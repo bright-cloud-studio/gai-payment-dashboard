@@ -1,0 +1,41 @@
+{
+    "name":"bright-cloud-studio/gai-payment-dashboard",
+    "description":"Adds a Payment Dashboard to Contao for use on the GAI website",
+    "keywords": ["contao", "payment", "dashboard", "bright", "cloud", "studio"],
+    "type": "contao-bundle",
+    "homepage": "http://brightcloudstudio.com/",
+    "license": "LGPL-3.0+",
+    "authors":[
+        {
+            "name": "Bright Cloud Studio",
+            "homepage": "https://brightcloudstudio.com",
+            "email": "mark@brightcloudstudio.com",
+            "role": "Developer"
+        }
+    ],
+    "support":{
+        "issues": "https://github.com/bright-cloud-studio/gai-payment-dashboard/issues",
+        "source": "https://github.com/bright-cloud-studio/gai-payment-dashboard"
+    },
+    "require":{
+        "php": "^7.3 || ^8.0",
+        "contao/core-bundle": "^4.9 || ^5.3"
+    },
+    "extra":{
+        "contao-manager-plugin": "Bcs\\PaymentDashboardBundle\\ContaoManager\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bcs\\PaymentDashboardBundle\\": "src"
+        },
+        "classmap": [
+            "src/Resources/contao"
+        ],
+        "exclude-from-classmap": [
+            "src/Resources/contao/config/",
+            "src/Resources/contao/dca/",
+            "src/Resources/contao/languages/",
+            "src/Resources/contao/templates/"
+        ]
+    }
+}
