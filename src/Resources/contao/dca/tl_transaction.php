@@ -4,7 +4,7 @@ use Contao\DataContainer;
 use Contao\DC_Table;
 
 /* Table tl_price_chart */
-$GLOBALS['TL_DCA']['tl_transactions'] = array
+$GLOBALS['TL_DCA']['tl_transaction'] = array
 (
  
     // Config
@@ -53,34 +53,34 @@ $GLOBALS['TL_DCA']['tl_transactions'] = array
         (
             'edit' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transactions']['edit'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
 			
             'copy' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transactions']['copy'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['copy'],
                 'href'                => 'act=copy',
                 'icon'                => 'copy.gif'
             ),
             'delete' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transactions']['delete'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['delete'],
                 'href'                => 'act=delete',
                 'icon'                => 'delete.svg',
                 'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
             ),
             'toggle' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_transactions']['toggle'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['toggle'],
 				'icon'                => 'visible.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('Bcs\Backend\TransactionsBackend', 'toggleIcon')
+				'button_callback'     => array('Bcs\Backend\TransactionBackend', 'toggleIcon')
 			),
             'show' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transactions']['show'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['show'],
                 'href'                => 'act=show',
                 'icon'                => 'show.gif'
             )
@@ -110,21 +110,21 @@ $GLOBALS['TL_DCA']['tl_transactions'] = array
         ),
     'alias' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['alias'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['alias'],
             'exclude'                 => true,
             'inputType'               => 'text',
             'search'                  => true,
             'eval'                    => array('unique'=>true, 'rgxp'=>'alias', 'doNotCopy'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
             'save_callback' => array
             (
-                array('Bcs\Backend\TransactionsBackend', 'generateAlias')
+                array('Bcs\Backend\TransactionBackend', 'generateAlias')
             ),
             'sql'                     => "varchar(128) COLLATE utf8mb3_bin NOT NULL default ''"
 
         ),
     'date' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['date'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -133,7 +133,7 @@ $GLOBALS['TL_DCA']['tl_transactions'] = array
         ),
     'psychologist' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['psychologist'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['psychologist'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
