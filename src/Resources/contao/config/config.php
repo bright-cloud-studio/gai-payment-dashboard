@@ -9,6 +9,6 @@
 */
 
 /* Back end modules */
-$GLOBALS['BE_MOD']['content']['transactions'] = array(
+$GLOBALS['BE_MOD']['content']['transaction'] = array(
 	'tables' => array('tl_transaction')
 );
