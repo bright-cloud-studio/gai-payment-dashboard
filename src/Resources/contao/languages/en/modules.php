@@ -11,4 +11,4 @@
 **/
 
 /* Back end modules */
-$GLOBALS['TL_LANG']['MOD']['transactions']                  = array('Transactions', 'Stored Transactions for the Duplicate Checker');
+$GLOBALS['TL_LANG']['MOD']['transaction']                  = array('Transactions', 'Stored Transactions for the Duplicate Checker');
