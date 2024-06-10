@@ -17,7 +17,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Config
     'config' => array
     (
-        'dataContainer'               => 'Table',
+        'dataContainer'               => 'DC_Table::class',
         'enableVersioning'            => true,
         'sql' => array
         (
