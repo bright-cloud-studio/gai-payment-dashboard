@@ -1,9 +1,9 @@
 <?php
 
+/* Transaction - Child to Assignment */
+
 use Contao\DataContainer;
 use Contao\DC_Table;
-
-
 
 /* Table tl_price_chart */
 $GLOBALS['TL_DCA']['tl_transaction'] = array
