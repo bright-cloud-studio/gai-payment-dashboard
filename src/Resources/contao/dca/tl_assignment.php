@@ -1,5 +1,7 @@
 <?php
 
+/* Assignment - Parent to Transaction */
+
 use Contao\Backend;
 use Contao\Database;
 use Contao\DataContainer;
