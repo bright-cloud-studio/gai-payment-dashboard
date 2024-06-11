@@ -87,7 +87,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['toggle'],
 				'icon'                => 'visible.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('Bcs\Backend\TransactionBackend', 'toggleIcon')
+				'button_callback'     => array('Bcs\Backend\AssignmentBackend', 'toggleIcon')
 			),
             'show' => array
             (
