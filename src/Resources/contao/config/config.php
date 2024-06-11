@@ -9,11 +9,15 @@
 */
 
 
+/* Create new sections in the Contao sidebar */
+$GLOBALS['TL_LANG']['MOD']['gai'][0] = "GAI Payment Dashboard";
+
+
 /* Back end modules */
-$GLOBALS['BE_MOD']['content']['transaction'] = array(
+$GLOBALS['BE_MOD']['gai']['transaction'] = array(
 	'tables' => array('tl_transaction')
 );
-$GLOBALS['BE_MOD']['content']['assignment'] = array(
+$GLOBALS['BE_MOD']['gai']['assignment'] = array(
 	'tables' => array('tl_assignment')
 );
 
