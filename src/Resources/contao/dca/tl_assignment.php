@@ -107,6 +107,10 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
 		    'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
         ),
+        'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default 0"
+		),
         'tstamp' => array
         (
 		    'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
