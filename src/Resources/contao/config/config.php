@@ -13,6 +13,9 @@
 $GLOBALS['BE_MOD']['content']['transaction'] = array(
 	'tables' => array('tl_transaction')
 );
+$GLOBALS['BE_MOD']['content']['assignment'] = array(
+	'tables' => array('tl_assignment')
+);
 
 
 /* Models */
