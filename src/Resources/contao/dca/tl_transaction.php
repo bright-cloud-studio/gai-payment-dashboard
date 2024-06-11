@@ -3,6 +3,8 @@
 use Contao\DataContainer;
 use Contao\DC_Table;
 
+$this->loadDataContainer('tl_assignment');
+
 /* Table tl_price_chart */
 $GLOBALS['TL_DCA']['tl_transaction'] = array
 (
@@ -12,13 +14,16 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     (
         'dataContainer'               => DC_Table::class,
         'ptable'                      => 'tl_assignment',
-        'enableVersioning'            => true,
+        'switchToEdit'                => true,
+		'enableVersioning'            => true,
+		'markAsCopy'                  => 'title',
         'sql' => array
         (
             'keys' => array
             (
                 'id' 	=> 	'primary',
-                'alias' =>  'index'
+                'alias' =>  'index',
+                'pid'   =>  'index'
             )
         )
     ),
@@ -28,12 +33,9 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     (
         'sorting' => array
         (
-            // Mode 2 - Records are sotrted by a switchable field
-            // Flag 12 - Sort descending
-            'mode'                    => DataContainer::MODE_TREE,
-            'flag'                    => 11,
-            'fields'                  => array('date', 'psychologist'),
-            'panelLayout'             => 'sort,filter;search,limit'
+            'mode'                    => DataContainer::MODE_TREE_EXTENDED,
+			'panelLayout'             => 'filter;search',
+			'defaultSearchField'      => 'date'
         ),
         'label' => array
         (
@@ -317,5 +319,9 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         )
     )
 );
+
+
+
+
 
 
