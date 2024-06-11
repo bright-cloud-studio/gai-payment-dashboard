@@ -10,7 +10,7 @@
 
 
 /* Create new sections in the Contao sidebar */
-$GLOBALS['TL_LANG']['MOD']['gai'][0] = "GAI Payment Dashboard";
+$GLOBALS['TL_LANG']['MOD']['gai'][-1] = "GAI Payment Dashboard";
 
 
 /* Back end modules */
