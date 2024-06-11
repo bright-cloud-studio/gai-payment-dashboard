@@ -96,7 +96,9 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Fields
     'fields' => array
     (
+        /* ******************* */
         // Contao Fields
+        /* ******************* */
         'id' => array
         (
 		    'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
@@ -123,12 +125,22 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'sql'                     => "varchar(128) COLLATE utf8mb3_bin NOT NULL default ''"
 
         ),
-
-
+        
+        /* ******************* */
         // Transaction Fields
-        'date' => array
+        /* ******************* */
+        'billing_month' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['billing_month'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'date_submitted' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date_submitted'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -162,18 +174,18 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'student_name' => array
+        'student_initials' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_name'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_initials'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'service_provided' => array
+        'service_code' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['service_provided'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['service_code'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -279,18 +291,9 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'sheet_row' => array
+        'assignment_id' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['sheet_row'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'label' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['label'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['assignment_id'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
