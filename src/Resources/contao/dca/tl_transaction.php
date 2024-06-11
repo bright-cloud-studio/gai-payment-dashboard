@@ -3,7 +3,7 @@
 use Contao\DataContainer;
 use Contao\DC_Table;
 
-$this->loadDataContainer('tl_assignment');
+
 
 /* Table tl_price_chart */
 $GLOBALS['TL_DCA']['tl_transaction'] = array
