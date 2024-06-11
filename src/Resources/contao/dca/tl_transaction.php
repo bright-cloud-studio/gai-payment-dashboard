@@ -11,6 +11,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     'config' => array
     (
         'dataContainer'               => DC_Table::class,
+        'ptable'                      => 'tl_assignment',
         'enableVersioning'            => true,
         'sql' => array
         (
@@ -102,6 +103,12 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         'id' => array
         (
 		    'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
+        ),
+        'pid' => array
+        (
+		    'foreignKey'              => 'tl_assignment.id',
+			'sql'                     => "int(10) unsigned NOT NULL default 0",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
         ),
         'tstamp' => array
         (
