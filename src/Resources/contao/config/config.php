@@ -10,8 +10,7 @@
 
 
 /* Create new sections in the Contao sidebar */
-$GLOBALS['TL_LANG']['MOD']['gai'][] = array("GAI Payment Dashboard", "Our custom section containing Payment Dashboard sections");
-
+$GLOBALS['TL_LANG']['MOD']['gai'][0] = "GAI Payment Dashboard";
 
 /* Back end modules */
 $GLOBALS['BE_MOD']['gai']['transaction'] = array(
