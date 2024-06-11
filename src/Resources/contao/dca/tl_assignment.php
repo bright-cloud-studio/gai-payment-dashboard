@@ -47,8 +47,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'label' => array
         (
-            'fields'                  => array('date', 'psychologist'),
-            'format'                  => '<span style="font-weight: bold;">Date:</span> %s <span style="font-weight: bold;">Psychologist:</span> %s'
+            'fields'                  => array('id', 'date'),
+            'format'                  => '<span style="font-weight: bold;">ID:</span> %s <span style="font-weight: bold;">Date:</span> %s'
         ),
         'global_operations' => array
         (
