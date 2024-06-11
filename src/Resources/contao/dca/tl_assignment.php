@@ -13,12 +13,17 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'dataContainer'               => DC_Table::class,
         'ctable'                      => array('tl_transaction'),
         'enableVersioning'            => true,
+        'onload_callback' => array
+		(
+			array('tl_assignment', 'setRootType')
+		),
         'sql' => array
         (
             'keys' => array
             (
                 'id' 	=> 	'primary',
-                'alias' =>  'index'
+                'alias' =>  'index',
+                'pid'   => 'index'
             )
         )
     ),
@@ -317,3 +322,39 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         )
     )
 );
+
+
+
+
+
+
+class tl_assignment extends Backend
+{
+
+	public function setRootType(DataContainer $dc)
+	{
+		if (Input::get('act') != 'create')
+		{
+			return;
+		}
+
+		// Insert into
+		if (Input::get('pid') == 0)
+		{
+			$GLOBALS['TL_DCA']['tl_assignment']['fields']['type']['default'] = 'root';
+		}
+		elseif (Input::get('mode') == 1)
+		{
+			$objPage = Database::getInstance()
+				->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+				->limit(1)
+				->execute(Input::get('pid'));
+
+			if ($objPage->pid == 0)
+			{
+				$GLOBALS['TL_DCA']['tl_assignment']['fields']['type']['default'] = 'root';
+			}
+		}
+	}
+
+}
