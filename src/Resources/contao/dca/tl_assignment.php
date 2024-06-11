@@ -11,6 +11,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     'config' => array
     (
         'dataContainer'               => DC_Table::class,
+        'ctable'                      => array('tl_transaction'),
         'enableVersioning'            => true,
         'sql' => array
         (
@@ -27,9 +28,10 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     (
         'sorting' => array
         (
-            // Mode 2 - Records are sotrted by a switchable field
-            // Flag 12 - Sort descending
-            'mode'                    => 2,
+            'mode'                    => DataContainer::MODE_TREE,
+            'rootPaste'               => true,
+            'showRootTrails'          => true,
+            'icon'                    => 'pagemounts.svg',
             'flag'                    => 11,
             'fields'                  => array('date', 'psychologist'),
             'panelLayout'             => 'sort,filter;search,limit'
@@ -51,13 +53,17 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'operations' => array
         (
+            'transactions' => array
+            (
+                'href'                => 'do=transaction',
+                'icon'                => 'article.svg'
+            ),
             'edit' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
-			
             'copy' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['copy'],
