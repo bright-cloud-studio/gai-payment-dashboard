@@ -14,7 +14,10 @@
 ClassLoader::addClasses(array
 (
     // Our Transactions
-    'Bcs\Backend\TransactionsBackend'           => 'system/modules/gai_invoices/library/Bcs/Backend/TransactionsBackend.php',
-    'Bcs\Model\Transactions'                    => 'system/modules/gai_invoices/library/Bcs/Model/Transactions.php',
+    'Bcs\Backend\TransactionBackend'           => 'system/modules/gai_invoices/library/Bcs/Backend/TransactionBackend.php',
+    'Bcs\Model\Transaction'                    => 'system/modules/gai_invoices/library/Bcs/Model/Transaction.php',
+
+    'Bcs\Backend\AssignmentBackend'           => 'system/modules/gai_invoices/library/Bcs/Backend/AssignmentBackend.php',
+    'Bcs\Model\Assignment'                    => 'system/modules/gai_invoices/library/Bcs/Model/Assignment.php',
     
 ));
