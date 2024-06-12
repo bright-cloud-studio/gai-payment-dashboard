@@ -6,7 +6,6 @@ use Contao\Backend;
 use Contao\Database;
 use Contao\DataContainer;
 use Contao\DC_Table;
-
 use Contao\Input;
 
 /* Table tl_price_chart */
