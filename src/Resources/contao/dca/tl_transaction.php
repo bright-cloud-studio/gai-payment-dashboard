@@ -36,7 +36,8 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'mode'                    => DataContainer::MODE_TREE_EXTENDED,
 			'panelLayout'             => 'filter;search',
 			'defaultSearchField'      => 'date',
-            'icon'                    => 'bundles/bcspaymentdashboard/icons/transaction.svg',
+            'icon'                    => 'articles.svg'
+            //'icon'                    => 'bundles/bcspaymentdashboard/icons/transaction.svg',
         ),
         'label' => array
         (
