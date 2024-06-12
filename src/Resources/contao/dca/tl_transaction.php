@@ -42,7 +42,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'mode'                    => DataContainer::MODE_TREE_EXTENDED,
 			'panelLayout'             => 'filter;search',
 			'defaultSearchField'      => 'date',
-            'icon'                    => 'article.svg'
+            'icon'                    => 'pagemounts.svg'
         ),
         'label' => array
         (
