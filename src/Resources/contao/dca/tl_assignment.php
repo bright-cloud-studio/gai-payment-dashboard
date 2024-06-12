@@ -67,7 +67,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'transactions' => array
             (
                 'href'                => 'do=transaction',
-                'icon'                => 'article.svg'
+                'icon'                => 'edit.gif'
             ),
             'edit' => array
             (
