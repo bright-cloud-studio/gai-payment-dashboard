@@ -42,7 +42,6 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'mode'                    => DataContainer::MODE_TREE,
             'rootPaste'               => true,
             'showRootTrails'          => true,
-            //'icon'                    => 'bundles/bcspaymentdashboard/icons/assignment.svg',
             'icon'                    => 'article.svg'.
             'flag'                    => 11,
             'fields'                  => array('date', 'psychologist'),
