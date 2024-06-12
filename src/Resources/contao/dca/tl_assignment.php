@@ -42,16 +42,15 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'mode'                    => DataContainer::MODE_TREE,
             'rootPaste'               => true,
             'showRootTrails'          => true,
-            'icon'                    => 'article.svg'.
+            'icon'                    => 'bundles/bcspaymentdashboard/icons/assignment.svg',
             'flag'                    => 11,
             'fields'                  => array('date', 'psychologist'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
-            'fields'                  => array('id'),
-			'format'                  => '%s',
-			'label_callback'          => array('tl_assignment', 'addIcon')
+            'fields'                  => array('id', 'date'),
+            'format'                  => '<span style="font-weight: bold;">ID:</span> %s <span style="font-weight: bold;">Date:</span> %s'
         ),
         'global_operations' => array
         (
@@ -363,12 +362,5 @@ class tl_assignment extends Backend
 			}
 		}
 	}
-
-
-    public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
-	{
-		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
-	}
-    
 
 }
