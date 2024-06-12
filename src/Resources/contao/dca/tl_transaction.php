@@ -36,13 +36,12 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'mode'                    => DataContainer::MODE_TREE_EXTENDED,
 			'panelLayout'             => 'filter;search',
 			'defaultSearchField'      => 'date',
-            'icon'                    => 'articles.svg'
+            'icon'                    => 'bundles/BcsPaymentDashboard/transaction.svg'
         ),
         'label' => array
         (
-            'fields'                  => array('id', 'psychologist'),
-			'format'                  => '%s <span class="label-info">[%s]</span>',
-			'label_callback'          => array('tl_transaction', 'addIcon')
+            'fields'                  => array('date', 'psychologist'),
+            'format'                  => '<span style="font-weight: bold;">Date:</span> %s <span style="font-weight: bold;">Psychologist:</span> %s'
         ),
         'global_operations' => array
         (
@@ -321,43 +320,3 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         )
     )
 );
-
-
-
-
-class tl_transaction extends Backend
-{
-	public function addIcon($row, $label)
-	{
-		$sub = 0;
-		$unpublished = ($row['start'] && $row['start'] > time()) || ($row['stop'] && $row['stop'] <= time());
-
-		if ($unpublished || !$row['published'])
-		{
-			++$sub;
-		}
-
-		if ($row['protected'])
-		{
-			$sub += 2;
-		}
-
-		$image = 'articles.svg';
-
-		if ($sub > 0)
-		{
-			$image = 'articles_' . $sub . '.svg';
-		}
-
-		$attributes = sprintf(
-			'data-icon="%s" data-icon-disabled="%s"',
-			$row['protected'] ? 'articles_2.svg' : 'articles.svg',
-			$row['protected'] ? 'articles_3.svg' : 'articles_1.svg',
-		);
-
-		$href = System::getContainer()->get('router')->generate('contao_backend_preview', array('page'=>$row['pid'], 'article'=>($row['alias'] ?: $row['id'])));
-
-		return '<a href="' . StringUtil::specialcharsUrl($href) . '" title="' . StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['view']) . '" target="_blank">' . Image::getHtml($image, '', $attributes) . '</a> ' . $label;
-	}
-}
-
