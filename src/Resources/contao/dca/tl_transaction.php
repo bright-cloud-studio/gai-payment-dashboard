@@ -37,7 +37,6 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
 			'panelLayout'             => 'filter;search',
 			'defaultSearchField'      => 'date',
             'icon'                    => 'articles.svg'
-            //'icon'                    => 'bundles/bcspaymentdashboard/icons/transaction.svg',
         ),
         'label' => array
         (
