@@ -348,7 +348,7 @@ class tl_transaction extends Backend
 			$sub += 2;
 		}
 
-		$image = 'articles.svg';
+		$image = 'bundles/bcspaymentdashboard/icons/assignment.svg';
 
 		if ($sub > 0)
 		{
@@ -357,8 +357,8 @@ class tl_transaction extends Backend
 
 		$attributes = sprintf(
 			'data-icon="%s" data-icon-disabled="%s"',
-			$row['protected'] ? 'articles_2.svg' : 'articles.svg',
-			$row['protected'] ? 'articles_3.svg' : 'articles_1.svg',
+			$row['protected'] ? 'bundles/bcspaymentdashboard/icons/assignment.svg' : 'bundles/bcspaymentdashboard/icons/assignment.svg',
+			$row['protected'] ? 'bundles/bcspaymentdashboard/icons/assignment.svg' : 'bundles/bcspaymentdashboard/icons/assignment.svg',
 		);
 
 		$href = System::getContainer()->get('router')->generate('contao_backend_preview', array('page'=>$row['pid'], 'article'=>($row['alias'] ?: $row['id'])));
