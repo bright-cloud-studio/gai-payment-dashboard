@@ -49,8 +49,9 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'label' => array
         (
-            'fields'                  => array('id', 'date'),
-            'format'                  => '<span style="font-weight: bold;">ID:</span> %s <span style="font-weight: bold;">Date:</span> %s'
+            'fields'                  => array('id'),
+			'format'                  => '%s',
+			'label_callback'          => array('tl_assignment', 'addIcon')
         ),
         'global_operations' => array
         (
@@ -362,5 +363,12 @@ class tl_assignment extends Backend
 			}
 		}
 	}
+
+
+    public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
+	{
+		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
+	}
+    
 
 }
