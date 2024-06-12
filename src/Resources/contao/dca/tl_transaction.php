@@ -41,7 +41,8 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         (
             'mode'                    => DataContainer::MODE_TREE_EXTENDED,
 			'panelLayout'             => 'filter;search',
-			'defaultSearchField'      => 'date'
+			'defaultSearchField'      => 'date',
+            'icon'                    => 'article.svg'
         ),
         'label' => array
         (
@@ -348,7 +349,7 @@ class tl_transaction extends Backend
 			$sub += 2;
 		}
 
-		$image = 'bundles/bcspaymentdashboard/icons/assignment.svg';
+		$image = 'articles.svg';
 
 		if ($sub > 0)
 		{
@@ -357,8 +358,8 @@ class tl_transaction extends Backend
 
 		$attributes = sprintf(
 			'data-icon="%s" data-icon-disabled="%s"',
-			$row['protected'] ? 'bundles/bcspaymentdashboard/icons/assignment.svg' : 'bundles/bcspaymentdashboard/icons/assignment.svg',
-			$row['protected'] ? 'bundles/bcspaymentdashboard/icons/assignment.svg' : 'bundles/bcspaymentdashboard/icons/assignment.svg',
+			$row['protected'] ? 'articles_2.svg' : 'articles.svg',
+			$row['protected'] ? 'articles_3.svg' : 'articles_1.svg',
 		);
 
 		$href = System::getContainer()->get('router')->generate('contao_backend_preview', array('page'=>$row['pid'], 'article'=>($row['alias'] ?: $row['id'])));
@@ -366,5 +367,3 @@ class tl_transaction extends Backend
 		return '<a href="' . StringUtil::specialcharsUrl($href) . '" title="' . StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['view']) . '" target="_blank">' . Image::getHtml($image, '', $attributes) . '</a> ' . $label;
 	}
 }
-
-
