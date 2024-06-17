@@ -336,15 +336,12 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 
 class tl_assignment extends Backend
 {
-
 	public function setRootType(DataContainer $dc)
 	{
 		if (Input::get('act') != 'create')
 		{
 			return;
 		}
-
-		// Insert into
 		if (Input::get('pid') == 0)
 		{
 			$GLOBALS['TL_DCA']['tl_assignment']['fields']['type']['default'] = 'root';
@@ -363,12 +360,8 @@ class tl_assignment extends Backend
 		}
 	}
 
-
     public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
 	{
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
-
-    
-
 }
