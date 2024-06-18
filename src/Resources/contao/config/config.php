@@ -21,5 +21,10 @@ $GLOBALS['BE_MOD']['gai']['assignment'] = array(
 );
 
 
+
+/* Front End modules */
+$GLOBALS['FE_MOD']['gai']['mod_work_assignments']          = 'Bcs\Module\ModWorkAssignments';
+
+
 /* Models */
 $GLOBALS['TL_MODELS']['tl_transaction']    = 'Bcs\Model\Transaction';
