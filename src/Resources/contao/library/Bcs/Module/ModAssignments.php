@@ -10,7 +10,7 @@
 * @license    http://opensource.org/licenses/lgpl-3.0.html
 **/
 
-class ModWorkAssignment extends \Contao\Module
+class ModAssignments extends \Contao\Module
 {
 
     /* Default Template */
@@ -29,7 +29,7 @@ class ModWorkAssignment extends \Contao\Module
         {
             $objTemplate = new \BackendTemplate('be_wildcard');
  
-            $objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['work_assignments'][0]) . ' ###';
+            $objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['assignments'][0]) . ' ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;
