@@ -1,6 +1,6 @@
 <!-- This is the module that lists a psychologists entries in the Work Assignment sheet, then allows them to submit Transactions for it -->
 
-<div class="mod_work_assignments marbot90">
+<div class="mod_assignments marbot90">
 	
 	<!-- First, this will list the users Work Assignments -->
 	
