@@ -15,4 +15,4 @@ $GLOBALS['TL_LANG']['MOD']['assignment']                  = array('Assignments',
 $GLOBALS['TL_LANG']['MOD']['transaction']                  = array('Transactions', 'Transactions created by Psycholigists using the Payment Dashboard');
 
 /* Front End modules */
-$GLOBALS['TL_LANG']['FMD']['mod_work_assignment']          = array('Work Assignments', 'Displays Work Assignments and allows creation of transactions for them');
+$GLOBALS['TL_LANG']['FMD']['mod_assignments']          = array('Assignments', 'Displays Assignments and allows creation of transactions for them');
