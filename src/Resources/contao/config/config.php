@@ -23,7 +23,7 @@ $GLOBALS['BE_MOD']['gai']['assignment'] = array(
 
 
 /* Front End modules */
-$GLOBALS['FE_MOD']['gai']['mod_work_assignment']          = 'Bcs\Module\ModWorkAssignment';
+$GLOBALS['FE_MOD']['gai']['mod_assignments']          = 'Bcs\Module\ModAssignments';
 
 
 /* Models */
