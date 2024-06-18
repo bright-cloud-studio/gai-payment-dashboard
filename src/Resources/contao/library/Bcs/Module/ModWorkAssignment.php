@@ -21,6 +21,25 @@ class ModWorkAssignment extends \Contao\Module
 	{
         parent::__construct($objModule, $strColumn);
 	}
+
+    /* Generate function */
+    public function generate()
+    {
+        if (TL_MODE == 'BE')
+        {
+            $objTemplate = new \BackendTemplate('be_wildcard');
+ 
+            $objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['work_assignments'][0]) . ' ###';
+            $objTemplate->title = $this->headline;
+            $objTemplate->id = $this->id;
+            $objTemplate->link = $this->name;
+            $objTemplate->href = 'contao/main.php?do=themes&table=tl_module&act=edit&id=' . $this->id;
+ 
+            return $objTemplate->parse();
+        }
+ 
+        return parent::generate();
+    }
   
 
 }
