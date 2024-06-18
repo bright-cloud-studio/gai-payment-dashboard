@@ -10,6 +10,8 @@
 * @license    http://opensource.org/licenses/lgpl-3.0.html
 **/
 
+namespace Bcs\Module;
+
 class ModAssignments extends \Contao\Module
 {
 
