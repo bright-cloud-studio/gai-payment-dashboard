@@ -10,6 +10,9 @@
  * @license    http://opensource.org/licenses/lgpl-3.0.html
 **/
 
-/* Back end modules */
+/* Back End modules */
 $GLOBALS['TL_LANG']['MOD']['assignment']                  = array('Assignments', 'Assignments created by GAI assigning work to Psychologists');
 $GLOBALS['TL_LANG']['MOD']['transaction']                  = array('Transactions', 'Transactions created by Psycholigists using the Payment Dashboard');
+
+/* Front End modules */
+$GLOBALS['TL_LANG']['FMD']['mod_work_assignments']          = array('Work Assignments', 'Displays Work Assignments and allows creation of transactions for them');
