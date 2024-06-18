@@ -13,7 +13,14 @@
 class ModWorkAssignment extends \Contao\Module
 {
 
+    /* Default Template */
+    protected $strTemplate = 'mod_work_assignments';
 
+    /* Construct function */
+    public function __construct($objModule, $strColumn='main')
+	{
+        parent::__construct($objModule, $strColumn);
+	}
   
 
 }
