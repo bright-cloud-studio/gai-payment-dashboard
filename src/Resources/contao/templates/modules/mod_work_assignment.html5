@@ -1,0 +1,167 @@
+<!-- This is the module that lists a psychologists entries in the Work Assignment sheet, then allows them to submit Transactions for it -->
+
+<div class="mod_work_assignments marbot90">
+	
+	<!-- First, this will list the users Work Assignments -->
+	
+	<!-- FILTERS -->
+	<div class="work_assignments_filter marbot60">
+		
+		<form class="flex_wrapper" id="form_<?= $unique_id ?>">
+
+			<fieldset class="size100">
+				
+				<h4 class="size100 marbot15">Filter Work Assignments</h4>
+				
+				<!-- Filter by District -->
+				<div class="widget widget-select size33 marbot15">
+					<label for="filter_district" class="size33">
+						District
+					</label>
+					<select name="filter_district" id="filter_district">
+						<option value="0"></option>
+						<?php
+							foreach($this->workAssignmentFilterDistricts as $district) {
+								echo '<option value="' . $district . '">' . $district . '</option>';
+							}
+						?>
+					</select>
+				</div>
+				
+				<!-- Filter by School -->
+				<div class="widget widget-select size33 marbot15">
+					<label for="filter_school" class="size33">
+						School
+					</label>
+					<select name="filter_school" id="filter_school">
+						<option value="0"></option>
+						<?php
+							foreach($this->workAssignmentFilterSchools as $school) {
+								echo '<option value="' . $school . '">' . $school . '</option>';
+							}
+						?>
+					</select>
+				</div>
+				
+				<!-- Filter by Student -->
+				<div class="widget widget-select size33 marbot15">
+					<label for="filter_student" class="size33">
+						Student
+					</label>
+					<select name="filter_student" id="filter_student">
+						<option value="0"></option>
+						<?php
+							foreach($this->workAssignmentFilterStudents as $student) {
+								echo '<option value="' . $student . '">' . $student . '</option>';
+							}
+						?>
+					</select>
+				</div>
+				
+				<div class="widget widget-submit size100">
+					<a id="reset_filter" class="btn reset_filter" onClick="resetFilter();">Reset Filter</a>
+				</div>
+				
+			</fieldset>
+			
+		</form>
+		
+	</div>
+	
+	
+	
+	<!-- SORTING -->
+	<div class="list_work_assignments marbot60">
+		<h2>Step One: Select Work Assignment</h2>
+		
+		<?php if(!empty($this->workAssignmentListNew) || !empty($this->workAssignmentListNonNew)) { ?>
+				<h4>Primary Assignments</h4>
+				<?= implode('', $this->workAssignmentListNew) ?>
+				<?= implode('', $this->workAssignmentListNonNew) ?><br>
+		<?php }?>
+		
+		<?php if(!empty($this->workAssignmentListNewShared) || !empty($this->workAssignmentListNonNewShared)) { ?>
+				<h4>Shared Assignments</h4>
+				<?= implode('', $this->workAssignmentListNewShared) ?>
+				<?= implode('', $this->workAssignmentListNonNewShared) ?><br>
+		<?php }?>
+
+	</div>
+
+	
+	<!-- Second, they will fill out this form to generate Transactions and mark this Work Assignment as processed -->
+	<div class="generate_transactions marbot60">
+	
+		<a id="anchor_form" class="anchor_form" name="anchor_form"></a>
+	
+		<?php if (empty($this->workAssignmentForm)): ?>
+			<p class="empty">There are no Work Assignments to build forms from</p>
+		<?php else: ?>
+			<?= implode('', $this->workAssignmentForm) ?>
+		<?php endif; ?>
+		
+	</div>
+	
+	
+	<div class="messages marbot60 center_element">
+		<span class="message"></span>
+	</div>
+	
+	<!--
+	<div class="additional_services hidden" id="{{user::company}}">
+		<h2>Additional Services</h2>
+		
+		<?php
+			$objUser = \FrontendUser::getInstance();
+			foreach($objUser->meeting_options as $option) {
+				?><?php
+				if($option == "parking") {
+					echo '<span data-service-code="14">Parking</span>';
+				}
+				if($option == "misc_travel_expenses") {
+					echo '<span data-service-code="18">Misc. Travel Expenses</span>';
+				}
+				if($option == "editing_services") {
+					echo '<span data-service-code="19">Editing Services</span>';
+				}
+				if($option == "manager") {
+					echo '<span data-service-code="20">Manager</span>';
+				}
+				?><?php
+			}
+		?>
+	</div>
+	-->
+
+	
+	<div class="services hidden" id="{{user::company}}">
+		<?php
+			foreach($this->services as $service) {
+				?>
+				
+				<div class="service service_<?= $service['service_code'] ?>">
+					<h2><?= $service['service_code'] ?> "<?= $service['name'] ?>"</h2>
+					<span class="service_code"><?= $service['service_code'] ?></span><br />
+					<span class="name"><?= $service['name'] ?></span><br />
+					<span class="psychologist_tier_1"><?= $service['psychologist_tier_1'] ?></span><br />
+					<span class="psychologist_tier_2"><?= $service['psychologist_tier_2'] ?></span><br />
+					<span class="psychologist_tier_3"><?= $service['psychologist_tier_3'] ?></span><br />
+					<span class="psychologist_tier_4"><?= $service['psychologist_tier_4'] ?></span><br />
+					<span class="psychologist_tier_5"><?= $service['psychologist_tier_5'] ?></span><br />
+					<span class="psychologist_tier_6"><?= $service['psychologist_tier_6'] ?></span><br />
+					<span class="psychologist_tier_7"><?= $service['psychologist_tier_7'] ?></span><br />
+					<span class="psychologist_tier_8"><?= $service['psychologist_tier_8'] ?></span><br />
+					<span class="psychologist_tier_9"><?= $service['psychologist_tier_9'] ?></span><br />
+					<span class="psychologist_tier_10"><?= $service['psychologist_tier_10'] ?></span><br />
+					<span class="school_tier_1"><?= $service['school_tier_1'] ?></span><br />
+					<span class="school_tier_2"><?= $service['school_tier_2'] ?></span><br />
+					<span class="school_tier_3"><?= $service['school_tier_3'] ?></span><br />
+				</div>
+				
+				<?php
+			}
+		?>
+	</div>
+	
+
+</div>
