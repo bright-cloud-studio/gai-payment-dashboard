@@ -1,6 +1,6 @@
 <?php
 
-/* District - Parent to School */
+/* District - Parent to Transaction */
 
 use Contao\Backend;
 use Contao\Database;
@@ -16,7 +16,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
     'config' => array
     (
         'dataContainer'               => DC_Table::class,
-        'ctable'                      => array('tl_school'),
+        'ctable'                      => array('tl_transaction'),
         'enableVersioning'            => true,
         'onload_callback' => array
 		(
@@ -49,8 +49,8 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         'label' => array
         (
             'fields'                  => array('id'),
-			      'format'                  => '%s',
-			      'label_callback'          => array('tl_district', 'addIcon')
+			'format'                  => '%s',
+			'label_callback'          => array('tl_district', 'addIcon')
         ),
         'global_operations' => array
         (
@@ -64,40 +64,40 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'operations' => array
         (
-            'schools' => array
+            'transactions' => array
             (
-                'href'                => 'do=school',
+                'href'                => 'do=transaction',
                 'icon'                => 'articles.svg'
             ),
             'edit' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_district']['edit'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
             'copy' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_district']['copy'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['copy'],
                 'href'                => 'act=copy',
                 'icon'                => 'copy.gif'
             ),
             'delete' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_district']['delete'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['delete'],
                 'href'                => 'act=delete',
                 'icon'                => 'delete.svg',
                 'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
             ),
             'toggle' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_district']['toggle'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['toggle'],
 				'icon'                => 'visible.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('Bcs\Backend\DistrictBackend', 'toggleIcon')
 			),
             'show' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_district']['show'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['show'],
                 'href'                => 'act=show',
                 'icon'                => 'show.gif'
             )
@@ -116,15 +116,15 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         // Contao Fields
         'id' => array
         (
-		        'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
+		    'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
         ),
         'pid' => array
-    		(
-    			  'sql'                     => "int(10) unsigned NOT NULL default 0"
-    		),
+		(
+			'sql'                     	=> "int(10) unsigned NOT NULL default 0"
+		),
         'tstamp' => array
         (
-		        'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
+		    'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
         ),
         'sorting' => array
         (
@@ -132,14 +132,14 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'alias' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['alias'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['alias'],
             'exclude'                 => true,
             'inputType'               => 'text',
             'search'                  => true,
             'eval'                    => array('unique'=>true, 'rgxp'=>'alias', 'doNotCopy'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
             'save_callback' => array
             (
-                array('Bcs\Backend\DistrictBackend', 'generateAlias')
+                array('Bcs\Backend\TransactionBackend', 'generateAlias')
             ),
             'sql'                     => "varchar(128) COLLATE utf8mb3_bin NOT NULL default ''"
 
@@ -334,34 +334,34 @@ $GLOBALS['TL_DCA']['tl_district'] = array
 
 
 
-class tl_assignment extends Backend
+class tl_district extends Backend
 {
 	public function setRootType(DataContainer $dc)
 	{
 		if (Input::get('act') != 'create')
 		{
-			  return;
+			return;
 		}
 		if (Input::get('pid') == 0)
 		{
-			$  GLOBALS['TL_DCA']['tl_district']['fields']['type']['default'] = 'root';
+			$GLOBALS['TL_DCA']['tl_district']['fields']['type']['default'] = 'root';
 		}
 		elseif (Input::get('mode') == 1)
 		{
-			  $objPage = Database::getInstance()
-				  ->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
-				  ->limit(1)
-				  ->execute(Input::get('pid'));
+			$objPage = Database::getInstance()
+				->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+				->limit(1)
+				->execute(Input::get('pid'));
 
-        if ($objPage->pid == 0)
-        {
-            $GLOBALS['TL_DCA']['tl_district']['fields']['type']['default'] = 'root';
-        }
+			if ($objPage->pid == 0)
+			{
+				$GLOBALS['TL_DCA']['tl_district']['fields']['type']['default'] = 'root';
+			}
 		}
 	}
 
-  public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
+    public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
 	{
-		  return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
+		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
 }
