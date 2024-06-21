@@ -16,7 +16,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
     'config' => array
     (
         'dataContainer'               => DC_Table::class,
-        'ctable'                      => array('tl_transaction'),
+        'ctable'                      => array('tl_school'),
         'enableVersioning'            => true,
         'onload_callback' => array
 		(
@@ -64,9 +64,9 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'operations' => array
         (
-            'transactions' => array
+            'schools' => array
             (
-                'href'                => 'do=transaction',
+                'href'                => 'do=school',
                 'icon'                => 'articles.svg'
             ),
             'edit' => array
