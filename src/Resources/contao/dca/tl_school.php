@@ -48,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
         (
             'fields'                  => array('date', 'psychologist'),
 			      'format'                  => '%s <span class="label-info">[%s]</span>',
-			      'label_callback'          => array('tl_transaction', 'addIcon')
+			      'label_callback'          => array('tl_school', 'addIcon')
         ),
         'global_operations' => array
         (
