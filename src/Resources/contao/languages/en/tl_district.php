@@ -24,24 +24,24 @@ $GLOBALS['TL_LANG']['tl_district']['alias']                      = array('Alias'
 $GLOBALS['TL_LANG']['tl_district']['published']                  = array('Published', 'Show this record on the front end.');
 
 /* Fields */
-$GLOBALS['TL_LANG']['tl_district']['district_legend']            = 'District Information';
-$GLOBALS['TL_LANG']['tl_district']['date']                       = array('Date', 'Today\'s Date');
-$GLOBALS['TL_LANG']['tl_district']['psychologist']               = array('Psychologist', 'Psycholigist this transactions is for');
-$GLOBALS['TL_LANG']['tl_district']['district']                   = array('District', 'District the school is in');
-$GLOBALS['TL_LANG']['tl_district']['school']                     = array('School', 'The name of the school');
-$GLOBALS['TL_LANG']['tl_district']['student_name']               = array('Student Name', 'The initials of the student');
-$GLOBALS['TL_LANG']['tl_district']['service_provided']           = array('Service Provided', 'The ID of the service being provided');
-$GLOBALS['TL_LANG']['tl_district']['price']                      = array('Price', 'Price for this transaction');
-$GLOBALS['TL_LANG']['tl_district']['lasid']                      = array('LASID', 'The LASID assigned to the student');
-$GLOBALS['TL_LANG']['tl_district']['sasid']                      = array('SASID', 'The SASID assigned to the student');
-$GLOBALS['TL_LANG']['tl_district']['meeting_date']               = array('Meeting Date', 'The date the meeting occured');
-$GLOBALS['TL_LANG']['tl_district']['meeting_start']              = array('Meeting Start', 'The time the meeting started');
-$GLOBALS['TL_LANG']['tl_district']['meeting_end']                = array('Meeting End', 'The time the meeting ended');
-$GLOBALS['TL_LANG']['tl_district']['meeting_duration']           = array('Meeting Duration', 'The amount of minutes the meeting lasted for');
-$GLOBALS['TL_LANG']['tl_district']['notes']                      = array('Notes', 'Notes added by the psychologist');
-$GLOBALS['TL_LANG']['tl_district']['internal_legend']            = 'FOR INTERNAL USE ONLY';
-$GLOBALS['TL_LANG']['tl_district']['reviewed']                   = array('Reviewed', 'Tracks if the psychologist has performed their mandatory review');
-$GLOBALS['TL_LANG']['tl_district']['deleted']                    = array('Deleted', 'Tracks if the psychologist has deleted this transactions');
-$GLOBALS['TL_LANG']['tl_district']['misc_billing']               = array('Misc. Billing', 'The display name for a Misc. Billing transaction');
-$GLOBALS['TL_LANG']['tl_district']['sheet_row']                  = array('Sheet Row', 'The row of the Work Assignment this transaction was generated for');
-$GLOBALS['TL_LANG']['tl_district']['label']                      = array('Label', 'The label used as the main descriptor for Misc. Billing Transactions');
+$GLOBALS['TL_LANG']['tl_district']['district_legend']                    = 'Invoice Specific';
+$GLOBALS['TL_LANG']['tl_district']['invoice_number']                     = array('Invoice Number', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['invoice_prefix']                     = array('Invoice Prefix', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['invoice_purchase_order']             = array('Invoice Purchase Order', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['invoice_price_tier']                 = array('Invoice Price Tier', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['invoice_last_generation_date']       = array('Invoice Last Generation Date', 'Today\'s Date');
+
+
+$GLOBALS['TL_LANG']['tl_district']['district_legend']                    = 'District Specific';
+$GLOBALS['TL_LANG']['tl_district']['district_name']                      = array('District Name', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['district_address']                   = array('District Address', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['district_city']                      = array('District City', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['district_state']                     = array('District State', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['district_zip']                       = array('District Zip', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['district_phone']                     = array('District Phone', 'Today\'s Date');
+
+
+$GLOBALS['TL_LANG']['tl_district']['district_legend']                    = 'Contact Specific';
+$GLOBALS['TL_LANG']['tl_district']['contact_name']                       = array('Contact Name', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['contact_email']                      = array('Contact Email', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['contact_cc_email']                   = array('Contact CC Email', 'Today\'s Date');
