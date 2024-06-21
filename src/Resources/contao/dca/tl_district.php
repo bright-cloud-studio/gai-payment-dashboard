@@ -71,33 +71,33 @@ $GLOBALS['TL_DCA']['tl_district'] = array
             ),
             'edit' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['edit'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_district']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
             'copy' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['copy'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_district']['copy'],
                 'href'                => 'act=copy',
                 'icon'                => 'copy.gif'
             ),
             'delete' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['delete'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_district']['delete'],
                 'href'                => 'act=delete',
                 'icon'                => 'delete.svg',
                 'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
             ),
             'toggle' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['toggle'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_district']['toggle'],
 				'icon'                => 'visible.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('Bcs\Backend\DistrictBackend', 'toggleIcon')
 			),
             'show' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['show'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_district']['show'],
                 'href'                => 'act=show',
                 'icon'                => 'show.gif'
             )
@@ -107,7 +107,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date,psychologist,district,school,student_name,service_provided,price,lasid,sasid,meeting_date,meeting_start,meeting_end,meeting_duration,notes;{internal_legend},reviewed,deleted,misc_billing,sheet_row;{publish_legend},published;'
+        'default'                     => '{district_legend},date,psychologist,district,school,student_name,service_provided,price,lasid,sasid,meeting_date,meeting_start,meeting_end,meeting_duration,notes;{internal_legend},reviewed,deleted,misc_billing,sheet_row;{publish_legend},published;'
     ),
  
     // Fields
@@ -132,24 +132,24 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'alias' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['alias'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['alias'],
             'exclude'                 => true,
             'inputType'               => 'text',
             'search'                  => true,
             'eval'                    => array('unique'=>true, 'rgxp'=>'alias', 'doNotCopy'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
             'save_callback' => array
             (
-                array('Bcs\Backend\TransactionBackend', 'generateAlias')
+                array('Bcs\Backend\DistrictBackend', 'generateAlias')
             ),
             'sql'                     => "varchar(128) COLLATE utf8mb3_bin NOT NULL default ''"
 
         ),
 
 
-        // Transaction Fields
+        // District Fields
         'date' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['date'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -158,7 +158,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'psychologist' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['psychologist'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['psychologist'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -167,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'district' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['district'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['district'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -176,7 +176,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'school' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['school'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['school'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -185,7 +185,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'student_name' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_name'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['student_name'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -194,7 +194,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'service_provided' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['service_provided'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['service_provided'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -203,7 +203,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'price' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['price'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['price'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -212,7 +212,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'lasid' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['lasid'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['lasid'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -221,7 +221,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'sasid' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['sasid'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['sasid'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -230,7 +230,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'meeting_date' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_date'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['meeting_date'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -239,7 +239,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'meeting_start' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_start'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['meeting_start'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -248,7 +248,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'meeting_end' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_end'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['meeting_end'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -257,7 +257,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'meeting_duration' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_duration'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['meeting_duration'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -266,7 +266,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'notes' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['notes'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['notes'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -275,7 +275,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'reviewed' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['reviewed'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['reviewed'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -284,7 +284,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'deleted' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['deleted'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['deleted'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -293,7 +293,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'misc_billing' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['misc_billing'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['misc_billing'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -302,7 +302,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'sheet_row' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['sheet_row'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['sheet_row'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -311,7 +311,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
         'label' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['label'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['label'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -321,7 +321,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         'published' => array
         (
             'exclude'                 => true,
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['published'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['published'],
             'inputType'               => 'checkbox',
             'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
             'sql'                     => "char(1) NOT NULL default ''"
