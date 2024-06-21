@@ -139,7 +139,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'eval'                    => array('unique'=>true, 'rgxp'=>'alias', 'doNotCopy'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
             'save_callback' => array
             (
-                array('Bcs\Backend\TransactionBackend', 'generateAlias')
+                array('Bcs\Backend\AssignmentBackend', 'generateAlias')
             ),
             'sql'                     => "varchar(128) COLLATE utf8mb3_bin NOT NULL default ''"
 
