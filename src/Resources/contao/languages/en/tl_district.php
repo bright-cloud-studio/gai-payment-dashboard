@@ -24,7 +24,7 @@ $GLOBALS['TL_LANG']['tl_district']['alias']                      = array('Alias'
 $GLOBALS['TL_LANG']['tl_district']['published']                  = array('Published', 'Show this record on the front end.');
 
 /* Fields */
-$GLOBALS['TL_LANG']['tl_district']['district_legend']            = 'Disctirct Information';
+$GLOBALS['TL_LANG']['tl_district']['district_legend']            = 'District Information';
 $GLOBALS['TL_LANG']['tl_district']['date']                       = array('Date', 'Today\'s Date');
 $GLOBALS['TL_LANG']['tl_district']['psychologist']               = array('Psychologist', 'Psycholigist this transactions is for');
 $GLOBALS['TL_LANG']['tl_district']['district']                   = array('District', 'District the school is in');
