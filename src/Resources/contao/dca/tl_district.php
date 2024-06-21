@@ -156,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
 
 
         
-        // District Fields - Invoie Specific
+        // Invoie Specific
         'invoice_number' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_district']['invoice_number'],
@@ -206,7 +206,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
     
 
         
-        // District Fields - District Specific
+        // District Specific
         'district_name' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_district']['district_name'],
@@ -263,7 +263,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         ),
 
 
-        // District Fields - Contact Details
+        // Contact Specific
         'contact_name' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_district']['contact_name'],
