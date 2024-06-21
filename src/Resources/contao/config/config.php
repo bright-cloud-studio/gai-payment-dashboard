@@ -20,6 +20,14 @@ $GLOBALS['BE_MOD']['gai']['assignment'] = array(
 	'tables' => array('tl_assignment')
 );
 
+$GLOBALS['BE_MOD']['gai']['district'] = array(
+	'tables' => array('tl_district')
+);
+$GLOBALS['BE_MOD']['gai']['school'] = array(
+	'tables' => array('tl_school')
+);
+
+
 
 
 /* Front End modules */
