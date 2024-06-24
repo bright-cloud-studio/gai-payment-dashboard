@@ -16,7 +16,7 @@ class FormHooks
 
     public function onPrepareForm($fields, $formId, $form)
     {
-        if($formData['formID'] == 'work_assignment') {
+        if($form->formID == 'work_assignment') {
             return;
         }
 
