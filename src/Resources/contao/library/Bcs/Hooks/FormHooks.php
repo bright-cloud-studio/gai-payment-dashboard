@@ -17,8 +17,7 @@ class FormHooks
     public function onPrepareForm($fields, $formId, $form)
     {
         if($formData['formID'] == 'work_assignment') {
-            echo "HOOK HIT2!";
-            die();
+            return;
         }
 
         return $fields;
