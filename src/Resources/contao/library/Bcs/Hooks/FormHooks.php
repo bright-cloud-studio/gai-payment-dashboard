@@ -6,7 +6,7 @@ class Handler
 {
     protected static $arrUserOptions = array();
  
-    public function onProcessForm($submittedData, $formData, $files, $labels, $form)
+    public function onFormSubmit($submittedData, $formData, $files, $labels, $form)
     {
         if($formData['formID'] == 'work_assignment') {
             echo "HOOK HIT!";
