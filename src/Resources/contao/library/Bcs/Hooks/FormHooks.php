@@ -2,7 +2,7 @@
 
 namespace Bcs\Hooks;
 
-class Handler
+class FormHooks
 {
     protected static $arrUserOptions = array();
  
