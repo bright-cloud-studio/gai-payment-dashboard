@@ -42,6 +42,12 @@ class ModAssignments extends \Contao\Module
  
         return parent::generate();
     }
+
+
+    protected function compile()
+    {
+        
+    }
   
 
 }
