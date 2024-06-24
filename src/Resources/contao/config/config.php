@@ -30,7 +30,8 @@ $GLOBALS['BE_MOD']['gai']['school'] = array(
 
 
 /* Hooks */
-$GLOBALS['TL_HOOKS']['processFormData'][]      = array('Bcs\Hooks\FormHooks', 'onFormSubmit');
+$GLOBALS['TL_HOOKS']['processFormData'][]        = array('Bcs\Hooks\FormHooks', 'onFormSubmit');
+$GLOBALS['TL_HOOKS']['compileFormFields'][]      = array('Bcs\Hooks\FormHooks', 'onPrepareForm');
 
 
 
