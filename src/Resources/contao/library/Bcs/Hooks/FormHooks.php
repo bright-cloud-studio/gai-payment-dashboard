@@ -20,6 +20,9 @@ class FormHooks
             echo "HOOK HIT2!";
             die();
         }
+
+        return $fields;
+        
     }
 
 }
