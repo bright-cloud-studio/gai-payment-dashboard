@@ -12,6 +12,9 @@
 
 namespace Bcs\Module;
 
+use Contao\BackendTemplate;
+use Contao\System;
+
 class ModAssignments extends \Contao\Module
 {
 
@@ -31,7 +34,7 @@ class ModAssignments extends \Contao\Module
 
         if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
         {
-            $objTemplate = new \BackendTemplate('be_wildcard');
+            $objTemplate = new BackendTemplate('be_wildcard');
  
             $objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['assignments'][0]) . ' ###';
             $objTemplate->title = $this->headline;
