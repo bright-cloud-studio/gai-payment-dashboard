@@ -29,10 +29,17 @@ $GLOBALS['BE_MOD']['gai']['school'] = array(
 
 
 
+/* Hooks */
+$GLOBALS['TL_HOOKS']['processFormData'][]      = array('Bcs\Hooks\FormHooks', 'onFormSubmit');
+
+
 
 /* Front End modules */
 $GLOBALS['FE_MOD']['gai']['mod_assignments']          = 'Bcs\Module\ModAssignments';
 
 
+
 /* Models */
 $GLOBALS['TL_MODELS']['tl_transaction']    = 'Bcs\Model\Transaction';
+
+
