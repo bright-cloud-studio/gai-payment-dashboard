@@ -23,7 +23,7 @@ class FormHooks
         if($form->formID == 'work_assignment') {
 
             // Prefill in our Work Assignment information
-            return;
+            return $fields;
         }
 
         return $fields;
