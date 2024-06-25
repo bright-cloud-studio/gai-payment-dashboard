@@ -221,8 +221,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(20) NOT NULL default ''",
         ),
         'student_gender' => array
         (
