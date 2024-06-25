@@ -107,7 +107,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},tstamp,psychologist,district,school,student_name,service_provided,price,lasid,sasid,meeting_date,meeting_start,meeting_end,meeting_duration,notes;{internal_legend},reviewed,deleted,misc_billing,sheet_row;{publish_legend},published;'
+        'default'                     => '{transaction_legend},date,psychologist,district,school,student_name,service_provided,price,lasid,sasid,meeting_date,meeting_start,meeting_end,meeting_duration,notes;{internal_legend},reviewed,deleted,misc_billing,sheet_row;{publish_legend},published;'
     ),
  
     // Fields
@@ -149,6 +149,15 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 
 
         // Transaction Fields
+        'date' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(10) NOT NULL default ''"
+        ),
         'psychologist' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['psychologist'],
