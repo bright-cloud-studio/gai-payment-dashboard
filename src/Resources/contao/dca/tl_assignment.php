@@ -43,13 +43,13 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'showRootTrails'          => true,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => 11,
-            'fields'                  => array('date', 'psychologist'),
+            'fields'                  => array('date_created', 'district', 'school', 'psychologist'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
-            'fields'                  => array('id'),
-			'format'                  => '%s',
+            'fields'                  => array('date_created', 'district', 'school', 'psychologist'),
+			'format'                  => '%s | %s - %s | %s',
 			'label_callback'          => array('tl_assignment', 'addIcon')
         ),
         'global_operations' => array
