@@ -149,7 +149,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'inputType'               => 'checkbox',
             'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
             'sql'                     => "char(1) NOT NULL default ''"
-        )
+        ),
 
         
         
