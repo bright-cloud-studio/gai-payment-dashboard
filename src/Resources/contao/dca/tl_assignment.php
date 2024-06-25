@@ -149,9 +149,9 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 
 
         // Transaction Fields
-        'date' => array
+        'date_created' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date_created'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -159,9 +159,27 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'sql'                     => "varchar(10) NOT NULL default ''",
             'default'                 => time(),
         ),
+        'date_30_day' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date_30_day'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'date_45_day' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['date_45_day'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
         'psychologist' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['psychologist'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['psychologist'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -195,40 +213,88 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'service_provided' => array
+        'student_dob' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['service_provided'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_dob'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'price' => array
+        'student_gender' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['price'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_gender'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'lasid' => array
+        'student_grade' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['lasid'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_grade'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'sasid' => array
+        'student_lasid' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['sasid'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_lasid'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'student_sasid' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_sasid'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+
+
+        
+        'initial_reeval' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['initial_reeval'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'type_of_testing' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['type_of_testing'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'testing_date' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['testing_date'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'meeting_required' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_required'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'meeting_date' => array
@@ -237,34 +303,52 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'meeting_start' => array
+        'contact_info_parent' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_start'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['contact_info_parent'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'meeting_end' => array
+        'contact_info_teacher' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_end'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['contact_info_teacher'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'meeting_duration' => array
+        'team_chair' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_duration'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['team_chair'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'email' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['email'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'report_submitted' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['report_submitted'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'notes' => array
@@ -273,54 +357,12 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'reviewed' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['reviewed'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'deleted' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['deleted'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'misc_billing' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['misc_billing'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'sheet_row' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['sheet_row'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'label' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['label'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
+
+
+        
         'published' => array
         (
             'exclude'                 => true,
