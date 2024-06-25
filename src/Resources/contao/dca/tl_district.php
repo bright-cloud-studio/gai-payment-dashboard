@@ -43,12 +43,12 @@ $GLOBALS['TL_DCA']['tl_district'] = array
             'showRootTrails'          => true,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => 11,
-            'fields'                  => array('date', 'psychologist'),
+            'fields'                  => array('district_name'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
-            'fields'                  => array('id'),
+            'fields'                  => array('district_name'),
 			'format'                  => '%s',
 			'label_callback'          => array('tl_district', 'addIcon')
         ),
