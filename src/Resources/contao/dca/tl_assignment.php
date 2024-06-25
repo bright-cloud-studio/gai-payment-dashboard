@@ -167,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date('m/d/y g:i A', strtotime("+30 days"));
+            'default'                 => date('m/d/y g:i A', strtotime("+30 days")),
         ),
         'date_45_day' => array
         (
@@ -177,7 +177,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date('m/d/y g:i A', strtotime("+45 days"));
+            'default'                 => date('m/d/y g:i A', strtotime("+45 days")),
         ),
         'psychologist' => array
         (
