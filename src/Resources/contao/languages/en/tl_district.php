@@ -25,6 +25,7 @@ $GLOBALS['TL_LANG']['tl_district']['published']                  = array('Publis
 
 /* Fields */
 $GLOBALS['TL_LANG']['tl_district']['district_legend']            = 'Invoice Specific';
+$GLOBALS['TL_LANG']['tl_district']['district_name']              = array('District Name', 'Today\'s Date');
 $GLOBALS['TL_LANG']['tl_district']['invoice_number']             = array('Invoice Number', 'Today\'s Date');
 $GLOBALS['TL_LANG']['tl_district']['invoice_prefix']             = array('Invoice Prefix', 'Today\'s Date');
 $GLOBALS['TL_LANG']['tl_district']['purchase_order']             = array('Purchase Order', 'Today\'s Date');
