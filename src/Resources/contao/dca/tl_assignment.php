@@ -125,6 +125,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'tstamp' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date'],
+            'inputType'               => 'text',
 		    'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
         ),
         'sorting' => array
