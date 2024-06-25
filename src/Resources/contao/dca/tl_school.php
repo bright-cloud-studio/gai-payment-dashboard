@@ -46,8 +46,8 @@ $GLOBALS['TL_DCA']['tl_school'] = array
         ),
         'label' => array
         (
-            'fields'                  => array('date', 'psychologist'),
-			      'format'                  => '%s <span class="label-info">[%s]</span>',
+            'fields'                  => array('school_name', 'contact_name'),
+			      'format'                  => '%s | %s',
 			      'label_callback'          => array('tl_school', 'addIcon')
         ),
         'global_operations' => array
