@@ -154,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(10) NOT NULL default (UNIX_TIMESTAMP(NOW()))"
+            'sql'                     => "varchar(10) NOT NULL default UNIX_TIMESTAMP()"
         ),
         'psychologist' => array
         (
