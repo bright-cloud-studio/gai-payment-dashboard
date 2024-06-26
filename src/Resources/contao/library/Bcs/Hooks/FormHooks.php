@@ -15,19 +15,21 @@ class FormHooks
     public function onFormSubmit($submittedData, $formData, $files, $labels, $form)
     {
 
-        // If this is our specific form
+        // Assignment Selection Form
         if($formData['formID'] == 'assignment_selection') {
 
             // Create transaction using submitted data
             $_SESSION['assignment_uuid'] = $submittedData['assignment_uuid'];
         }
+
+        
     }
 
     // When a form is loaded
     public function onPrepareForm($fields, $formId, $form)
     {
         
-        // If this is our specific form
+        // ASSIGNMENT SELECTION FORM
         if($form->formID == 'assignment_selection') {
             
             // Loop through the fields
@@ -38,24 +40,27 @@ class FormHooks
                     
                     // Convert to php array
                     $options = unserialize($field->options);
+                    
+                    
+                    
+                        // GET ALL ASSIGNMENTS ASSOCIATED WITH ME
+                        $member = FrontendUser::getInstance();
+                        
+                        
+                        // get all of the Assignments for this Member
+                        $opt = [
+                            'order' => 'id ASC'
+                        ];
+                        $assignments = Assignment::findBy('psychologist', $member->id, $opt);
+                        
+                        foreach($assignments as $assignmnet) {
+                            // Add our new option
+                            $options[] = array (
+                                'value' => $assignmnet->id,
+                                'label' => $assignmnet->district . " - " . $assignmnet->student_name . " - " . $assignmnet->type_of_testing
+                            );
+                        }
 
-                    // Get our frontend member
-                    $member = FrontendUser::getInstance();
-                    
-                    // get all of the Assignments for this Member
-                    $opt = [
-                        'order' => 'id ASC'
-                    ];
-                    $assignments = Assignment::findBy('psychologist', $member->id, $opt);
-                    
-                    foreach($assignments as $assignmnet) {
-                        // Add our new option
-                        $options[] = array (
-                            'value' => $assignmnet->id,
-                            'label' => $assignmnet->district . " - " . $assignmnet->student_name . " - " . $assignmnet->type_of_testing
-                        );
-                    }
-                    
                     // Save back as a serialized array
                     $field->options = serialize($options);
 
@@ -65,6 +70,17 @@ class FormHooks
             // Prefill in our Work Assignment information
             return $fields;
         }
+        
+        // ASSIGNMENT GENERATE TRANSACTION FORM
+        else if($form->formID == 'assignment_generate_transaction') {
+            echo "BING BONG NOISE";
+            die();
+            
+            return $fields;
+        }
+        
+        
+        
 
         return $fields;
         
