@@ -118,4 +118,22 @@ class AssignmentBackend extends Backend
 		return $varValue;
 	}
 
+
+    public function getChildCategories(DataContainer $dc) { 
+		
+        $psychologists = array();
+
+		$this->import('Database');
+		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE published=1")->execute();
+		while($result->next())
+		{
+
+            $psychologists = $psychologists + array($result->id => ($result->firstname . " " . $result->lastname));
+            
+		}
+
+		return $psychologists;
+	}
+    
+
 }
