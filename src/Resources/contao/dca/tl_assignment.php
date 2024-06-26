@@ -182,8 +182,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'psychologist' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['psychologist'],
-            'inputType'               => 'text',
-            'default'                 => '',
+            'inputType'               => 'radio',
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
