@@ -38,30 +38,23 @@ class FormHooks
                     
                     // Convert to php array
                     $options = unserialize($field->options);
-                    
-                    
-                    
-                        // GET ALL ASSIGNMENTS ASSOCIATED WITH ME
-                        $member = FrontendUser::getInstance();
-                        
-                        
-                        // get all of the Assignments for this Member
-                        $opt = [
-                            'order' => 'id ASC'
-                        ];
-                        $assignments = Assignment::findBy('psychologist', $member->id, $opt);
-                        
-                        foreach($assignments as $assignmnet) {
-                            // Add our new option
-                            $options[] = array (
-                                'value' => $assignmnet->id,
-                                'label' => $assignmnet->district . " - " . $assignmnet->student_name . " - " . $assignmnet->type_of_testing
-                            );
-                        }
 
-
-
+                    // Get our frontend member
+                    $member = FrontendUser::getInstance();
                     
+                    // get all of the Assignments for this Member
+                    $opt = [
+                        'order' => 'id ASC'
+                    ];
+                    $assignments = Assignment::findBy('psychologist', $member->id, $opt);
+                    
+                    foreach($assignments as $assignmnet) {
+                        // Add our new option
+                        $options[] = array (
+                            'value' => $assignmnet->id,
+                            'label' => $assignmnet->district . " - " . $assignmnet->student_name . " - " . $assignmnet->type_of_testing
+                        );
+                    }
                     
                     // Save back as a serialized array
                     $field->options = serialize($options);
