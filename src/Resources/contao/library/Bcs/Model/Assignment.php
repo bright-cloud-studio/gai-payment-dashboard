@@ -2,7 +2,10 @@
  
 namespace Bcs\Model;
 
-class Assignment extends \Model
+use Contao\Model;
+
+
+class Assignment extends Model
 {
 	
 	/**
