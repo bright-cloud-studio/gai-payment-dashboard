@@ -119,12 +119,12 @@ class AssignmentBackend extends Backend
 	}
 
 
-    public function getChildCategories(DataContainer $dc) { 
+    public function getPsychologists(DataContainer $dc) { 
 		
         $psychologists = array();
 
 		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE published=1")->execute();
+		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0")->execute();
 		while($result->next())
 		{
 
