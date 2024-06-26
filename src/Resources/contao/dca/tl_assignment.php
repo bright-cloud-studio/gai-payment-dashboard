@@ -196,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getDistricts'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'school' => array
@@ -206,7 +206,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getSchools'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'student_name' => array
