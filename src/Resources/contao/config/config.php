@@ -42,5 +42,4 @@ $GLOBALS['FE_MOD']['gai']['mod_assignments']          = 'Bcs\Module\ModAssignmen
 
 /* Models */
 $GLOBALS['TL_MODELS']['tl_transaction']    = 'Bcs\Model\Transaction';
-
-
+$GLOBALS['TL_MODELS']['tl_assignment']    = 'Bcs\Model\Assignment';
