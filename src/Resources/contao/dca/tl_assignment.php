@@ -71,33 +71,33 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             ),
             'edit' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['edit'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_assignment']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
             'copy' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['copy'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_assignment']['copy'],
                 'href'                => 'act=copy',
                 'icon'                => 'copy.gif'
             ),
             'delete' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['delete'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_assignment']['delete'],
                 'href'                => 'act=delete',
                 'icon'                => 'delete.svg',
                 'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
             ),
             'toggle' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['toggle'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_assignment']['toggle'],
 				'icon'                => 'visible.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('Bcs\Backend\AssignmentBackend', 'toggleIcon')
 			),
             'show' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['show'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_assignment']['show'],
                 'href'                => 'act=show',
                 'icon'                => 'show.gif'
             )
@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 		),
         'tstamp' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date'],
             'inputType'               => 'text',
 		    'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
         ),
@@ -134,7 +134,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'alias' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['alias'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['alias'],
             'exclude'                 => true,
             'inputType'               => 'text',
             'search'                  => true,
@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         // Transaction Fields
         'date_created' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date_created'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_created'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -161,7 +161,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'date_30_day' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date_30_day'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_30_day'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -171,7 +171,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'date_45_day' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['date_45_day'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_45_day'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -181,34 +181,37 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'psychologist' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['psychologist'],
-            'inputType'               => 'radio',
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['psychologist'],
+            'inputType'               => 'select',
             'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'district' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['district'],
-            'inputType'               => 'text',
-            'default'                 => '',
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['district'],
+            'inputType'               => 'select',
             'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'school' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['school'],
-            'inputType'               => 'text',
-            'default'                 => '',
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['school'],
+            'inputType'               => 'select',
             'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'student_name' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_name'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_name'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -217,7 +220,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'student_dob' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_dob'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_dob'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -226,7 +229,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'student_gender' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_gender'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_gender'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -235,7 +238,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'student_grade' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_grade'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_grade'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -244,7 +247,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'student_lasid' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_lasid'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_lasid'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -253,7 +256,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'student_sasid' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_sasid'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_sasid'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -265,7 +268,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         
         'initial_reeval' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['initial_reeval'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['initial_reeval'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -274,7 +277,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'type_of_testing' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['type_of_testing'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['type_of_testing'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -283,7 +286,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'testing_date' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['testing_date'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['testing_date'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -292,7 +295,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'meeting_required' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_required'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['meeting_required'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -301,7 +304,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'meeting_date' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_date'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['meeting_date'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -310,7 +313,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'contact_info_parent' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['contact_info_parent'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['contact_info_parent'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -319,7 +322,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'contact_info_teacher' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['contact_info_teacher'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['contact_info_teacher'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -328,7 +331,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'team_chair' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['team_chair'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['team_chair'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -337,7 +340,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'email' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['email'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['email'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -346,7 +349,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'report_submitted' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['report_submitted'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['report_submitted'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -355,7 +358,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'notes' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['notes'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['notes'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -368,7 +371,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'published' => array
         (
             'exclude'                 => true,
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['published'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['published'],
             'inputType'               => 'checkbox',
             'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
             'sql'                     => "char(1) NOT NULL default ''"
