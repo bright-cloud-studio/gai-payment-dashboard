@@ -2,6 +2,8 @@
 
 namespace Bcs\Hooks;
 
+use Contao\Input;
+
 class FormHooks
 {
     protected static $arrUserOptions = array();
@@ -19,6 +21,7 @@ class FormHooks
     // When a form is loaded
     public function onPrepareForm($fields, $formId, $form)
     {
+        
         // If this is our specific form
         if($form->formID == 'work_assignment') {
 
