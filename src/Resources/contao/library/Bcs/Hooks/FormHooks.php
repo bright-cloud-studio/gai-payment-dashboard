@@ -51,18 +51,17 @@ class FormHooks
                         ];
                         $assignments = Assignment::findBy('psychologist', $member->id, $opt);
                         
-                        echo "<pre>";
-                        print_r($assignments);
-                        echo "</pre>";
-                        die();
+                        foreach($assignments as $assignmnet) {
+                            // Add our new option
+                            $options[] = array (
+                                'value' => $assignmnet->id,
+                                'label' => $assignmnet->district . " - " . $assignmnet->student_name . " - " . $assignmnet->type_of_testing
+                            );
+                        }
 
 
 
-                    // Add our new option
-                    $options[] = array (
-                        'value' => '123',
-                        'label' => '456'
-                    );
+                    
                     
                     // Save back as a serialized array
                     $field->options = serialize($options);
