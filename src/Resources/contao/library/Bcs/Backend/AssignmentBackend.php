@@ -145,7 +145,7 @@ class AssignmentBackend extends Backend
 
         // Use the DB to grab all of our enabled members, aka our psychologists
 		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE disable=0")->execute();
+		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1")->execute();
 		while($result->next())
 		{
             // Add ti array with ID as the value and firstname lastname as the label
@@ -163,7 +163,7 @@ class AssignmentBackend extends Backend
 
         // Use the DB to grab all of our enabled members, aka our psychologists
 		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE disable=0")->execute();
+		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE published=1")->execute();
 		while($result->next())
 		{
             // Add ti array with ID as the value and firstname lastname as the label
