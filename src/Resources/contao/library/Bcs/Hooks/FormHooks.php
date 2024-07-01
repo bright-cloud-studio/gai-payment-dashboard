@@ -14,15 +14,11 @@ class FormHooks
     // When a form is submitted
     public function onFormSubmit($submittedData, $formData, $files, $labels, $form)
     {
-
         // Assignment Selection Form
         if($formData['formID'] == 'assignment_selection') {
-
             // Create transaction using submitted data
             $_SESSION['assignment_uuid'] = $submittedData['assignment_uuid'];
         }
-
-        
     }
 
     // When a form is loaded
