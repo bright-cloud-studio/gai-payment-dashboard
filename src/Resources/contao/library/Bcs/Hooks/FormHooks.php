@@ -73,15 +73,10 @@ class FormHooks
         
         // ASSIGNMENT GENERATE TRANSACTION FORM
         else if($form->formID == 'assignment_generate_transaction') {
-            echo "BING BONG NOISE";
-            die();
-            
             return $fields;
         }
-        
-        
-        
 
+        
         return $fields;
         
     }
