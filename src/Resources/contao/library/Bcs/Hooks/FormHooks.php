@@ -28,8 +28,10 @@ class FormHooks
     // When a form is loaded
     public function onPrepareForm($fields, $formId, $form)
     {
-        
-        // ASSIGNMENT SELECTION FORM
+
+        ///////////////////////////////
+        // ASSIGNMENT SELECTION FORM //
+        //////////////////////////////
         if($form->formID == 'assignment_selection') {
             
             // Loop through the fields
@@ -40,21 +42,22 @@ class FormHooks
                     
                     // Convert to php array
                     $options = unserialize($field->options);
-                    
-                    
-                    
-                        // GET ALL ASSIGNMENTS ASSOCIATED WITH ME
+
+                        // Get the Front end user
                         $member = FrontendUser::getInstance();
-                        
                         
                         // get all of the Assignments for this Member
                         $opt = [
                             'order' => 'id ASC'
                         ];
+
+                        // Get the Assignments using our specific criteria
                         $assignments = Assignment::findBy('psychologist', $member->id, $opt);
-                        
+
+                        // Loop through all the collected Assignments
                         foreach($assignments as $assignmnet) {
-                            // Add our new option
+                            
+                            // Format the assignment so it can be added to the form
                             $options[] = array (
                                 'value' => $assignmnet->id,
                                 'label' => $assignmnet->district . " - " . $assignmnet->student_name . " - " . $assignmnet->type_of_testing
@@ -63,15 +66,17 @@ class FormHooks
 
                     // Save back as a serialized array
                     $field->options = serialize($options);
-
                 }
             }
 
             // Prefill in our Work Assignment information
             return $fields;
         }
-        
-        // ASSIGNMENT GENERATE TRANSACTION FORM
+
+
+        //////////////////////////////////////////
+        // ASSIGNMENT GENERATE TRANSACTION FORM //
+        //////////////////////////////////////////
         else if($form->formID == 'assignment_generate_transaction') {
             return $fields;
         }
