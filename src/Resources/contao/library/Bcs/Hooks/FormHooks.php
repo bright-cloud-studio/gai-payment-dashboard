@@ -74,6 +74,24 @@ class FormHooks
         // ASSIGNMENT GENERATE TRANSACTION FORM //
         //////////////////////////////////////////
         else if($form->formID == 'assignment_generate_transaction') {
+            
+            // Get the Assignment
+            $assignment = Assignment::findOneBy('id', $_SESSION['assignment_uuid']);
+            
+            //echo "TEST: " . $assignment->psychologist;
+
+            $fields['psychologist']->value = $assignment->psychologist;
+
+
+            
+            foreach($fields as $key => $field) {
+                //echo "KEY: " . $key . "<br>";
+            }
+            
+            
+            // Fill in the fields with the correct data
+            
+            
             return $fields;
         }
 
