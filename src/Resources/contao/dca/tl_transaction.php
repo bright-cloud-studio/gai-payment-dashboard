@@ -146,23 +146,15 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         /* ******************* */
         // Transaction Fields
         /* ******************* */
-        'billing_month' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['billing_month'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
         'date_submitted' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date_submitted'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(20) NOT NULL default ''",
+            'default'                 => date("m/d/y g:i A")
         ),
         'psychologist' => array
         (
