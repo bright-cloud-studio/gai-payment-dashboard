@@ -193,9 +193,9 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'service_code' => array
+        'service' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['service_code'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['service'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
