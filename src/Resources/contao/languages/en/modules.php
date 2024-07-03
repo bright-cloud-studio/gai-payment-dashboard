@@ -11,11 +11,11 @@
 **/
 
 /* Back End modules */
-$GLOBALS['TL_LANG']['MOD']['assignment']                  = array('Assignments', 'Assignments created by GAI assigning work to Psychologists');
-$GLOBALS['TL_LANG']['MOD']['transaction']                  = array('Transactions', 'Transactions created by Psycholigists using the Payment Dashboard');
-
-$GLOBALS['TL_LANG']['MOD']['district']                  = array('Districts', 'Master List of all Districts');
-$GLOBALS['TL_LANG']['MOD']['school']                  = array('Schools', 'Master List of all Schools');
+$GLOBALS['TL_LANG']['MOD']['assignment']               = array('Assignments', 'Assignments created by GAI assigning work to Psychologists');
+$GLOBALS['TL_LANG']['MOD']['transaction']              = array('Transactions', 'Transactions created by Psycholigists using the Payment Dashboard');
+$GLOBALS['TL_LANG']['MOD']['district']                 = array('Districts', 'Master List of all Districts');
+$GLOBALS['TL_LANG']['MOD']['school']                   = array('Schools', 'Master List of all Schools');
+$GLOBALS['TL_LANG']['MOD']['service']                  = array('Services', 'Master List of all Services');
 
 
 /* Front End modules */
