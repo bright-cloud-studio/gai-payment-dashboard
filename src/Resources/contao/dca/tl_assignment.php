@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         // Contao Fields
         'id' => array
         (
-		    'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
+		    'sql'                     => "int(10) unsigned NOT NULL auto_increment"
         ),
         'pid' => array
 		(
@@ -126,11 +126,11 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date'],
             'inputType'               => 'text',
-		    'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
+		    'sql'                     => "int(10) unsigned NOT NULL default '0'"
         ),
         'sorting' => array
         (
-            'sql'                    	=> "int(10) unsigned NOT NULL default '0'"
+            'sql'                     => "int(10) unsigned NOT NULL default '0'"
         ),
         'alias' => array
         (
@@ -155,7 +155,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date("m/d/y g:i A"),
         ),
@@ -165,7 +165,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date('m/d/y g:i A', strtotime("+30 days")),
         ),
@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date('m/d/y g:i A', strtotime("+45 days")),
         ),
@@ -224,7 +224,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
         ),
         'student_gender' => array
@@ -291,7 +291,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date("m/d/y g:i A"),
         ),
@@ -310,7 +310,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date("m/d/y g:i A"),
         ),
