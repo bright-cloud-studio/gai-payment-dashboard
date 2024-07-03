@@ -6,6 +6,7 @@ use Contao\Backend;
 use Contao\Database;
 use Contao\DataContainer;
 use Contao\DC_Table;
+use Contao\Image;
 use Contao\Input;
 use Contao\StringUtil;
 use Contao\System;
