@@ -152,7 +152,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date("m/d/y g:i A")
         ),
