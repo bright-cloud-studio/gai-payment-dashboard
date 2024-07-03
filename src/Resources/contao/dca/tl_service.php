@@ -233,6 +233,15 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+
+        'published' => array
+        (
+            'exclude'                 => true,
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['published'],
+            'inputType'               => 'checkbox',
+            'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
+            'sql'                     => "char(1) NOT NULL default ''"
         )
     )
 );
