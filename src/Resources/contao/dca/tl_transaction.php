@@ -6,10 +6,8 @@ use Contao\Backend;
 use Contao\Database;
 use Contao\DataContainer;
 use Contao\DC_Table;
-use Contao\Image;
 use Contao\Input;
 use Contao\StringUtil;
-use Contao\System;
 
 /* Table tl_price_chart */
 $GLOBALS['TL_DCA']['tl_transaction'] = array
@@ -167,10 +165,11 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         'psychologist' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['psychologist'],
-            'inputType'               => 'text',
-            'default'                 => '',
+            'inputType'               => 'select',
             'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'district' => array
