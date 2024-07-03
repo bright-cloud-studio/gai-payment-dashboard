@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, service_code, price, lasid, sasid, meeting_date, meeting_start, meeting_end, meeting_duration, notes, reviewed;{publish_legend},published;'
+        'default'                     => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, service, price, lasid, sasid, meeting_date, meeting_start, meeting_end, meeting_duration, notes, reviewed;{publish_legend},published;'
     ),
  
     // Fields
