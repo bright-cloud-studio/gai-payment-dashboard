@@ -81,7 +81,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{services_legend},service_code,name,psychologist_tier_1,psychologist_tier_2,psychologist_tier_3,psychologist_tier_4,psychologist_tier_5,psychologist_tier_6,psychologist_tier_7,psychologist_tier_8,psychologist_tier_9,psychologist_tier_10,school_tier_1,school_tier_2,school_tier_3;'
+        'default'                     => '{services_legend},service_code,name,psychologist_tier_1,psychologist_tier_2,psychologist_tier_3,psychologist_tier_4,psychologist_tier_5,psychologist_tier_6,psychologist_tier_7,psychologist_tier_8,psychologist_tier_9,psychologist_tier_10,school_tier_1,school_tier_2,school_tier_3;{publish_legend},published;'
     ),
  
     // Fields
