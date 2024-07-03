@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date,psychologist,district,school,student_initials,service_code,price,lasid,sasid,meeting_date,meeting_start,meeting_end,meeting_duration,notes;{publish_legend},published;'
+        'default'                     => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, service_code, price, lasid, sasid, meeting_date, meeting_start, meeting_end, meeting_duration, notes, reviewed;{publish_legend},published;'
     ),
  
     // Fields
@@ -277,33 +277,6 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         'reviewed' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['reviewed'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'deleted' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['deleted'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'misc_billing' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['misc_billing'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'assignment_id' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['assignment_id'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
