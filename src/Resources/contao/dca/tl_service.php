@@ -4,7 +4,7 @@ use Contao\DataContainer;
 use Contao\DC_Table;
  
 /* Table tl_services */
-$GLOBALS['TL_DCA']['tl_services'] = array
+$GLOBALS['TL_DCA']['tl_service'] = array
 (
  
     // Config
@@ -51,27 +51,27 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         (
             'edit' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_services']['edit'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_service']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
 			
             'copy' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_services']['copy'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_service']['copy'],
                 'href'                => 'act=copy',
                 'icon'                => 'copy.gif'
             ),
             'delete' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_services']['delete'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_service']['delete'],
                 'href'                => 'act=delete',
                 'icon'                => 'delete.svg',
                 'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
             ),
             'show' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_services']['show'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_service']['show'],
                 'href'                => 'act=show',
                 'icon'                => 'show.gif'
             )
@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'service_code' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['service_code'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['service_code'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'name' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['name'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['name'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -119,7 +119,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_1' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_1'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_1'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_2' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_2'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_2'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -137,7 +137,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_3' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_3'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_3'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -146,7 +146,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_4' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_4'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_4'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -155,7 +155,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_5' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_5'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_5'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -164,7 +164,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_6' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_6'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_6'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -173,7 +173,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_7' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_7'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_7'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -182,7 +182,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_8' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_8'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_8'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -191,7 +191,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_9' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_9'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_9'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -200,7 +200,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'psychologist_tier_10' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['psychologist_tier_10'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['psychologist_tier_10'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -209,7 +209,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'school_tier_1' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['school_tier_1'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['school_tier_1'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -218,7 +218,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'school_tier_2' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['school_tier_2'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['school_tier_2'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
@@ -227,7 +227,7 @@ $GLOBALS['TL_DCA']['tl_services'] = array
         ),
         'school_tier_3' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_services']['school_tier_3'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_service']['school_tier_3'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
