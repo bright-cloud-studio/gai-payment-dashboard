@@ -19,12 +19,14 @@ $GLOBALS['BE_MOD']['gai']['transaction'] = array(
 $GLOBALS['BE_MOD']['gai']['assignment'] = array(
 	'tables' => array('tl_assignment')
 );
-
 $GLOBALS['BE_MOD']['gai']['district'] = array(
 	'tables' => array('tl_district')
 );
 $GLOBALS['BE_MOD']['gai']['school'] = array(
 	'tables' => array('tl_school')
+);
+$GLOBALS['BE_MOD']['gai']['service'] = array(
+	'tables' => array('tl_service')
 );
 
 
