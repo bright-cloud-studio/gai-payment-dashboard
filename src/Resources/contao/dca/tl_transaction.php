@@ -154,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'search'                  => true,
             'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y g:i A")
+            'default'                 => date("m/d/y g:i")
         ),
         'psychologist' => array
         (
