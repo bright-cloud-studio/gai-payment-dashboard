@@ -353,11 +353,11 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'report_submitted' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['report_submitted'],
-            'inputType'               => 'text',
+            'inputType'               => 'select',
             'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'options'                  => array('yes' => 'Yes', 'no' => 'No'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
+    		'sql'                      => "varchar(5) NOT NULL default 'slider'"
         ),
         'notes' => array
         (
