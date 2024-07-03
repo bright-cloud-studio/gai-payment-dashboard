@@ -272,7 +272,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr'),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'reviewed' => array
