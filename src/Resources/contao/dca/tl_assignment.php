@@ -230,11 +230,11 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'student_gender' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_gender'],
-            'inputType'               => 'text',
+            'inputType'               => 'select',
             'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'options'                  => array('male' => 'Male', 'female' => 'Female', 'other' => 'Other'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
+    		'sql'                      => "varchar(32) NOT NULL default 'slider'"
         ),
         'student_grade' => array
         (
