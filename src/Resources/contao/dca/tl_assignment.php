@@ -234,7 +234,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'options'                  => array('male' => 'Male', 'female' => 'Female', 'other' => 'Other'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
-    		'sql'                      => "varchar(32) NOT NULL default 'slider'"
+    		'sql'                      => "varchar(32) NOT NULL default ''"
         ),
         'student_grade' => array
         (
@@ -273,7 +273,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'options'                  => array('initial' => 'Initial', 're_eval' => 'Re-eval'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
-    		'sql'                      => "varchar(10) NOT NULL default 'slider'"
+    		'sql'                      => "varchar(10) NOT NULL default ''"
         ),
         'type_of_testing' => array
         (
@@ -302,7 +302,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'options'                  => array('yes' => 'Yes', 'no' => 'No'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
-    		'sql'                      => "varchar(10) NOT NULL default 'slider'"
+    		'sql'                      => "varchar(10) NOT NULL default ''"
         ),
         'meeting_date' => array
         (
@@ -357,7 +357,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'options'                  => array('yes' => 'Yes', 'no' => 'No'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
-    		'sql'                      => "varchar(5) NOT NULL default 'slider'"
+    		'sql'                      => "varchar(5) NOT NULL default ''"
         ),
         'notes' => array
         (
