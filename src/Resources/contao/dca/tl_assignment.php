@@ -278,10 +278,11 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'type_of_testing' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['type_of_testing'],
-            'inputType'               => 'text',
-            'default'                 => '',
+            'inputType'               => 'select',
             'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getServices'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'testing_date' => array
