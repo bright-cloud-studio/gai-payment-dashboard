@@ -362,7 +362,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'notes' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['notes'],
-            'inputType'               => 'text',
+            'inputType'               => 'textarea',
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
