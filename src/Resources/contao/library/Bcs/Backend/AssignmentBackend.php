@@ -172,6 +172,24 @@ class AssignmentBackend extends Backend
 
 		return $schools;
 	}
+
+    // Get Services as select menu
+    public function getServices(DataContainer $dc) { 
+
+        // Hold the psys
+        $services = array();
+
+        // Use the DB to grab all of our enabled members, aka our psychologists
+		$this->import('Database');
+		$result = $this->Database->prepare("SELECT * FROM tl_service WHERE published=1")->execute();
+		while($result->next())
+		{
+            // Add ti array with ID as the value and firstname lastname as the label
+            $services = $services + array($result->service_code => $result->name);   
+		}
+
+		return $services;
+	}
     
 
 }
