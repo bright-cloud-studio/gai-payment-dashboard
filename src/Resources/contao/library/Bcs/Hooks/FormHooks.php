@@ -3,6 +3,7 @@
 namespace Bcs\Hooks;
 
 use Bcs\Model\Assignment;
+use Bcs\Model\Transaction;
 
 use Contao\FrontendUser;
 use Contao\Input;
@@ -18,6 +19,15 @@ class FormHooks
         if($formData['formID'] == 'assignment_selection') {
             // Create transaction using submitted data
             $_SESSION['assignment_uuid'] = $submittedData['assignment_uuid'];
+        }
+        // Assignment Generate Transaction Form
+        else if($formData['formID'] == 'assignment_generate_transaction') {
+            
+            $transaction = new Transaction();
+            $transaction->pid = 15;
+            $transaction->psychologist =  $submittedData['psychologist'];
+            $transaction->save();
+            
         }
     }
 
