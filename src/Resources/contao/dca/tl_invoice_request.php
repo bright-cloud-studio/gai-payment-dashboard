@@ -35,8 +35,8 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         ),
         'label' => array
         (
-            'fields'                  => array('service_code', 'name'),
-            'format'                  => '<span class="label-info">Service Code: [%s]</span> Name: %s'
+            'fields'                  => array('date_start', 'date_end'),
+            'format'                  => '%s - %s'
         ),
         'global_operations' => array
         (
@@ -81,7 +81,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{services_legend},service_code,name,psychologist_tier_1,psychologist_tier_2,psychologist_tier_3,psychologist_tier_4,psychologist_tier_5,psychologist_tier_6,psychologist_tier_7,psychologist_tier_8,psychologist_tier_9,psychologist_tier_10,school_tier_1,school_tier_2,school_tier_3;{publish_legend},published;'
+        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_distrcts;{publish_legend},published;'
     ),
  
     // Fields
@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         'published' => array
         (
             'exclude'                 => true,
-            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['published'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_request']['published'],
             'inputType'               => 'checkbox',
             'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
             'sql'                     => "char(1) NOT NULL default ''"
