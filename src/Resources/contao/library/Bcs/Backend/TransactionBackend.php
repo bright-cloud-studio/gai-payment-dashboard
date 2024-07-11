@@ -7,6 +7,7 @@ use Contao\Image;
 use Contao\Input;
 use Contao\DataContainer;
 use Contao\StringUtil;
+use Contao\System;
 
 use Bcs\Model\Transaction;
 
@@ -18,7 +19,7 @@ class TransactionBackend extends Backend
 	{
         if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1), (@func_get_arg(12) ?: null));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -54,7 +55,7 @@ class TransactionBackend extends Backend
 
 		// Update the database
 		$this->Database->prepare("UPDATE tl_transaction SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")->execute($intId);
-		$this->log('A new version of record "tl_transactions.id='.$intId.'" has been created'.$this->getParentEntries('tl_listing', $intId), __METHOD__, TL_GENERAL);
+		System::getContainer()->get('monolog.logger.contao.cron')->info('A new version of record "tl_transactions.id='.$intId.'" has been created'.$this->getParentEntries('tl_listing', $intId));
 	}
 	
 	public function exportListings()
