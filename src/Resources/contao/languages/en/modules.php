@@ -17,6 +17,8 @@ $GLOBALS['TL_LANG']['MOD']['district']                 = array('Districts', 'Mas
 $GLOBALS['TL_LANG']['MOD']['school']                   = array('Schools', 'Master List of all Schools');
 $GLOBALS['TL_LANG']['MOD']['service']                  = array('Services', 'Master List of all Services');
 
+$GLOBALS['TL_LANG']['MOD']['invoice_request']          = array('Generate Invoices', 'Create an Invoice Request to generate invoices for a certain date range');
+
 
 /* Front End modules */
 $GLOBALS['TL_LANG']['FMD']['mod_assignments']          = array('Assignments', 'Displays Assignments and allows creation of transactions for them');
