@@ -2,7 +2,9 @@
  
 namespace Bcs\Model;
 
-class Transaction extends \Model
+use Contao\Model;
+
+class Transaction extends Model
 {
 	
 	/**
