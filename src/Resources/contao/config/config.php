@@ -28,6 +28,9 @@ $GLOBALS['BE_MOD']['gai']['school'] = array(
 $GLOBALS['BE_MOD']['gai']['service'] = array(
 	'tables' => array('tl_service')
 );
+$GLOBALS['BE_MOD']['gai']['invoice_request'] = array(
+	'tables' => array('tl_invoice_request')
+);
 
 
 
@@ -46,3 +49,4 @@ $GLOBALS['FE_MOD']['gai']['mod_assignments']          = 'Bcs\Module\ModAssignmen
 $GLOBALS['TL_MODELS']['tl_transaction']    = 'Bcs\Model\Transaction';
 $GLOBALS['TL_MODELS']['tl_assignment']    = 'Bcs\Model\Assignment';
 $GLOBALS['TL_MODELS']['tl_service']    = 'Bcs\Model\Service';
+$GLOBALS['TL_MODELS']['tl_invoice_request']    = 'Bcs\Model\InvoiceRequest';
