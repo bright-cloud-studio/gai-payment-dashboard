@@ -154,6 +154,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_created'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
