@@ -8,7 +8,6 @@
 * @see	       https://github.com/bright-cloud-studio/gai-payment-d
 */
 
-
 /* Create new sections in the Contao sidebar */
 $GLOBALS['TL_LANG']['MOD']['gai'][0] = "GAI Payment Dashboard";
 
@@ -16,11 +15,11 @@ $GLOBALS['TL_LANG']['MOD']['gai'][0] = "GAI Payment Dashboard";
 $GLOBALS['BE_MOD']['gai']['invoice_request'] = array(
 	'tables' => array('tl_invoice_request')
 );
-$GLOBALS['BE_MOD']['gai']['transaction'] = array(
-	'tables' => array('tl_transaction')
-);
 $GLOBALS['BE_MOD']['gai']['assignment'] = array(
 	'tables' => array('tl_assignment')
+);
+$GLOBALS['BE_MOD']['gai']['transaction'] = array(
+	'tables' => array('tl_transaction')
 );
 $GLOBALS['BE_MOD']['gai']['district'] = array(
 	'tables' => array('tl_district')
@@ -33,17 +32,13 @@ $GLOBALS['BE_MOD']['gai']['service'] = array(
 );
 
 
-
-
 /* Hooks */
 $GLOBALS['TL_HOOKS']['processFormData'][]        = array('Bcs\Hooks\FormHooks', 'onFormSubmit');
 $GLOBALS['TL_HOOKS']['compileFormFields'][]      = array('Bcs\Hooks\FormHooks', 'onPrepareForm');
 
 
-
 /* Front End modules */
 $GLOBALS['FE_MOD']['gai']['mod_assignments']          = 'Bcs\Module\ModAssignments';
-
 
 
 /* Models */
