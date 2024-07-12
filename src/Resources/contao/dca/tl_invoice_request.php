@@ -17,7 +17,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'keys' => array
             (
                 'id' 	=> 	'primary',
-                'name' =>  'index'
+                //'name' =>  'index'
             )
         )
     ),
@@ -31,7 +31,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'fields'                  => array('service_code'),
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'panelLayout'             => 'filter;search,limit',
-            'defaultSearchField'      => 'name'
+            //'defaultSearchField'      => 'name'
         ),
         'label' => array
         (
