@@ -106,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'inputType'               => 'checkbox',
             'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
             'sql'                     => "char(1) NOT NULL default ''"
-        )
+        ),
 
 
 
@@ -154,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\InvoiceRequestBackend', 'getDistricts'),
             'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
+        )
 
 
 
