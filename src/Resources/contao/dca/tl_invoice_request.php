@@ -81,7 +81,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_distrcts;{publish_legend},published;'
+        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{publish_legend},published;'
     ),
  
     // Fields
@@ -138,20 +138,20 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         'exclude_psychologists' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_psychologists'],
-            'inputType'               => 'select',
+            'inputType'               => 'checkbox',
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\InvoiceRequestBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'exclude_districts' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_districts'],
-            'inputType'               => 'select',
+            'inputType'               => 'checkbox',
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\InvoiceRequestBackend', 'getDistricts'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         )
