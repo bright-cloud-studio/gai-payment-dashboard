@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         'sorting' => array
         (
             'mode'                    => DataContainer::MODE_SORTED,
-            'fields'                  => array('service_code'),
+            'fields'                  => array('date_start'),
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'panelLayout'             => 'filter;search,limit',
             //'defaultSearchField'      => 'name'
