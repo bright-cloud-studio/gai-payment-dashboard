@@ -30,6 +30,9 @@ $GLOBALS['BE_MOD']['gai']['school'] = array(
 $GLOBALS['BE_MOD']['gai']['service'] = array(
 	'tables' => array('tl_service')
 );
+$GLOBALS['BE_MOD']['gai']['price_tier'] = array(
+	'tables' => array('tl_price_tier')
+);
 
 
 /* Hooks */
@@ -47,5 +50,6 @@ $GLOBALS['TL_MODELS']['tl_district']           = 'Bcs\Model\District';
 $GLOBALS['TL_MODELS']['tl_invoice_request']    = 'Bcs\Model\InvoiceRequest';
 $GLOBALS['TL_MODELS']['tl_school']             = 'Bcs\Model\School';
 $GLOBALS['TL_MODELS']['tl_service']            = 'Bcs\Model\Service';
+$GLOBALS['TL_MODELS']['tl_price_tier']         = 'Bcs\Model\PriceTier';
 $GLOBALS['TL_MODELS']['tl_transaction']        = 'Bcs\Model\Transaction';
 
