@@ -69,10 +69,13 @@ class FormHooks
                             
                             // Get label for District
                             $district = District::findOneBy('id', $assignment->district);
+
+                            // Get label for School
+                            $school = School::findOneBy('pid', $assignment->school);
                             
                             
                             // date_created - district - school - student
-                            $label = date('m/d/y',$t) . " - " . $district->district_name;
+                            $label = date('m/d/y',$t) . " - " . $district->district_name . " - " . $school->school_name;
                             
                             
                             
