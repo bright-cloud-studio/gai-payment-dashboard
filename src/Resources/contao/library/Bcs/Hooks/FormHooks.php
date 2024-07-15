@@ -63,10 +63,16 @@ class FormHooks
                         // Loop through all the collected Assignments
                         foreach($assignments as $assignmnet) {
                             
+                            $t = strtotime($assignmnet->date_created);
+                            
+                            $label = date('m/d/y',$t);
+                            
+                            
+                            
                             // Format the assignment so it can be added to the form
                             $options[] = array (
                                 'value' => $assignmnet->id,
-                                'label' => $assignmnet->district . " - " . $assignmnet->student_name . " - " . $assignmnet->type_of_testing
+                                'label' => $label
                             );
                         }
 
