@@ -1,6 +1,8 @@
 <?php
 
 use Bcs\Model\Service;
+use Contao\DataContainer;
+use Contao\DC_Table;
 
 /* Psychologist - Custom Fields */
 
