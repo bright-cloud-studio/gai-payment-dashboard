@@ -17,7 +17,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['price_tier_assignments'] = array
     'label'                   => &$GLOBALS['TL_LANG']['tl_member']['price_tier_assignments'],
     'inputType'               => 'checkbox',
     'flag'                    => DataContainer::SORT_ASC,
-    'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+    'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
     'options_callback'	      => array('Bcs\Backend\ServiceBackend', 'getPriceTierAssignmentOptions'),
     'sql'                     => "varchar(255) NOT NULL default ''"
 );
