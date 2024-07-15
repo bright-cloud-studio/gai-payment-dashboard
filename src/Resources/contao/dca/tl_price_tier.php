@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{school_legend}, tier_type, tier_price;{publish_legend},published;'
+        'default'                     => '{school_legend}, tier_price;{publish_legend},published;'
     ),
  
     // Fields
@@ -156,15 +156,6 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
         /* ******************* */
         // Transaction Fields
         /* ******************* */
-        'tier_type' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_type'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
         'tier_price' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_price'],
