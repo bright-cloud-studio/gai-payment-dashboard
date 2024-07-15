@@ -4,6 +4,7 @@ namespace Bcs\Hooks;
 
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
+use Bcs\Model\School;
 use Bcs\Model\Transaction;
 
 use Contao\FrontendUser;
@@ -75,7 +76,7 @@ class FormHooks
                             
                             
                             // date_created - district - school - student
-                            $label = date('m/d/y',$t) . " - " . $district->district_name . " - " . $school->school_name;
+                            $label = date('m/d/y',$t) . " - " . $district->district_name . " - " . $school->school_name . " - " . $assignment->student_name;
                             
                             
                             
