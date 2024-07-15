@@ -2,7 +2,9 @@
  
 namespace Bcs\Model;
 
-class District extends \Model
+use Contao\Model;
+
+class District extends Model
 {
 	
 	/**
