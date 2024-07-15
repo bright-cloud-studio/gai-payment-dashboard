@@ -5,6 +5,7 @@ namespace Bcs\Hooks;
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
 use Bcs\Model\Psychologist;
+use Bcs\Model\Service;
 use Bcs\Model\School;
 use Bcs\Model\Transaction;
 
@@ -110,44 +111,35 @@ class FormHooks
             // Customize certain fields, first loop through all form fields
             foreach($fields as $field) {
                 
-                // If this is the Psychologists select field
-                if($field->name == 'psychologist') {
+                // Hidden Fields
+                if($field->name == 'psychologist') { $field->value = $assignment->psychologist; }
+                if($field->name == 'report_submitted') { $field->value = $assignment->report_submitted; }
+                if($field->name == 'service_assigned') { $field->value = $assignment->type_of_testing; }
+                if($field->name == 'service_price') {
                     
-                    // Stores our generated options
-                    $options = [];
-                    
-                    // Get all active members, aka the psychologists
-                    $psychologists = MemberModel::findBy('disable', '');
-                    
-                    // Loop through the found psychologists
-                    foreach($psychologists as $psy) {
-                        
-                        // Add them to the select dropdown
-                        $options[] = array (
-                            'value' => $psy->id,
-                            'label' => $psy->firstname . " " . $psy->lastname
-                        );
-                        
-                    }
-     
+                    // Get the price for this service, for this psychologist's tier
+                    $field->value = "123456";
                 }
                 
-                $field->options = serialize($options);
+                // Assignment Details
+                if($field->name == 'district') { $field->value = $assignment->district; }
+                if($field->name == 'school') { $field->value = $assignment->school; }
+    
+                // Transaction Details
+                if($field->name == 'student_initial') { $field->value = $assignment->student_name; }
+                if($field->name == 'student_dob') { $field->value = $assignment->student_dob; }
+                if($field->name == 'student_lasid') { $field->value = $assignment->student_lasid; }
+                if($field->name == 'student_sasid') { $field->value = $assignment->student_sasid; }
+                if($field->name == 'service_provided') { $field->value = $assignment->type_of_testing; }
+                
             }
+
             
-            
-            // Apply our pre-defined values to the form
-            $fields['psychologist']->value = $assignment->psychologist;
-            $fields['report_submitted']->value = $assignment->report_submitted;
-            
-            
-            // Fill in the fields with the correct data
-            
-            
+            // Return our modified fields
             return $fields;
         }
 
-        
+        // Return our modified fields
         return $fields;
         
     }
