@@ -3,6 +3,7 @@
 namespace Bcs\Hooks;
 
 use Bcs\Model\Assignment;
+use Bcs\Model\District;
 use Bcs\Model\Transaction;
 
 use Contao\FrontendUser;
@@ -61,17 +62,23 @@ class FormHooks
                         $assignments = Assignment::findBy('psychologist', $member->id, $opt);
 
                         // Loop through all the collected Assignments
-                        foreach($assignments as $assignmnet) {
+                        foreach($assignments as $assignment) {
                             
-                            $t = strtotime($assignmnet->date_created);
+                            // Get the formated 'Date Created'
+                            $t = strtotime($assignment->date_created);
                             
-                            $label = date('m/d/y',$t);
+                            // Get label for District
+                            $district = District::findOneBy('id', $assignment->district);
+                            
+                            
+                            // date_created - district - school - student
+                            $label = date('m/d/y',$t) . " - " . $district->district_name;
                             
                             
                             
                             // Format the assignment so it can be added to the form
                             $options[] = array (
-                                'value' => $assignmnet->id,
+                                'value' => $assignment->id,
                                 'label' => $label
                             );
                         }
