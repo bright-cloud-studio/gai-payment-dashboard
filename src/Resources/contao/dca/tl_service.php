@@ -11,13 +11,19 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     'config' => array
     (
         'dataContainer'               => DC_Table::class,
+        'ctable'                      => array('tl_price_tier'),
         'enableVersioning'            => true,
+        'onload_callback' => array
+		(
+			array('tl_service', 'setRootType')
+		),
         'sql' => array
         (
             'keys' => array
             (
                 'id' 	=> 	'primary',
-                'name' =>  'index'
+                'name' =>  'index',
+                'pid'   => 'index'
             )
         )
     ),
@@ -27,21 +33,25 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTED,
+            'mode'                    => DataContainer::MODE_TREE,
+            'rootPaste'               => true,
+            'showRootTrails'          => true,
+            'icon'                    => 'pagemounts.svg',
+            'flag'                    => 11,
             'fields'                  => array('service_code'),
-            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
-            'panelLayout'             => 'filter;search,limit',
-            'defaultSearchField'      => 'name'
+            'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
-            'fields'                  => array('service_code', 'name'),
-            'format'                  => '<span class="label-info">Service Code: [%s]</span> Name: %s'
+            'fields'                  => array('name'),
+			'format'                  => '%s',
+			'label_callback'          => array('tl_service', 'addIcon')
         ),
         'global_operations' => array
         (
             'all' => array
             (
+                'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
                 'href'                => 'act=select',
                 'class'               => 'header_edit_all',
                 'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
@@ -49,13 +59,17 @@ $GLOBALS['TL_DCA']['tl_service'] = array
         ),
         'operations' => array
         (
+            'price_tiers' => array
+            (
+                'href'                => 'do=price_tier',
+                'icon'                => 'articles.svg'
+            ),
             'edit' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_service']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
-			
             'copy' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_service']['copy'],
@@ -69,6 +83,13 @@ $GLOBALS['TL_DCA']['tl_service'] = array
                 'icon'                => 'delete.svg',
                 'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
             ),
+            'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_service']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+				'button_callback'     => array('Bcs\Backend\ServiceBackend', 'toggleIcon')
+			),
             'show' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_service']['show'],
@@ -81,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{services_legend},service_code,name,psychologist_tier_1,psychologist_tier_2,psychologist_tier_3,psychologist_tier_4,psychologist_tier_5,psychologist_tier_6,psychologist_tier_7,psychologist_tier_8,psychologist_tier_9,psychologist_tier_10,school_tier_1,school_tier_2,school_tier_3;{publish_legend},published;'
+        'default'                     => '{services_legend},service_code,name,description;{publish_legend},published;'
     ),
  
     // Fields
@@ -89,8 +110,12 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     (
         'id' => array
         (
-            'sql'                   => "int(10) unsigned NOT NULL auto_increment"
+		    'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
         ),
+        'pid' => array
+		(
+			'sql'                     	=> "int(10) unsigned NOT NULL default 0"
+		),
         'tstamp' => array
         (
             'sql'                   => "int(10) unsigned NOT NULL default '0'"
@@ -138,3 +163,40 @@ $GLOBALS['TL_DCA']['tl_service'] = array
         )
     )
 );
+
+
+
+
+class tl_service extends Backend
+{
+	public function setRootType(DataContainer $dc)
+	{
+		if (Input::get('act') != 'create')
+		{
+			return;
+		}
+		if (Input::get('pid') == 0)
+		{
+			$GLOBALS['TL_DCA']['tl_service']['fields']['type']['default'] = 'root';
+		}
+		elseif (Input::get('mode') == 1)
+		{
+			$objPage = Database::getInstance()
+				->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+				->limit(1)
+				->execute(Input::get('pid'));
+
+			if ($objPage->pid == 0)
+			{
+				$GLOBALS['TL_DCA']['tl_service']['fields']['type']['default'] = 'root';
+			}
+		}
+	}
+
+    public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
+	{
+		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
+	}
+}
+
+
