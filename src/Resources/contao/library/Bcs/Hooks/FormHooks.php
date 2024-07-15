@@ -10,6 +10,7 @@ use Bcs\Model\Transaction;
 
 use Contao\FrontendUser;
 use Contao\Input;
+use Contao\MemberModel;
 
 class FormHooks
 {
@@ -80,7 +81,6 @@ class FormHooks
                             $label = date('m/d/y',$t) . " - " . $district->district_name . " - " . $school->school_name . " - " . $assignment->student_name;
                             
                             
-                            
                             // Format the assignment so it can be added to the form
                             $options[] = array (
                                 'value' => $assignment->id,
@@ -118,16 +118,16 @@ class FormHooks
                     // Stores our generated options
                     $options = [];
                     
-                    // Get all active psychologists
-                    $psychologists = Psychologist::findBy('published', '1');
+                    // Get all active members, aka the psychologists
+                    $psychologists = MemberModel::findBy('disable', '');
                     
                     // Loop through the found psychologists
                     foreach($psychologists as $psy) {
                         
-                        
+                        // Add them to the select dropdown
                         $options[] = array (
                             'value' => $psy->id,
-                            'label' => $psy->firstname + " " + $psy->lastname
+                            'label' => $psy->firstname . " " . $psy->lastname
                         );
                         
                     }
