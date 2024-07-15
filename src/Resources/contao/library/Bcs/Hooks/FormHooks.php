@@ -106,10 +106,8 @@ class FormHooks
             // Get the Assignment
             $assignment = Assignment::findOneBy('id', $_SESSION['assignment_uuid']);
 
-            // Apply our pre-defined values to the form
-            $fields['psychologist']->value = $assignment->psychologist;
             
-            // Loop through the fields
+            // Customize certain fields, first loop through all form fields
             foreach($fields as $field) {
                 
                 // If this is the Psychologists select field
@@ -136,6 +134,11 @@ class FormHooks
                 
                 $field->options = serialize($options);
             }
+            
+            
+            // Apply our pre-defined values to the form
+            $fields['psychologist']->value = $assignment->psychologist;
+            $fields['report_submitted']->value = $assignment->report_submitted;
             
             
             // Fill in the fields with the correct data
