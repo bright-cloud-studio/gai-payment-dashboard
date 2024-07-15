@@ -19,16 +19,3 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['meeting_options'] = array
     'eval'                    => array('multiple'=>true, 'mandatory'=>false,'tl_class'=>'clr') 
 );
 
-
-
-
-$services = Service::findBy('published', '1');
-
-foreach($services as $service) {
-
-    echo "BAM: " . $service->name . "<br>";
-    
-}
-
-die();
-
