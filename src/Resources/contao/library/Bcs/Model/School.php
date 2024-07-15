@@ -2,7 +2,9 @@
  
 namespace Bcs\Model;
 
-class School extends \Model
+use Contao\Model;
+
+class School extends Model
 {
 	
 	/**
