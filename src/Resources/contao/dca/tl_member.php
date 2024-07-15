@@ -1,5 +1,7 @@
 <?php
 
+use Bcs\Model\Service;
+
 /* Psychologist - Custom Fields */
 
  /* Extend the tl_user palettes */
@@ -16,12 +18,17 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['meeting_options'] = array
     'options'                 => array('misc_billing' => 'Misc. Billing', 'misc_travel_expenses' => 'Misc. Travel Expenses', 'editing_services' => 'Editing Services', 'manager' => 'Manager', 'parking' => 'Parking', 'test_late_cancel_first' => 'First Test Late Cancel', 'test_late_cancel_additional' => 'Additional Test Late Cancel'),								
     'eval'                    => array('multiple'=>true, 'mandatory'=>false,'tl_class'=>'clr') 
 );
-$GLOBALS['TL_DCA']['tl_member']['fields']['price_tier'] = array
-(
-    'sql'                     => "varchar(255) NOT NULL default ''",
-    'inputType'               => 'text',
-    'default'                 => '',
-    'search'                  => true,
-    'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-    'sql'                     => "varchar(255) NOT NULL default ''"
-);
+
+
+
+
+$services = Service::findBy('published', '1');
+
+foreach($services as $service) {
+
+    echo "BAM: " . $service->name . "<br>";
+    
+}
+
+die();
+
