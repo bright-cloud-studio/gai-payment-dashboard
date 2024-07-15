@@ -46,5 +46,7 @@ $GLOBALS['TL_MODELS']['tl_assignment']         = 'Bcs\Model\Assignment';
 $GLOBALS['TL_MODELS']['tl_district']           = 'Bcs\Model\District';
 $GLOBALS['TL_MODELS']['tl_invoice_request']    = 'Bcs\Model\InvoiceRequest';
 $GLOBALS['TL_MODELS']['tl_school']             = 'Bcs\Model\School';
+$GLOBALS['TL_MODELS']['tl_price_tier']         = 'Bcs\Model\PriceTier';
 $GLOBALS['TL_MODELS']['tl_service']            = 'Bcs\Model\Service';
 $GLOBALS['TL_MODELS']['tl_transaction']        = 'Bcs\Model\Transaction';
+
