@@ -4,6 +4,7 @@ namespace Bcs\Hooks;
 
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
+use Bcs\Model\Psychologist;
 use Bcs\Model\School;
 use Bcs\Model\Transaction;
 
@@ -104,15 +105,36 @@ class FormHooks
             
             // Get the Assignment
             $assignment = Assignment::findOneBy('id', $_SESSION['assignment_uuid']);
-            
-            //echo "TEST: " . $assignment->psychologist;
 
+            // Apply our pre-defined values to the form
             $fields['psychologist']->value = $assignment->psychologist;
-
-
             
-            foreach($fields as $key => $field) {
-                //echo "KEY: " . $key . "<br>";
+            // Loop through the fields
+            foreach($fields as $field) {
+                
+                // If this is the Psychologists select field
+                if($field->name == 'psychologist') {
+                    
+                    // Stores our generated options
+                    $options = [];
+                    
+                    // Get all active psychologists
+                    $psychologists = Psychologist::findBy('published', '1');
+                    
+                    // Loop through the found psychologists
+                    foreach($psychologists as $psy) {
+                        
+                        
+                        $options[] = array (
+                            'value' => $psy->id,
+                            'label' => $psy->firstname + " " + $psy->lastname
+                        );
+                        
+                    }
+     
+                }
+                
+                $field->options = serialize($options);
             }
             
             
