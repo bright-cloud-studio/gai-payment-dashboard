@@ -394,6 +394,9 @@ class tl_assignment extends Backend
     /* Generate function */
     public function generate()
     {
+        echo "GEN";
+        die();
+        
         $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 
         if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
@@ -403,6 +406,22 @@ class tl_assignment extends Backend
         }
  
         return parent::generate();
+    }
+
+     public function compile()
+    {
+        echo "COMPILE";
+        die();
+        
+        $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
+        {
+            $GLOBALS['TL_BODY'][] = '<script src="bundles/bcspaymentdashboard/js/select2.min.js"></script>';
+            $GLOBALS['TL_CSS'][] = '/bundles/bcspaymentdashboard/css/select2.min.css';
+        }
+ 
+        return parent::compile();
     }
     
 	public function setRootType(DataContainer $dc)
