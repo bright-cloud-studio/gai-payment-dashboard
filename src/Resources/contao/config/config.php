@@ -1,5 +1,8 @@
 <?php
- 
+
+use Contao\System;
+
+
 /**
 * @copyright  Bright Cliud Studio
 * @author     Bright Cloud Studio
