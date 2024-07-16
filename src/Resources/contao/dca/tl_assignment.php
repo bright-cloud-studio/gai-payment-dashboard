@@ -389,7 +389,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
 {
-    $GLOBALS['TL_BODY'][] = '<script src="bundles/bcspaymentdashboard/js/select2.min.js"></script>';
+    $GLOBALS['TL_JAVASCRIPT'][] = '<script src="bundles/bcspaymentdashboard/js/select2.min.js"></script>';
     $GLOBALS['TL_CSS'][] = '/bundles/bcspaymentdashboard/css/select2.min.css';
 }
 
