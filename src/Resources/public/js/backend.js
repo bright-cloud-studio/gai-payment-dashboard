@@ -1,9 +1,5 @@
-<script>
+$(document).ready(function() {
 
-    $(document).ready(function() {
-    
-        console.log("BACKEND LOADED");
-    
-    });
+    console.log("BACKEND LOADED");
 
-</script>
+});
