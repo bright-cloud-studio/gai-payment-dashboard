@@ -47,7 +47,7 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
         'label' => array
         (
             'fields'                  => array('tier_price'),
-            'format'                  => 'Price: %s',
+            'format'                  => '$%s.00',
             'label_callback'          => array('tl_price_tier', 'addIcon')
         ),
         'global_operations' => array
