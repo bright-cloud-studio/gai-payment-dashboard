@@ -1,7 +1,7 @@
 <?php
 
+use Contao\ArrayUtil;
 use Contao\System;
-
 
 /**
 * @copyright  Bright Cliud Studio
