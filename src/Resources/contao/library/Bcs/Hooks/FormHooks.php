@@ -4,6 +4,7 @@ namespace Bcs\Hooks;
 
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
+use Bcs\Model\PriceTier;
 use Bcs\Model\Psychologist;
 use Bcs\Model\Service;
 use Bcs\Model\School;
@@ -39,7 +40,10 @@ class FormHooks
     // When a form is loaded
     public function onPrepareForm($fields, $formId, $form)
     {
-
+        
+        // Get the Front end user
+        $member = FrontendUser::getInstance();
+        
         ///////////////////////////////
         // ASSIGNMENT SELECTION FORM //
         //////////////////////////////
@@ -53,9 +57,6 @@ class FormHooks
                     
                     // Convert to php array
                     $options = unserialize($field->options);
-
-                        // Get the Front end user
-                        $member = FrontendUser::getInstance();
                         
                         // get all of the Assignments for this Member
                         $opt = [
@@ -125,12 +126,26 @@ class FormHooks
                 if($field->name == 'district') { $field->value = $assignment->district; }
                 if($field->name == 'school') { $field->value = $assignment->school; }
     
-                // Transaction Details
                 if($field->name == 'student_initial') { $field->value = $assignment->student_name; }
                 if($field->name == 'student_dob') { $field->value = $assignment->student_dob; }
                 if($field->name == 'student_lasid') { $field->value = $assignment->student_lasid; }
                 if($field->name == 'student_sasid') { $field->value = $assignment->student_sasid; }
+                
+                // Transaction Details
                 if($field->name == 'service_provided') { $field->value = $assignment->type_of_testing; }
+                
+                if($field->name == 'hourly_rate') {
+                    
+                    // get all of the price tiers that are assigned to this service
+                    $prices = PriceTier::findBy('pid', $assignment->type_of_testing);
+                    // loop through those prices, find one that is in our assigned tiers
+                    foreach($prices as $price) {
+                        if(in_array($price->id, $member->price_tier_assignments)) {
+                            $field->value = $price->tier_price;
+                        }
+                    }
+                    
+                }
                 
             }
 
