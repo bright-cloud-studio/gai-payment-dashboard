@@ -99,7 +99,7 @@ class ServiceBackend extends Backend
             $tiers = PriceTier::findBy('pid', $service->id);
 
             foreach($tiers as $tier) {
-                $options[$service->name][$tier->id] = $tier->tier_type . " " . $tier->tier_price;
+                $options[$service->name][$tier->id] = "$" . $tier->tier_type . " " . $tier->tier_price . ".00";
             }
         }
         return $options;
