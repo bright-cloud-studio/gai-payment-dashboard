@@ -390,6 +390,21 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 
 class tl_assignment extends Backend
 {
+    
+    /* Generate function */
+    public function generate()
+    {
+        $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
+        {
+            $GLOBALS['TL_BODY'][] = '<script src="bundles/bcspaymentdashboard/js/select2.min.js"></script>';
+            $GLOBALS['TL_CSS'][] = '/bundles/bcspaymentdashboard/css/select2.min.css';
+        }
+ 
+        return parent::generate();
+    }
+    
 	public function setRootType(DataContainer $dc)
 	{
 		if (Input::get('act') != 'create')
@@ -418,4 +433,5 @@ class tl_assignment extends Backend
 	{
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
+    
 }
