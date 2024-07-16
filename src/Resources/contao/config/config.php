@@ -57,9 +57,9 @@ $GLOBALS['TL_MODELS']['tl_price_tier']         = 'Bcs\Model\PriceTier';
 $GLOBALS['TL_MODELS']['tl_transaction']        = 'Bcs\Model\Transaction';
 
 
-$request = System::getContainer()->get('request_stack')->getCurrentRequest();
-if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
-{
-    $GLOBALS['TL_BODY'][] = '<script src="bundles/bcspaymentdashboard/js/select2.min.js"></script>';
-    $GLOBALS['TL_CSS'][] = '/bundles/bcspaymentdashboard/css/select2.min.css';
-}
+//$request = System::getContainer()->get('request_stack')->getCurrentRequest();
+//if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
+//{
+//    $GLOBALS['TL_BODY'][] = '<script src="bundles/bcspaymentdashboard/js/select2.min.js"></script>';
+//    $GLOBALS['TL_CSS'][] = '/bundles/bcspaymentdashboard/css/select2.min.css';
+//}
