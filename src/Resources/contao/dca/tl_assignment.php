@@ -389,6 +389,9 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
 {
+    $GLOBALS['TL_JAVASCRIPT']['be_j'] = 'https://code.jquery.com/jquery-3.7.1.min.js';
+    $GLOBALS['TL_JAVASCRIPT']['be_j']['integrity'] = 'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=';
+        
     $GLOBALS['TL_JAVASCRIPT'][] = '/bundles/bcspaymentdashboard/js/select2.min.js';
     $GLOBALS['TL_JAVASCRIPT'][] = '/bundles/bcspaymentdashboard/js/backend.js';
     $GLOBALS['TL_CSS'][]        = '/bundles/bcspaymentdashboard/css/select2.min.css';
