@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
-    console.log("BACKEND LOADED");
+    $(document).ready(function() {
+        $('#ctrl_psychologist').select2();
+    });
 
 });
