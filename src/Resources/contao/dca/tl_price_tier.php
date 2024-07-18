@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{school_legend}, tier_price;{publish_legend},published;'
+        'default'                     => '{price_tier_legend}, tier_price;{publish_legend},published;'
     ),
  
     // Fields
