@@ -1,5 +1,11 @@
 <?php
 
+use Contao\Backend;
+use Contao\Database;
+use Contao\DataContainer;
+use Contao\DC_Table;
+use Contao\Input;
+
 /* Table tl_rep */
 $GLOBALS['TL_DCA']['tl_student'] = array
 (
@@ -7,7 +13,7 @@ $GLOBALS['TL_DCA']['tl_student'] = array
     // Config
     'config' => array
     (
-        'dataContainer'               => 'Table',
+        'dataContainer'               => DC_Table::class,
         'enableVersioning'            => true,
         'sql' => array
         (
