@@ -14,7 +14,7 @@ $GLOBALS['TL_DCA']['tl_student'] = array
             'keys' => array
             (
                 'id' 	=> 	'primary',
-                'rep_name' =>  'index'
+                'name' =>  'index'
             )
         )
     ),
