@@ -140,19 +140,19 @@ $GLOBALS['TL_DCA']['tl_student'] = array
     		(
     			'label'                   => &$GLOBALS['TL_LANG']['tl_student']['date_of_birth'],
     			'inputType'               => 'text',
-    			'default'                 => '',
-    			'search'                  => true,
-    			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-    			'sql'                     => "varchar(255) NOT NULL default ''"
+                'default'                 => '',
+                'search'                  => true,
+                'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+                'sql'                     => "varchar(20) NOT NULL default ''",
     		),
         'gender' => array
     		(
     			'label'                   => &$GLOBALS['TL_LANG']['tl_student']['gender'],
-    			'inputType'               => 'text',
-    			'default'                 => '',
-    			'search'                  => true,
-    			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-    			'sql'                     => "varchar(255) NOT NULL default ''"
+    			'inputType'               => 'select',
+                'default'                 => '',
+                'options'                  => array('male' => 'Male', 'female' => 'Female', 'other' => 'Other'),
+        		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
+        		'sql'                      => "varchar(32) NOT NULL default ''"
     		),
         'grade' => array
     		(
