@@ -16,6 +16,7 @@ $GLOBALS['TL_LANG']['MOD']['transaction']              = array('Transactions', '
 $GLOBALS['TL_LANG']['MOD']['district']                 = array('Districts', 'Master List of all Districts');
 $GLOBALS['TL_LANG']['MOD']['school']                   = array('Schools', 'Master List of all Schools');
 $GLOBALS['TL_LANG']['MOD']['service']                  = array('Services', 'Master List of all Services');
+$GLOBALS['TL_LANG']['MOD']['student']                  = array('Student', 'Master List of all Students');
 
 $GLOBALS['TL_LANG']['MOD']['invoice_request']          = array('Generate Invoices', 'Create an Invoice Request to generate invoices for a certain date range');
 
