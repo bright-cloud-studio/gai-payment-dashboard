@@ -109,7 +109,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{assignment_legend}, date_created, date_30_day, date_45_day, psychologist, district, school, student_name, student_dob, student_gender, student_grade, student_lasid, student_sasid, initial_reeval, type_of_testing, testing_date, meeting_required, meeting_date, contact_info_parent, contact_info_teacher, team_chair, email, report_submitted, notes;{publish_legend},published;'
+        'default'                     => '{assignment_legend}, date_created, date_30_day, date_45_day, psychologist, district, school, student, initial_reeval, type_of_testing, testing_date, meeting_required, meeting_date, contact_info_parent, contact_info_teacher, team_chair, email, report_submitted, notes;{publish_legend},published;'
     ),
  
     // Fields
