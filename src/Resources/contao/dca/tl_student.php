@@ -25,14 +25,14 @@ $GLOBALS['TL_DCA']['tl_student'] = array
         'sorting' => array
         (
             'mode'                    => 1,
-            'fields'                  => array('rep_name'),
+            'fields'                  => array('name'),
             'flag'                    => 1,
             'panelLayout'             => 'filter;search,limit'
         ),
         'label' => array
         (
-            'fields'                  => array('state', 'city', 'rep_name'),
-            'format'                  => '%s - %s - %s'
+            'fields'                  => array('name'),
+            'format'                  => '%s'
         ),
         'global_operations' => array
         (
