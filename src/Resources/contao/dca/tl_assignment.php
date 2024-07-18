@@ -212,62 +212,18 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getSchools'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'student_name' => array
+        'student' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_name'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'student_dob' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_dob'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(20) NOT NULL default ''",
-        ),
-        'student_gender' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_gender'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student'],
             'inputType'               => 'select',
-            'default'                 => '',
-            'options'                  => array('male' => 'Male', 'female' => 'Female', 'other' => 'Other'),
-    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
-    		'sql'                      => "varchar(32) NOT NULL default ''"
-        ),
-        'student_grade' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_grade'],
-            'inputType'               => 'text',
-            'default'                 => '',
             'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'student_lasid' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_lasid'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'student_sasid' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student_sasid'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getStudents'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
 
-
+        
         
         'initial_reeval' => array
         (
