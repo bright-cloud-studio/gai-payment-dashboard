@@ -206,7 +206,7 @@ class AssignmentBackend extends Backend
             $students = $students + array($result->id => $result->name);   
 		}
 
-		return $services;
+		return $students;
 	}
     
 
