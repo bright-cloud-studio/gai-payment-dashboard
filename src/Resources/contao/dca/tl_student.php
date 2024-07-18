@@ -44,8 +44,8 @@ $GLOBALS['TL_DCA']['tl_student'] = array
         (
             'export' => array
             (
-                'label'               => 'Export Reps CSV',
-                'href'                => 'key=exportReps',
+                'label'               => 'Export Students CSV',
+                'href'                => 'key=exportStudents',
                 'icon'                => 'system/modules/frasch_find_your_rep/assets/icons/file-export-icon-16.png'
             ),
             'all' => array
