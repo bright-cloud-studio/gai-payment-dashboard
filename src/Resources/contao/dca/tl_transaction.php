@@ -256,8 +256,11 @@ class tl_transaction extends Backend
 	{
 
         $label = '';
+
+        $label .= $row['date_submitted'] . " - ";
+        
         $psy = MemberModel::findBy('id', $row['psychologist']);
-        $label .= $psy->name;
+        $label .= $psy->firstname . " " . $psy->lastname;
         
         
 		$sub = 0;
