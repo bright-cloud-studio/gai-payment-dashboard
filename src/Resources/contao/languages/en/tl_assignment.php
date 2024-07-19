@@ -31,12 +31,9 @@ $GLOBALS['TL_LANG']['tl_assignment']['date_45_day']               = array('Date 
 $GLOBALS['TL_LANG']['tl_assignment']['psychologist']              = array('Psychologist', 'asdf');
 $GLOBALS['TL_LANG']['tl_assignment']['district']                  = array('District', 'asdf');
 $GLOBALS['TL_LANG']['tl_assignment']['school']                    = array('School', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['student_name']              = array('Student Name', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['student_dob']               = array('Student DOB', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['student_gender']            = array('Student Gender', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['student_grade']             = array('Student Grade', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['student_lasid']             = array('Student LASID', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['student_sasid']             = array('Student SASID', 'asdf');
+
+$GLOBALS['TL_LANG']['tl_assignment']['student']              = array('Student', 'asdf');
+
 $GLOBALS['TL_LANG']['tl_assignment']['initial_reeval']            = array('Initial / Re-Eval', 'asdf');
 $GLOBALS['TL_LANG']['tl_assignment']['type_of_testing']           = array('Type of Testing', 'asdf');
 $GLOBALS['TL_LANG']['tl_assignment']['testing_date']              = array('Testing Date', 'asdf');
