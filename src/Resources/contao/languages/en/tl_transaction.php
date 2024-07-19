@@ -19,9 +19,9 @@ $GLOBALS['TL_LANG']['tl_transaction']['delete']                     = array('Del
 $GLOBALS['TL_LANG']['tl_transaction']['toggle']                     = array('Toggle record', 'Toggle record ID %s');
 
 /* System Fields */
-$GLOBALS['TL_LANG']['tl_transaction']['publish_legend']             = 'Publish';
+$GLOBALS['TL_LANG']['tl_transaction']['publish_legend']             = 'Reviewed Information';
 $GLOBALS['TL_LANG']['tl_transaction']['alias']                      = array('Alias', 'Auto-generated alias.');
-$GLOBALS['TL_LANG']['tl_transaction']['published']                  = array('Published', 'Show this record on the front end.');
+$GLOBALS['TL_LANG']['tl_transaction']['published']                  = array('Reviewed', 'Indicates if this Transaction has been Reviewed by the submitting Psychologist');
 
 /* Fields */
 $GLOBALS['TL_LANG']['tl_transaction']['transaction_legend']         = 'Transaction Information';
