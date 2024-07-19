@@ -255,10 +255,13 @@ class tl_transaction extends Backend
 	public function addIcon($row, $label)
 	{
 
+        // Clear out our current label
         $label = '';
 
-        $label .= $row['date_submitted'] . " - ";
-        
+        // Add our formatted date and a dash
+        $label .= date('m/d/Y', $row['date_submitted']) . " - ";
+
+        // Add the Psy's name
         $psy = MemberModel::findBy('id', $row['psychologist']);
         $label .= $psy->firstname . " " . $psy->lastname;
         
