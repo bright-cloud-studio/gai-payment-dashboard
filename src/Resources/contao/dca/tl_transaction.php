@@ -251,6 +251,14 @@ class tl_transaction extends Backend
 {
 	public function addIcon($row, $label)
 	{
+
+
+        echo "<pre>";
+        print_r($row);
+        echo "</pre>";
+        die();
+
+        
 		$sub = 0;
 		$unpublished = ($row['start'] && $row['start'] > time()) || ($row['stop'] && $row['stop'] <= time());
 
