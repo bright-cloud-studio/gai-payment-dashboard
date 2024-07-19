@@ -35,6 +35,15 @@ class FormHooks
             echo "Create Transaction!";
             die();
             
+            // Create a new Transaction
+            $transaction = new Transaction();
+            
+            // Apply values
+            $transaction->pid = $submittedData['assignment_uuid'];
+            $transaction->psyhologist = $submittedData['assignment_uuid'];
+            
+            // Save our new Transaction
+            $transaction->save();
             
             //$transaction = new Transaction();
             //$transaction->pid = 15;
