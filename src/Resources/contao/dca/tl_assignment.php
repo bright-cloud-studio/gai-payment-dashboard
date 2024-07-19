@@ -9,6 +9,7 @@ use Contao\Database;
 use Contao\DataContainer;
 use Contao\DC_Table;
 use Contao\Input;
+use Contao\MemberModel;
 
 use Contao\System;
 
@@ -397,7 +398,10 @@ class tl_assignment extends Backend
 
         // Add the Psy's name
         $district = District::findOneBy('id', $row['district']);
-        $label .= $district->district_name;
+        $label .= $district->district_name . " - ";
+
+        $psy = MemberModel::findBy('id', $row['psychologist']);
+        $label .= $psy->firstname . " " . $psy->lastname;
 
         
         
