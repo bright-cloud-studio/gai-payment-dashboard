@@ -47,7 +47,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         'label' => array
         (
             'fields'                  => array('date_submitted', 'psychologist'),
-			'format'                  => '%s - >%s',
+			'format'                  => '%s -  %s',
 			'label_callback'          => array('tl_transaction', 'addIcon')
         ),
         'global_operations' => array
