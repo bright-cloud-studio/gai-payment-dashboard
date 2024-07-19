@@ -142,6 +142,16 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'sql'                     => "varchar(128) COLLATE utf8mb3_bin NOT NULL default ''"
 
         ),
+        'published' => array
+        (
+            'exclude'                 => true,
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['published'],
+            'inputType'               => 'checkbox',
+            'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
+            'sql'                     => "char(1) NOT NULL default ''"
+        ),
+
+        
         
         /* ******************* */
         // Transaction Fields
@@ -212,24 +222,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'lasid' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['lasid'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'sasid' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['sasid'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
+        
         'meeting_date' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_date'],
@@ -274,23 +267,6 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
             'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'reviewed' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['reviewed'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'published' => array
-        (
-            'exclude'                 => true,
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['published'],
-            'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
-            'sql'                     => "char(1) NOT NULL default ''"
         )
     )
 );
