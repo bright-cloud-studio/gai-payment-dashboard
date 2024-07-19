@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, service, price, lasid, sasid, meeting_date, meeting_start, meeting_end, meeting_duration, reviewed, notes;{publish_legend},published;'
+        'default'                     => '{transaction_legend},date_submitted, psychologist, service, price, lasid, sasid, meeting_date, meeting_start, meeting_end, meeting_duration, reviewed, notes;{publish_legend},published;'
     ),
  
     // Fields
@@ -174,34 +174,6 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'getPsychologists'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'district' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['district'],
-            'inputType'               => 'select',
-            'search'                  => true,
-            'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'getDistricts'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'school' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['school'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'student_initials' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['student_initials'],
-            'inputType'               => 'text',
-            'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'service' => array
