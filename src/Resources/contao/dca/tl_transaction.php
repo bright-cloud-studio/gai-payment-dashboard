@@ -267,7 +267,7 @@ class tl_transaction extends Backend
         $psy = MemberModel::findBy('id', $row['psychologist']);
         $label .= $psy->firstname . " " . $psy->lastname . " - ";
 
-        $service = Service::findBy('id', $row['service']);
+        $service = Service::findBy('service_code', $row['service']);
         $label .= $psy->name;
         
         
