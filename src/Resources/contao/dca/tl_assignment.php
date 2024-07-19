@@ -2,6 +2,8 @@
 
 /* Assignment - Parent to Transaction */
 
+use Bcs\Model\District;
+
 use Contao\Backend;
 use Contao\Database;
 use Contao\DataContainer;
@@ -51,7 +53,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'label' => array
         (
             'fields'                  => array('date_created', 'district', 'school', 'psychologist'),
-			'format'                  => '%s | %s - %s | %s',
+			'format'                  => '%s %s %s %s',
 			'label_callback'          => array('tl_assignment', 'addIcon')
         ),
         'global_operations' => array
@@ -388,6 +390,17 @@ class tl_assignment extends Backend
 
     public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
 	{
+        $label = '';
+
+        // Add our formatted date and a dash
+        $label .= date('m/d/Y', $row['date_created']) . " - ";
+
+        // Add the Psy's name
+        $district = District::findOneBy('id', $row['district']);
+        $label .= $district->district_name;
+
+        
+        
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
     
