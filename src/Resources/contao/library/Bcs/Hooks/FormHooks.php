@@ -39,13 +39,9 @@ class FormHooks
             $transaction->pid = $submittedData['assignment_uuid'];
             $transaction->psyhologist = $submittedData['assignment_uuid'];
             
+            
             // Save our new Transaction
             $transaction->save();
-            
-            //$transaction = new Transaction();
-            //$transaction->pid = 15;
-            //$transaction->psychologist =  $submittedData['psychologist'];
-            //$transaction->save();
             
         }
     }
