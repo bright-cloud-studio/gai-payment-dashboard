@@ -268,7 +268,7 @@ class tl_transaction extends Backend
         $label .= $psy->firstname . " " . $psy->lastname . " - ";
 
         $service = Service::findBy('service_code', $row['service']);
-        $label .= $psy->name;
+        $label .= $service->name;
         
         
 		$sub = 0;
