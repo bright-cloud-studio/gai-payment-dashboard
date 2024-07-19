@@ -324,7 +324,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'textarea',
             'default'                 => '',
             'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
 
@@ -335,7 +335,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'exclude'                 => true,
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['published'],
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
+            'eval'                    => array('rte'=>'tinyMCE', 'submitOnChange'=>true, 'doNotCopy'=>true),
             'sql'                     => "char(1) NOT NULL default ''"
         )
     )
