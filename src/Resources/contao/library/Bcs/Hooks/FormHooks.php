@@ -8,6 +8,7 @@ use Bcs\Model\PriceTier;
 use Bcs\Model\Psychologist;
 use Bcs\Model\Service;
 use Bcs\Model\School;
+use Bcs\Model\Student;
 use Bcs\Model\Transaction;
 
 use Contao\FrontendUser;
@@ -126,10 +127,19 @@ class FormHooks
                 if($field->name == 'district') { $field->value = $assignment->district; }
                 if($field->name == 'school') { $field->value = $assignment->school; }
     
-                if($field->name == 'student_initial') { $field->value = $assignment->student_name; }
-                if($field->name == 'student_dob') { $field->value = $assignment->student_dob; }
-                if($field->name == 'student_lasid') { $field->value = $assignment->student_lasid; }
-                if($field->name == 'student_sasid') { $field->value = $assignment->student_sasid; }
+                
+                
+                
+                
+                
+                
+                //Get Student and fill in values
+                $student = Student::findOneBy('id', $assignment->student );
+
+                if($field->name == 'student') { $field->value = $assignment->student; }
+                if($field->name == 'student_dob') { $field->value = $student->date_of_birth; }
+                if($field->name == 'student_lasid') { $field->value = $student->lasid; }
+                if($field->name == 'student_sasid') { $field->value = $student->sasid; }
                 
                 // Transaction Details
                 if($field->name == 'service_provided') { $field->value = $assignment->type_of_testing; }
