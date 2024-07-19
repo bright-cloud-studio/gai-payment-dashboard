@@ -38,8 +38,7 @@ class FormHooks
             // Apply values
             $transaction->pid = $submittedData['assignment_uuid'];
             $transaction->psyhologist = $submittedData['assignment_uuid'];
-            
-            
+            $transaction->tstamp = time();
             // Save our new Transaction
             $transaction->save();
             
