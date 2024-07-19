@@ -3,6 +3,8 @@
 /* Transaction - Child to Assignment */
 
 
+use Bcs\Model\Service;
+
 use Contao\MemberModel;
 
 use Contao\Backend;
@@ -263,7 +265,10 @@ class tl_transaction extends Backend
 
         // Add the Psy's name
         $psy = MemberModel::findBy('id', $row['psychologist']);
-        $label .= $psy->firstname . " " . $psy->lastname;
+        $label .= $psy->firstname . " " . $psy->lastname . " - ";
+
+        $service = Service::findBy('id', $row['service']);
+        $label .= $psy->name;
         
         
 		$sub = 0;
