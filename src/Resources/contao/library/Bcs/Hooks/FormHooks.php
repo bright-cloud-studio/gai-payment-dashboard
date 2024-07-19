@@ -31,10 +31,7 @@ class FormHooks
         else if($formData['formID'] == 'assignment_generate_transaction') {
             
             /* Insert the submitted data as a Transaction */
-            
-            echo "Create Transaction!";
-            die();
-            
+
             // Create a new Transaction
             $transaction = new Transaction();
             
