@@ -2,6 +2,9 @@
 
 /* Transaction - Child to Assignment */
 
+
+use Bcs\Model\Psychologist;
+
 use Contao\Backend;
 use Contao\Database;
 use Contao\DataContainer;
@@ -252,12 +255,12 @@ class tl_transaction extends Backend
 	public function addIcon($row, $label)
 	{
 
+        $label = '';
+        
+        $psy = Psychologist::findOneBy('id', $row['psychologist']);
 
-        echo "<pre>";
-        print_r($row);
-        echo "</pre>";
-        die();
-
+        $label .= $psy->name;
+        
         
 		$sub = 0;
 		$unpublished = ($row['start'] && $row['start'] > time()) || ($row['stop'] && $row['stop'] <= time());
