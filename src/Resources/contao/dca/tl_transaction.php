@@ -3,7 +3,7 @@
 /* Transaction - Child to Assignment */
 
 
-use Bcs\Model\Psychologist;
+use Contao\MemberModel;
 
 use Contao\Backend;
 use Contao\Database;
@@ -256,9 +256,7 @@ class tl_transaction extends Backend
 	{
 
         $label = '';
-        
-        $psy = \Psychologist::findOneBy('id', $row['psychologist']);
-
+        $psy = MemberModel::findBy('id', $row['psychologist']);
         $label .= $psy->name;
         
         
