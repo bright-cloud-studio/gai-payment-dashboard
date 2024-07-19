@@ -30,10 +30,16 @@ class FormHooks
         // Assignment Generate Transaction Form
         else if($formData['formID'] == 'assignment_generate_transaction') {
             
-            $transaction = new Transaction();
-            $transaction->pid = 15;
-            $transaction->psychologist =  $submittedData['psychologist'];
-            $transaction->save();
+            /* Insert the submitted data as a Transaction */
+            
+            echo "Create Transaction!";
+            die();
+            
+            
+            //$transaction = new Transaction();
+            //$transaction->pid = 15;
+            //$transaction->psychologist =  $submittedData['psychologist'];
+            //$transaction->save();
             
         }
     }
@@ -81,7 +87,8 @@ class FormHooks
                             
                             
                             // date_created - district - school - student
-                            $label = date('m/d/y',$t) . " - " . $district->district_name . " - " . $school->school_name . " - " . $assignment->student_name;
+                            $student = Student::findOneBy('id', $assignment->student);
+                            $label = date('m/d/y',$t) . " - " . $district->district_name . " - " . $school->school_name . " - " . $student->name;
                             
                             
                             // Format the assignment so it can be added to the form
@@ -136,7 +143,6 @@ class FormHooks
                 //Get Student and fill in values
                 $student = Student::findOneBy('id', $assignment->student );
 
-                // Apply those Student values to the form
                 if($field->name == 'student') { $field->value = $assignment->student; }
                 if($field->name == 'student_dob') { $field->value = $student->date_of_birth; }
                 if($field->name == 'student_lasid') { $field->value = $student->lasid; }
