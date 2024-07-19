@@ -257,7 +257,7 @@ class tl_transaction extends Backend
 
         $label = '';
         
-        $psy = Psychologist::findOneBy('id', $row['psychologist']);
+        $psy = \Psychologist::findOneBy('id', $row['psychologist']);
 
         $label .= $psy->name;
         
