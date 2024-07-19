@@ -136,6 +136,7 @@ class FormHooks
                 //Get Student and fill in values
                 $student = Student::findOneBy('id', $assignment->student );
 
+                // Apply those Student values to the form
                 if($field->name == 'student') { $field->value = $assignment->student; }
                 if($field->name == 'student_dob') { $field->value = $student->date_of_birth; }
                 if($field->name == 'student_lasid') { $field->value = $student->lasid; }
