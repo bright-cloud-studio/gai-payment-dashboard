@@ -106,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{services_legend},service_code,name,description;{publish_legend},published;'
+        'default'                     => '{services_legend}, service_code, name, service_type, description;{publish_legend}, published;'
     ),
  
     // Fields
@@ -159,6 +159,15 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'service_type' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['service_type'],
+            'inputType'               => 'select',
+            'default'                 => '',
+            'options'                  => array('fixed_price' => 'Fixed Price', 'time_based' => 'Time Based'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
+    		'sql'                      => "varchar(15) NOT NULL default ''"
         ),
         'description' => array
         (
