@@ -160,7 +160,7 @@ class FormHooks
                     // loop through those prices, find one that is in our assigned tiers
                     foreach($prices as $price) {
                         if(in_array($price->id, $member->price_tier_assignments)) {
-                            $field->value = $price->tier_price;
+                            //$field->value = $price->tier_price;
                         }
                     }
                     
