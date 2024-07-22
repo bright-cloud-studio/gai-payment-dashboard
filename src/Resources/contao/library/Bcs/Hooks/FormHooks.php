@@ -126,21 +126,15 @@ class FormHooks
                 if($field->name == 'psychologist') { $field->value = $assignment->psychologist; }
                 if($field->name == 'report_submitted') { $field->value = $assignment->report_submitted; }
                 if($field->name == 'service_assigned') { $field->value = $assignment->type_of_testing; }
-                if($field->name == 'service_price') {
-                    
-                    // Get the price for this service, for this psychologist's tier
-                    $field->value = "123456";
-                }
                 
+                $service = Service::findOneBy('service_code', $assignment->type_of_testing);
+                if($field->name == 'service_type') { $field->value = $service->service_type; }
+
                 // Assignment Details
                 if($field->name == 'district') { $field->value = $assignment->district; }
                 if($field->name == 'school') { $field->value = $assignment->school; }
     
-                
-                
-                
-                
-                
+
                 
                 //Get Student and fill in values
                 $student = Student::findOneBy('id', $assignment->student );
