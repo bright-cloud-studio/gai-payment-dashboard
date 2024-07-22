@@ -164,7 +164,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['service_type'],
             'inputType'               => 'select',
-            'default'                 => '',
+            'default'                 => 'fixed_price',
             'options'                  => array('fixed_price' => 'Fixed Price', 'time_based' => 'Time Based'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
     		'sql'                      => "varchar(15) NOT NULL default ''"
