@@ -12,14 +12,22 @@
 
 namespace Bcs\Module;
 
+use Bcs\Model\Service;
+use Bcs\Model\PriceTier;
+
+
 use Contao\BackendTemplate;
 use Contao\System;
+
+use Contao\FrontendUser;
 
 class ModAssignments extends \Contao\Module
 {
 
     /* Default Template */
     protected $strTemplate = 'mod_assignments';
+    
+    protected static $service_prices = array();
 
     /* Construct function */
     public function __construct($objModule, $strColumn='main')
@@ -51,6 +59,22 @@ class ModAssignments extends \Contao\Module
 
     protected function compile()
     {
+        $member = FrontendUser::getInstance();
+        
+        $services = Service::findBy('published', '1');
+        foreach($services as $service) {
+            
+            $prices = PriceTier::findBy('pid', $service->id);
+            foreach($prices as $price) {
+                if(in_array($price->id, $member->price_tier_assignments)) {
+                    $service_prices[$service->service_code] = $price->tier_price;
+                }
+            }
+            
+            
+        }
+        
+        $this->Template->service_prices = $service_prices;
         
     }
   
