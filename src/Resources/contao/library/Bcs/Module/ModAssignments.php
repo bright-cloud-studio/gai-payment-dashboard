@@ -67,7 +67,8 @@ class ModAssignments extends \Contao\Module
             $prices = PriceTier::findBy('pid', $service->id);
             foreach($prices as $price) {
                 if(in_array($price->id, $member->price_tier_assignments)) {
-                    $service_prices[$service->service_code] = $price->tier_price;
+                    $service_prices[$service->service_code]['price'] = $price->tier_price;
+                    $service_prices[$service->service_code]['service_type'] = $service->service_type;
                 }
             }
             
