@@ -63,6 +63,8 @@ class ModAssignments extends \Contao\Module
         
         $services = Service::findBy('published', '1');
         foreach($services as $service) {
+
+            // Create an array of services codes linked to prices then add them to the template so we can grab them with jQuery
             
             $prices = PriceTier::findBy('pid', $service->id);
             foreach($prices as $price) {
