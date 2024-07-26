@@ -11,12 +11,12 @@
 **/
 
 /* System Buttons */
-$GLOBALS['TL_LANG']['tl_transaction']['new']                        = array('New record', 'Add a new record');
-$GLOBALS['TL_LANG']['tl_transaction']['show']                       = array('Record details', 'Show the details of record ID %s');
-$GLOBALS['TL_LANG']['tl_transaction']['edit']                       = array('Edit record', 'Edit record ID %s');
-$GLOBALS['TL_LANG']['tl_transaction']['copy']                       = array('Copy record', 'Copy record ID %s');
-$GLOBALS['TL_LANG']['tl_transaction']['delete']                     = array('Delete record', 'Delete record ID %s');
-$GLOBALS['TL_LANG']['tl_transaction']['toggle']                     = array('Toggle record', 'Toggle record ID %s');
+$GLOBALS['TL_LANG']['tl_transaction']['new']                        = array('New Transaction', 'Add a new record');
+$GLOBALS['TL_LANG']['tl_transaction']['show']                       = array('Transaction Details', 'Show the details of record ID %s');
+$GLOBALS['TL_LANG']['tl_transaction']['edit']                       = array('Edit Transaction', 'Edit record ID %s');
+$GLOBALS['TL_LANG']['tl_transaction']['copy']                       = array('Copy Transaction', 'Copy record ID %s');
+$GLOBALS['TL_LANG']['tl_transaction']['delete']                     = array('Delete Transaction', 'Delete record ID %s');
+$GLOBALS['TL_LANG']['tl_transaction']['toggle']                     = array('Toggle Transaction', 'Toggle record ID %s');
 
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_transaction']['publish_legend']             = 'Reviewed Information';
