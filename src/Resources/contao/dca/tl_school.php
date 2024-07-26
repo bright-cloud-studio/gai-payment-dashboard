@@ -161,6 +161,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_school']['school_name'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -170,6 +171,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_school']['contact_name'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -179,6 +181,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_school']['contact_address'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -188,6 +191,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_school']['contact_email'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -197,6 +201,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_school']['contact_cc_email'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -206,6 +211,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_school']['city'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -215,6 +221,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_school']['state'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -224,6 +231,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_school']['zip'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -233,6 +241,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_school']['phone'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
