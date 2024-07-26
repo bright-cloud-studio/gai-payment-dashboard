@@ -132,8 +132,12 @@ class FormHooks
                 
 
                 // Assignment Details
+                $district = District::findOneBy('id', $assignment->district );
                 if($field->name == 'district') { $field->value = $assignment->district; }
+                if($field->name == 'district_label') { $field->value = $district->district_name; }
+                $school = School::findOneBy('id', $assignment->school );
                 if($field->name == 'school') { $field->value = $assignment->school; }
+                if($field->name == 'school_label') { $field->value = $school->school_name; }
     
 
                 
@@ -141,6 +145,7 @@ class FormHooks
                 $student = Student::findOneBy('id', $assignment->student );
 
                 if($field->name == 'student') { $field->value = $assignment->student; }
+                if($field->name == 'student_label') { $field->value = $student->name; }
                 if($field->name == 'student_dob') { $field->value = $student->date_of_birth; }
                 if($field->name == 'student_lasid') { $field->value = $student->lasid; }
                 if($field->name == 'student_sasid') { $field->value = $student->sasid; }
