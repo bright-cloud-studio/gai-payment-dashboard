@@ -147,6 +147,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_service']['service_code'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -156,6 +157,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_service']['name'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -165,6 +167,8 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['service_type'],
             'inputType'               => 'select',
             'default'                 => 'fixed_price',
+            'filter'                  => true,
+            'search'                  => true,
             'options'                  => array('fixed_price' => 'Fixed Price', 'time_based' => 'Time Based'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
     		'sql'                      => "varchar(15) NOT NULL default ''"
@@ -174,6 +178,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_service']['description'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
             'sql'                     => "varchar(255) NOT NULL default ''"
