@@ -29,17 +29,28 @@ class FormHooks
         }
         // Assignment Generate Transaction Form
         else if($formData['formID'] == 'assignment_generate_transaction') {
-            
-            /* Insert the submitted data as a Transaction */
+
+
+            //echo "<pre>";
+            //print_r($submittedData);
+            //die();
 
             // Create a new Transaction
             $transaction = new Transaction();
             
             // Apply values
             $transaction->pid = $submittedData['assignment_uuid'];
-            $transaction->psyhologist = $submittedData['assignment_uuid'];
             $transaction->tstamp = time();
-            $transaction->date_submitted = time();
+            
+            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+            $transaction->psychologist = $submittedData['psychologist'];
+            $transaction->service = $submittedData['service_provided'];
+            $transaction->price = $submittedData['hourly_rate'];
+            $transaction->meeting_date = strtotime($submittedData['meeting_date']);
+            $transaction->meeting_start = $submittedData['start_time'];
+            $transaction->meeting_end = $submittedData['end_time'];
+            $transaction->notes = $submittedData['notes'];
+            
             // Save our new Transaction
             $transaction->save();
             
