@@ -170,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_30_day'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'filter'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date('m/d/y g:i A', strtotime("+30 days")),
@@ -180,7 +180,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_45_day'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'filter'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date('m/d/y g:i A', strtotime("+45 days")),
@@ -189,6 +189,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['psychologist'],
             'inputType'               => 'select',
+            'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
@@ -199,6 +200,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['district'],
             'inputType'               => 'select',
+            'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
@@ -209,6 +211,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['school'],
             'inputType'               => 'select',
+            'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
@@ -219,6 +222,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['student'],
             'inputType'               => 'select',
+            'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
@@ -232,6 +236,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['initial_reeval'],
             'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => true,
             'default'                 => '',
             'options'                  => array('initial' => 'Initial', 're_eval' => 'Re-eval'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
@@ -241,6 +247,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['type_of_testing'],
             'inputType'               => 'select',
+            'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
@@ -252,6 +259,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['testing_date'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
@@ -261,6 +269,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['meeting_required'],
             'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => true,
             'default'                 => '',
             'options'                  => array('yes' => 'Yes', 'no' => 'No'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
@@ -271,6 +281,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['meeting_date'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
@@ -316,6 +327,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['report_submitted'],
             'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => true,
             'default'                 => '',
             'options'                  => array('yes' => 'Yes', 'no' => 'No'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
