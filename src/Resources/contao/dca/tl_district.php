@@ -162,6 +162,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_district']['district_name'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -171,6 +172,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_district']['invoice_prefix'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -180,6 +182,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_district']['purchase_order'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
