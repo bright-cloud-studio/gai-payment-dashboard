@@ -11,12 +11,12 @@
 **/
 
 /* System Buttons */
-$GLOBALS['TL_LANG']['tl_invoice_request']['new']                        = array('New record', 'Add a new record');
-$GLOBALS['TL_LANG']['tl_invoice_request']['show']                       = array('Record details', 'Show the details of record ID %s');
-$GLOBALS['TL_LANG']['tl_invoice_request']['edit']                       = array('Edit record', 'Edit record ID %s');
-$GLOBALS['TL_LANG']['tl_invoice_request']['copy']                       = array('Copy record', 'Copy record ID %s');
-$GLOBALS['TL_LANG']['tl_invoice_request']['delete']                     = array('Delete record', 'Delete record ID %s');
-$GLOBALS['TL_LANG']['tl_invoice_request']['toggle']                     = array('Toggle record', 'Toggle record ID %s');
+$GLOBALS['TL_LANG']['tl_invoice_request']['new']                        = array('New Invoice Generation Request', 'Add a new record');
+$GLOBALS['TL_LANG']['tl_invoice_request']['show']                       = array('Invoice Generation Request Details', 'Show the details of record ID %s');
+$GLOBALS['TL_LANG']['tl_invoice_request']['edit']                       = array('Edit Invoice Generation Request', 'Edit record ID %s');
+$GLOBALS['TL_LANG']['tl_invoice_request']['copy']                       = array('Copy Invoice Generation Request', 'Copy record ID %s');
+$GLOBALS['TL_LANG']['tl_invoice_request']['delete']                     = array('Delete Invoice Generation Request', 'Delete record ID %s');
+$GLOBALS['TL_LANG']['tl_invoice_request']['toggle']                     = array('Toggle Invoice Generation Request', 'Toggle record ID %s');
 
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_invoice_request']['publish_legend']             = 'Publish';
