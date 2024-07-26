@@ -166,6 +166,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date_submitted'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
@@ -175,6 +176,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['psychologist'],
             'inputType'               => 'select',
+            'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
@@ -186,6 +188,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['service'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -195,6 +198,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['price'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -205,6 +209,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_date'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
@@ -215,6 +220,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_start'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -224,6 +230,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_end'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -233,6 +240,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_duration'],
             'inputType'               => 'text',
             'default'                 => '',
+            'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
