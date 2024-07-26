@@ -12,9 +12,11 @@ use Contao\System;
 */
 
 /* Create new sections in the Contao sidebar */
-$GLOBALS['TL_LANG']['MOD']['gai'][0] = "GAI Payment Dashboard";
+
 
 /* Back end modules - Data DCAs */
+$GLOBALS['TL_LANG']['MOD']['gai_data'][0] = "Invoices - Data";
+
 $GLOBALS['BE_MOD']['gai_data']['district'] = array(
 	'tables' => array('tl_district')
 );
@@ -32,6 +34,8 @@ $GLOBALS['BE_MOD']['gai_data']['student'] = array(
 );
 
 /* Back end modules - Work DCAs */
+$GLOBALS['TL_LANG']['MOD']['gai'][0] = "Invoices - Generator";
+
 $GLOBALS['BE_MOD']['gai']['invoice_request'] = array(
 	'tables' => array('tl_invoice_request')
 );
