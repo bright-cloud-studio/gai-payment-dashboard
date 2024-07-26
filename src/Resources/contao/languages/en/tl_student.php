@@ -11,12 +11,12 @@
 **/
 
 /* System Buttons */
-$GLOBALS['TL_LANG']['tl_student']['new']                        = array('New record', 'Add a new record');
-$GLOBALS['TL_LANG']['tl_student']['show']                       = array('Record details', 'Show the details of record ID %s');
-$GLOBALS['TL_LANG']['tl_student']['edit']                       = array('Edit record', 'Edit record ID %s');
-$GLOBALS['TL_LANG']['tl_student']['copy']                       = array('Copy record', 'Copy record ID %s');
-$GLOBALS['TL_LANG']['tl_student']['delete']                     = array('Delete record', 'Delete record ID %s');
-$GLOBALS['TL_LANG']['tl_student']['toggle']                     = array('Toggle record', 'Toggle record ID %s');
+$GLOBALS['TL_LANG']['tl_student']['new']                        = array('New Student', 'Add a new record');
+$GLOBALS['TL_LANG']['tl_student']['show']                       = array('Student Details', 'Show the details of record ID %s');
+$GLOBALS['TL_LANG']['tl_student']['edit']                       = array('Edit Student', 'Edit record ID %s');
+$GLOBALS['TL_LANG']['tl_student']['copy']                       = array('Copy Student', 'Copy record ID %s');
+$GLOBALS['TL_LANG']['tl_student']['delete']                     = array('Delete Student', 'Delete record ID %s');
+$GLOBALS['TL_LANG']['tl_student']['toggle']                     = array('Toggle Student', 'Toggle record ID %s');
 
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_student']['publish_legend']             = 'Publish';
