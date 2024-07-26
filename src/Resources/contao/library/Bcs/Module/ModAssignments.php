@@ -71,6 +71,7 @@ class ModAssignments extends \Contao\Module
                 if(in_array($price->id, $member->price_tier_assignments)) {
                     $service_prices[$service->service_code]['price'] = $price->tier_price;
                     $service_prices[$service->service_code]['service_type'] = $service->service_type;
+                    $service_prices[$service->service_code]['service_name'] = $service->name;
                 }
             }
             
