@@ -47,7 +47,7 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
         'label' => array
         (
             'fields'                  => array('tier_price'),
-            'format'                  => '$%s.00',
+            'format'                  => '$%s',
             'label_callback'          => array('tl_price_tier', 'addIcon')
         ),
         'global_operations' => array
@@ -116,13 +116,13 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
         ),
         'pid' => array
         (
-		        'foreignKey'              => 'tl_service.id',
-			      'sql'                     => "int(10) unsigned NOT NULL default 0",
+            'foreignKey'              => 'tl_service.id',
+            'sql'                     => "int(10) unsigned NOT NULL default 0",
             'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
         ),
         'tstamp' => array
         (
-		        'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
+            'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
         ),
         'sorting' => array
         (
