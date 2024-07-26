@@ -129,6 +129,7 @@ class FormHooks
                 
                 $service = Service::findOneBy('service_code', $assignment->type_of_testing);
                 if($field->name == 'service_type') { $field->value = $service->service_type; }
+                
 
                 // Assignment Details
                 if($field->name == 'district') { $field->value = $assignment->district; }
@@ -146,6 +147,8 @@ class FormHooks
                 
                 // Transaction Details
                 if($field->name == 'service_provided') { $field->value = $assignment->type_of_testing; }
+                if($field->name == 'service_provided_label') { $field->value = $service->name; }
+                
                 
                 if($field->name == 'hourly_rate') {
                     
