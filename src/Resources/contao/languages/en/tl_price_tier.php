@@ -11,12 +11,12 @@
 **/
 
 /* System Buttons */
-$GLOBALS['TL_LANG']['tl_price_tier']['new']                        = array('New record', 'Add a new record');
-$GLOBALS['TL_LANG']['tl_price_tier']['show']                       = array('Record details', 'Show the details of record ID %s');
-$GLOBALS['TL_LANG']['tl_price_tier']['edit']                       = array('Edit record', 'Edit record ID %s');
-$GLOBALS['TL_LANG']['tl_price_tier']['copy']                       = array('Copy record', 'Copy record ID %s');
-$GLOBALS['TL_LANG']['tl_price_tier']['delete']                     = array('Delete record', 'Delete record ID %s');
-$GLOBALS['TL_LANG']['tl_price_tier']['toggle']                     = array('Toggle record', 'Toggle record ID %s');
+$GLOBALS['TL_LANG']['tl_price_tier']['new']                        = array('New Price Tier', 'Add a new record');
+$GLOBALS['TL_LANG']['tl_price_tier']['show']                       = array('Price Tier Details', 'Show the details of record ID %s');
+$GLOBALS['TL_LANG']['tl_price_tier']['edit']                       = array('Edit Price Tier', 'Edit record ID %s');
+$GLOBALS['TL_LANG']['tl_price_tier']['copy']                       = array('Copy Price Tier', 'Copy record ID %s');
+$GLOBALS['TL_LANG']['tl_price_tier']['delete']                     = array('Delete Price Tier', 'Delete record ID %s');
+$GLOBALS['TL_LANG']['tl_price_tier']['toggle']                     = array('Toggle Price Tier', 'Toggle record ID %s');
 
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_price_tier']['publish_legend']             = 'Publish';
