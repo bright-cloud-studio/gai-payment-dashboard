@@ -11,12 +11,12 @@
 **/
 
 /* System Buttons */
-$GLOBALS['TL_LANG']['tl_assignment']['new']                        = array('New record', 'Add a new record');
-$GLOBALS['TL_LANG']['tl_assignment']['show']                       = array('Record details', 'Show the details of record ID %s');
-$GLOBALS['TL_LANG']['tl_assignment']['edit']                       = array('Edit record', 'Edit record ID %s');
-$GLOBALS['TL_LANG']['tl_assignment']['copy']                       = array('Copy record', 'Copy record ID %s');
-$GLOBALS['TL_LANG']['tl_assignment']['delete']                     = array('Delete record', 'Delete record ID %s');
-$GLOBALS['TL_LANG']['tl_assignment']['toggle']                     = array('Toggle record', 'Toggle record ID %s');
+$GLOBALS['TL_LANG']['tl_assignment']['new']                        = array('New Assignment', 'Add a new record');
+$GLOBALS['TL_LANG']['tl_assignment']['show']                       = array('Assignment Details', 'Show the details of record ID %s');
+$GLOBALS['TL_LANG']['tl_assignment']['edit']                       = array('Edit Assignment', 'Edit record ID %s');
+$GLOBALS['TL_LANG']['tl_assignment']['copy']                       = array('Copy Assignment', 'Copy record ID %s');
+$GLOBALS['TL_LANG']['tl_assignment']['delete']                     = array('Delete Assignment', 'Delete record ID %s');
+$GLOBALS['TL_LANG']['tl_assignment']['toggle']                     = array('Toggle Assignment', 'Toggle record ID %s');
 
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_assignment']['publish_legend']             = 'Publish';
