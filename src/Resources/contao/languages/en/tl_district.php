@@ -11,12 +11,12 @@
 **/
 
 /* System Buttons */
-$GLOBALS['TL_LANG']['tl_district']['new']                        = array('New record', 'Add a new record');
-$GLOBALS['TL_LANG']['tl_district']['show']                       = array('Record details', 'Show the details of record ID %s');
-$GLOBALS['TL_LANG']['tl_district']['edit']                       = array('Edit record', 'Edit record ID %s');
-$GLOBALS['TL_LANG']['tl_district']['copy']                       = array('Copy record', 'Copy record ID %s');
-$GLOBALS['TL_LANG']['tl_district']['delete']                     = array('Delete record', 'Delete record ID %s');
-$GLOBALS['TL_LANG']['tl_district']['toggle']                     = array('Toggle record', 'Toggle record ID %s');
+$GLOBALS['TL_LANG']['tl_district']['new']                        = array('New District', 'Add a new record');
+$GLOBALS['TL_LANG']['tl_district']['show']                       = array('District details', 'Show the details of record ID %s');
+$GLOBALS['TL_LANG']['tl_district']['edit']                       = array('Edit District', 'Edit record ID %s');
+$GLOBALS['TL_LANG']['tl_district']['copy']                       = array('Copy District', 'Copy record ID %s');
+$GLOBALS['TL_LANG']['tl_district']['delete']                     = array('Delete District', 'Delete record ID %s');
+$GLOBALS['TL_LANG']['tl_district']['toggle']                     = array('Toggle District', 'Toggle record ID %s');
 
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_district']['publish_legend']             = 'Publish';
