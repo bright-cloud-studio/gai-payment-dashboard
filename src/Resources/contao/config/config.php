@@ -14,7 +14,24 @@ use Contao\System;
 /* Create new sections in the Contao sidebar */
 $GLOBALS['TL_LANG']['MOD']['gai'][0] = "GAI Payment Dashboard";
 
-/* Back end modules */
+/* Back end modules - Data DCAs */
+$GLOBALS['BE_MOD']['gai_data']['district'] = array(
+	'tables' => array('tl_district')
+);
+$GLOBALS['BE_MOD']['gai_data']['school'] = array(
+	'tables' => array('tl_school')
+);
+$GLOBALS['BE_MOD']['gai_data']['service'] = array(
+	'tables' => array('tl_service')
+);
+$GLOBALS['BE_MOD']['gai_data']['price_tier'] = array(
+	'tables' => array('tl_price_tier')
+);
+$GLOBALS['BE_MOD']['gai_data']['student'] = array(
+	'tables' => array('tl_student')
+);
+
+/* Back end modules - Work DCAs */
 $GLOBALS['BE_MOD']['gai']['invoice_request'] = array(
 	'tables' => array('tl_invoice_request')
 );
@@ -23,21 +40,6 @@ $GLOBALS['BE_MOD']['gai']['assignment'] = array(
 );
 $GLOBALS['BE_MOD']['gai']['transaction'] = array(
 	'tables' => array('tl_transaction')
-);
-$GLOBALS['BE_MOD']['gai']['district'] = array(
-	'tables' => array('tl_district')
-);
-$GLOBALS['BE_MOD']['gai']['school'] = array(
-	'tables' => array('tl_school')
-);
-$GLOBALS['BE_MOD']['gai']['service'] = array(
-	'tables' => array('tl_service')
-);
-$GLOBALS['BE_MOD']['gai']['price_tier'] = array(
-	'tables' => array('tl_price_tier')
-);
-$GLOBALS['BE_MOD']['gai']['student'] = array(
-	'tables' => array('tl_student')
 );
 
 
