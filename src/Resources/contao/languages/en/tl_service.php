@@ -11,12 +11,12 @@
 **/
 
 /* System Buttons */
-$GLOBALS['TL_LANG']['tl_service']['new']                        = array('New record', 'Add a new record');
-$GLOBALS['TL_LANG']['tl_service']['show']                       = array('Record details', 'Show the details of record ID %s');
-$GLOBALS['TL_LANG']['tl_service']['edit']                       = array('Edit record', 'Edit record ID %s');
-$GLOBALS['TL_LANG']['tl_service']['copy']                       = array('Copy record', 'Copy record ID %s');
-$GLOBALS['TL_LANG']['tl_service']['delete']                     = array('Delete record', 'Delete record ID %s');
-$GLOBALS['TL_LANG']['tl_service']['toggle']                     = array('Toggle record', 'Toggle record ID %s');
+$GLOBALS['TL_LANG']['tl_service']['new']                        = array('New Service', 'Add a new record');
+$GLOBALS['TL_LANG']['tl_service']['show']                       = array('Service Details', 'Show the details of record ID %s');
+$GLOBALS['TL_LANG']['tl_service']['edit']                       = array('Edit Service', 'Edit record ID %s');
+$GLOBALS['TL_LANG']['tl_service']['copy']                       = array('Copy Service', 'Copy record ID %s');
+$GLOBALS['TL_LANG']['tl_service']['delete']                     = array('Delete Service', 'Delete record ID %s');
+$GLOBALS['TL_LANG']['tl_service']['toggle']                     = array('Toggle Service', 'Toggle record ID %s');
 
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_service']['publish_legend']             = 'Publish';
