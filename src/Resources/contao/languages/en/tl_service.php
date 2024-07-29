@@ -25,6 +25,6 @@ $GLOBALS['TL_LANG']['tl_service']['published']                  = array('Publish
 
 /* Fields */
 $GLOBALS['TL_LANG']['tl_service']['services_legend']         = 'Service Information';
-$GLOBALS['TL_LANG']['tl_service']['service_code']            = array('Service Code', 'asdf');
-$GLOBALS['TL_LANG']['tl_service']['name']                    = array('Name', 'asdf');
-$GLOBALS['TL_LANG']['tl_service']['service_type']            = array('Service Type', 'asdf');
+$GLOBALS['TL_LANG']['tl_service']['service_code']            = array('Service Code', 'Enter the unique Service Code for this Service');
+$GLOBALS['TL_LANG']['tl_service']['name']                    = array('Service Name', 'Enter the name of this Service');
+$GLOBALS['TL_LANG']['tl_service']['service_type']            = array('Service Type', 'Select if this Service is a flat \'fixed price\' or a calculated \'time based\' Service');
