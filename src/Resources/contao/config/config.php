@@ -23,15 +23,16 @@ $GLOBALS['BE_MOD']['gai_data']['district'] = array(
 $GLOBALS['BE_MOD']['gai_data']['school'] = array(
 	'tables' => array('tl_school')
 );
+$GLOBALS['BE_MOD']['gai_data']['student'] = array(
+	'tables' => array('tl_student')
+);
 $GLOBALS['BE_MOD']['gai_data']['service'] = array(
 	'tables' => array('tl_service')
 );
 $GLOBALS['BE_MOD']['gai_data']['price_tier'] = array(
 	'tables' => array('tl_price_tier')
 );
-$GLOBALS['BE_MOD']['gai_data']['student'] = array(
-	'tables' => array('tl_student')
-);
+
 
 /* Back end modules - Work DCAs */
 $GLOBALS['TL_LANG']['MOD']['gai'][0] = "Invoices - Generator";
