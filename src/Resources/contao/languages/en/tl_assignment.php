@@ -25,23 +25,21 @@ $GLOBALS['TL_LANG']['tl_assignment']['published']                  = array('Publ
 
 /* Fields */
 $GLOBALS['TL_LANG']['tl_assignment']['assignment_legend']         = 'Assignment Information';
-$GLOBALS['TL_LANG']['tl_assignment']['date_created']              = array('Date Created', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['date_30_day']               = array('Date 30 Days', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['date_45_day']               = array('Date 45 Days', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['psychologist']              = array('Psychologist', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['district']                  = array('District', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['school']                    = array('School', 'asdf');
-
-$GLOBALS['TL_LANG']['tl_assignment']['student']              = array('Student', 'asdf');
-
-$GLOBALS['TL_LANG']['tl_assignment']['initial_reeval']            = array('Initial / Re-Eval', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['type_of_testing']           = array('Type of Testing', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['testing_date']              = array('Testing Date', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['meeting_required']          = array('Meeting Required', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['meeting_date']              = array('Meeting Date', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['contact_info_parent']       = array('Contact Info - Parent', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['contact_info_teacher']      = array('Contact Info - Teacher', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['team_chair']                = array('Team Chair', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['email']                     = array('Email', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['report_submitted']          = array('Report Submitted', 'asdf');
-$GLOBALS['TL_LANG']['tl_assignment']['notes']                     = array('Notes', 'asdf');
+$GLOBALS['TL_LANG']['tl_assignment']['date_created']              = array('Date Created', 'The date when this Assignment is created');
+$GLOBALS['TL_LANG']['tl_assignment']['date_30_day']               = array('Date 30 Days', 'The date which would be the 30-day marker');
+$GLOBALS['TL_LANG']['tl_assignment']['date_45_day']               = array('Date 45 Days', 'The date which would be the 45-day marker');
+$GLOBALS['TL_LANG']['tl_assignment']['psychologist']              = array('Psychologist', 'Select the Psychologist this Assignment is being assigned to');
+$GLOBALS['TL_LANG']['tl_assignment']['district']                  = array('District', 'Select the District this student is located in');
+$GLOBALS['TL_LANG']['tl_assignment']['school']                    = array('School', 'Select the School this student is located in');
+$GLOBALS['TL_LANG']['tl_assignment']['student']                   = array('Student', 'Select the Student this Assignment belongs to');
+$GLOBALS['TL_LANG']['tl_assignment']['initial_reeval']            = array('Initial / Re-Eval', 'Select if this is an \'Initial\' or \'Re-Eval\' Assignment type');
+$GLOBALS['TL_LANG']['tl_assignment']['type_of_testing']           = array('Type of Testing', 'Select the pre-assigned Service for this Assignment');
+$GLOBALS['TL_LANG']['tl_assignment']['testing_date']              = array('Testing Date', 'Select the Testing Date for this Assignment');
+$GLOBALS['TL_LANG']['tl_assignment']['meeting_required']          = array('Meeting Required', 'Select if a Meeting is required or not');
+$GLOBALS['TL_LANG']['tl_assignment']['meeting_date']              = array('Meeting Date', 'Select the date the meeting will take place on');
+$GLOBALS['TL_LANG']['tl_assignment']['contact_info_parent']       = array('Contact Info - Parent', 'UNNEEDED?');
+$GLOBALS['TL_LANG']['tl_assignment']['contact_info_teacher']      = array('Contact Info - Teacher', 'UNNEEDED?');
+$GLOBALS['TL_LANG']['tl_assignment']['team_chair']                = array('Team Chair', 'Enter the Team Chair for this Assignment');
+$GLOBALS['TL_LANG']['tl_assignment']['email']                     = array('Email', 'UNNEEDED?');
+$GLOBALS['TL_LANG']['tl_assignment']['report_submitted']          = array('Report Submitted', 'Select if a Report as been submitted or not for this Assignment');
+$GLOBALS['TL_LANG']['tl_assignment']['notes']                     = array('Notes', 'Enter any Notes you would like linked to this Assignment');
