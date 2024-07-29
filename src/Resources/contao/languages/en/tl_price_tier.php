@@ -25,4 +25,4 @@ $GLOBALS['TL_LANG']['tl_price_tier']['published']                  = array('Publ
 
 /* Fields */
 $GLOBALS['TL_LANG']['tl_price_tier']['price_tier_legend']  = 'Price Tier Information';
-$GLOBALS['TL_LANG']['tl_price_tier']['tier_price']         = array('Tier Price', 'asdf');
+$GLOBALS['TL_LANG']['tl_price_tier']['tier_price']         = array('Tier Price', 'Enter a price which can be assigned to a Psychologist for this Service.');
