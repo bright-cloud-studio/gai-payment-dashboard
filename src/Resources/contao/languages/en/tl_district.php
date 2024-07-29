@@ -21,12 +21,10 @@ $GLOBALS['TL_LANG']['tl_district']['toggle']                     = array('Toggle
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_district']['publish_legend']             = 'Publish';
 $GLOBALS['TL_LANG']['tl_district']['alias']                      = array('Alias', 'Auto-generated alias.');
-$GLOBALS['TL_LANG']['tl_district']['published']                  = array('Published', 'Show this record on the front end.');
+$GLOBALS['TL_LANG']['tl_district']['published']                  = array('Published', 'Publishing a District will make it available as an option when creating Assignments.');
 
 /* Fields */
-$GLOBALS['TL_LANG']['tl_district']['district_legend']            = 'Invoice Specific';
-$GLOBALS['TL_LANG']['tl_district']['district_name']              = array('District Name', 'Today\'s Date');
-$GLOBALS['TL_LANG']['tl_district']['invoice_number']             = array('Invoice Number', 'Today\'s Date');
-$GLOBALS['TL_LANG']['tl_district']['invoice_prefix']             = array('Invoice Prefix', 'Today\'s Date');
-$GLOBALS['TL_LANG']['tl_district']['purchase_order']             = array('Purchase Order', 'Today\'s Date');
-$GLOBALS['TL_LANG']['tl_district']['price_tier']                 = array('Price Tier', 'Today\'s Date');
+$GLOBALS['TL_LANG']['tl_district']['district_legend']            = 'District Information';
+$GLOBALS['TL_LANG']['tl_district']['district_name']              = array('District Name', 'Enter the name of this District');
+$GLOBALS['TL_LANG']['tl_district']['invoice_prefix']             = array('Invoice Prefix', 'Unique Prefix used before their invoice number');
+$GLOBALS['TL_LANG']['tl_district']['purchase_order']             = array('Purchase Order', 'Purchase Order used on this District\'s invoices');
