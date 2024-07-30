@@ -55,7 +55,6 @@ class ServiceBackend extends Backend
 
 		// Update the database
 		$this->Database->prepare("UPDATE tl_service SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")->execute($intId);
-		//$this->log('A new version of record "tl_service.id='.$intId.'" has been created'.$this->getParentEntries('tl_listing', $intId), __METHOD__, TL_GENERAL);
 	}
 	
 	public function generateAlias($varValue, DataContainer $dc)
