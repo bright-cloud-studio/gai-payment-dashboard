@@ -169,7 +169,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'default'                 => 'fixed_price',
             'filter'                  => true,
             'search'                  => true,
-            'options'                  => array('fixed_price' => 'Fixed Price', 'time_based' => 'Time Based'),
+            'options'                  => array('fixed_price' => 'Fixed Price', 'time_based' => 'Time Based', 'manaul_price' => 'Manual Price Entry'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
     		'sql'                      => "varchar(15) NOT NULL default ''"
         ),
