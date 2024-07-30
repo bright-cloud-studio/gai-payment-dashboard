@@ -18,7 +18,7 @@ class DistrictBackend extends Backend
 	{
       if (strlen(Input::get('tid')))
       {
-        $this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1), (@func_get_arg(12) ?: null));
+        $this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
         $this->redirect($this->getReferer());
       }
 
