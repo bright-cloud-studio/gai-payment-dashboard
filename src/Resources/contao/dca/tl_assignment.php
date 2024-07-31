@@ -49,7 +49,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
-            'fields'                  => array('date_created ASC'),
+            'fields'                  => array('date_created DESC'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
