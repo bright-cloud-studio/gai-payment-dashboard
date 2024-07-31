@@ -24,16 +24,13 @@ class FormHooks
     {
         // Assignment Selection Form
         if($formData['formID'] == 'assignment_selection') {
+            
             // Create transaction using submitted data
             $_SESSION['assignment_uuid'] = $submittedData['assignment_uuid'];
+            
         }
         // Assignment Generate Transaction Form
         else if($formData['formID'] == 'assignment_generate_transaction') {
-
-
-            //echo "<pre>";
-            //print_r($submittedData);
-            //die();
 
             // Create a new Transaction
             $transaction = new Transaction();
