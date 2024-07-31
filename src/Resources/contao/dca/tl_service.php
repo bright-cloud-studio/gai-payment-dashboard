@@ -15,6 +15,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     (
         'dataContainer'               => DC_Table::class,
         'ctable'                      => array('tl_price_tier'),
+        'switchToEdit'                => false,
         'enableVersioning'            => true,
         'onload_callback' => array
 		(
@@ -36,11 +37,11 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE,
-            'rootPaste'               => true,
-            'showRootTrails'          => true,
+            'mode'                    => DataContainer::MODE_SORTED,
+            'rootPaste'               => false,
+            'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
-            'flag'                    => 11,
+            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'fields'                  => array('service_code'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
