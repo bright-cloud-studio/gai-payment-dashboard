@@ -78,6 +78,13 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
                 'href'                => 'act=copy',
                 'icon'                => 'copy.gif'
             ),
+            'cut' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_price_tier']['cut'],
+				'href'                => 'act=paste&amp;mode=cut',
+				'icon'                => 'cut.svg',
+				'attributes'          => 'data-action="contao--scroll-offset#store"',
+			),
             'delete' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_price_tier']['delete'],
