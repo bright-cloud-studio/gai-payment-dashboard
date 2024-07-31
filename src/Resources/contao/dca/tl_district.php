@@ -17,6 +17,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
     (
         'dataContainer'               => DC_Table::class,
         'ctable'                      => array('tl_school'),
+        'switchToEdit'                => false,
         'enableVersioning'            => true,
         'onload_callback' => array
 		(
@@ -39,7 +40,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         'sorting' => array
         (
             'mode'                    => DataContainer::MODE_TREE,
-            'rootPaste'               => true,
+            'rootPaste'               => false,
             'showRootTrails'          => true,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => 11,
