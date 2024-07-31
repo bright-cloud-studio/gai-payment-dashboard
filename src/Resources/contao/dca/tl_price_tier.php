@@ -97,13 +97,7 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
                 'label'               => &$GLOBALS['TL_LANG']['tl_price_tier']['show'],
                 'href'                => 'act=show',
                 'icon'                => 'show.gif'
-            ),
-            'drag' => array
-			(
-				'icon'                => 'drag.svg',
-				'attributes'          => 'class="drag-handle" aria-hidden="true"',
-				'button_callback'     => array('tl_price_tier', 'dragFile')
-			)
+            )
         )
     ),
  
@@ -132,6 +126,10 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
         'tstamp' => array
         (
             'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
+        ),
+        'sorting' => array
+        (
+            'sql'                    	=> "int(10) unsigned NOT NULL default '0'"
         ),
         'alias' => array
         (
@@ -214,10 +212,4 @@ class tl_price_tier extends Backend
 
 		return '<a href="' . StringUtil::specialcharsUrl($href) . '" title="' . StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['view']) . '" target="_blank">' . Image::getHtml($image, '', $attributes) . '</a> ' . $label;
 	}
-
-    public function dragFile($row, $href, $label, $title, $icon, $attributes)
-	{
-        return '<button type="button" title="' . StringUtil::specialchars($title) . '" ' . $attributes . '>' . Image::getHtml($icon, $label) . '</button> ';
-	}
-    
 }
