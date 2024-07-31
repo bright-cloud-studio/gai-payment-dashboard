@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "int(5) NOT NULL default ''"
+            'sql'                     => "int(5) unsigned NOT NULL default 0"
         ),
         'name' => array
         (
