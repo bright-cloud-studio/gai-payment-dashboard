@@ -133,10 +133,6 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
         (
             'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
         ),
-        'sorting' => array
-        (
-            'sql'                    	=> "int(10) unsigned NOT NULL default '0'"
-        ),
         'alias' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['alias'],
@@ -221,7 +217,7 @@ class tl_price_tier extends Backend
 
     public function dragFile($row, $href, $label, $title, $icon, $attributes)
 	{
-		return System::getContainer()->get('security.helper')->isGranted(ContaoCorePermissions::USER_CAN_RENAME_FILE) ? '<button type="button" title="' . StringUtil::specialchars($title) . '" ' . $attributes . '>' . Image::getHtml($icon, $label) . '</button> ' : ' ';
+        return '<button type="button" title="' . StringUtil::specialchars($title) . '" ' . $attributes . '>' . Image::getHtml($icon, $label) . '</button> ';
 	}
     
 }
