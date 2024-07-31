@@ -39,15 +39,13 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE_EXTENDED,
+            'mode'                    => DataContainer::MODE_SORTED,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_ASC,
             'fields'                  => array('tier_price'),
-            'panelLayout'             => 'filter;search',
-            'defaultSearchField'      => 'tier_price',
-            
+            'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
