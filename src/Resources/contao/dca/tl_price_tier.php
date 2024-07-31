@@ -3,6 +3,7 @@
 /* Price Tier - Child to Service */
 
 use Contao\Backend;
+use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Contao\Database;
 use Contao\DataContainer;
 use Contao\DC_Table;
