@@ -116,17 +116,17 @@ $GLOBALS['TL_DCA']['tl_school'] = array
         /* ******************* */
         'id' => array
         (
-		        'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
+            'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
         ),
         'pid' => array
         (
-		        'foreignKey'              => 'tl_district.id',
-			      'sql'                     => "int(10) unsigned NOT NULL default 0",
+            'foreignKey'              => 'tl_district.id',
+            'sql'                     => "int(10) unsigned NOT NULL default 0",
             'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
         ),
         'tstamp' => array
         (
-		        'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
+            'sql'                     	=> "int(10) unsigned NOT NULL default '0'"
         ),
         'sorting' => array
         (
@@ -207,7 +207,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'city' => array
