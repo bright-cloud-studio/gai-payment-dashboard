@@ -20,9 +20,9 @@ $GLOBALS['TL_DCA']['tl_school'] = array
     (
         'dataContainer'               => DC_Table::class,
         'ptable'                      => 'tl_district',
-        'switchToEdit'                => true,
-		    'enableVersioning'            => true,
-		    'markAsCopy'                  => 'title',
+        'switchToEdit'                => false,
+		'enableVersioning'            => true,
+		'markAsCopy'                  => 'title',
         'sql' => array
         (
             'keys' => array
@@ -40,15 +40,16 @@ $GLOBALS['TL_DCA']['tl_school'] = array
         'sorting' => array
         (
             'mode'                    => DataContainer::MODE_TREE_EXTENDED,
-			      'panelLayout'             => 'filter;search',
-			      'defaultSearchField'      => 'date',
+            'rootPaste'               => false,
+            'panelLayout'             => 'filter;search',
+            'defaultSearchField'      => 'date',
             'icon'                    => 'pagemounts.svg'
         ),
         'label' => array
         (
             'fields'                  => array('school_name', 'contact_name'),
-			      'format'                  => '%s | %s',
-			      'label_callback'          => array('tl_school', 'addIcon')
+            'format'                  => '%s | %s',
+            'label_callback'          => array('tl_school', 'addIcon')
         ),
         'global_operations' => array
         (
