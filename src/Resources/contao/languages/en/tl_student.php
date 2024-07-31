@@ -24,10 +24,10 @@ $GLOBALS['TL_LANG']['tl_student']['alias']                      = array('Alias',
 $GLOBALS['TL_LANG']['tl_student']['published']                  = array('Published', 'Show this record on the front end.');
 
 /* Fields */
-$GLOBALS['TL_LANG']['tl_student']['assignment_legend']  = 'Student Information';
-$GLOBALS['TL_LANG']['tl_student']['name']               = array('Name', 'Enter this Student\'s Name');
-$GLOBALS['TL_LANG']['tl_student']['date_of_birth']      = array('Date of Birth', 'Enter this Student\'s Date of Birth');
-$GLOBALS['TL_LANG']['tl_student']['gender']             = array('Gender', 'Select this Student\'s Gender');
-$GLOBALS['TL_LANG']['tl_student']['grade']              = array('Grade', 'Enter this Student\'s Grade');
-$GLOBALS['TL_LANG']['tl_student']['lasid']              = array('LASID', 'Enter this Student\'s State Issued LASID number');
-$GLOBALS['TL_LANG']['tl_student']['sasid']              = array('SASID', 'Enter this Student\'s State Issued SASID number');
+$GLOBALS['TL_LANG']['tl_student']['student_legend']     = 'Student Information';
+$GLOBALS['TL_LANG']['tl_student']['name']               = array('Student\'s Name', 'Enter this Student\'s Name');
+$GLOBALS['TL_LANG']['tl_student']['date_of_birth']      = array('Student\'s Date of Birth', 'Enter this Student\'s Date of Birth');
+$GLOBALS['TL_LANG']['tl_student']['gender']             = array('Student\'s Gender', 'Select this Student\'s Gender');
+$GLOBALS['TL_LANG']['tl_student']['grade']              = array('Student\'s Grade', 'Enter this Student\'s Grade');
+$GLOBALS['TL_LANG']['tl_student']['lasid']              = array('Student\'s LASID', 'Enter this Student\'s State Issued LASID number');
+$GLOBALS['TL_LANG']['tl_student']['sasid']              = array('Student\'s SASID', 'Enter this Student\'s State Issued SASID number');
