@@ -39,8 +39,11 @@ $GLOBALS['TL_DCA']['tl_school'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE_EXTENDED,
+            'mode'                    => DataContainer::MODE_SORTED,
+            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'rootPaste'               => false,
+            'showRootTrails'          => false,
+            'fields'                  => array('school_name'),
             'panelLayout'             => 'filter;search',
             'defaultSearchField'      => 'date',
             'icon'                    => 'pagemounts.svg'
