@@ -25,7 +25,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     (
         'dataContainer'               => DC_Table::class,
         'ptable'                      => 'tl_assignment',
-        'switchToEdit'                => true,
+        'switchToEdit'                => false,
 		'enableVersioning'            => true,
 		'markAsCopy'                  => 'title',
         'sql' => array
@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE_EXTENDED,
+            'mode'                    => DataContainer::MODE_PARENT,
 			'panelLayout'             => 'filter;search',
 			'defaultSearchField'      => 'date',
             'icon'                    => 'pagemounts.svg'
