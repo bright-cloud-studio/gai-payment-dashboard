@@ -22,6 +22,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     (
         'dataContainer'               => DC_Table::class,
         'ctable'                      => array('tl_transaction'),
+        'switchToEdit'                => false,
         'enableVersioning'            => true,
         'onload_callback' => array
 		(
@@ -43,12 +44,12 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE,
-            'rootPaste'               => true,
-            'showRootTrails'          => true,
+            'mode'                    => DataContainer::MODE_SORTED,
+            'rootPaste'               => false,
+            'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
-            'flag'                    => 11,
-            'fields'                  => array('date_created', 'district', 'school', 'psychologist'),
+            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'fields'                  => array('date_created DESC'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
