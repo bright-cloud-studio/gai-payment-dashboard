@@ -39,7 +39,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTED,
+            'mode'                    => DataContainer::MODE_SORTED_PARENT,
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'rootPaste'               => false,
             'showRootTrails'          => true,
