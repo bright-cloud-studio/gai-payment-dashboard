@@ -37,7 +37,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE,
+            'mode'                    => DataContainer::MODE_SORTED,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
