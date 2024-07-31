@@ -41,7 +41,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
-            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'flag'                    => DataContainer::SORT_INITIAL_LETTERS_ASC,
             'fields'                  => array('service_code'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
