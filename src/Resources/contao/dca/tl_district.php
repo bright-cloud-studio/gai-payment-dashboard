@@ -39,11 +39,11 @@ $GLOBALS['TL_DCA']['tl_district'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE,
+            'mode'                    => DataContainer::MODE_SORTED,
             'rootPaste'               => false,
-            'showRootTrails'          => true,
+            'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
-            'flag'                    => 11,
+            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'fields'                  => array('district_name'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
