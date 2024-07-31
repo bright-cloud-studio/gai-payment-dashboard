@@ -71,7 +71,6 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
-			
             'copy' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_price_tier']['copy'],
@@ -86,18 +85,24 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
                 'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
             ),
             'toggle' => array
-      			(
-      				'label'               => &$GLOBALS['TL_LANG']['tl_price_tier']['toggle'],
-      				'icon'                => 'visible.gif',
-      				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-      				'button_callback'     => array('Bcs\Backend\PriceTierBackend', 'toggleIcon')
-      			),
+            (
+                'label'               => &$GLOBALS['TL_LANG']['tl_price_tier']['toggle'],
+                'icon'                => 'visible.gif',
+                'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                'button_callback'     => array('Bcs\Backend\PriceTierBackend', 'toggleIcon')
+            ),
             'show' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_price_tier']['show'],
                 'href'                => 'act=show',
                 'icon'                => 'show.gif'
-            )
+            ),
+            'drag' => array
+			(
+				'icon'                => 'drag.svg',
+				'attributes'          => 'class="drag-handle" aria-hidden="true"',
+				'button_callback'     => array('tl_price_tier', 'dragFile')
+			)
         )
     ),
  
@@ -212,4 +217,10 @@ class tl_price_tier extends Backend
 
 		return '<a href="' . StringUtil::specialcharsUrl($href) . '" title="' . StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['view']) . '" target="_blank">' . Image::getHtml($image, '', $attributes) . '</a> ' . $label;
 	}
+
+    public function dragFile($row, $href, $label, $title, $icon, $attributes)
+	{
+		return System::getContainer()->get('security.helper')->isGranted(ContaoCorePermissions::USER_CAN_RENAME_FILE) ? '<button type="button" title="' . StringUtil::specialchars($title) . '" ' . $attributes . '>' . Image::getHtml($icon, $label) . '</button> ' : ' ';
+	}
+    
 }
