@@ -20,9 +20,9 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
     (
         'dataContainer'               => DC_Table::class,
         'ptable'                      => 'tl_service',
-        'switchToEdit'                => true,
-		    'enableVersioning'            => true,
-		    'markAsCopy'                  => 'title',
+        'switchToEdit'                => false,
+        'enableVersioning'            => true,
+        'markAsCopy'                  => 'title',
         'sql' => array
         (
             'keys' => array
@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
-            'flag'                    => DataContainer::SORT_INITIAL_LETTERS_ASC,
+            'flag'                    => DataContainer::SORT_ASC,
             'fields'                  => array('tier_price'),
             'panelLayout'             => 'filter;search',
             'defaultSearchField'      => 'tier_price',
@@ -117,7 +117,7 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
         /* ******************* */
         'id' => array
         (
-		        'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
+            'sql'                     	=> "int(10) unsigned NOT NULL auto_increment"
         ),
         'pid' => array
         (
@@ -165,11 +165,11 @@ $GLOBALS['TL_DCA']['tl_price_tier'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_price'],
             'inputType'               => 'text',
-            'default'                 => '',
+            'default'                 => '0.00',
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         )
         
         
