@@ -105,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{school_legend}, school_name, contact_name, contact_address, contact_email, contact_cc_email, city, state, zip, phone;{publish_legend},published;'
+        'default'                     => '{school_legend}, school_name, contact_name, contact_address, city, state, zip, phone, contact_email, contact_cc_email;{publish_legend},published;'
     ),
  
     // Fields
