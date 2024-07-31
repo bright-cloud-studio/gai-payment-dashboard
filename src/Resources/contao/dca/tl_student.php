@@ -98,7 +98,7 @@ $GLOBALS['TL_DCA']['tl_student'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{rep_legend},name, date_of_birth, gender, grade, lasid, sasid;{state_legend},state;{publish_legend},published;'
+        'default'                     => '{student_legend},name, date_of_birth, gender, grade, lasid, sasid;{state_legend},state;{publish_legend},published;'
     ),
  
     // Fields
@@ -113,17 +113,17 @@ $GLOBALS['TL_DCA']['tl_student'] = array
             'sql'                     => "int(10) unsigned NOT NULL default '0'"
         ),
         'sorting' => array
-    		(
+        (
             'sql'                     => "int(10) unsigned NOT NULL default '0'"
-    		),
+        ),
         'published' => array
-    		(
-    			'exclude'                 => true,
-    			'label'                   => &$GLOBALS['TL_LANG']['tl_student']['published'],
-    			'inputType'               => 'checkbox',
-    			'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
-    			'sql'                     => "char(1) NOT NULL default ''"
-    		),
+        (
+            'exclude'                 => true,
+            'label'                   => &$GLOBALS['TL_LANG']['tl_student']['published'],
+            'inputType'               => 'checkbox',
+            'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
+            'sql'                     => "char(1) NOT NULL default ''"
+        ),
 
 
       
@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_student'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'sasid' => array
@@ -185,7 +185,7 @@ $GLOBALS['TL_DCA']['tl_student'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         )
 
