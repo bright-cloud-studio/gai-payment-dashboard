@@ -37,11 +37,11 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTED,
+             'mode'                    => DataContainer::MODE_SORTED,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
-            'flag'                    => DataContainer::SORT_INITIAL_LETTERS_ASC,
+            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'fields'                  => array('service_code'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
@@ -207,7 +207,11 @@ class tl_service extends Backend
 		{
 			return;
 		}
-		if (Input::get('mode') == 1)
+		if (Input::get('pid') == 0)
+		{
+			$GLOBALS['TL_DCA']['tl_service']['fields']['type']['default'] = 'root';
+		}
+		elseif (Input::get('mode') == 1)
 		{
 			$objPage = Database::getInstance()
 				->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
