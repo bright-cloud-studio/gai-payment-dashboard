@@ -14,6 +14,7 @@ $GLOBALS['TL_DCA']['tl_student'] = array
     'config' => array
     (
         'dataContainer'               => DC_Table::class,
+        'switchToEdit'                => false,
         'enableVersioning'            => true,
         'sql' => array
         (
