@@ -16,7 +16,6 @@ $GLOBALS['TL_DCA']['tl_service'] = array
         'dataContainer'               => DC_Table::class,
         'ctable'                      => array('tl_price_tier'),
         'switchToEdit'                => false,
-        'enableVersioning'            => true,
         'onload_callback' => array
 		(
 			array('tl_service', 'setRootType')
@@ -167,11 +166,11 @@ $GLOBALS['TL_DCA']['tl_service'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['service_type'],
             'inputType'               => 'select',
-            'default'                 => 'fixed_price',
+            'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
             'options'                  => array('fixed_price' => 'Fixed Price', 'time_based' => 'Time Based', 'manual_price' => 'Manual Price Entry'),
-    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Service Type'),
     		'sql'                      => "varchar(15) NOT NULL default ''"
         ),
         'description' => array
