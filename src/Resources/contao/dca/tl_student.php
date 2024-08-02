@@ -98,7 +98,7 @@ $GLOBALS['TL_DCA']['tl_student'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{student_legend},name, date_of_birth, gender, grade, lasid, sasid;{state_legend},state;{publish_legend},published;'
+        'default'                     => '{district_legend},district;{student_legend},name, date_of_birth, gender, grade, lasid, sasid;{state_legend},state;{publish_legend},published;'
     ),
  
     // Fields
@@ -126,7 +126,17 @@ $GLOBALS['TL_DCA']['tl_student'] = array
         ),
 
 
-      
+        'district' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_student']['district'],
+            'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getDistricts'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
         'name' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_student']['name'],
