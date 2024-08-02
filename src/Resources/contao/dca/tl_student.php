@@ -133,7 +133,7 @@ $GLOBALS['TL_DCA']['tl_student'] = array
             'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a District'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getDistricts'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
