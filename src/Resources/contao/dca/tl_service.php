@@ -146,7 +146,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_service']['service_code'],
             'inputType'               => 'text',
-            'default'                 => '',
+            'default'                 => '0',
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
