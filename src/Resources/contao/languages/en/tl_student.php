@@ -24,6 +24,9 @@ $GLOBALS['TL_LANG']['tl_student']['alias']                      = array('Alias',
 $GLOBALS['TL_LANG']['tl_student']['published']                  = array('Published', 'Show this record on the front end.');
 
 /* Fields */
+$GLOBALS['TL_LANG']['tl_student']['district_legend']    = 'District Information';
+$GLOBALS['TL_LANG']['tl_student']['district']           = array('Student\'s District', 'Select the District this student belongs to.');
+
 $GLOBALS['TL_LANG']['tl_student']['student_legend']     = 'Student Information';
 $GLOBALS['TL_LANG']['tl_student']['name']               = array('Student\'s Name', 'Enter this Student\'s Name');
 $GLOBALS['TL_LANG']['tl_student']['date_of_birth']      = array('Student\'s Date of Birth', 'Enter this Student\'s Date of Birth');
