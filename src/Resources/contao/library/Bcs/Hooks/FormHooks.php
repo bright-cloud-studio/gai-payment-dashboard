@@ -85,6 +85,7 @@ class FormHooks
 
                         // Loop through all the collected Assignments
                         foreach($assignments as $assignment) {
+                            $label = '';
                             
                             // Get the formated 'Date Created'
                             $t = strtotime($assignment->date_created);
@@ -93,12 +94,16 @@ class FormHooks
                             $district = District::findOneBy('id', $assignment->district);
 
                             // Get label for School
-                            $school = School::findOneBy('pid', $assignment->school);
-                            
+                            $school = School::findOneBy('id', $assignment->school);
                             
                             // date_created - district - school - student
                             $student = Student::findOneBy('id', $assignment->student);
-                            $label = date('m/d/y',$t) . " - " . $district->district_name . " - " . $school->school_name . " - " . $student->name;
+                            //$label = date('m/d/y',$t) . " - " . $district->district_name . " - " . $school->school_name . " - " . $student->name;
+                            
+                            $label .= "<span id='date'>" . date('m/d/y',$t) . "</span>";
+                            $label .= "<span id='district'>" . $district->district_name. "</span>";
+                            $label .= "<span id='school'>" . $school->school_name . "</span>";
+                            $label .= "<span id='student'>" . $student->name . "</span>";
                             
                             
                             // Format the assignment so it can be added to the form
