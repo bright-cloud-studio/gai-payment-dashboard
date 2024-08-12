@@ -168,7 +168,7 @@ class AssignmentBackend extends Backend
 		while($result->next())
 		{
             
-        	$result2 = $this->Database->prepare("SELECT * FROM tl_school WHERE published=1")->execute();
+        	$result2 = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=".$result->id)->execute();
     		while($result2->next())
     		{
                 // Add ti array with ID as the value and firstname lastname as the label
