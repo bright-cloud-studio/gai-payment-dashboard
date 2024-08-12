@@ -77,7 +77,7 @@ class FormHooks
                         
                         // get all of the Assignments for this Member
                         $opt = [
-                            'order' => 'id ASC'
+                            'order' => 'date_created DESC'
                         ];
 
                         // Get the Assignments using our specific criteria
