@@ -19,6 +19,6 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['price_tier_assignments'] = array
     'flag'                    => DataContainer::SORT_ASC,
     'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
     'options_callback'	      => array('Bcs\Backend\ServiceBackend', 'getPriceTierAssignmentOptions'),
-    'sql'                     => "varchar(255) NOT NULL default ''"
+    'sql'                     => "TEXT(20000) NOT NULL default ''"
 );
 
