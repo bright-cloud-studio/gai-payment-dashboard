@@ -165,6 +165,7 @@ class AssignmentBackend extends Backend
 		$this->import('Database');
 		
 		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1")->execute();
+		
 		while($result->next())
 		{
             
@@ -172,15 +173,12 @@ class AssignmentBackend extends Backend
     		while($result2->next())
     		{
                 // Add ti array with ID as the value and firstname lastname as the label
-                $schools[$result->district_name] = array($result2->id => $result2->school_name);   
+                $schools[$result->district_name][] = array($result2->id => $result2->school_name);   
     		}
             
             
 		}
 		
-		
-	
-
 		return $schools;
 	}
 
