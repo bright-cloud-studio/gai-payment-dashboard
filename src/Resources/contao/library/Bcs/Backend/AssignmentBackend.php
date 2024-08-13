@@ -174,10 +174,11 @@ class AssignmentBackend extends Backend
                 
                 
     		}
-    		
+    		return $schools;
         }
 
-		return $schools;
+        return null;
+		
 	}
 
     // Get Services as select menu
