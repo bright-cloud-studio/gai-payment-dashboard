@@ -176,8 +176,7 @@ class AssignmentBackend extends Backend
     		return $schools;
         }
 
-        $schools = $schools + array('0' => 'Please Select a District');
-        return $schools;
+        //return $schools;
 		
 	}
 
