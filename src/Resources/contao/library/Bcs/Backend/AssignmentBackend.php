@@ -158,10 +158,9 @@ class AssignmentBackend extends Backend
     // Get Schools as select menu
     public function getSchools(DataContainer $dc) { 
 
+        $schools = array();
+        
         if($dc->activeRecord->school != null) {
-
-            // Hold the psys
-            $schools = array();
     
             // Use the DB to grab all of our enabled members, aka our psychologists
     		$this->import('Database');
