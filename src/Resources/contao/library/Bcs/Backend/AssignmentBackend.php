@@ -176,7 +176,7 @@ class AssignmentBackend extends Backend
     		return $schools;
         }
 
-        //return $schools;
+        return $schools;
 		
 	}
 
