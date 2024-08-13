@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'dataContainer'               => DC_Table::class,
         'ctable'                      => array('tl_transaction'),
         'switchToEdit'                => false,
-        'enableVersioning'            => true,
+        'enableVersioning'            => false,
         'onload_callback' => array
 		(
 			array('tl_assignment', 'setRootType')
