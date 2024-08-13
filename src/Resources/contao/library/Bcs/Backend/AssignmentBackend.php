@@ -162,7 +162,6 @@ class AssignmentBackend extends Backend
         
         if($dc->activeRecord->school != null) {
 
-            $schools = $schools + array('0' => 'First, select a District');
     
             // Use the DB to grab all of our enabled members, aka our psychologists
     		$this->import('Database');
@@ -177,7 +176,7 @@ class AssignmentBackend extends Backend
     		}
     		return $schools;
         }
-        $schools = $schools + array('0' => 'First, select a District');
+        
         return $schools;
 		
 	}
