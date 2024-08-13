@@ -1,4 +1,4 @@
-<div class="mod_assignment_prices size100 marbot60">
+<div class="mod_list_services size100 marbot60">
 	<h2>Available Services and Prices</h2>
 	
 	<?php
