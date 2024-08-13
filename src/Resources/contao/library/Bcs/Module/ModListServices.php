@@ -21,7 +21,7 @@ use Contao\System;
 
 use Contao\FrontendUser;
 
-class ModAssignments extends \Contao\Module
+class ModListServices extends \Contao\Module
 {
 
     /* Default Template */
