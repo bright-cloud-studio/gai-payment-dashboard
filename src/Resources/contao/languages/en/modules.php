@@ -23,4 +23,4 @@ $GLOBALS['TL_LANG']['MOD']['invoice_request']          = array('Generate Invoice
 
 
 /* Front End modules */
-$GLOBALS['TL_LANG']['FMD']['mod_assignments']          = array('Assignments', 'Displays Assignments and allows creation of transactions for them');
+$GLOBALS['TL_LANG']['FMD']['mod_list_services']        = array('List Services', 'Lists Service data on the Assignments page');
