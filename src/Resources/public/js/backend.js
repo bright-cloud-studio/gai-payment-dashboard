@@ -1,10 +1,6 @@
 /* Once fully loaded */
 $(document).ready(function() {
 
-    $("#ctrl_district").change(function(){
-        $('.tl_submit').click();
-    });
-    
     /* Apply Select2 - Assignments */
     $(document).ready(function(){ $('#ctrl_psychologist').select2(); });
     $(document).ready(function(){ $('#ctrl_school').select2(); });
