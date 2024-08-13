@@ -25,7 +25,7 @@ class ModListServices extends \Contao\Module
 {
 
     /* Default Template */
-    protected $strTemplate = 'mod_assignments';
+    protected $strTemplate = 'mod_list_services';
     
     protected static $service_prices = array();
 
