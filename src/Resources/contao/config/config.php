@@ -54,7 +54,7 @@ $GLOBALS['TL_HOOKS']['compileFormFields'][]      = array('Bcs\Hooks\FormHooks', 
 
 
 /* Front End modules */
-$GLOBALS['FE_MOD']['gai']['mod_assignments']          = 'Bcs\Module\ModAssignments';
+$GLOBALS['FE_MOD']['gai']['mod_list_services']          = 'Bcs\Module\ModListServices';
 
 
 /* Models */
