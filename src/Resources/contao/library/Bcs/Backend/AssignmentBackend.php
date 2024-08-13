@@ -158,27 +158,25 @@ class AssignmentBackend extends Backend
     // Get Schools as select menu
     public function getSchools(DataContainer $dc) { 
 
-        // Hold the psys
-        $schools = array();
+        if($dc->activeRecord->school != null) {
 
-        // Use the DB to grab all of our enabled members, aka our psychologists
-		$this->import('Database');
-		
-		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1")->execute();
-		
-		while($result->next())
-		{
-            
-        	$result2 = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=".$result->id)->execute();
-    		while($result2->next())
+            // Hold the psys
+            $schools = array();
+    
+            // Use the DB to grab all of our enabled members, aka our psychologists
+    		$this->import('Database');
+    		
+    		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=".$dc->activeRecord->district)->execute();
+    		while($result->next())
     		{
                 // Add ti array with ID as the value and firstname lastname as the label
-                $schools[$result->district_name][] = array($result2->id => $result2->school_name);   
+                $schools = $schools + array($result->id => $result->school_name);
+                
+                
     		}
-            
-            
-		}
-		
+    		
+        }
+
 		return $schools;
 	}
 
