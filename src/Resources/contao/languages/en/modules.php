@@ -24,3 +24,4 @@ $GLOBALS['TL_LANG']['MOD']['invoice_request']          = array('Generate Invoice
 
 /* Front End modules */
 $GLOBALS['TL_LANG']['FMD']['mod_list_services']        = array('List Services', 'Lists Service data on the Assignments page');
+$GLOBALS['TL_LANG']['FMD']['mod_list_transactions']    = array('List Transactions', 'Lists a Psychologist\'s Transactions');
