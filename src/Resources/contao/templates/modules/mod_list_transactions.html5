@@ -1,0 +1,9 @@
+<div class="mod_list_transactions size100 marbot60">
+	<h2>Your Transactions</h2>
+	
+	<?php
+		foreach ($this->service_prices as $service => $price) {
+			echo "<span id='".$service."' data-name='".$price['service_name']."' data-price='".$price['price']."' data-service-type='".$price['service_type']."'>".$price['price']."</span><br>";
+		}
+	?>
+</div>
