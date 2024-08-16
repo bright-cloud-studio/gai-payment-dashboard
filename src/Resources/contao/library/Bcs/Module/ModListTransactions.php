@@ -14,12 +14,12 @@ namespace Bcs\Module;
 
 use Bcs\Model\Service;
 use Bcs\Model\PriceTier;
-
+use Bcs\Model\Transaction;
 
 use Contao\BackendTemplate;
 use Contao\System;
-
 use Contao\FrontendUser;
+
 
 class ModListTransactions extends \Contao\Module
 {
@@ -60,29 +60,15 @@ class ModListTransactions extends \Contao\Module
     protected function compile()
     {
         $member = FrontendUser::getInstance();
-
-        /*
-
-        $services = Service::findBy('published', '1');
-        foreach($services as $service) {
-
-            // Create an array of services codes linked to prices then add them to the template so we can grab them with jQuery
-            
-            $prices = PriceTier::findBy('pid', $service->id);
-            foreach($prices as $price) {
-                if(in_array($price->id, $member->price_tier_assignments)) {
-                    $service_prices[$service->service_code]['price'] = $price->tier_price;
-                    $service_prices[$service->service_code]['service_type'] = $service->service_type;
-                    $service_prices[$service->service_code]['service_name'] = $service->name;
-                }
-            }
-            
-            
+        
+        $transactions = Transaction::findBy('pid', $_SESSION['assignment_uuid']);
+        foreach($transactions as $transaction) {
+            $service_prices[$transaction->id]['psychologist'] = $transaction->psychologist;
         }
         
         $this->Template->service_prices = $service_prices;
 
-        */
+        
         
     }
   
