@@ -60,8 +60,11 @@ class ModListTransactions extends \Contao\Module
     protected function compile()
     {
         $member = FrontendUser::getInstance();
+
+        // Get Transactions that have our selected Assignment as the parent and that belong to this Psychologist
+        $transactions = Transaction::findBy('pid', );
+        $pages = PageModel::findBy(['pid = ?', 'psychologist = ?'], [$_SESSION['assignment_uuid'], $member->id]);
         
-        $transactions = Transaction::findBy('pid', $_SESSION['assignment_uuid']);
         foreach($transactions as $transaction) {
             $service_prices[$transaction->id]['psychologist'] = $transaction->psychologist;
         }
