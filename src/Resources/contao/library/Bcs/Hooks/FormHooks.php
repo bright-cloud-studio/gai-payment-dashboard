@@ -66,11 +66,12 @@ class FormHooks
         // Get the Front end user
         $member = FrontendUser::getInstance();
         
-        // If we dont have a Form ID saved in the php session
-        if(!$formData['formID']) {
+        // If we are loading our "Create Transactions" form
+        if(str_contains(Environment::get('request'), "create-transaction")) {
             
-            // If our URL contains 'create-transaction'
-            if(str_contains(Environment::get('request'), "create-transaction")) {
+            // If we don't have an assignment unique id in our session
+            if(!$_SESSION['assignment_uuid']) {
+                
                 // Find the one "root" page
                 $root_page = PageModel::findOneByType('root');
                 // Get the url for our root page
@@ -79,7 +80,9 @@ class FormHooks
                 $redirect_code = 302;
                 // Temporary Redirect (302) the user to the root page
                 Controller::redirect($root_url, ($redirect_code ? $redirect_code : NULL));
+                
             }
+            
         }
         
         ///////////////////////////////
