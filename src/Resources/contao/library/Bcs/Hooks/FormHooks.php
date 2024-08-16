@@ -22,6 +22,10 @@ class FormHooks
     // When a form is submitted
     public function onFormSubmit($submittedData, $formData, $files, $labels, $form)
     {
+        
+        if(!$formData['formID']) {
+            $this->redirect("https://google.com/");
+        }
         // Assignment Selection Form
         if($formData['formID'] == 'assignment_selection') {
             
