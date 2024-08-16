@@ -62,10 +62,6 @@ class FormHooks
     // When a form is loaded
     public function onPrepareForm($fields, $formId, $form)
     {
-        
-        // Get the Front end user
-        $member = FrontendUser::getInstance();
-        
         // If we are loading our "Create Transactions" form
         if(str_contains(Environment::get('request'), "create-transaction")) {
             
@@ -104,6 +100,8 @@ class FormHooks
                             'order' => 'date_created ASC'
                         ];
 
+                        $member = FrontendUser::getInstance();
+                         
                         // Get the Assignments using our specific criteria
                         $assignments = Assignment::findBy('psychologist', $member->id, $opt);
 
@@ -197,6 +195,7 @@ class FormHooks
                     // get all of the price tiers that are assigned to this service
                     $prices = PriceTier::findBy('pid', $assignment->type_of_testing);
                     // loop through those prices, find one that is in our assigned tiers
+                    $member = FrontendUser::getInstance();
                     foreach($prices as $price) {
                         if(in_array($price->id, $member->price_tier_assignments)) {
                             //$field->value = $price->tier_price;
