@@ -12,6 +12,7 @@ use Bcs\Model\Student;
 use Bcs\Model\Transaction;
 
 use Contao\Controller;
+use Contao\Environment;
 use Contao\FrontendUser;
 use Contao\Input;
 use Contao\MemberModel;
@@ -68,13 +69,17 @@ class FormHooks
         // If we dont have a Form ID saved in the php session
         if(!$formData['formID']) {
             
-            // Find the one "root" page
-            $root_page = PageModel::findOneByType('root');
-            // Get the url for our root page
-            $root_url = $root_page->getFrontendUrl();
-            $redirect_code = 302;
-            // Temporary Redirect (302) the user to the root page
-            Controller::redirect($root_url, ($redirect_code ? $redirect_code : NULL));
+            // If our URL contains 'create-transaction'
+            if(str_contains(Environment::get('request'), "create-transaction")) {
+                // Find the one "root" page
+                $root_page = PageModel::findOneByType('root');
+                // Get the url for our root page
+                $root_url = $root_page->getFrontendUrl();
+                // Set code to 302, which means temporary internal redirect
+                $redirect_code = 302;
+                // Temporary Redirect (302) the user to the root page
+                Controller::redirect($root_url, ($redirect_code ? $redirect_code : NULL));
+            }
         }
         
         ///////////////////////////////
