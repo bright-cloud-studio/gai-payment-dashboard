@@ -23,9 +23,6 @@ class FormHooks
     public function onFormSubmit($submittedData, $formData, $files, $labels, $form)
     {
         
-        if(!$formData['formID']) {
-            $this->redirect("https://google.com/");
-        }
         // Assignment Selection Form
         if($formData['formID'] == 'assignment_selection') {
             
@@ -64,6 +61,13 @@ class FormHooks
         
         // Get the Front end user
         $member = FrontendUser::getInstance();
+        
+        // If we don't have a formID then our session has expired. 
+        if(!$formData['formID']) {
+            
+            // Redirect to the homepage
+            header("Location: https://google.com/");
+        }
         
         ///////////////////////////////
         // ASSIGNMENT SELECTION FORM //
