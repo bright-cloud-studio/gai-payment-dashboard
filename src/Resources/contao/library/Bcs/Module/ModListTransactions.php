@@ -65,14 +65,14 @@ class ModListTransactions extends \Contao\Module
         $transactions = Transaction::findBy(['pid = ?', 'psychologist = ?'], [$_SESSION['assignment_uuid'], $member->id]);
         
         foreach($transactions as $transaction) {
-            $service_prices[$transaction->id]['date_submitted'] = $transaction->psychologist;
-            $service_prices[$transaction->id]['service'] = $transaction->psychologist;
-            $service_prices[$transaction->id]['price'] = $transaction->psychologist;
-            $service_prices[$transaction->id]['meeting_date'] = $transaction->psychologist;
-            $service_prices[$transaction->id]['meeting_start'] = $transaction->psychologist;
-            $service_prices[$transaction->id]['meeting_end'] = $transaction->psychologist;
-            $service_prices[$transaction->id]['meeting_duration'] = $transaction->psychologist;
-            $service_prices[$transaction->id]['notes'] = $transaction->psychologist;
+            $service_prices[$transaction->id]['date_submitted'] = $transaction->date_submitted;
+            $service_prices[$transaction->id]['service'] = $transaction->service;
+            $service_prices[$transaction->id]['price'] = $transaction->price;
+            $service_prices[$transaction->id]['meeting_date'] = $transaction->meeting_date;
+            $service_prices[$transaction->id]['meeting_start'] = $transaction->meeting_start;
+            $service_prices[$transaction->id]['meeting_end'] = $transaction->meeting_end;
+            $service_prices[$transaction->id]['meeting_duration'] = $transaction->meeting_duration;
+            $service_prices[$transaction->id]['notes'] = $transaction->notes;
         }
         
         $this->Template->service_prices = $service_prices;
