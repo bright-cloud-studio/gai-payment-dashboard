@@ -3,7 +3,7 @@
 	
 	<?php
 		foreach ($this->service_prices as $service => $price) {
-			echo "<span id='".$service."' data-psychologist='".$price['psychologist']."' data-price='".$price['price']."' data-service-type='".$price['service_type']."'>".$price['price']."</span><br>";
+			echo "<span id='".$service."' data-psychologist='".$price['psychologist']."' data-price='".$price['price']."' data-service-type='".$price['service_type']."'>".$price['servuce']." - ".$price['price']."</span><br>";
 		}
 	?>
 </div>
