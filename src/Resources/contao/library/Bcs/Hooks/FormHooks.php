@@ -11,9 +11,12 @@ use Bcs\Model\School;
 use Bcs\Model\Student;
 use Bcs\Model\Transaction;
 
+use Contao\Controller;
 use Contao\FrontendUser;
 use Contao\Input;
 use Contao\MemberModel;
+use Contao\PageModel;
+
 
 class FormHooks
 {
@@ -62,11 +65,16 @@ class FormHooks
         // Get the Front end user
         $member = FrontendUser::getInstance();
         
-        // If we don't have a formID then our session has expired. 
+        // If we dont have a Form ID saved in the php session
         if(!$formData['formID']) {
             
-            // Redirect to the homepage
-            header("Location: https://google.com/");
+            // Find the one "root" page
+            $root_page = PageModel::findOneByType('root');
+            // Get the url for our root page
+            $root_url = $root_page->getFrontendUrl();
+            $redirect_code = 302;
+            // Temporary Redirect (302) the user to the root page
+            Controller::redirect($root_url, ($redirect_code ? $redirect_code : NULL));
         }
         
         ///////////////////////////////
