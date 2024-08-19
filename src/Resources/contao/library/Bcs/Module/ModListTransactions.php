@@ -59,6 +59,9 @@ class ModListTransactions extends \Contao\Module
 
     protected function compile()
     {
+        $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/bcspaymentdashboard/js/atatables.min.js';
+        $GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/atatables.min.css';
+        
         $member = FrontendUser::getInstance();
 
         // Get Transactions that have our selected Assignment as the parent and that belong to this Psychologist
