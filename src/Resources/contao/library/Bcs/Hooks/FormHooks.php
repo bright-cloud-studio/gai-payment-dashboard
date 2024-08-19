@@ -120,13 +120,15 @@ class FormHooks
                             
                             // date_created - district - school - student
                             $student = Student::findOneBy('id', $assignment->student);
-                            //$label = date('m/d/y',$t) . " - " . $district->district_name . " - " . $school->school_name . " - " . $student->name;
+                            
+                            // Get total number of Transactions this Member has for this Assignment
+                            $transactions_total = Transaction::countBy(['pid = ?', 'psychologist = ?'], [$assignment->id, $member->id]);
                             
                             $label .= "<span id='date'>" . date('m/d/y',$t) . "</span>";
                             $label .= "<span id='district'>" . $district->district_name. "</span>";
                             $label .= "<span id='school'>" . $school->school_name . "</span>";
                             $label .= "<span id='student'>" . $student->name . "</span>";
-                            
+                            $label .= "<span id='transactions'>Transactions: " . $transactions_total . "</span>";
                             
                             // Format the assignment so it can be added to the form
                             $options[] = array (
