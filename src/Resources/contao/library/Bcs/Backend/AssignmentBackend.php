@@ -160,7 +160,7 @@ class AssignmentBackend extends Backend
 
         $schools = array();
         
-        if($dc->activeRecord->school != null) {
+        if($dc->activeRecord != '') {
 
     
             // Use the DB to grab all of our enabled members, aka our psychologists
