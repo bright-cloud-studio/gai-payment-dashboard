@@ -3,31 +3,37 @@
 
 <div class="mod_list_transactions size100 marbot60">
 	<h2>Your Transactions</h2>
-	<table id="list_transactions">
-		<tr>
-			<td>ID</td>
-			<td>Date Submitted</td>
-			<td>Service</td>
-			<td>Price</td>
-			<td>Meeting Date</td>
-			<td>Meeting Duration</td>
-			<td>Notes</td>
-		</tr>
 
-		<?php
-			foreach ($this->transactions as $key => $transaction) {
-				$buffer = "<tr>";
-					$buffer .= "<td>" . $key . "</td>";
-					$buffer .= "<td>" . $transaction['date_submitted'] . "</td>";
-					$buffer .= "<td>" . $transaction['service'] . "</td>";
-					$buffer .= "<td>" . $transaction['price'] . "</td>";
-					$buffer .= "<td>" . $transaction['meeting_date'] . "</td>";
-					$buffer .= "<td>" . $transaction['meeting_duration'] . "</td>";
-					$buffer .= "<td>" . $transaction['notes'] . "</td>";
-				$buffer .= "</tr>";		
-			}
-			echo $buffer;
-		?>
 
+	<table id="list_transactions" class="display">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Date Submitted</th>
+				<th>Service</th>
+				<th>Price</th>
+				<th>Meeting Date</th>
+				<th>Meeting Duration</th>
+				<th>Notes</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+				foreach ($this->transactions as $key => $transaction) {
+					$buffer = "<tr>";
+						$buffer .= "<td>" . $key . "</td>";
+						$buffer .= "<td>" . $transaction['date_submitted'] . "</td>";
+						$buffer .= "<td>" . $transaction['service'] . "</td>";
+						$buffer .= "<td>" . $transaction['price'] . "</td>";
+						$buffer .= "<td>" . $transaction['meeting_date'] . "</td>";
+						$buffer .= "<td>" . $transaction['meeting_duration'] . "</td>";
+						$buffer .= "<td>" . $transaction['notes'] . "</td>";
+					$buffer .= "</tr>";		
+				}
+				echo $buffer;
+			?>
+
+		</tbody>
 	</table>
+
 </div>
