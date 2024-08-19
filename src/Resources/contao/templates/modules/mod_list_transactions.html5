@@ -3,7 +3,7 @@
 
 <div class="mod_list_transactions size100 marbot60">
 	<h2>Your Transactions</h2>
-	<table>
+	<table id="list_transactions">
 		<tr>
 			<td>ID</td>
 			<td>Date Submitted</td>
