@@ -338,7 +338,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'notes' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['notes'],
-            'inputType'               => 'textarea',
+            'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('rte'=>'tinyMCE', 'mandatory'=>false, 'tl_class'=>'clr'),
