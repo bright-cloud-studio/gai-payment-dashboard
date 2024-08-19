@@ -59,8 +59,8 @@ class ModListTransactions extends \Contao\Module
 
     protected function compile()
     {
-        $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/bcspaymentdashboard/js/atatables.min.js';
-        $GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/atatables.min.css';
+        $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/bcspaymentdashboard/js/datatables.min.js';
+        $GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/datatables.min.css';
         
         $member = FrontendUser::getInstance();
 
