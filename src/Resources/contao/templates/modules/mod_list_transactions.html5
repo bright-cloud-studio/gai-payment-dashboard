@@ -9,6 +9,8 @@
 			<td>Meeting Date</td>
 			<td>Meeting Duration</td>
 			<td>Notes</td>
+		</tr>
+
 		<?php
 			foreach ($this->transactions as $key => $transaction) {
 				$buffer = "<tr>";
@@ -19,8 +21,10 @@
 					$buffer .= "<td>" . $transaction['meeting_date'] . "</td>";
 					$buffer .= "<td>" . $transaction['meeting_duration'] . "</td>";
 					$buffer .= "<td>" . $transaction['notes'] . "</td>";
-				$buffer .= "</tr>";			
+				$buffer .= "</tr>";		
 			}
+			echo $buffer;
 		?>
+
 	</table>
 </div>
