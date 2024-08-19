@@ -1,9 +1,26 @@
 <div class="mod_list_transactions size100 marbot60">
 	<h2>Your Transactions</h2>
-	
-	<?php
-		foreach ($this->service_prices as $service => $price) {
-			echo "<span id='".$service."' data-psychologist='".$price['psychologist']."' data-price='".$price['price']."' data-service-type='".$price['service_type']."'>".$price['service']." - ".$price['price']."</span><br>";
-		}
-	?>
+	<table>
+		<tr>
+			<td>ID</td>
+			<td>Date Submitted</td>
+			<td>Service</td>
+			<td>Price</td>
+			<td>Meeting Date</td>
+			<td>Meeting Duration</td>
+			<td>Notes</td>
+		<?php
+			foreach ($this->transactions as $key => $transaction) {
+				$buffer = "<tr>";
+					$buffer .= "<td>" . $key . "</td>";
+					$buffer .= "<td>" . $transaction['date_submitted'] . "</td>";
+					$buffer .= "<td>" . $transaction['service'] . "</td>";
+					$buffer .= "<td>" . $transaction['price'] . "</td>";
+					$buffer .= "<td>" . $transaction['meeting_date'] . "</td>";
+					$buffer .= "<td>" . $transaction['meeting_duration'] . "</td>";
+					$buffer .= "<td>" . $transaction['notes'] . "</td>";
+				$buffer .= "</tr>";			
+			}
+		?>
+	</table>
 </div>
