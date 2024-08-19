@@ -1,3 +1,6 @@
+
+<!-- Include DataTables for better formatting -->
+
 <div class="mod_list_transactions size100 marbot60">
 	<h2>Your Transactions</h2>
 	<table>
