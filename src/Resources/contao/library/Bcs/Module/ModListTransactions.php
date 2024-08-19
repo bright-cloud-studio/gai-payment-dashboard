@@ -79,8 +79,6 @@ class ModListTransactions extends \Contao\Module
         }
         
         $this->Template->transactions = $template_transactions;
-
-        
         
     }
   
