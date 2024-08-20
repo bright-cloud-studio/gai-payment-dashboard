@@ -5,7 +5,7 @@
 	<h2>Your Psych Work Form</h2>
 
 
-	<table id="list_transactions" class="display compact" style="width:100%">
+	<table id="psych_work_form" class="display compact" style="width:100%">
 		<thead>
 			<tr>
 				<th></th>
