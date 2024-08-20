@@ -168,7 +168,6 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date("m/d/y g:i A"),
         ),
-        /*
         'date_30_day' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_30_day'],
@@ -347,8 +346,6 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-
-        */
         
         'published' => array
         (
