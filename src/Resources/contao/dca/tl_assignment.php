@@ -20,7 +20,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     // Config
     'config' => array
     (
-        'dataContainer'               => 1,
+        'dataContainer'               => DC_Table::class,
         'ctable'                      => array('tl_transaction'),
         'switchToEdit'                => false,
         'enableVersioning'            => true,
@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTED,
+            'mode'                    => 1,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
