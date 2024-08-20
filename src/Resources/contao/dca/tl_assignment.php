@@ -166,7 +166,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y g:i A"),
+            'default'                 => date("m/d/y"),
         ),
         'date_30_day' => array
         (
