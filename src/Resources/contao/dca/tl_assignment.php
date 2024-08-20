@@ -45,12 +45,12 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'sorting' => array
         (
             'mode'                    => 1,
-            'rootPaste'               => false,
-            'showRootTrails'          => false,
+            //'rootPaste'               => false,
+            //'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'fields'                  => array('date_created DESC'),
-            'panelLayout'             => 'sort,filter;search,limit'
+            //'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
@@ -113,7 +113,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{assignment_legend}, date_created;'
+        //'default'                     => '{assignment_legend}, date_created;'
         //'default'                     => '{assignment_legend}, date_created, date_30_day, date_45_day, psychologist, district, school, student, initial_reeval, type_of_testing, testing_date, meeting_required, meeting_date, contact_info_parent, contact_info_teacher, team_chair, email, report_submitted, notes;{publish_legend},published;'
     ),
  
@@ -156,6 +156,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 
 
         // Transaction Fields
+        /*
         'date_created' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_created'],
@@ -195,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
+            //'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'district' => array
@@ -206,7 +207,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getDistricts'),
+            //'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getDistricts'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'school' => array
@@ -217,7 +218,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getSchools'),
+            //'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getSchools'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'student' => array
@@ -228,7 +229,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getStudents'),
+            //'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getStudents'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
 
@@ -346,7 +347,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
 
-
+        */
         
         'published' => array
         (
