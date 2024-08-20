@@ -358,7 +358,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     )
 );
 
-/*
+
 $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
 {
@@ -366,15 +366,15 @@ if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isB
     //$GLOBALS['TL_JAVASCRIPT'][''] = 'https://code.jquery.com/jquery-3.7.1.min.js';
 
     // Use jQuery from Contao's Assets, add to backend page
-    $jquery_src = \Contao\Controller::addAssetsUrlTo('assets/jquery/js/jquery.min.js');
-    array_unshift($GLOBALS['TL_JAVASCRIPT'], $jquery_src);
+    //$jquery_src = \Contao\Controller::addAssetsUrlTo('assets/jquery/js/jquery.min.js');
+    //array_unshift($GLOBALS['TL_JAVASCRIPT'], $jquery_src);
 
     
     $GLOBALS['TL_JAVASCRIPT'][] = '/bundles/bcspaymentdashboard/js/select2.min.js';
     $GLOBALS['TL_JAVASCRIPT'][] = '/bundles/bcspaymentdashboard/js/backend.js';
     $GLOBALS['TL_CSS'][]        = '/bundles/bcspaymentdashboard/css/select2.min.css';
 }
-*/
+
 
 
 
