@@ -190,10 +190,10 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         'service' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['service'],
-            'inputType'               => 'text',
-            'default'                 => '',
+            'inputType'               => 'select',
             'filter'                  => true,
             'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
             'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'getServices'),
             'sql'                     => "varchar(255) NOT NULL default ''"
