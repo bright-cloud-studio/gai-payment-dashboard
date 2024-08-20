@@ -26,7 +26,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'enableVersioning'            => true,
         'onload_callback' => array
 		(
-			//array('tl_assignment', 'setRootType')
+			array('tl_assignment', 'setRootType')
 		),
         'sql' => array
         (
@@ -45,18 +45,18 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'sorting' => array
         (
             'mode'                    => 1,
-            //'rootPaste'               => false,
-            //'showRootTrails'          => false,
+            'rootPaste'               => false,
+            'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'fields'                  => array('date_created DESC'),
-            //'panelLayout'             => 'sort,filter;search,limit'
+            'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
             'fields'                  => array('date_created', 'district', 'school', 'psychologist'),
 			'format'                  => '%s %s %s %s',
-			//'label_callback'          => array('tl_assignment', 'addIcon')
+			'label_callback'          => array('tl_assignment', 'addIcon')
         ),
         'global_operations' => array
         (
@@ -359,6 +359,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 );
 
 
+/*
 $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
 {
@@ -366,14 +367,15 @@ if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isB
     //$GLOBALS['TL_JAVASCRIPT'][''] = 'https://code.jquery.com/jquery-3.7.1.min.js';
 
     // Use jQuery from Contao's Assets, add to backend page
-    $jquery_src = \Contao\Controller::addAssetsUrlTo('assets/jquery/js/jquery.min.js');
-    array_unshift($GLOBALS['TL_JAVASCRIPT'], $jquery_src);
+    //$jquery_src = \Contao\Controller::addAssetsUrlTo('assets/jquery/js/jquery.min.js');
+    //array_unshift($GLOBALS['TL_JAVASCRIPT'], $jquery_src);
 
     
     //$GLOBALS['TL_JAVASCRIPT'][] = '/bundles/bcspaymentdashboard/js/select2.min.js';
     //$GLOBALS['TL_JAVASCRIPT'][] = '/bundles/bcspaymentdashboard/js/backend.js';
     //$GLOBALS['TL_CSS'][]        = '/bundles/bcspaymentdashboard/css/select2.min.css';
 }
+*/
 
 
 
