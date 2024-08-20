@@ -42,4 +42,6 @@ $GLOBALS['TL_LANG']['tl_assignment']['contact_info_teacher']      = array('Conta
 $GLOBALS['TL_LANG']['tl_assignment']['team_chair']                = array('Team Chair', 'Enter the Team Chair for this Assignment');
 $GLOBALS['TL_LANG']['tl_assignment']['email']                     = array('Email', 'UNNEEDED?');
 $GLOBALS['TL_LANG']['tl_assignment']['report_submitted']          = array('Report Submitted', 'Select if a Report as been submitted or not for this Assignment');
+
+$GLOBALS['TL_LANG']['tl_assignment']['notes_legend']              = 'Notes';
 $GLOBALS['TL_LANG']['tl_assignment']['notes']                     = array('Notes', 'Enter any Notes you would like linked to this Assignment');
