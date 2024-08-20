@@ -205,16 +205,21 @@ class AssignmentBackend extends Backend
         // Hold the psys
         $students = array();
 
-        // Use the DB to grab all of our enabled members, aka our psychologists
-		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_student WHERE published=1")->execute();
-		while($result->next())
-		{
-            // Add ti array with ID as the value and firstname lastname as the label
-            $students = $students + array($result->id => $result->name);   
-		}
-
-		return $students;
+        if($dc->activeRecord != '') {
+            
+            // Use the DB to grab all of our enabled members, aka our psychologists
+    		$this->import('Database');
+    		$result = $this->Database->prepare("SELECT * FROM tl_student WHERE district=".$dc->activeRecord->district)->execute();
+    		while($result->next())
+    		{
+                // Add ti array with ID as the value and firstname lastname as the label
+                $students = $students + array($result->id => $result->name);   
+    		}
+    
+    		return $students;
+        }
+        $students = $students + array('0' => 'First, Select a District');
+        return $students;
 	}
     
 
