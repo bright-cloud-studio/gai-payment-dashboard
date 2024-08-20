@@ -20,13 +20,13 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     // Config
     'config' => array
     (
-        'dataContainer'               => DC_Table::class,
+        'dataContainer'               => 1,
         'ctable'                      => array('tl_transaction'),
         'switchToEdit'                => false,
         'enableVersioning'            => true,
         'onload_callback' => array
 		(
-			array('tl_assignment', 'setRootType')
+			//array('tl_assignment', 'setRootType')
 		),
         'sql' => array
         (
