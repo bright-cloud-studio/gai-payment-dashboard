@@ -44,7 +44,9 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE_EXTENDED,
+            'mode'                    => DataContainer::MODE_PARENT,
+            'headerFields'            => array('district', 'school', 'student', 'initial_reeval'),
+            
             'rootPaste'               => false,
 			
             'icon'                    => 'pagemounts.svg',
