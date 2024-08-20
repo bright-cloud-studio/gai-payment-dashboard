@@ -196,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            //'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'district' => array
@@ -207,7 +207,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            //'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getDistricts'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getDistricts'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'school' => array
@@ -218,7 +218,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            //'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getSchools'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getSchools'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'student' => array
@@ -229,7 +229,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            //'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getStudents'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getStudents'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
 
