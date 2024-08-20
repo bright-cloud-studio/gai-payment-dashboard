@@ -19,7 +19,6 @@ $GLOBALS['TL_LANG']['tl_transaction']['delete']                     = array('Del
 $GLOBALS['TL_LANG']['tl_transaction']['toggle']                     = array('Toggle Transaction', 'Toggle record ID %s');
 
 /* System Fields */
-$GLOBALS['TL_LANG']['tl_transaction']['publish_legend']             = 'Reviewed Information';
 $GLOBALS['TL_LANG']['tl_transaction']['alias']                      = array('Alias', 'Auto-generated alias.');
 $GLOBALS['TL_LANG']['tl_transaction']['published']                  = array('Reviewed', 'Indicates if this Transaction has been Reviewed by the submitting Psychologist');
 
@@ -34,5 +33,9 @@ $GLOBALS['TL_LANG']['tl_transaction']['meeting_date']               = array('Mee
 $GLOBALS['TL_LANG']['tl_transaction']['meeting_start']              = array('Meeting Start', 'asdf');
 $GLOBALS['TL_LANG']['tl_transaction']['meeting_end']                = array('Meeting End', 'asdf');
 $GLOBALS['TL_LANG']['tl_transaction']['meeting_duration']           = array('Meeting Duration', 'asdf');
+
+$GLOBALS['TL_LANG']['tl_assignment']['notes_legend']              = 'Notes';
 $GLOBALS['TL_LANG']['tl_transaction']['notes']                      = array('Notes', 'asdf');
+
+$GLOBALS['TL_LANG']['tl_transaction']['publish_legend']             = 'Reviewed Information';
 $GLOBALS['TL_LANG']['tl_transaction']['reviewed']                   = array('Reviewed', 'asdf');
