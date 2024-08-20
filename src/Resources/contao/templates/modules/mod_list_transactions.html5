@@ -5,32 +5,29 @@
 	<h2>Your Transactions</h2>
 
 
-	<table id="list_transactions" class="display">
+	<table id="list_transactions" class="display compact" style="width:100%">
 		<thead>
 			<tr>
-				<th>ID</th>
+				<th></th>
 				<th>Date Submitted</th>
 				<th>Service</th>
 				<th>Price</th>
-				<th>Meeting Date</th>
-				<th>Meeting Duration</th>
-				<th>Notes</th>
 			</tr>
 		</thead>
 		<tbody>
+			
 			<?php
-				foreach ($this->transactions as $key => $transaction) {
-					$buffer = "<tr>";
-						$buffer .= "<td>" . $key . "</td>";
+				foreach ($this->transactions as$transaction) {
+						$buffer = '';
+						$buffer .= "<tr>";
+						$buffer .= "<td></td>";
 						$buffer .= "<td>" . $transaction['date_submitted'] . "</td>";
 						$buffer .= "<td>" . $transaction['service'] . "</td>";
 						$buffer .= "<td>" . $transaction['price'] . "</td>";
-						$buffer .= "<td>" . $transaction['meeting_date'] . "</td>";
-						$buffer .= "<td>" . $transaction['meeting_duration'] . "</td>";
-						$buffer .= "<td>" . $transaction['notes'] . "</td>";
-					$buffer .= "</tr>";		
+						$buffer .= "</tr>";
+						echo $buffer;
 				}
-				echo $buffer;
+				
 			?>
 
 		</tbody>
