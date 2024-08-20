@@ -363,7 +363,7 @@ $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
 {
     
-    $GLOBALS['TL_JAVASCRIPT'][''] = 'https://code.jquery.com/jquery-3.7.1.min.js';
+    //$GLOBALS['TL_JAVASCRIPT'][''] = 'https://code.jquery.com/jquery-3.7.1.min.js';
 
     // Use jQuery from Contao's Assets, add to backend page
     //$jquery_src = \Contao\Controller::addAssetsUrlTo('assets/jquery/js/jquery.min.js');
