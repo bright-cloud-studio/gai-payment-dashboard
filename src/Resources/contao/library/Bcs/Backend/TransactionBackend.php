@@ -121,7 +121,6 @@ class TransactionBackend extends Backend
 
 
 
-
     // Get Psychologists as select menu
     public function getPsychologists(DataContainer $dc) { 
 
@@ -139,42 +138,7 @@ class TransactionBackend extends Backend
 
 		return $psychologists;
 	}
-
-    // Get Districts as select menu
-    public function getDistricts(DataContainer $dc) { 
-
-        // Hold the psys
-        $districts = array();
-
-        // Use the DB to grab all of our enabled members, aka our psychologists
-		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1")->execute();
-		while($result->next())
-		{
-            // Add ti array with ID as the value and firstname lastname as the label
-            $districts = $districts + array($result->id => $result->district_name);   
-		}
-
-		return $districts;
-	}
-
-    // Get Schools as select menu
-    public function getSchools(DataContainer $dc) { 
-
-        // Hold the psys
-        $schools = array();
-
-        // Use the DB to grab all of our enabled members, aka our psychologists
-		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE published=1")->execute();
-		while($result->next())
-		{
-            // Add ti array with ID as the value and firstname lastname as the label
-            $schools = $schools + array($result->id => $result->school_name);   
-		}
-
-		return $schools;
-	}
+    
 
     // Get Services as select menu
     public function getServices(DataContainer $dc) { 
