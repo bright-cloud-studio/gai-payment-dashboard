@@ -217,7 +217,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getSchools'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
@@ -228,7 +228,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getStudents'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
@@ -243,7 +243,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'default'                 => '',
             'options'                  => array('initial' => 'Initial', 're_eval' => 'Re-eval'),
-    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
     		'sql'                      => "varchar(10) NOT NULL default ''"
         ),
         'type_of_testing' => array
@@ -253,7 +253,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getServices'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
@@ -276,7 +276,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'default'                 => '',
             'options'                  => array('yes' => 'Yes', 'no' => 'No'),
-    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
     		'sql'                      => "varchar(10) NOT NULL default ''"
         ),
         'meeting_date' => array
@@ -334,7 +334,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'default'                 => '',
             'options'                  => array('yes' => 'Yes', 'no' => 'No'),
-    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
     		'sql'                      => "varchar(5) NOT NULL default ''"
         ),
         'notes' => array
