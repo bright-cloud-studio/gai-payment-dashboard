@@ -8,25 +8,24 @@
 	<table id="psych_work_form" class="display compact" style="width:100%">
 		<thead>
 			<tr>
-				<th></th>
-				<th>Date Submitted</th>
-				<th>Service</th>
-				<th>Price</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
-				<th>Date Submitted</th>
+				<th>Date Created</th>
+				<th>Date 30 Day</th>
+				<th>Date 45 Day</th>
+				<th>Psychologist</th>
+				<th>District</th>
+				<th>School</th>
+				<th>Student Name</th>
+				<th>Initial / Re-Eval</th>
+				<th>Type of Testing</th>
+				<th>Testing Date</th>
+				<th>Meeting Required</th>
+				<th>Meeting Date</th>
+				<th>Contact Info - Parent</th>
+				<th>Contact Info - Teacher</th>
+				<th>Team Chair</th>
+				<th>Email</th>
+				<th>Report Submitted</th>
+				<th>Notes</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,7 +34,6 @@
 				foreach ($this->assignments as $assignment) {
 					$buffer = '';
 					$buffer .= "<tr>";
-					$buffer .= "<td></td>";
 					$buffer .= "<td>" . $assignment['date_created'] . "</td>";
 					$buffer .= "<td>" . $assignment['date_30_day'] . "</td>";
 					$buffer .= "<td>" . $assignment['date_45_day'] . "</td>";
