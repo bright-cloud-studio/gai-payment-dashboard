@@ -61,7 +61,10 @@ class ModPsychWorkForm extends \Contao\Module
 
     protected function compile()
     {
+
+        // Include Datatables JS library and CSS stylesheets
         $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/bcspaymentdashboard/js/datatables.min.js';
+        
         $GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/datatables.min.css';
         
         $member = FrontendUser::getInstance();
