@@ -64,27 +64,38 @@ class ModPsychWorkForm extends \Contao\Module
 
         // Include Datatables JS library and CSS stylesheets
         $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/bcspaymentdashboard/js/datatables.min.js';
-        
         $GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/datatables.min.css';
         
         $member = FrontendUser::getInstance();
 
         // Update this to list Assignment infomation instead of Transactions
         // Get Transactions that have our selected Assignment as the parent and that belong to this Psychologist
-        $transactions = Transaction::findBy(['psychologist = ?'], [$member->id]);
+        //$transactions = Transaction::findBy(['psychologist = ?'], [$member->id]);
+
+        $assignments = Assignment::findBy(['psychologist = ?'], [$member->id]);
         
-        foreach($transactions as $transaction) {
-            $template_transactions[$transaction->id]['date_submitted'] = $transaction->date_submitted;
-            $template_transactions[$transaction->id]['service'] = $transaction->service;
-            $template_transactions[$transaction->id]['price'] = $transaction->price;
-            $template_transactions[$transaction->id]['meeting_date'] = $transaction->meeting_date;
-            $template_transactions[$transaction->id]['meeting_start'] = $transaction->meeting_start;
-            $template_transactions[$transaction->id]['meeting_end'] = $transaction->meeting_end;
-            $template_transactions[$transaction->id]['meeting_duration'] = $transaction->meeting_duration;
-            $template_transactions[$transaction->id]['notes'] = $transaction->notes;
+        foreach($assignments as $assignment) {
+            $template_assignments[$assignment->id]['date_created'] = $transaction->date_created;
+            $template_assignments[$assignment->id]['date_30_day'] = $transaction->date_30_day;
+            $template_assignments[$assignment->id]['date_45_day'] = $transaction->date_45_day;
+            $template_assignments[$assignment->id]['psychologist'] = $transaction->psychologist;
+            $template_assignments[$assignment->id]['district'] = $transaction->district;
+            $template_assignments[$assignment->id]['school'] = $transaction->school;
+            $template_assignments[$assignment->id]['student'] = $transaction->student;
+            $template_assignments[$assignment->id]['initial_reeval'] = $transaction->initial_reeval;
+            $template_assignments[$assignment->id]['type_of_testing'] = $transaction->type_of_testing;
+            $template_assignments[$assignment->id]['testing_date'] = $transaction->testing_date;
+            $template_assignments[$assignment->id]['meeting_required'] = $transaction->meeting_required;
+            $template_assignments[$assignment->id]['meeting_date'] = $transaction->meeting_date;
+            $template_assignments[$assignment->id]['contact_info_parent'] = $transaction->contact_info_parent;
+            $template_assignments[$assignment->id]['contact_info_teacher'] = $transaction->contact_info_teacher;
+            $template_assignments[$assignment->id]['team_chair'] = $transaction->team_chair;
+            $template_assignments[$assignment->id]['email'] = $transaction->email;
+            $template_assignments[$assignment->id]['report_submitted'] = $transaction->report_submitted;
+            $template_assignments[$assignment->id]['notes'] = $transaction->notes;
         }
         
-        $this->Template->transactions = $template_transactions;
+        $this->Template->assignments = $template_assignments;
         
     }
   
