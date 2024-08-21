@@ -15,6 +15,7 @@ namespace Bcs\Module;
 use Bcs\Model\Service;
 use Bcs\Model\PriceTier;
 use Bcs\Model\Transaction;
+use Bcs\Model\Assignment;
 
 use Contao\BackendTemplate;
 use Contao\System;
@@ -28,6 +29,7 @@ class ModPsychWorkForm extends \Contao\Module
     protected $strTemplate = 'mod_psych_work_form';
     
     protected static $template_transactions = array();
+    protected static $template_assignments = array();
 
     /* Construct function */
     public function __construct($objModule, $strColumn='main')
