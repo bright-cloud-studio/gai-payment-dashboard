@@ -17,6 +17,7 @@ use Bcs\Model\District;
 use Bcs\Model\PriceTier;
 use Bcs\Model\School;
 use Bcs\Model\Service;
+use Bcs\Model\Student;
 use Bcs\Model\Transaction;
 
 use Contao\BackendTemplate;
@@ -92,8 +93,9 @@ class ModPsychWorkForm extends \Contao\Module
             
             $school = School::findOneBy('id', $assignment->school);
             $template_assignments[$assignment->id]['school'] = $school->school_name;
-            
-            $template_assignments[$assignment->id]['student'] = $assignment->student;
+
+            $student = Student::findOneBy('id', $assignment->student );
+            $template_assignments[$assignment->id]['student'] = $student->name;
             $template_assignments[$assignment->id]['type_of_testing'] = $assignment->type_of_testing;
 
 
