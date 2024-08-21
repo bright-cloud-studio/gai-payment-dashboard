@@ -96,7 +96,9 @@ class ModPsychWorkForm extends \Contao\Module
 
             $student = Student::findOneBy('id', $assignment->student );
             $template_assignments[$assignment->id]['student'] = $student->name;
-            $template_assignments[$assignment->id]['type_of_testing'] = $assignment->type_of_testing;
+
+            $service = Service::findOneBy('service_code', $assignment->type_of_testing);
+            $template_assignments[$assignment->id]['type_of_testing'] = $service->name;
 
 
             
