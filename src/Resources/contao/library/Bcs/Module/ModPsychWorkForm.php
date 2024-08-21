@@ -64,6 +64,7 @@ class ModPsychWorkForm extends \Contao\Module
         
         $member = FrontendUser::getInstance();
 
+        // Update this to list Assignment infomation instead of Transactions
         // Get Transactions that have our selected Assignment as the parent and that belong to this Psychologist
         $transactions = Transaction::findBy(['psychologist = ?'], [$member->id]);
         
