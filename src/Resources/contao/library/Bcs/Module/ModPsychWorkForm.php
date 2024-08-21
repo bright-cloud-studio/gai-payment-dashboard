@@ -15,6 +15,7 @@ namespace Bcs\Module;
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
 use Bcs\Model\PriceTier;
+use Bcs\Model\School;
 use Bcs\Model\Service;
 use Bcs\Model\Transaction;
 
@@ -88,9 +89,10 @@ class ModPsychWorkForm extends \Contao\Module
             // Convert IDs to labels
             $district = District::findOneBy('id', $assignment->district);
             $template_assignments[$assignment->id]['district'] = $district->district_name;
-
             
-            $template_assignments[$assignment->id]['school'] = $assignment->school;
+            $school = School::findOneBy('id', $assignment->school);
+            $template_assignments[$assignment->id]['school'] = $school->school_name;
+            
             $template_assignments[$assignment->id]['student'] = $assignment->student;
             $template_assignments[$assignment->id]['type_of_testing'] = $assignment->type_of_testing;
 
