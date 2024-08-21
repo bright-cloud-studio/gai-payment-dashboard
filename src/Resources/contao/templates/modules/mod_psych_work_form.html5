@@ -17,15 +17,30 @@
 		<tbody>
 			
 			<?php
-				foreach ($this->transactions as$transaction) {
-						$buffer = '';
-						$buffer .= "<tr>";
-						$buffer .= "<td></td>";
-						$buffer .= "<td>" . $transaction['date_submitted'] . "</td>";
-						$buffer .= "<td>" . $transaction['service'] . "</td>";
-						$buffer .= "<td>" . $transaction['price'] . "</td>";
-						$buffer .= "</tr>";
-						echo $buffer;
+				foreach ($this->assignments as $assignment) {
+					$buffer = '';
+					$buffer .= "<tr>";
+					$buffer .= "<td></td>";
+					$buffer .= "<td>" . $transaction['date_created'] . "</td>";
+					$buffer .= "<td>" . $transaction['date_30_day'] . "</td>";
+					$buffer .= "<td>" . $transaction['date_45_day'] . "</td>";
+					$buffer .= "<td>" . $transaction['psychologist'] . "</td>";
+					$buffer .= "<td>" . $transaction['district'] . "</td>";
+					$buffer .= "<td>" . $transaction['school'] . "</td>";
+					$buffer .= "<td>" . $transaction['student'] . "</td>";
+					$buffer .= "<td>" . $transaction['initial_reeval'] . "</td>";
+					$buffer .= "<td>" . $transaction['type_of_testing'] . "</td>";
+					$buffer .= "<td>" . $transaction['testing_date'] . "</td>";
+					$buffer .= "<td>" . $transaction['meeting_required'] . "</td>";
+					$buffer .= "<td>" . $transaction['meeting_date'] . "</td>";
+					$buffer .= "<td>" . $transaction['contact_info_parent'] . "</td>";
+					$buffer .= "<td>" . $transaction['contact_info_teacher'] . "</td>";
+					$buffer .= "<td>" . $transaction['team_chair'] . "</td>";
+					$buffer .= "<td>" . $transaction['email'] . "</td>";
+					$buffer .= "<td>" . $transaction['report_submitted'] . "</td>";
+					$buffer .= "<td>" . $transaction['notes'] . "</td>";
+					$buffer .= "</tr>";
+					echo $buffer;
 				}
 				
 			?>
