@@ -12,10 +12,11 @@
 
 namespace Bcs\Module;
 
-use Bcs\Model\Service;
-use Bcs\Model\PriceTier;
-use Bcs\Model\Transaction;
 use Bcs\Model\Assignment;
+use Bcs\Model\District;
+use Bcs\Model\PriceTier;
+use Bcs\Model\Service;
+use Bcs\Model\Transaction;
 
 use Contao\BackendTemplate;
 use Contao\System;
@@ -78,12 +79,24 @@ class ModPsychWorkForm extends \Contao\Module
             $template_assignments[$assignment->id]['date_created'] = $assignment->date_created;
             $template_assignments[$assignment->id]['date_30_day'] = $assignment->date_30_day;
             $template_assignments[$assignment->id]['date_45_day'] = $assignment->date_45_day;
+
+            
+            // Not sure we need this Column anymore
             $template_assignments[$assignment->id]['psychologist'] = $assignment->psychologist;
-            $template_assignments[$assignment->id]['district'] = $assignment->district;
+
+            
+            // Convert IDs to labels
+            $district = District::findOneBy('id', $assignment->district);
+            $template_assignments[$assignment->id]['district'] = $district->district_name;
+
+            
             $template_assignments[$assignment->id]['school'] = $assignment->school;
             $template_assignments[$assignment->id]['student'] = $assignment->student;
-            $template_assignments[$assignment->id]['initial_reeval'] = $assignment->initial_reeval;
             $template_assignments[$assignment->id]['type_of_testing'] = $assignment->type_of_testing;
+
+
+            
+            $template_assignments[$assignment->id]['initial_reeval'] = $assignment->initial_reeval;
             $template_assignments[$assignment->id]['testing_date'] = $assignment->testing_date;
             $template_assignments[$assignment->id]['meeting_required'] = $assignment->meeting_required;
             $template_assignments[$assignment->id]['meeting_date'] = $assignment->meeting_date;
