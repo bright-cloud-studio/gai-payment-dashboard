@@ -12,9 +12,10 @@
 
 namespace Bcs\Module;
 
-use Bcs\Model\Service;
-use Bcs\Model\PriceTier;
-use Bcs\Model\Transaction;
+use Bcs\Model\District;
+use Bcs\Model\School;
+use Bcs\Model\Student;
+use Bcs\Model\Assignment;
 
 use Contao\BackendTemplate;
 use Contao\System;
@@ -27,7 +28,9 @@ class ModListAssignmentsFilter extends \Contao\Module
     /* Default Template */
     protected $strTemplate = 'mod_list_assignments_filter';
     
-    protected static $template_transactions = array();
+    protected static $filter_districts = array();
+    protected static $filter_schools = array();
+    protected static $filter_students = array();
 
     /* Construct function */
     public function __construct($objModule, $strColumn='main')
@@ -64,21 +67,32 @@ class ModListAssignmentsFilter extends \Contao\Module
         
         $member = FrontendUser::getInstance();
 
+        // get all of the Assignments for this Member
+        $opt = [
+            'order' => 'date_created ASC'
+        ];
+                        
         // Get Transactions that have our selected Assignment as the parent and that belong to this Psychologist
-        $transactions = Transaction::findBy(['pid = ?', 'psychologist = ?'], [$_SESSION['assignment_uuid'], $member->id]);
+        $assignments = Assignment::findBy('psychologist', $member->id, $opt);
         
-        foreach($transactions as $transaction) {
-            $template_transactions[$transaction->id]['date_submitted'] = $transaction->date_submitted;
-            $template_transactions[$transaction->id]['service'] = $transaction->service;
-            $template_transactions[$transaction->id]['price'] = $transaction->price;
-            $template_transactions[$transaction->id]['meeting_date'] = $transaction->meeting_date;
-            $template_transactions[$transaction->id]['meeting_start'] = $transaction->meeting_start;
-            $template_transactions[$transaction->id]['meeting_end'] = $transaction->meeting_end;
-            $template_transactions[$transaction->id]['meeting_duration'] = $transaction->meeting_duration;
-            $template_transactions[$transaction->id]['notes'] = $transaction->notes;
+        foreach($assignments as $assignment) {
+            
+            // Get the District name
+            $district = District::findOneBy('id', $assignment->district);
+            $filter_districts[] = $district->district_name;
+            
+            // Get the School name
+            $school = School::findOneBy('id', $assignment->school);
+            $filter_schools[] = $school->school_name;
+            
+            // Get the Student name
+            $student = Student::findOneBy('id', $assignment->student);
+            $filter_students[] = $student->name;
         }
         
-        $this->Template->transactions = $template_transactions;
+        $this->Template->filter_districts = $filter_districts;
+        $this->Template->filter_schools = $filter_schools;
+        $this->Template->filter_students = $filter_students;
         
     }
   
