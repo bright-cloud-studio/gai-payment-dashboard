@@ -25,7 +25,7 @@ class ModListTransactionFilter extends \Contao\Module
 {
 
     /* Default Template */
-    protected $strTemplate = 'modlist_transaction_filter';
+    protected $strTemplate = 'mod_list_transaction_filter';
     
     protected static $template_transactions = array();
 
