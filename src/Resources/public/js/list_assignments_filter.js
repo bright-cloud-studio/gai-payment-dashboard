@@ -12,8 +12,10 @@ $(document).ready(function() {
     filterWorkAssignments();
   });
   
-  
-  // Filter
+});
+
+
+ // Filter
   function filterWorkAssignments() {
   
   // get select values
@@ -61,5 +63,3 @@ $(document).ready(function() {
     $('#filter_student').val(0);
     filterWorkAssignments();
   }
-
-});
