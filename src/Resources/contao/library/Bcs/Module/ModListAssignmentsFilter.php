@@ -21,11 +21,11 @@ use Contao\System;
 use Contao\FrontendUser;
 
 
-class ModListTransactionFilter extends \Contao\Module
+class ModListAssignmentsFilter extends \Contao\Module
 {
 
     /* Default Template */
-    protected $strTemplate = 'mod_list_transaction_filter';
+    protected $strTemplate = 'mod_list_assignments_filter';
     
     protected static $template_transactions = array();
 
