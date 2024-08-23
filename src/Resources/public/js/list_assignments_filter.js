@@ -22,7 +22,7 @@ $(document).ready(function() {
   var student = $('#filter_student').val();
   
   // loop through listed elements
-  $( ".work_assignment_list a" ).each(function( index ) {
+  $( ".list_assignment_wrapper" ).each(function( index ) {
   
     // HOW FILTERING WORKS BY LOGIC
     // 1. Start off with the assumption you will show the entry
