@@ -1,0 +1,63 @@
+<!-- FILTERS -->
+<div class="mod_list_assignments_filter marbot60">
+	
+	<form class="flex_wrapper" id="form_<?= $unique_id ?>">
+
+		<fieldset class="size100">
+			
+			<h4 class="size100 marbot15">Filter Work Assignments</h4>
+			
+			<!-- Filter by District -->
+			<div class="widget widget-select size33 marbot15">
+				<label for="filter_district" class="size33">
+					District
+				</label>
+				<select name="filter_district" id="filter_district">
+					<option value="0"></option>
+					<?php
+						foreach($this->workAssignmentFilterDistricts as $district) {
+							echo '<option value="' . $district . '">' . $district . '</option>';
+						}
+					?>
+				</select>
+			</div>
+			
+			<!-- Filter by School -->
+			<div class="widget widget-select size33 marbot15">
+				<label for="filter_school" class="size33">
+					School
+				</label>
+				<select name="filter_school" id="filter_school">
+					<option value="0"></option>
+					<?php
+						foreach($this->workAssignmentFilterSchools as $school) {
+							echo '<option value="' . $school . '">' . $school . '</option>';
+						}
+					?>
+				</select>
+			</div>
+			
+			<!-- Filter by Student -->
+			<div class="widget widget-select size33 marbot15">
+				<label for="filter_student" class="size33">
+					Student
+				</label>
+				<select name="filter_student" id="filter_student">
+					<option value="0"></option>
+					<?php
+						foreach($this->workAssignmentFilterStudents as $student) {
+							echo '<option value="' . $student . '">' . $student . '</option>';
+						}
+					?>
+				</select>
+			</div>
+			
+			<div class="widget widget-submit size100">
+				<a id="reset_filter" class="btn reset_filter" onClick="resetFilter();">Reset Filter</a>
+			</div>
+			
+		</fieldset>
+		
+	</form>
+	
+</div>
