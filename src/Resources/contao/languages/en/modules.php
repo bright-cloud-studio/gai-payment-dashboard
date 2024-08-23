@@ -23,6 +23,7 @@ $GLOBALS['TL_LANG']['MOD']['invoice_request']          = array('Generate Invoice
 
 
 /* Front End modules */
-$GLOBALS['TL_LANG']['FMD']['mod_list_services']              = array('List Services', 'Lists Service data on the Assignments page');
-$GLOBALS['TL_LANG']['FMD']['mod_list_transactions']          = array('List Transactions', 'Lists a Psychologist\'s Transactions');
-$GLOBALS['TL_LANG']['FMD']['mod_list_transaction_filter']    = array('List Transaction Filter', 'Contains filters for the Assignments page');
+$GLOBALS['TL_LANG']['FMD']['mod_list_services']           = array('List Services', 'Lists Service data on the Assignments page');
+$GLOBALS['TL_LANG']['FMD']['mod_list_transactions']       = array('List Transactions', 'Lists a Psychologist\'s Transactions');
+$GLOBALS['TL_LANG']['FMD']['mod_list_transaction_filter'] = array('List Transaction Filter', 'Contains filters for the Assignments page');
+$GLOBALS['TL_LANG']['FMD']['mod_psych_work_form']         = array('Psych Work Form', 'Lists a Psychologist\'s Transactions in a spreadsheet format');
