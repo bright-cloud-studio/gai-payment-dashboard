@@ -1,0 +1,22 @@
+
+<!-- Include DataTables for better formatting -->
+
+<div class="mod_list_transaction_filter size100 marbot60">
+	<h2>Filters Go Here</h2>
+  
+			<?php
+  
+				foreach ($this->transactions as $transaction) {
+					$buffer = '';
+					$buffer .= "<tr>";
+					$buffer .= "<td></td>";
+					$buffer .= "<td>" . $transaction['date_submitted'] . "</td>";
+					$buffer .= "<td>" . $transaction['service'] . "</td>";
+					$buffer .= "<td>" . $transaction['price'] . "</td>";
+					$buffer .= "</tr>";
+					echo $buffer;
+				}
+				
+			?>
+
+</div>
