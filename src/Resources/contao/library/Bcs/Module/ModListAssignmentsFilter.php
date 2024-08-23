@@ -62,7 +62,7 @@ class ModListAssignmentsFilter extends \Contao\Module
 
     protected function compile()
     {
-        //$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/bcspaymentdashboard/js/datatables.min.js';
+        $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/bcspaymentdashboard/js/list_assignments_filter.js';
         //$GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/datatables.min.css';
         
         $member = FrontendUser::getInstance();
