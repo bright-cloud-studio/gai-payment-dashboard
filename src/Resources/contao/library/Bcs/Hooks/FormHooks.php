@@ -135,9 +135,7 @@ class FormHooks
                             $options[] = array (
                                 'value' => $assignment->id,
                                 'label' => $label,
-                                'district' => $district->district_name,
-                                'school' => $school->school_name,
-                                'student' => $student->name
+                                'test1' => 'successful_testy_test'
                             );
                         }
 
