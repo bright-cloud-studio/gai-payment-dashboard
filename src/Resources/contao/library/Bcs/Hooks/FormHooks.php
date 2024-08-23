@@ -124,16 +124,18 @@ class FormHooks
                             // Get total number of Transactions this Member has for this Assignment
                             $transactions_total = Transaction::countBy(['pid = ?', 'psychologist = ?'], [$assignment->id, $member->id]);
                             
-                            $label .= "<span id='date'>" . date('m/d/y',$t) . "</span>";
-                            $label .= "<span id='district'>" . $district->district_name. "</span>";
-                            $label .= "<span id='school'>" . $school->school_name . "</span>";
+                            $label .= "<span id='transactions'>( " . $transactions_total . " )</span> ";
+                            $label .= "<span id='date'>" . date('m/d/y',$t) . "</span> - ";
+                            $label .= "<span id='district'>" . $district->district_name. "</span> - ";
+                            $label .= "<span id='school'>" . $school->school_name . "</span> - ";
                             $label .= "<span id='student'>" . $student->name . "</span>";
-                            $label .= "<span id='transactions'>Transactions: " . $transactions_total . "</span>";
+                            
                             
                             // Format the assignment so it can be added to the form
                             $options[] = array (
                                 'value' => $assignment->id,
-                                'label' => $label
+                                'label' => $label,
+                                'test1' => 'successful_testy_test'
                             );
                         }
 
