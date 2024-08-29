@@ -33,7 +33,7 @@
 				foreach ($this->assignments as $assignment) {
 					$buffer = '';
 					$buffer .= "<tr>";
-					$buffer .= "<td'>" . $assignment['date_created'] . "</td>";
+					$buffer .= "<td>" . $assignment['date_created'] . "</td>";
 					$buffer .= "<td>" . $assignment['date_30_day'] . "</td>";
 					$buffer .= "<td>" . $assignment['date_45_day'] . "</td>";
 					$buffer .= "<td>" . $assignment['district'] . "</td>";
