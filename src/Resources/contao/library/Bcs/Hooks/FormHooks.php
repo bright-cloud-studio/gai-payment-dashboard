@@ -10,6 +10,7 @@ use Bcs\Model\Service;
 use Bcs\Model\School;
 use Bcs\Model\Student;
 use Bcs\Model\Transaction;
+use Bcs\Model\TransactionMisc;
 
 use Contao\Controller;
 use Contao\Environment;
@@ -59,7 +60,7 @@ class FormHooks
         else if($formData['formID'] == 'assignment_misc_billing') {
 
             // Create a new Transaction
-            $transaction = new Transaction();
+            $transaction = new TransactionMisc();
             
             // Apply values
             $transaction->pid = 0;
@@ -72,6 +73,8 @@ class FormHooks
 
             $service = Service::findBy('name', 'Misc. Billing');
             $transaction->service = $service->service_code;
+
+            $transaction->service_provided = $submittedData['service_provided'];
             
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
             $transaction->notes = $submittedData['notes'];
