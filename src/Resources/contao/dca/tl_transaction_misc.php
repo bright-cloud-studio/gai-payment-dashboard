@@ -284,7 +284,7 @@ class tl_transaction_misc extends Backend
         $service = Service::findBy('service_code', $row['service']);
         //$label .= $service->name;
 
-        $label .= row['service_label'];
+        $label .= $row['service_label'];
         
         
 		$sub = 0;
