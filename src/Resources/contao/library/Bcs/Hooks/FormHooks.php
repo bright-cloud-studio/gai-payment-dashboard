@@ -29,14 +29,12 @@ class FormHooks
         
         // Assignment Selection Form
         if($formData['formID'] == 'assignment_selection') {
-            
             // Create transaction using submitted data
             $_SESSION['assignment_uuid'] = $submittedData['assignment_uuid'];
-            
         }
+            
         // Assignment Generate Transaction Form
         else if($formData['formID'] == 'assignment_generate_transaction') {
-
             // Create a new Transaction
             $transaction = new Transaction();
             
@@ -54,9 +52,35 @@ class FormHooks
             $transaction->notes = $submittedData['notes'];
             
             // Save our new Transaction
+            $transaction->save();   
+        }
+
+        // Assignment Misc. Billing Form
+        else if($formData['formID'] == 'assignment_misc_billing') {
+
+            // Create a new Transaction
+            $transaction = new Transaction();
+            
+            // Apply values
+            $transaction->pid = 0;
+            $transaction->tstamp = time();
+            
+            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+
+            $member = FrontendUser::getInstance();
+            $transaction->psychologist = $member->id;
+
+            $service = Service::findBy('name', 'Misc. Billing');
+            $transaction->service = $service->service_code;
+            
+            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+            $transaction->notes = $submittedData['notes'];
+            
+            // Save our new Transaction
             $transaction->save();
             
         }
+        
     }
 
     // When a form is loaded
