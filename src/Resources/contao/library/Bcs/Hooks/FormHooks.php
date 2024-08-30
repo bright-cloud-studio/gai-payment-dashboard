@@ -74,7 +74,7 @@ class FormHooks
             $service = Service::findBy('name', 'Misc. Billing');
             $transaction->service = $service->service_code;
 
-            $transaction->service_provided = $submittedData['service_provided'];
+            $transaction->service_label = $submittedData['service_label'];
             
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
             $transaction->notes = $submittedData['notes'];
