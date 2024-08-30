@@ -151,6 +151,19 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'sql'                     => "char(1) NOT NULL default ''"
         ),
 
+
+        'district' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['district'],
+            'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'submitOnChange'=>true),
+            'options_callback'	      => array('Bcs\Backend\TransactionMiscBackend', 'getDistricts'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+
         
         
         /* ******************* */
