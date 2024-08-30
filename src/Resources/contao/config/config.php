@@ -46,6 +46,9 @@ $GLOBALS['BE_MOD']['gai']['assignment'] = array(
 $GLOBALS['BE_MOD']['gai']['transaction'] = array(
 	'tables' => array('tl_transaction')
 );
+$GLOBALS['BE_MOD']['gai']['transaction_misc'] = array(
+	'tables' => array('tl_transaction_misc')
+);
 
 
 /* Hooks */
@@ -69,3 +72,4 @@ $GLOBALS['TL_MODELS']['tl_service']            = 'Bcs\Model\Service';
 $GLOBALS['TL_MODELS']['tl_student']            = 'Bcs\Model\Student';
 $GLOBALS['TL_MODELS']['tl_price_tier']         = 'Bcs\Model\PriceTier';
 $GLOBALS['TL_MODELS']['tl_transaction']        = 'Bcs\Model\Transaction';
+$GLOBALS['TL_MODELS']['tl_transaction_misc']   = 'Bcs\Model\TransactionMisc';
