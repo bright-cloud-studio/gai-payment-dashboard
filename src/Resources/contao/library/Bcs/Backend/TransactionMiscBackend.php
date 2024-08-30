@@ -144,7 +144,6 @@ class TransactionMiscBackend extends Backend
     public function getServices(DataContainer $dc) { 
         
         // Hold the psys
-        /*
         $services = array();
         
         // Use the DB to grab all of our enabled members, aka our psychologists
@@ -155,12 +154,8 @@ class TransactionMiscBackend extends Backend
             // Add ti array with ID as the value and firstname lastname as the label
             $services = $services + array($result->service_code => $result->name);   
         }
-        
-        
-        return $services;
-        */
 
-        return array(99 => "Misc. Billing");
+        return $services;
         
     }
 
