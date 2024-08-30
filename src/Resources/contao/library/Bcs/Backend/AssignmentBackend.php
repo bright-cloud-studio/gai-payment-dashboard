@@ -158,14 +158,9 @@ class AssignmentBackend extends Backend
     // Get Schools as select menu
     public function getSchools(DataContainer $dc) { 
     
-        //echo "<pre>";
-        //print_r($dc->activeRecord);
-        //die();
-        
         $schools = array();
         
         if($dc->activeRecord->district != '') {
-
     
             // Use the DB to grab all of our enabled members, aka our psychologists
     		$this->import('Database');
@@ -175,8 +170,6 @@ class AssignmentBackend extends Backend
     		{
                 // Add ti array with ID as the value and firstname lastname as the label
                 $schools = $schools + array($result->id => $result->school_name);
-                
-                
     		}
     		return $schools;
         }
@@ -206,7 +199,6 @@ class AssignmentBackend extends Backend
     // Get Students as select menu
     public function getStudents(DataContainer $dc) { 
     
-    
         // Hold the psys
         $students = array();
 
@@ -225,8 +217,7 @@ class AssignmentBackend extends Backend
         }
         $students = $students + array('0' => 'First, Select a District');
         return $students;
-        
+    
 	}
     
-
 }
