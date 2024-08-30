@@ -53,8 +53,8 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
         'label' => array
         (
             'fields'                  => array('date_submitted', 'psychologist'),
-			      'format'                  => '%s -  %s',
-			      'label_callback'          => array('tl_transaction_misc', 'addIcon')
+            'format'                  => '%s -  %s',
+            'label_callback'          => array('tl_transaction_misc', 'addIcon')
         ),
         'global_operations' => array
         (
@@ -107,7 +107,7 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;'
+        'default'                     => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;'
     ),
  
     // Fields
@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
-            'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'getPsychologists'),
+            'options_callback'	      => array('Bcs\Backend\TransactionMiscBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'service' => array
@@ -186,7 +186,17 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
-            'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'getServices'),
+            'options_callback'	      => array('Bcs\Backend\TransactionMiscBackend', 'getServices'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'service_label' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['service_label'],
+            'inputType'               => 'text',
+            'filter'                  => true,
+            'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'price' => array
