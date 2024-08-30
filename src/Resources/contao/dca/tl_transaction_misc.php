@@ -218,8 +218,7 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y g:i")
+            'sql'                     => "varchar(20) NOT NULL default ''"
         ),
         'meeting_start' => array
         (
