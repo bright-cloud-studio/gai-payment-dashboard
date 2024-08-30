@@ -83,6 +83,34 @@ class FormHooks
             $transaction->save();
             
         }
+            
+        // Assignment Misc. Travel Expenses Form
+        else if($formData['formID'] == 'assignment_misc_travel_expenses') {
+
+            // Create a new Transaction
+            $transaction = new TransactionMisc();
+            
+            // Apply values
+            $transaction->pid = 0;
+            $transaction->tstamp = time();
+            
+            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+
+            $member = FrontendUser::getInstance();
+            $transaction->psychologist = $member->id;
+
+            $service = Service::findBy('name', 'Misc. Travel Expenses');
+            $transaction->service = $service->service_code;
+
+            $transaction->service_label = $submittedData['service_label'];
+            
+            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+            $transaction->notes = $submittedData['notes'];
+            
+            // Save our new Transaction
+            $transaction->save();
+            
+        }
         
     }
 
