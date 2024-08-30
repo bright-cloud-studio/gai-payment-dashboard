@@ -120,7 +120,24 @@ class TransactionMiscBackend extends Backend
 	}
 
 
+    // Get Districts as select menu
+    public function getDistricts(DataContainer $dc) { 
 
+        // Hold the psys
+        $districts = array();
+
+        // Use the DB to grab all of our enabled members, aka our psychologists
+		$this->import('Database');
+		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1")->execute();
+		while($result->next())
+		{
+            // Add ti array with ID as the value and firstname lastname as the label
+            $districts = $districts + array($result->id => $result->district_name);   
+		}
+
+		return $districts;
+	}
+    
     // Get Psychologists as select menu
     public function getPsychologists(DataContainer $dc) { 
 
