@@ -127,7 +127,7 @@ class FormHooks
             $member = FrontendUser::getInstance();
             $transaction->psychologist = $member->id;
 
-            $service = Service::findBy('name', 'Misc. Travel Expenses');
+            $service = Service::findBy('name', 'Parking');
             $transaction->service = $service->service_code;
 
             $transaction->district = $submittedData['district'];
