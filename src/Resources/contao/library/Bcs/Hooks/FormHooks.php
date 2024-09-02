@@ -199,6 +199,42 @@ class FormHooks
             $transaction->save();
             
         }
+
+        // Assignment Test Late Cancel - First form
+        else if($formData['formID'] == 'assignment_test_late_cancel_first') {
+
+            // Create a new Transaction
+            $transaction = new TransactionMisc();
+            
+            // Apply values
+            $transaction->pid = 0;
+            $transaction->tstamp = time();
+            
+            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+
+            $member = FrontendUser::getInstance();
+            $transaction->psychologist = $member->id;
+
+            $service = Service::findBy('name', 'First Test Late Cancel');
+            $transaction->service = $service->service_code;
+            $transaction->service_label = $service->name;
+
+            $transaction->district = $submittedData['district'];
+            $transaction->school = $submittedData['school'];
+
+            $transaction->student_initials = $submittedData['student_initials'];
+            $transaction->lasid = $submittedData['lasid'];
+            $transaction->sasid = $submittedData['sasid'];
+
+            $transaction->meeting_date = strtotime($submittedData['meeting_date']);
+
+            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+            $transaction->notes = $submittedData['notes'];
+            
+            // Save our new Transaction
+            $transaction->save();
+            
+        }
         
     }
 
