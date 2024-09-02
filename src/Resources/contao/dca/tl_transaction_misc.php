@@ -107,7 +107,7 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;'
+        'default'                     => '{transaction_legend},date_submitted, psychologist, service, district, school, service_label, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{student_legend}, student_initials, lasid, sasid;{notes_legend},notes;{publish_legend},published;'
     ),
  
     // Fields
@@ -161,6 +161,47 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'submitOnChange'=>true),
             'options_callback'	      => array('Bcs\Backend\TransactionMiscBackend', 'getDistricts'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'school' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['school'],
+            'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true),
+            'options_callback'	      => array('Bcs\Backend\TransactionMiscBackend', 'getSchools'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'student_initials' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['student'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'lasid' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['lasid'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'sasid' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['sasid'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
 
