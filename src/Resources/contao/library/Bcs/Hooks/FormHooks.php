@@ -169,6 +169,36 @@ class FormHooks
             $transaction->save();
             
         }
+
+        // Assignment Editing Services form
+        else if($formData['formID'] == 'assignment_editing_services') {
+
+            // Create a new Transaction
+            $transaction = new TransactionMisc();
+            
+            // Apply values
+            $transaction->pid = 0;
+            $transaction->tstamp = time();
+            
+            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+
+            $member = FrontendUser::getInstance();
+            $transaction->psychologist = $member->id;
+
+            $service = Service::findBy('name', 'Editing Services');
+            $transaction->service = $service->service_code;
+
+            $transaction->service_label = "Editing Services";
+
+            $transaction->meeting_duration = $submittedData['meeting_duration'];
+            
+            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+            $transaction->notes = $submittedData['notes'];
+            
+            // Save our new Transaction
+            $transaction->save();
+            
+        }
         
     }
 
