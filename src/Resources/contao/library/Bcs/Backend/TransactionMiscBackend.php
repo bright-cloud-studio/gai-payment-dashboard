@@ -137,6 +137,29 @@ class TransactionMiscBackend extends Backend
 
 		return $districts;
 	}
+
+    // Get Schools as select menu
+    public function getSchools(DataContainer $dc) { 
+    
+        $schools = array();
+        
+        if($dc->activeRecord->district != '') {
+    
+            // Use the DB to grab all of our enabled members, aka our psychologists
+    		$this->import('Database');
+    		
+    		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=".$dc->activeRecord->district)->execute();
+    		while($result->next())
+    		{
+                // Add ti array with ID as the value and firstname lastname as the label
+                $schools = $schools + array($result->id => $result->school_name);
+    		}
+    		return $schools;
+        }
+        $schools = $schools + array('0' => 'First, Select a District');
+        return $schools;
+		
+	}
     
     // Get Psychologists as select menu
     public function getPsychologists(DataContainer $dc) { 
