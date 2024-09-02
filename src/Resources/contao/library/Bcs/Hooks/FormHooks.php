@@ -160,8 +160,6 @@ class FormHooks
             $service = Service::findBy('name', 'Manager');
             $transaction->service = $service->service_code;
 
-            $transaction->district = $submittedData['district'];
-            
             $transaction->service_label = $submittedData['service_label'];
             
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
