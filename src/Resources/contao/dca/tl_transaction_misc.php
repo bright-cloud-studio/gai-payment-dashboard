@@ -117,6 +117,8 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
         '19'           => '{transaction_legend},date_submitted, psychologist, service, service_label, meeting_duration, price;{notes_legend},notes;{publish_legend},published;',
         // Manager = 20
         '20'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
+        // Test Late Cancel = 32
+        '32'           => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, lasid, sasid; {meeting_legend}, meeting_date, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
         // Misc. Billing = 99
         '99'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
     ),
