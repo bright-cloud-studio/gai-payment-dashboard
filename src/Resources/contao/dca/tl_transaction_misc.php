@@ -113,6 +113,8 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
         '14'           => '{transaction_legend},date_submitted ,psychologist, district, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
         // Misc. Travel Expenses = 18
         '18'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
+        // Manager = 20
+        '20'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
         // Misc. Billing = 99
         '99'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
     ),
