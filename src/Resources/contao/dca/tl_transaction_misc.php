@@ -109,10 +109,12 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
     (
         '__selector__' => ['service'],
         'default'      => '{transaction_legend},date_submitted, psychologist, service, district, school, service_label, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{student_legend}, student_initials, lasid, sasid;{notes_legend},notes;{publish_legend},published;',
+        // Parking = 14
+        '14'           => '{transaction_legend},date_submitted ,psychologist, district, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
+        // Misc. Travel Expenses = 18
+        '18'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
         // Misc. Billing = 99
         '99'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
-        // Misc. Travel Expenses = 18
-        '18'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;'
     ),
  
     // Fields
