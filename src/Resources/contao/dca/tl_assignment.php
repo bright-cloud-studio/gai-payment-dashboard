@@ -194,6 +194,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'select',
             'filter'                  => true,
             'search'                  => true,
+            'foreignKey'              => 'tl_member.firstname',
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
