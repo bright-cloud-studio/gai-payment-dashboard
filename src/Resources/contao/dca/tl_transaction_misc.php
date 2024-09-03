@@ -107,7 +107,9 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date_submitted, psychologist, service, district, school, service_label, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{student_legend}, student_initials, lasid, sasid;{notes_legend},notes;{publish_legend},published;'
+        '__selector__' => ['service'],
+        'default'                     => '{transaction_legend},date_submitted, psychologist, service, district, school, service_label, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{student_legend}, student_initials, lasid, sasid;{notes_legend},notes;{publish_legend},published;',
+        '99'                     => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{publish_legend},published;'
     ),
  
     // Fields
