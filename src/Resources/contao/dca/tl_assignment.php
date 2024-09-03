@@ -228,7 +228,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
-            'foreignKey'              => 'tl_student.student_name',
+            'foreignKey'              => 'tl_student.name',
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getStudents'),
             'sql'                     => "varchar(255) NOT NULL default ''"
