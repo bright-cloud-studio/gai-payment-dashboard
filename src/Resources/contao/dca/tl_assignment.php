@@ -247,7 +247,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
     		'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getInitialReeval'),
-            'sql'                      => "varchar(10) NOT NULL default ''"
+            'sql'                      => "varchar(30) NOT NULL default ''"
         ),
         'type_of_testing' => array
         (
