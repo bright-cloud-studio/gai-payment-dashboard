@@ -20,7 +20,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['price_tier'] = array
     'eval'                    => array('mandatory'=>true, 'multiple'=>false, 'tl_class'=>''),
     'options_callback'	      => array('Bcs\Backend\ServiceBackend', 'getPriceTiers'),
     'sql'                     => "varchar(50) NOT NULL default ''",
-    'default'                 => "price_tier_1"
+    'default'                 => "tier_1_price"
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['price_tier_display'] = array
