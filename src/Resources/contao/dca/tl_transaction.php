@@ -77,20 +77,6 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
-			
-            'copy' => array
-            (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['copy'],
-                'href'                => 'act=copy',
-                'icon'                => 'copy.gif'
-            ),
-            'delete' => array
-            (
-                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['delete'],
-                'href'                => 'act=delete',
-                'icon'                => 'delete.svg',
-                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
-            ),
             'toggle' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['toggle'],
@@ -156,7 +142,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'exclude'                 => true,
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['published'],
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
+            'eval'                    => array('submitOnChange'=>false, 'doNotCopy'=>true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
 
