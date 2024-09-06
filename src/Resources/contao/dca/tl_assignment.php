@@ -424,7 +424,7 @@ class tl_assignment extends Backend
         $label .= $psy->firstname . " " . $psy->lastname;
 
         
-        $student = StudentModel::findBy('id', $row['student']);
+        $student = Student::findBy('id', $row['student']);
         if($student->lasid != '' && $student->sasid != '') {
             $label .= $student->lasid . " / " . $student->sasid;
         } else {
