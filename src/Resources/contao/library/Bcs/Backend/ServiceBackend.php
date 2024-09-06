@@ -9,7 +9,6 @@ use Contao\DataContainer;
 use Contao\StringUtil;
 
 use Bcs\Model\Service;
-use Bcs\Model\PriceTier;
 
 
 class ServiceBackend extends Backend
