@@ -347,7 +347,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "text NOT NULL default ''"
         ),
         
         'published' => array
