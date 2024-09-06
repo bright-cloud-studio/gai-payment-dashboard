@@ -89,16 +89,16 @@ class ServiceBackend extends Backend
     
         // Hold the psys
         $tiers = array();
-        $tiers = $tiers + array('price_tier_1' => 'Price Tier 1');
-        $tiers = $tiers + array('price_tier_2' => 'Price Tier 2');
-        $tiers = $tiers + array('price_tier_3' => 'Price Tier 3');
-        $tiers = $tiers + array('price_tier_4' => 'Price Tier 4');
-        $tiers = $tiers + array('price_tier_5' => 'Price Tier 5');
-        $tiers = $tiers + array('price_tier_6' => 'Price Tier 6');
-        $tiers = $tiers + array('price_tier_7' => 'Price Tier 7');
-        $tiers = $tiers + array('price_tier_8' => 'Price Tier 8');
-        $tiers = $tiers + array('price_tier_9' => 'Price Tier 9');
-        $tiers = $tiers + array('price_tier_10' => 'Price Tier 10');
+        $tiers = $tiers + array('tier_1_price' => 'Price Tier 1');
+        $tiers = $tiers + array('tier_2_price' => 'Price Tier 2');
+        $tiers = $tiers + array('tier_3_price' => 'Price Tier 3');
+        $tiers = $tiers + array('tier_4_price' => 'Price Tier 4');
+        $tiers = $tiers + array('tier_5_price' => 'Price Tier 5');
+        $tiers = $tiers + array('tier_6_price' => 'Price Tier 6');
+        $tiers = $tiers + array('tier_7_price' => 'Price Tier 7');
+        $tiers = $tiers + array('tier_8_price' => 'Price Tier 8');
+        $tiers = $tiers + array('tier_9_price' => 'Price Tier 9');
+        $tiers = $tiers + array('tier_10_price' => 'Price Tier 10');
         
         return $tiers;
     
@@ -108,17 +108,21 @@ class ServiceBackend extends Backend
         
         // Hold the psys
         $options = array();
-        $services = Service::findBy('published', '1');
-        
-        // loop through each service
-        foreach($services as $service) {
-            // loop through each service's tiers
-            $tiers = PriceTier::findBy('pid', $service->id);
+        $tier = $dc->activeRecord->price_tier;
 
-            foreach($tiers as $tier) {
-                $options[$service->name][$tier->id] = "$" . $tier->tier_type . " " . $tier->tier_price;
+        if($tier != '') {
+            
+            $services = Service::findBy('published', '1');
+            
+            // loop through each service
+            foreach($services as $service) {
+
+                $options[$service->name] = "$" . $tier->{$tier};
+                
             }
+
         }
+        
         return $options;
     }
         
