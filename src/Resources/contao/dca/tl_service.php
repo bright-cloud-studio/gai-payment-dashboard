@@ -177,9 +177,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_1_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'tier_2_price' => array
@@ -187,9 +185,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_2_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'tier_3_price' => array
@@ -197,9 +193,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_3_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'tier_4_price' => array
@@ -207,9 +201,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_4_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'tier_5_price' => array
@@ -217,9 +209,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_5_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'tier_6_price' => array
@@ -227,9 +217,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_6_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'tier_7_price' => array
@@ -237,9 +225,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_7_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'tier_8_price' => array
@@ -247,9 +233,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_8_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'tier_9_price' => array
@@ -257,9 +241,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_9_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'tier_10_price' => array
@@ -267,9 +249,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['tier_10_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
 
@@ -279,9 +259,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['school_tier_1_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'school_tier_2_price' => array
@@ -289,9 +267,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['school_tier_2_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
         'school_tier_3_price' => array
@@ -299,9 +275,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_price_tier']['school_tier_3_price'],
             'inputType'               => 'text',
             'default'                 => '0.00',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "decimal(6,2) NOT NULL default '0.00'"
         ),
 
