@@ -29,9 +29,6 @@ $GLOBALS['BE_MOD']['gai_data']['student'] = array(
 $GLOBALS['BE_MOD']['gai_data']['service'] = array(
 	'tables' => array('tl_service')
 );
-$GLOBALS['BE_MOD']['gai_data']['price_tier'] = array(
-	'tables' => array('tl_price_tier')
-);
 
 
 /* Back end modules - Work DCAs */
