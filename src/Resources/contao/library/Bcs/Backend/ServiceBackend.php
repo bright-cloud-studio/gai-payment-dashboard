@@ -84,9 +84,27 @@ class ServiceBackend extends Backend
 		return $varValue;
 	}
 
+     // Get Price Tiers as select menu
+    public function getPriceTiers(DataContainer $dc) { 
+    
+        // Hold the psys
+        $tiers = array();
+        $tiers = $tiers + array('price_tier_1' => 'Price Tier 1');
+        $tiers = $tiers + array('price_tier_2' => 'Price Tier 2');
+        $tiers = $tiers + array('price_tier_3' => 'Price Tier 3');
+        $tiers = $tiers + array('price_tier_4' => 'Price Tier 4');
+        $tiers = $tiers + array('price_tier_5' => 'Price Tier 5');
+        $tiers = $tiers + array('price_tier_6' => 'Price Tier 6');
+        $tiers = $tiers + array('price_tier_7' => 'Price Tier 7');
+        $tiers = $tiers + array('price_tier_8' => 'Price Tier 8');
+        $tiers = $tiers + array('price_tier_9' => 'Price Tier 9');
+        $tiers = $tiers + array('price_tier_10' => 'Price Tier 10');
+        
+        return $tiers;
+    
+	}
 
-
-    public function getPriceTierAssignmentOptions(DataContainer $dc) {
+    public function getPriceTierDisplay(DataContainer $dc) {
         
         // Hold the psys
         $options = array();
