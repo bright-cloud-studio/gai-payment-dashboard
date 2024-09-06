@@ -14,7 +14,6 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     'config' => array
     (
         'dataContainer'               => DC_Table::class,
-        'ctable'                      => array('tl_price_tier'),
         'switchToEdit'                => false,
         'onload_callback' => array
 		(
@@ -62,11 +61,6 @@ $GLOBALS['TL_DCA']['tl_service'] = array
         ),
         'operations' => array
         (
-            'price_tiers' => array
-            (
-                'href'                => 'do=price_tier',
-                'icon'                => 'articles.svg'
-            ),
             'edit' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_service']['edit'],
