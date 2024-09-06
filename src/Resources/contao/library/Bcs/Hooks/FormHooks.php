@@ -410,21 +410,6 @@ class FormHooks
                 if($field->name == 'service_provided') { $field->value = $assignment->type_of_testing; }
                 if($field->name == 'service_provided_label') { $field->value = $service->name; }
                 
-                
-                if($field->name == 'hourly_rate') {
-                    
-                    // get all of the price tiers that are assigned to this service
-                    $prices = PriceTier::findBy('pid', $assignment->type_of_testing);
-                    // loop through those prices, find one that is in our assigned tiers
-                    $member = FrontendUser::getInstance();
-                    foreach($prices as $price) {
-                        if(in_array($price->id, $member->price_tier_assignments)) {
-                            //$field->value = $price->tier_price;
-                        }
-                    }
-                    
-                }
-                
             }
 
             
