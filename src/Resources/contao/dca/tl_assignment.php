@@ -54,8 +54,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         ),
         'label' => array
         (
-            'fields'                  => array('date_created', 'district', 'school', 'psychologist'),
-			'format'                  => '%s %s %s %s',
+            'fields'                  => array('date_created', 'district', 'school', 'psychologist', 'student'),
+			'format'                  => '%s %s %s %s %s',
 			'label_callback'          => array('tl_assignment', 'addIcon')
         ),
         'global_operations' => array
