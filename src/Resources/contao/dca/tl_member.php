@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['price_tier_display'] = array
     'label'                   => &$GLOBALS['TL_LANG']['tl_member']['price_tier_display'],
     'inputType'               => 'checkbox',
     'flag'                    => DataContainer::SORT_ASC,
-    'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
+    'eval'                    => array('mandatory'=>false, 'multiple'=>false, 'tl_class'=>'w50', 'hideInput'="'true'),
     'options_callback'	      => array('Bcs\Backend\ServiceBackend', 'getPriceTierDisplay'),
     'sql'                     => "TEXT(20000) NOT NULL default ''"
 );
