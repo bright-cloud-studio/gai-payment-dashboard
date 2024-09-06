@@ -73,20 +73,6 @@ $GLOBALS['TL_DCA']['tl_service'] = array
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
-			
-            'copy' => array
-            (
-                'label'               => &$GLOBALS['TL_LANG']['tl_service']['copy'],
-                'href'                => 'act=copy',
-                'icon'                => 'copy.gif'
-            ),
-            'delete' => array
-            (
-                'label'               => &$GLOBALS['TL_LANG']['tl_service']['delete'],
-                'href'                => 'act=delete',
-                'icon'                => 'delete.svg',
-                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
-            ),
             'toggle' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_district']['toggle'],
