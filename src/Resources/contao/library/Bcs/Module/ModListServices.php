@@ -65,15 +65,9 @@ class ModListServices extends \Contao\Module
         foreach($services as $service) {
 
             // Create an array of services codes linked to prices then add them to the template so we can grab them with jQuery
-            
-            $prices = PriceTier::findBy('pid', $service->id);
-            foreach($prices as $price) {
-                if(in_array($price->id, $member->price_tier_assignments)) {
-                    $service_prices[$service->service_code]['price'] = $price->tier_price;
-                    $service_prices[$service->service_code]['service_type'] = $service->service_type;
-                    $service_prices[$service->service_code]['service_name'] = $service->name;
-                }
-            }
+            $service_prices[$service->service_code]['price'] = $service->{$member->price_tier};
+            $service_prices[$service->service_code]['service_type'] = $service->service_type;
+            $service_prices[$service->service_code]['service_name'] = $service->name;
             
             
         }
