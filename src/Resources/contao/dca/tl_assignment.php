@@ -269,7 +269,6 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y g:i A"),
         ),
         'meeting_required' => array
         (
@@ -291,7 +290,6 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y g:i A"),
         ),
         'contact_info_parent' => array
         (
@@ -300,7 +298,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "text NOT NULL default ''"
         ),
         'contact_info_teacher' => array
         (
@@ -309,7 +307,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "text NOT NULL default ''"
         ),
         'team_chair' => array
         (
@@ -335,8 +333,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'select',
             'filter'                  => true,
             'search'                  => true,
-            'default'                 => '',
-            'options'                  => array('yes' => 'Yes', 'no' => 'No'),
+            'default'                 => 'no',
+            'options'                  => array('no' => 'No', 'yes' => 'Yes'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
     		'sql'                      => "varchar(5) NOT NULL default ''"
         ),
