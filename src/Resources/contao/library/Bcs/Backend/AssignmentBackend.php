@@ -219,5 +219,50 @@ class AssignmentBackend extends Backend
         return $students;
     
 	}
+
+
+
+
+
+
+
+
+     // Get Initial - Re-eval as select menu
+    public function getInitialReeval(DataContainer $dc) { 
+    
+        // Hold the psys
+        $students = array();
+
+        $students = $students + array('initial' => 'Initial');
+        $students = $students + array('initial_504' => 'Initial 504');
+
+        $students = $students + array('re_eval' => 'Re-eval');
+        $students = $students + array('re_eval_504' => 'Re-eval 504');
+
+        $students = $students + array('extended' => 'Extended Eval');
+        $students = $students + array('independent' => 'Independent Eval');
+
+        $students = $students + array('other' => 'Other');
+        
+        return $students;
+    
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     
 }
