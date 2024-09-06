@@ -421,7 +421,7 @@ class tl_assignment extends Backend
         $label .= $district->district_name . " - ";
 
         $psy = MemberModel::findBy('id', $row['psychologist']);
-        $label .= $psy->firstname . " " . $psy->lastname . " ";
+        $label .= $psy->firstname . " " . $psy->lastname . " - ";
 
         
         $student = Student::findBy('id', $row['student']);
