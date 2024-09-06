@@ -423,6 +423,16 @@ class tl_assignment extends Backend
         $label .= $psy->firstname . " " . $psy->lastname;
 
         
+        $student = StudentModel::findBy('id', $row['student']);
+        if($student->lasid != '' && $student->sasid != '') {
+            $label .= $student->lasid . " / " . $student->sasid;
+        } else {
+            if($student->lasid != '')
+                $label .= $student->lasid;
+            if($student->sasid != '')
+                $label .= $student->sasid;
+        }
+
         
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
