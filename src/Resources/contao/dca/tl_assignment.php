@@ -3,6 +3,7 @@
 /* Assignment - Parent to Transaction */
 
 use Bcs\Model\District;
+use Bcs\Model\Student;
 
 use Contao\Backend;
 use Contao\Database;
