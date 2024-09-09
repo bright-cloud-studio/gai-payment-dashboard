@@ -431,9 +431,11 @@ class FormHooks
                     // Convert to php array
                     $options = unserialize($field->options);
                     
-                    
+                    $opt = [
+                        'order' => 'firstname ASC'
+                    ];
                     // Hold the psys
-                   $psychologists = Psychologist::findBy('published', '1');
+                    $psychologists = MemberModel::findBy('disable', '0', $opt);
             
                     // loop through each service
                     foreach($psychologists as $psy) {
