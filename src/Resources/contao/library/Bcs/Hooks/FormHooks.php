@@ -68,8 +68,7 @@ class FormHooks
             
             $transaction->date_submitted = strtotime($submittedData['date_submitted']);
 
-            $member = FrontendUser::getInstance();
-            $transaction->psychologist = $member->id;
+            $transaction->psychologist = $submittedData['psychologist'];
 
             $service = Service::findBy('name', 'Misc. Billing');
             $transaction->service = $service->service_code;
