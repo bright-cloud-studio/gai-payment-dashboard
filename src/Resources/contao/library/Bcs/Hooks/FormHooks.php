@@ -68,7 +68,8 @@ class FormHooks
             
             $transaction->date_submitted = strtotime($submittedData['date_submitted']);
 
-            $transaction->psychologist = $submittedData['psychologist'];
+            $member = FrontendUser::getInstance();
+            $transaction->psychologist = $member->id;
 
             $service = Service::findBy('name', 'Misc. Billing');
             $transaction->service = $service->service_code;
@@ -416,9 +417,9 @@ class FormHooks
             return $fields;
         }
         
-        ///////////////////////////////
-        // ASSIGNMENT SELECTION FORM //
-        //////////////////////////////
+        //////////////////////////////////
+        // ASSIGNMENT MISC BILLING FORM //
+        /////////////////////////////////
         if($form->formID == 'assignment_misc_billing') {
             
             // Loop through the fields
@@ -442,6 +443,47 @@ class FormHooks
                         $options[] = array (
                             'value' => $psy->id,
                             'label' => $psy->firstname . ' ' . $psy->lastname
+                        );
+                        
+                    }
+            
+
+                    // Save back as a serialized array
+                    $field->options = serialize($options);
+                }
+            }
+
+            // Prefill in our Work Assignment information
+            return $fields;
+        }
+        
+        
+        //////////////////////////////////
+        // ASSIGNMENT ADD MEETING FORM //
+        /////////////////////////////////
+        if($form->formID == 'assignment_add_meeting') {
+            
+            // Loop through the fields
+            foreach($fields as $field) {
+                
+                // If this is our assignment uuid radio field
+                if($field->name == 'district') {
+                    
+                    // Convert to php array
+                    $options = unserialize($field->options);
+                    
+                    $opt = [
+                        'order' => 'district_name ASC'
+                    ];
+                    // Hold the psys
+                    $districts = District::findBy('published', '1', $opt);
+            
+                    // loop through each service
+                    foreach($districts as $district) {
+        
+                        $options[] = array (
+                            'value' => $district->id,
+                            'label' => $district->district_name
                         );
                         
                     }
