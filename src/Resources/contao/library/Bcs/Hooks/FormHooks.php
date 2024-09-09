@@ -416,6 +416,46 @@ class FormHooks
             // Return our modified fields
             return $fields;
         }
+        
+        ///////////////////////////////
+        // ASSIGNMENT SELECTION FORM //
+        //////////////////////////////
+        if($form->formID == 'assignment_misc_billing') {
+            
+            // Loop through the fields
+            foreach($fields as $field) {
+                
+                // If this is our assignment uuid radio field
+                if($field->name == 'psychologist') {
+                    
+                    // Convert to php array
+                    $options = unserialize($field->options);
+                    
+                    
+                    // Hold the psys
+                   $psychologists = Psychologist::findBy('published', '1');
+            
+                    // loop through each service
+                    foreach($psychologists as $psy) {
+        
+                        $options[] = array (
+                            'value' => $psy->id,
+                            'label' => $psy->firstname . ' ' . $psy->lastname
+                        );
+                        
+                    }
+            
+
+                    // Save back as a serialized array
+                    $field->options = serialize($options);
+                }
+            }
+
+            // Prefill in our Work Assignment information
+            return $fields;
+        }
+        
+        
 
         // Return our modified fields
         return $fields;
