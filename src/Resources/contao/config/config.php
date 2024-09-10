@@ -3,7 +3,7 @@
 use Contao\ArrayUtil;
 use Contao\System;
 
-use Bcs\PaymentDashboardBundle\FormSelectDynamic;
+use Bcs\Forms\FormSelectDynamic;
 
 use Bcs\SelectMenuDynamic;
 
