@@ -1,6 +1,7 @@
 <?php
 
 namespace Bcs\Hooks;
+use DateTime;
 
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
@@ -50,10 +51,8 @@ class FormHooks
             $transaction->meeting_date = strtotime($submittedData['meeting_date']);
             $transaction->meeting_start = $submittedData['start_time'];
             $transaction->meeting_end = $submittedData['end_time'];
-
-            $start_date = strtotime($submittedData['start_time']);
-            $difference = $start_date->diff(strtotime($submittedData['end_time']));
-            $transaction->meeting_duration = $difference->i;
+            
+            $transaction->meeting_duration = $this->timeDifferenceInMinutes($submittedData['start_time'],$submittedData['end_time']);
                 
             $transaction->notes = $submittedData['notes'];
             
@@ -521,5 +520,19 @@ class FormHooks
         } 
         return $hours * 60 + $minutes; 
     } 
+    
+    public function timeDifferenceInMinutes($time1, $time2) {
+        // Convert times to UNIX timestamps
+        $timestamp1 = strtotime($time1);
+        $timestamp2 = strtotime($time2);
+    
+        // Calculate the difference in seconds
+        $differenceInSeconds = abs($timestamp2 - $timestamp1);
+    
+        // Convert seconds to minutes
+        $differenceInMinutes = round($differenceInSeconds / 60);
+    
+        return $differenceInMinutes;
+    }
 
 }
