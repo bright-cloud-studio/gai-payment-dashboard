@@ -73,6 +73,7 @@ class ModListTransactions extends \Contao\Module
 
             $service = Service::findBy('id', $transaction->service);
             $template_transactions[$transaction->id]['service_type'] = $service->service_type;
+            $template_transactions[$transaction->id]['service_label'] = $service->name;
 
             $template_transactions[$transaction->id]['price'] = $transaction->price;
             $template_transactions[$transaction->id]['meeting_date'] = $transaction->meeting_date;
