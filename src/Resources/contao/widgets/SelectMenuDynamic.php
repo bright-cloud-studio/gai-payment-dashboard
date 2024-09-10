@@ -8,7 +8,7 @@
  * @license LGPL-3.0-or-later
  */
 
-namespace Contao;
+namespace Bcs;
 
 /**
  * Provide methods to handle select menus.
