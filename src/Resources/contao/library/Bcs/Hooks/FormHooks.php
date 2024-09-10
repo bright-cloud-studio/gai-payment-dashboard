@@ -62,7 +62,7 @@ class FormHooks
 
         // Assignment Misc. Billing Form
         else if($formData['formID'] == 'assignment_misc_billing') {
-
+            
             // Create a new Transaction
             $transaction = new TransactionMisc();
             
@@ -73,7 +73,7 @@ class FormHooks
             $transaction->date_submitted = strtotime($submittedData['date_submitted']);
 
             $member = FrontendUser::getInstance();
-            $transaction->psychologist = $member->id;
+            $transaction->psychologist = $submittedData['psychologist'];
 
             $service = Service::findBy('name', 'Misc. Billing');
             $transaction->service = $service->service_code;
@@ -434,7 +434,8 @@ class FormHooks
                     
                     // Convert to php array
                     $options = unserialize($field->options);
-                    
+
+
                     $opt = [
                         'order' => 'firstname ASC'
                     ];
@@ -487,7 +488,8 @@ class FormHooks
         
                         $options[] = array (
                             'value' => $district->id,
-                            'label' => $district->district_name
+                            'label' => $district->district_name,
+                            'mandatory' => false
                         );
                         
                     }
