@@ -511,6 +511,24 @@ class FormHooks
         
     }
 
+
+    public function onFormFieldValidation($widget, $formId, $formData, $form)
+    {
+        if ($formId == 'assignment_add_meeting') {
+            echo "Hooked hooking hookfully";
+            die();
+        }
+
+        return $widget;
+    }
+
+
+
+
+
+
+    // HELPER FUNCTIONS
+    
     // Converts our H:i format into pure minutes
     public function hoursToMinutes($hours) 
     { 
