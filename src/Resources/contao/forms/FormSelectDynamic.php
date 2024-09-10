@@ -47,7 +47,7 @@ class FormSelectDynamic extends Widget
 	 *
 	 * @var string
 	 */
-	protected $strPrefix = 'widget widget-select widget-select-dynamic';
+	protected $strPrefix = 'widget widget-select';
 
 	/**
 	 * Add specific attributes
@@ -126,7 +126,11 @@ class FormSelectDynamic extends Widget
 
 		$varInput = $this->validator($options);
 
-
+		// Check for a valid option (see #4383)
+		if (!empty($varInput) && !$this->isValidOption($varInput))
+		{
+			$this->addError($GLOBALS['TL_LANG']['ERR']['invalid']);
+		}
 
 		// Add class "error"
 		if ($this->hasErrors())
