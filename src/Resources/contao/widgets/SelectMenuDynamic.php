@@ -7,9 +7,8 @@
  *
  * @license LGPL-3.0-or-later
  */
-namespace Bcs;
 
-use Contao\SelectMenu;
+namespace Contao;
 
 /**
  * Provide methods to handle select menus.
@@ -21,7 +20,7 @@ use Contao\SelectMenu;
  * @property array   $unknownOption
  * @property boolean $chosen
  */
-class SelectMenuDynamic extends SelectMenu
+class SelectMenuDynamic extends Widget
 {
 	/**
 	 * Submit user input
