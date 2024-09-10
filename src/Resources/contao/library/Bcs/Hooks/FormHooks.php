@@ -50,8 +50,10 @@ class FormHooks
             $transaction->meeting_date = strtotime($submittedData['meeting_date']);
             $transaction->meeting_start = $submittedData['start_time'];
             $transaction->meeting_end = $submittedData['end_time'];
-            
-            $transaction->meeting_duration = $this->hoursToMinutes(date("H:i",strtotime($submittedData['start_time']) - strtotime($submittedData['end_time'])));
+
+            $start_date = strtotime($submittedData['start_time']);
+            $difference = $start_date->diff(strtotime($submittedData['end_time']));
+            $transaction->meeting_duration = $difference->i;
                 
             $transaction->notes = $submittedData['notes'];
             
