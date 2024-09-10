@@ -10,9 +10,9 @@ class FormSelectDynamic extends FormSelect
 {
     protected $strTemplate = 'form_select_dynamic';
     
-    public function __construct($arrAttributes = null)
+    public function __generate()
     {
-        parent::__construct($arrAttributes);
+        parent::__generate();
     }
     
     public function validate()
