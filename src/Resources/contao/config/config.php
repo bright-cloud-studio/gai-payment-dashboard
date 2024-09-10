@@ -5,6 +5,9 @@ use Contao\System;
 
 use Bcs\PaymentDashboardBundle\FormSelectDynamic;
 
+use Bcs\SelectMenuDynamic;
+
+
 /**
 * @copyright  Bright Cliud Studio
 * @author     Bright Cloud Studio
@@ -75,4 +78,4 @@ $GLOBALS['TL_MODELS']['tl_transaction_misc']   = 'Bcs\Model\TransactionMisc';
 
 
 // Custom Form Fields
-$GLOBALS['TL_FFL']['select_dynamic'] = 'Bcs\PaymentDashboardBundle\FormSelectDynamic';
+$GLOBALS['TL_FFL']['select_dynamic'] = SelectMenuDynamic::class;
