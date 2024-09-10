@@ -51,7 +51,6 @@ $GLOBALS['BE_MOD']['gai']['transaction_misc'] = array(
 /* Hooks */
 $GLOBALS['TL_HOOKS']['processFormData'][]        = array('Bcs\Hooks\FormHooks', 'onFormSubmit');
 $GLOBALS['TL_HOOKS']['compileFormFields'][]      = array('Bcs\Hooks\FormHooks', 'onPrepareForm');
-$GLOBALS['TL_HOOKS']['validateFormField'][]      = array('Bcs\Hooks\FormHooks', 'onFormFieldValidation');
 
 
 /* Front End modules */
