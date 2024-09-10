@@ -508,4 +508,16 @@ class FormHooks
         
     }
 
+    // Converts our H:i format into pure minutes
+    public function hoursToMinutes($hours) 
+    { 
+        $minutes = 0; 
+        if (strpos($hours, ':') !== false) 
+        { 
+            // Split hours and minutes. 
+            list($hours, $minutes) = explode(':', $hours); 
+        } 
+        return $hours * 60 + $minutes; 
+    } 
+
 }
