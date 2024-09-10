@@ -8,6 +8,13 @@ use Contao\FormModel;
 
 class FormSelectDynamic extends FormSelect
 {
+    protected $strTemplate = 'form_select_dynamic';
+    
+    public function __construct($arrAttributes = null)
+    {
+        parent::__construct($arrAttributes);
+    }
+    
     public function validate()
   	{
   		$mandatory = $this->mandatory;
