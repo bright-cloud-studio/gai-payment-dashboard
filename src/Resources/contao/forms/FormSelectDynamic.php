@@ -10,46 +10,27 @@ class FormSelectDynamic extends FormSelect
 {
     protected $strTemplate = 'form_select_dynamic';
     
-    public function __generate()
+    public function __set($strKey, $varValue): void
     {
-        parent::__generate();
+        parent::__set($strKey, $varValue);
+    }
+    
+    public function __get($strKey)
+    {
+        return parent::__get($strKey);
     }
     
     public function validate()
   	{
-  		$mandatory = $this->mandatory;
-  		$options = $this->getPost($this->strName);
-  
-  		// Check if there is at least one value
-  		if ($mandatory && \is_array($options))
-  		{
-  			foreach ($options as $option)
-  			{
-  				if (\strlen($option))
-  				{
-  					$this->mandatory = false;
-  					break;
-  				}
-  			}
-  		}
-  
-  		$varInput = $this->validator($options);
-      
-  
-  		// Add class "error"
-  		if ($this->hasErrors())
-  		{
-  			$this->class = 'error';
-  		}
-  		else
-  		{
-  			$this->varValue = $varInput;
-  		}
-  
-  		// Reset the property
-  		if ($mandatory)
-  		{
-  			$this->mandatory = true;
-  		}
+  		
   	}
+  	
+  	
+  	protected function getOptions(): array
+    {
+        return parent::getOptions();
+    }
+  	
+  	
+  	
 }
