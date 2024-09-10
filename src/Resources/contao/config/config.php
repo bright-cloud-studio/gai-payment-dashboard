@@ -79,4 +79,4 @@ $GLOBALS['TL_MODELS']['tl_transaction_misc']   = 'Bcs\Model\TransactionMisc';
 
 // Custom Form Fields
 //$GLOBALS['BE_FFL']['select_dynamic'] = SelectMenuDynamic::class;
-$GLOBALS['TL_FFL']['select_dynamic'] = SelectMenuDynamic::class;
+$GLOBALS['TL_FFL']['select_dynamic'] = FormSelectDynamic::class;
