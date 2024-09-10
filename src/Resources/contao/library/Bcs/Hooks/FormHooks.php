@@ -461,7 +461,7 @@ class FormHooks
         //////////////////////////////////
         // ASSIGNMENT ADD MEETING FORM //
         /////////////////////////////////
-        if($form->formID == 'assignment_add_meeting') {
+        if($form->formID == 'assignment_add_meeting' || $form->formID == 'assignment_test_late_cancel_first' || $form->formID == 'assignment_test_late_cancel_additional') {
             
             // Loop through the fields
             foreach($fields as $field) {
