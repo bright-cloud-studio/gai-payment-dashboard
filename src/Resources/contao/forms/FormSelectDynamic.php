@@ -10,6 +10,8 @@
 
 namespace Contao;
 
+use Contao\StringUtil;
+
 /**
  * Class FormSelect
  *
