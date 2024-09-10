@@ -8,7 +8,7 @@
  * @license LGPL-3.0-or-later
  */
 
-namespace Bcs;
+namespace Bcs\Forms;
 
 use Contao\StringUtil;
 
