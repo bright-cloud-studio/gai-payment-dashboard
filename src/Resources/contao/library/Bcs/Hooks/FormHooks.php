@@ -50,6 +50,9 @@ class FormHooks
             $transaction->meeting_date = strtotime($submittedData['meeting_date']);
             $transaction->meeting_start = $submittedData['start_time'];
             $transaction->meeting_end = $submittedData['end_time'];
+            
+            $transaction->meeting_duration = hoursToMinutes(date("H:i",strtotime($submittedData['start_time']) - strtotime($submittedData['end_time'])));
+                
             $transaction->notes = $submittedData['notes'];
             
             // Save our new Transaction
