@@ -435,10 +435,11 @@ class FormHooks
                     // Convert to php array
                     $options = unserialize($field->options);
 
-
+                    // Set Configuration options for the query
                     $opt = [
                         'order' => 'firstname ASC'
                     ];
+                    
                     // Hold the psys
                     $psychologists = MemberModel::findBy('disable', '0', $opt);
             
@@ -451,7 +452,6 @@ class FormHooks
                         );
                         
                     }
-            
 
                     // Save back as a serialized array
                     $field->options = serialize($options);
@@ -493,7 +493,6 @@ class FormHooks
                         );
                         
                     }
-            
 
                     // Save back as a serialized array
                     $field->options = serialize($options);
@@ -503,14 +502,11 @@ class FormHooks
             // Prefill in our Work Assignment information
             return $fields;
         }
-        
-        
 
         // Return our modified fields
         return $fields;
         
     }
-
 
     
 
