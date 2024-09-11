@@ -37,6 +37,7 @@ class FormHooks
             
         // Assignment Generate Transaction Form
         else if($formData['formID'] == 'assignment_generate_transaction') {
+            
             // Create a new Transaction
             $transaction = new Transaction();
             
