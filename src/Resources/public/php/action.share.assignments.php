@@ -10,17 +10,56 @@
         die("Connection failed: " . $dbh->connect_error);
     }
     
-    $query =  "select * from tl_school WHERE published='1' AND pid='".$_POST['selected_district']."'";
-    $result = $dbh->query($query);
-    if($result) {
-        while($row = $result->fetch_assoc()) {
+    // Get our data
+    $psy_name = $_POST['psychologist'];
+    $psy_id = -1;
+    
+    $myfile = fopen("newfile_".rand(1,9999)."txt", "w") or die("Unable to open file!");
+    fwrite($myfile, "Psy Name: " . $psy_name . "\r\n");
+    
+    $query_psy =  "select * from tl_member WHERE disable='0'";
+    $result_psy = $dbh->query($query_psy);
+    if($result_psy) {
+        while($row = $result_psy->fetch_assoc()) {
             
-             $options[] = array (
-                'value' => $row['id'],
-                'label' => $row['school_name']
-            );
+            $db_name = $row['firstname'] . " " . $row['lastname'];
+            //fwrite($myfile, "DB Name: " . $db_name . "\r\n");
+            if($db_name == $psy_name)
+                $psy_id = $row['id'];
         }
     }
     
-    // encode our PHP array into a JSON format and send that puppy back to the AJAX call
-    echo json_encode($options);
+    
+    $assignments = json_decode($_POST['assignments']);
+    
+ 
+    
+    fwrite($myfile, "Psy ID: " . $psy_id . "\r\n");
+
+
+    if($psy_id != -1) {
+        foreach($assignments as $assignment) {
+            $query =  "select * from tl_assignment WHERE id='".$assignment."'";
+            $result = $dbh->query($query);
+            if($result) {
+                while($row = $result->fetch_assoc()) {
+                    
+                    
+                    fwrite($myfile, "Assignment: " . $assignment . "\r\n");
+                    //fwrite($myfile, $shared. "\r\n");
+                    
+                    $shared = unserialize($row['psychologists_shared']);
+                    $shared[] = $psy_id;
+                    
+                    $update =  "update tl_assignment set psychologists_shared='".serialize($shared)."' WHERE id='".$assignment."'";
+                    $result_update = $dbh->query($update);
+                    
+                }
+            }
+            echo "success";
+        }
+    }
+    
+    fclose($myfile);
+    echo "fail";
+
