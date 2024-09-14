@@ -279,6 +279,16 @@ class FormHooks
         
     }
 
+
+
+
+
+
+
+
+
+
+
     // When a form is loaded
     public function onPrepareForm($fields, $formId, $form)
     {
@@ -344,7 +354,10 @@ class FormHooks
                             // Get total number of Transactions this Member has for this Assignment
                             $transactions_total = Transaction::countBy(['pid = ?', 'psychologist = ?'], [$assignment->id, $member->id]);
                             
-                            $label .= "<span id='transactions'>(" . $transactions_total . ")</span> ";
+                            // Check if Administrator (id = 2) is in this member's Groups, if so add our Transaction Total number
+                            if(in_array('2', $member->groups))
+                                $label .= "<span id='transactions'>(" . $transactions_total . ")</span> ";
+                            
                             $label .= "<span id='date'>" . date('m/d/y',$t) . "</span> - ";
                             $label .= "<span id='district'>" . $district->district_name. "</span> - ";
                             $label .= "<span id='school'>" . $school->school_name . "</span> - ";
