@@ -196,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('multiple'=> true, 'mandatory'=>false, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologistsShared'),
-            'sql'                     => "text NOT NULL default ''"
+            'sql' => "blob NULL"
         ),
         'district' => array
         (
