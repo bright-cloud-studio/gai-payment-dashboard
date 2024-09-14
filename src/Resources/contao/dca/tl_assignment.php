@@ -190,11 +190,11 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'psychologists_shared' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['psychologists_shared'],
-            'inputType'               => 'radio',
+            'inputType'               => 'checkbox',
             'filter'                  => true,
             'search'                  => true,
             'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('multiple'=> true, 'mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Psychologist'),
+            'eval'                    => array('multiple'=> true, 'mandatory'=>false, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologistsShared'),
             'sql'                     => "text NOT NULL default ''"
         ),
