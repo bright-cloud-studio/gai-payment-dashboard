@@ -373,6 +373,62 @@ class FormHooks
                                 'student' => $student->name
                             );
                         }
+                        
+                        
+                        
+                        
+                        // Get the Assignments using our specific criteria
+                        $assignments_shared = Assignment::findBy('psychologists_shared', $opt);
+                        
+                        echo "Shared: <br>";
+                        echo "<pre>";
+                        print_r($assignments_shared);
+                        echo "</pre>";
+                        die();
+
+                        // Loop through all the collected Assignments
+                        foreach($assignments_shared as $assignment) {
+                            $label = '';
+                            
+                            // Get the formated 'Date Created'
+                            $t = strtotime($assignment->date_created);
+                            
+                            // Get label for District
+                            $district = District::findOneBy('id', $assignment->district);
+
+                            // Get label for School
+                            $school = School::findOneBy('id', $assignment->school);
+                            
+                            // date_created - district - school - student
+                            $student = Student::findOneBy('id', $assignment->student);
+                            
+                            // Get total number of Transactions this Member has for this Assignment
+                            $transactions_total = Transaction::countBy(['pid = ?', 'psychologist = ?'], [$assignment->id, $member->id]);
+                            
+                            // Check if Administrator (id = 2) is in this member's Groups, if so add our Transaction Total number
+                            if(in_array('2', $member->groups))
+                                $label .= "<span id='transactions'>(" . $transactions_total . ")</span> ";
+                            
+                            $label .= "<span id='shared'>Shared by ASDF</span>";
+                            $label .= "<span id='date'>" . date('m/d/y',$t) . "</span> - ";
+                            $label .= "<span id='district'>" . $district->district_name. "</span> - ";
+                            $label .= "<span id='school'>" . $school->school_name . "</span> - ";
+                            $label .= "<span id='student'>" . $student->name . "</span>";
+                            
+                            
+                            // Format the assignment so it can be added to the form
+                            $options[] = array (
+                                'value' => $assignment->id,
+                                'label' => $label,
+                                'district' => $district->district_name,
+                                'school' => $school->school_name,
+                                'student' => $student->name
+                            );
+                        }
+                        
+                        
+                        
+                        
 
                     // Save back as a serialized array
                     $field->options = serialize($options);
