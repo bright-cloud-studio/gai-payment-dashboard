@@ -48,4 +48,4 @@ $GLOBALS['TL_LANG']['tl_assignment']['notes']                     = array('Notes
 
 
 $GLOBALS['TL_LANG']['tl_assignment']['shared_legend']              = 'Shared Details';
-$GLOBALS['TL_LANG']['tl_assignment']['shared']                     = array('Psychologists Shared With', 'Determines who this Assignment is Shared with');
+$GLOBALS['TL_LANG']['tl_assignment']['psychologists_shared']       = array('Psychologists Shared With', 'Determines who this Assignment is Shared with');
