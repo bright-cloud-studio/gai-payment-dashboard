@@ -45,3 +45,7 @@ $GLOBALS['TL_LANG']['tl_assignment']['report_submitted']          = array('Repor
 
 $GLOBALS['TL_LANG']['tl_assignment']['notes_legend']              = 'Notes';
 $GLOBALS['TL_LANG']['tl_assignment']['notes']                     = array('Notes', 'Enter any Notes you would like linked to this Assignment');
+
+
+$GLOBALS['TL_LANG']['tl_assignment']['shared_legend']              = 'Shared Details';
+$GLOBALS['TL_LANG']['tl_assignment']['shared']                     = array('Psychologists Shared With', 'Determines who this Assignment is Shared with');
