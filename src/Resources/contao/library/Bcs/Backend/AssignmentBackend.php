@@ -137,6 +137,24 @@ class AssignmentBackend extends Backend
 		return $psychologists;
 	}
 
+    // Get Psychologists as select menu
+    public function getPsychologistsShared(DataContainer $dc) { 
+
+        // Hold the psys
+        $psychologists = array();
+
+        // Use the DB to grab all of our enabled members, aka our psychologists
+		$this->import('Database');
+		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0")->execute();
+		while($result->next())
+		{
+            // Add ti array with ID as the value and firstname lastname as the label
+            $psychologists = $psychologists + array($result->id => ($result->firstname . " " . $result->lastname));   
+		}
+
+		return $psychologists;
+	}
+
     // Get Districts as select menu
     public function getDistricts(DataContainer $dc) { 
 
