@@ -187,6 +187,17 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
+        'psychologists_shared' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['psychologists_shared'],
+            'inputType'               => 'radio',
+            'filter'                  => true,
+            'search'                  => true,
+            'flag'                    => DataContainer::SORT_ASC,
+            'eval'                    => array('multiple'=> true, 'mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Psychologist'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologistsShared'),
+            'sql'                     => "text NOT NULL default ''"
+        ),
         'district' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['district'],
