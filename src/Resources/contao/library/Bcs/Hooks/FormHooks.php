@@ -34,6 +34,13 @@ class FormHooks
             // Create transaction using submitted data
             $_SESSION['assignment_uuid'] = $submittedData['assignment_uuid'];
         }
+        
+        // Psych Work Form
+        else if($formData['formID'] == 'psych_work_form') {
+            // Create transaction using submitted data
+            echo "clever bastard!";
+            die();
+        }
             
         // Assignment Generate Transaction Form
         else if($formData['formID'] == 'assignment_generate_transaction') {
@@ -333,7 +340,8 @@ class FormHooks
                         $member = FrontendUser::getInstance();
                          
                         // Get the Assignments using our specific criteria
-                        $assignments = Assignment::findBy('psychologist', $member->id, $opt);
+                        $assignments = Assignment::findBy(['psychologist = ?', 'published = ?'], [$member->id, '1'], $opt);
+        
 
                         // Loop through all the collected Assignments
                         foreach($assignments as $assignment) {
@@ -352,7 +360,7 @@ class FormHooks
                             $student = Student::findOneBy('id', $assignment->student);
                             
                             // Get total number of Transactions this Member has for this Assignment
-                            $transactions_total = Transaction::countBy(['pid = ?', 'psychologist = ?'], [$assignment->id, $member->id]);
+                            $transactions_total = Transaction::countBy(['pid = ?'], [$assignment->id]);
                             
                             // Check if Administrator (id = 2) is in this member's Groups, if so add our Transaction Total number
                             if(in_array('2', $member->groups))
@@ -378,52 +386,52 @@ class FormHooks
                         
                         
                         // Get the Assignments using our specific criteria
-                        $assignments_shared = Assignment::findBy('psychologists_shared', $opt);
-                        
-                        echo "Shared: <br>";
-                        echo "<pre>";
-                        print_r($assignments_shared);
-                        echo "</pre>";
-                        die();
+                        $assignments_shared = Assignment::findAllByShared($member->id, $opt);
 
                         // Loop through all the collected Assignments
                         foreach($assignments_shared as $assignment) {
-                            $label = '';
                             
-                            // Get the formated 'Date Created'
-                            $t = strtotime($assignment->date_created);
+                            if(in_array($member->id, unserialize($assignment->psychologists_shared))) {
                             
-                            // Get label for District
-                            $district = District::findOneBy('id', $assignment->district);
-
-                            // Get label for School
-                            $school = School::findOneBy('id', $assignment->school);
-                            
-                            // date_created - district - school - student
-                            $student = Student::findOneBy('id', $assignment->student);
-                            
-                            // Get total number of Transactions this Member has for this Assignment
-                            $transactions_total = Transaction::countBy(['pid = ?', 'psychologist = ?'], [$assignment->id, $member->id]);
-                            
-                            // Check if Administrator (id = 2) is in this member's Groups, if so add our Transaction Total number
-                            if(in_array('2', $member->groups))
-                                $label .= "<span id='transactions'>(" . $transactions_total . ")</span> ";
-                            
-                            $label .= "<span id='shared'>Shared by ASDF</span>";
-                            $label .= "<span id='date'>" . date('m/d/y',$t) . "</span> - ";
-                            $label .= "<span id='district'>" . $district->district_name. "</span> - ";
-                            $label .= "<span id='school'>" . $school->school_name . "</span> - ";
-                            $label .= "<span id='student'>" . $student->name . "</span>";
-                            
-                            
-                            // Format the assignment so it can be added to the form
-                            $options[] = array (
-                                'value' => $assignment->id,
-                                'label' => $label,
-                                'district' => $district->district_name,
-                                'school' => $school->school_name,
-                                'student' => $student->name
-                            );
+                                $label = '';
+                                
+                                // Get the formated 'Date Created'
+                                $t = strtotime($assignment->date_created);
+                                
+                                // Get label for District
+                                $district = District::findOneBy('id', $assignment->district);
+    
+                                // Get label for School
+                                $school = School::findOneBy('id', $assignment->school);
+                                
+                                // date_created - district - school - student
+                                $student = Student::findOneBy('id', $assignment->student);
+                                
+                                // Get total number of Transactions this Member has for this Assignment
+                                $transactions_total = Transaction::countBy(['pid = ?'], [$assignment->id]);
+                                
+                                // Check if Administrator (id = 2) is in this member's Groups, if so add our Transaction Total number
+                                if(in_array('2', $member->groups))
+                                    $label .= "<span id='transactions'>(" . $transactions_total . ")</span> ";
+                                
+                                $psy = MemberModel::findBy('id', $assignment->psychologist);
+                                
+                                $label .= "<span id='shared'>(Shared by ".$psy->firstname ." ". $psy->lastname.")</span> ";
+                                $label .= "<span id='date'>" . date('m/d/y',$t) . "</span> - ";
+                                $label .= "<span id='district'>" . $district->district_name. "</span> - ";
+                                $label .= "<span id='school'>" . $school->school_name . "</span> - ";
+                                $label .= "<span id='student'>" . $student->name . "</span>";
+                                
+                                
+                                // Format the assignment so it can be added to the form
+                                $options[] = array (
+                                    'value' => $assignment->id,
+                                    'label' => $label,
+                                    'district' => $district->district_name,
+                                    'school' => $school->school_name,
+                                    'student' => $student->name
+                                );
+                            }
                         }
                         
                         
@@ -453,7 +461,8 @@ class FormHooks
             foreach($fields as $field) {
                 
                 // Hidden Fields
-                if($field->name == 'psychologist') { $field->value = $assignment->psychologist; }
+                $member = FrontendUser::getInstance();
+                if($field->name == 'psychologist') { $field->value = $member->id; }
                 if($field->name == 'report_submitted') { $field->value = $assignment->report_submitted; }
                 if($field->name == 'service_assigned') { $field->value = $assignment->type_of_testing; }
                 
