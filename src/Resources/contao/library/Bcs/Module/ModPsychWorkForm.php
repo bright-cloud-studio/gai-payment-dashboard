@@ -89,7 +89,7 @@ class ModPsychWorkForm extends \Contao\Module
             
             // Convert IDs to labels
             $district = District::findOneBy('id', $assignment->district);
-            $template_assignments[$assignment->id]['district'] = $district->district_name;
+            $template_assignments[$assignment->id]['district'] = "<input type='text' value='" . $district->district_name . "'>";
             
             $school = School::findOneBy('id', $assignment->school);
             $template_assignments[$assignment->id]['school'] = $school->school_name;
