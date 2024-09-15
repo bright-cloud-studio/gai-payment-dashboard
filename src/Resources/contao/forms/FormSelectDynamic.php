@@ -11,6 +11,7 @@
 namespace Bcs\Forms;
 
 use Contao\StringUtil;
+use Contao\Widget;
 
 /**
  * Class FormSelect
