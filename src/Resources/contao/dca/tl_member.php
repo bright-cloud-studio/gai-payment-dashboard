@@ -30,5 +30,5 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['price_tier_display'] = array
     'flag'                    => DataContainer::SORT_ASC,
     'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'clr', 'hideInput'=>true),
     'options_callback'	      => array('Bcs\Backend\ServiceBackend', 'getPriceTierDisplay'),
-    'sql'                     => "TEXT(20000) NOT NULL default ''"
+    'sql' => "blob NULL"
 );
