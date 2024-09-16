@@ -39,10 +39,6 @@ $GLOBALS['BE_MOD']['gai_data']['service'] = array(
 	'tables' => array('tl_service')
 );
 
-
-$GLOBALS['BE_MOD']['accounts']['member']['tables'] = 'tl_member_gai';
-
-
 /* Back end modules - Work DCAs */
 $GLOBALS['TL_LANG']['MOD']['gai'][0] = "Invoices - Generator";
 
