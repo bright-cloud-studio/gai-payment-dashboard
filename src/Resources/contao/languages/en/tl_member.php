@@ -13,4 +13,4 @@
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_member']['price_tier_legend']          = 'Price Tier Details';
 $GLOBALS['TL_LANG']['tl_member']['price_tier']                 = array('Price Tier', 'Select the Price Tier this Member belongs to.');
-$GLOBALS['TL_LANG']['tl_member']['price_tier_display']         = array('Service Prices Display', 'Displays the prices for Services within this Price Tier. Used for reference only.');
+$GLOBALS['TL_LANG']['tl_member']['price_tier_display']         = array('DISPLAY ONLY - Service Tier Prices', 'Displays the prices for Services within this Price Tier. Used for reference only.');
