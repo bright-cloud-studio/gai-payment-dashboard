@@ -17,12 +17,20 @@
 		<tbody>
 			
 			<?php
-				foreach ($this->transactions as$transaction) {
+				foreach ($this->transactions as $transaction) {
+					
+						$data = "";
+						$data .= "data-service-label='". $transaction['service_label'] ."'";
+						$data .= "data-meeting-date='". date('m/d/y', $transaction['meeting_date']) ."'";
+						$data .= "data-meeting-start='". $transaction['meeting_start'] ."'";
+						$data .= "data-meeting-end='". $transaction['meeting_end'] ."'";
+						$data .= "data-meeting-duration='". $transaction['meeting_duration'] ."'";
+					
 						$buffer = '';
-						$buffer .= "<tr>";
+						$buffer .= "<tr " . $data . ">";
 						$buffer .= "<td></td>";
-						$buffer .= "<td>" . $transaction['date_submitted'] . "</td>";
-						$buffer .= "<td>" . $transaction['service'] . "</td>";
+						$buffer .= "<td>" . date('m/d/y', $transaction['date_submitted']) . "</td>";
+						$buffer .= "<td>" . $transaction['service_label'] . "</td>";
 						$buffer .= "<td>" . $transaction['price'] . "</td>";
 						$buffer .= "</tr>";
 						echo $buffer;
