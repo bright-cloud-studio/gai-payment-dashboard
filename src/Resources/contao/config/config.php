@@ -40,7 +40,7 @@ $GLOBALS['BE_MOD']['gai_data']['service'] = array(
 );
 
 
-$GLOBALS['BE_MOD']['accounts']['member']['tables']    => 'tl_member_gai';
+$GLOBALS['BE_MOD']['accounts']['member']['tables'] = 'tl_member_gai';
 
 
 /* Back end modules - Work DCAs */
