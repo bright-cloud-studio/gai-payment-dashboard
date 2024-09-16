@@ -111,39 +111,8 @@ class FormSelectDynamic extends Widget
 	 */
 	public function validate()
 	{
+
 		$mandatory = $this->mandatory;
-		$options = $this->getPost($this->strName);
-
-		// Check if there is at least one value
-		if ($mandatory && \is_array($options))
-		{
-			foreach ($options as $option)
-			{
-				if (\strlen($option))
-				{
-					$this->mandatory = false;
-					break;
-				}
-			}
-		}
-
-		$varInput = $this->validator($options);
-
-		// Check for a valid option (see #4383)
-		if (!empty($varInput) && !$this->isValidOption($varInput))
-		{
-			$this->addError($GLOBALS['TL_LANG']['ERR']['invalid']);
-		}
-
-		// Add class "error"
-		if ($this->hasErrors())
-		{
-			$this->class = 'error';
-		}
-		else
-		{
-			$this->varValue = $varInput;
-		}
 
 		// Reset the property
 		if ($mandatory)
