@@ -116,7 +116,7 @@ class ServiceBackend extends Backend
             // loop through each service
             foreach($services as $service) {
 
-                $options[$service->name][] = "$" . $service->{$tier};
+                $options[] = "<span style='font-weight: 600;>" . $service->name . ":</span> $" . $service->{$tier};
                 
             }
 
