@@ -1,0 +1,64 @@
+
+<!-- Include DataTables for better formatting -->
+
+<div class="mod_psych_work_form size100 marbot60">
+	<h2>Your Psych Work Form</h2>
+
+
+	<table id="psych_work_form" class="display compact cell-border hover order-column row-borders stripe" style="width:100%">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Created</th>
+				<th>30 Day</th>
+				<th>45 Day</th>
+				<th>District</th>
+				<th>School</th>
+				<th>Student</th>
+				<th>Initial / Re-Eval</th>
+				<th>Type of Testing</th>
+				<th>Meeting Required</th>
+				<th>Testing Date</th>
+				<th>Meeting Date</th>
+				<th>Contact Info - Parent</th>
+				<th>Contact Info - Teacher</th>
+				<th>Team Chair</th>
+				<th>Email</th>
+				<th>Report Submitted</th>
+				<th>Notes</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			<?php
+				foreach ($this->assignments as $assignment) {
+					$buffer = '';
+					$buffer .= "<tr>";
+					$buffer .= "<td></td>";
+					$buffer .= "<td>" . $assignment['date_created'] . "</td>";
+					$buffer .= "<td>" . $assignment['date_30_day'] . "</td>";
+					$buffer .= "<td>" . $assignment['date_45_day'] . "</td>";
+					$buffer .= "<td>" . $assignment['district'] . "</td>";
+					$buffer .= "<td>" . $assignment['school'] . "</td>";
+					$buffer .= "<td>" . $assignment['student'] . "</td>";
+					$buffer .= "<td>" . $assignment['initial_reeval'] . "</td>";
+					$buffer .= "<td>" . $assignment['type_of_testing'] . "</td>";
+					$buffer .= "<td>" . $assignment['meeting_required'] . "</td>";
+					$buffer .= "<td>" . $assignment['testing_date'] . "</td>";
+					$buffer .= "<td>" . $assignment['meeting_date'] . "</td>";
+					$buffer .= "<td>" . $assignment['contact_info_parent'] . "</td>";
+					$buffer .= "<td>" . $assignment['contact_info_teacher'] . "</td>";
+					$buffer .= "<td>" . $assignment['team_chair'] . "</td>";
+					$buffer .= "<td>" . $assignment['email'] . "</td>";
+					$buffer .= "<td>" . $assignment['report_submitted'] . "</td>";
+					$buffer .= "<td>" . $assignment['notes'] . "</td>";
+					$buffer .= "</tr>";
+					echo $buffer;
+				}
+				
+			?>
+
+		</tbody>
+	</table>
+
+</div>
