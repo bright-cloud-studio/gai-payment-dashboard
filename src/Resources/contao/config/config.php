@@ -66,6 +66,7 @@ $GLOBALS['FE_MOD']['gai']['mod_list_services']           = 'Bcs\Module\ModListSe
 $GLOBALS['FE_MOD']['gai']['mod_list_transactions']       = 'Bcs\Module\ModListTransactions';
 $GLOBALS['FE_MOD']['gai']['mod_list_assignments_filter'] = 'Bcs\Module\ModListAssignmentsFilter';
 $GLOBALS['FE_MOD']['gai']['mod_psych_work_form']         = 'Bcs\Module\ModPsychWorkForm';
+$GLOBALS['FE_MOD']['gai']['mod_review_transactions']     = 'Bcs\Module\ModReviewTransactions';
 
 
 /* Models */
