@@ -10,16 +10,16 @@
         die("Connection failed: " . $dbh->connect_error);
     }
     
-    $myfile = fopen("logs/psy_work_form_save_district_log_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
+    $myfile = fopen("logs/psy_work_form_save_date_of_birth_log_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
     
     // Get data from ajax
-    $assignment_id = $_POST['assignment_id'];
-    $district = $_POST['district'];
+    $student_id = $_POST['student_id'];
+    $date_of_birth = $_POST['date_of_birth'];
     
-    fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
-    fwrite($myfile, "SAVING: District: " . $district . "\r\n");
+    fwrite($myfile, "SAVING: Student ID: " . $student_id . "\r\n");
+    fwrite($myfile, "SAVING: Date of Birth: " . $date_of_birth . "\r\n");
 
-    $update =  "update tl_assignment set district='".$district."' WHERE id='".$assignment_id."'";
+    $update =  "update tl_student set date_of_birth='".$date_of_birth."' WHERE id='".$student_id."'";
     $result_update = $dbh->query($update);
 
     fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
