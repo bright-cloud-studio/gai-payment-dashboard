@@ -151,6 +151,7 @@ class ModPsychWorkForm extends \Contao\Module
             
             
             // Student
+            
             if($is_admin) {
                 $template_assignments[$assignment->id]['student'] .= "<select name='student_$assignment->id' class='student' id='student_$assignment->id'>";
                 $template_assignments[$assignment->id]['student'] .= "<option value='' selected disabled>Select a Student</option>";
@@ -168,6 +169,46 @@ class ModPsychWorkForm extends \Contao\Module
             } else {
                 $student = Student::findOneBy('id', $assignment->student );
                 $template_assignments[$assignment->id]['student'] = $student->name;
+            }
+            
+            
+            
+            // Student - D.O.B.
+            if($is_admin) {
+                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
+                $template_assignments[$assignment->id]['date_of_birth'] = "<input value='$student->date_of_birth' name='date_of_birth_$assignment->student'class='date_of_birth' id='date_of_birth_$assignment->student' autocomplete='off'>";
+            } else {
+                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
+                $template_assignments[$assignment->id]['date_of_birth'] = $student->date_of_birth;
+            }
+            
+            
+            
+            // Student - Grade.
+            if($is_admin) {
+                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
+                $template_assignments[$assignment->id]['grade'] = "<input value='$student->grade' name='grade_$assignment->student'class='grade' id='grade_$assignment->student' autocomplete='off'>";
+            } else {
+                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
+                $template_assignments[$assignment->id]['grade'] = $student->grade;
+            }
+            
+            // Student - LASID.
+            if($is_admin) {
+                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
+                $template_assignments[$assignment->id]['lasid'] = "<input value='$student->lasid' name='lasid_$assignment->student'class='lasid' id='lasid_$assignment->student' autocomplete='off'>";
+            } else {
+                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
+                $template_assignments[$assignment->id]['lasid'] = $student->lasid;
+            }
+            
+            // Student - SASID.
+            if($is_admin) {
+                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
+                $template_assignments[$assignment->id]['sasid'] = "<input value='$student->sasid' name='sasid_$assignment->student'class='sasid' id='sasid_$assignment->student' autocomplete='off'>";
+            } else {
+                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
+                $template_assignments[$assignment->id]['sasid'] = $student->sasid;
             }
 
 
