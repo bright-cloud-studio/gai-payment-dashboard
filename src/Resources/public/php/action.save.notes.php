@@ -17,9 +17,9 @@
     $notes = $_POST['notes'];
     
     fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
-    fwrite($myfile, "SAVING: Notes: " . $notes . "\r\n");
+    fwrite($myfile, "SAVING: Notes: " . addslashes($notes) . "\r\n");
 
-    $update =  "update tl_assignment set notes='".$notes."' WHERE id='".$assignment_id."'";
+    $update =  "update tl_assignment set notes='".addslashes($notes)."' WHERE id='".$assignment_id."'";
     $result_update = $dbh->query($update);
 
     fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
