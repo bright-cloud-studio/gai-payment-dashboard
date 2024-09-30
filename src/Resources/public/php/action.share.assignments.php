@@ -14,7 +14,7 @@
     $psy_name = $_POST['psychologist'];
     $psy_id = -1;
     
-    $myfile = fopen("/logs/share_log_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
+    $myfile = fopen("logs/share_log_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
     fwrite($myfile, "Psy Name: " . $psy_name . "\r\n");
     
     $query_psy =  "select * from tl_member WHERE disable='0'";
