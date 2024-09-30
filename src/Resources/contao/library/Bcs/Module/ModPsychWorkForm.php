@@ -367,7 +367,7 @@ class ModPsychWorkForm extends \Contao\Module
             
             // Notes
             if(1 == 1) {
-                $template_assignments[$assignment->id]['notes'] = "<input value='$assignment->notes' name='notes_$assignment->id' class='notes' id='notes_$assignment->id' autocomplete='off'>";
+                $template_assignments[$assignment->id]['notes'] = "<input value='".htmlspecialchars($assignment->notes, ENT_QUOTES) ."' name='notes_$assignment->id' class='notes' id='notes_$assignment->id' autocomplete='off'>";
             } else {
                 $template_assignments[$assignment->id]['notes'] = $assignment->notes;
             }
