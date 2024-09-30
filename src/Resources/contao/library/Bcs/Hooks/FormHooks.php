@@ -67,6 +67,41 @@ class FormHooks
             // Save our new Transaction
             $transaction->save();   
         }
+        
+        // Assignment Add Meeting as a Covering Psychologist form
+        else if($formData['formID'] == 'assignment_add_meeting') {
+            
+            // Create a new Transaction
+            $transaction = new TransactionMisc();
+            
+            // Apply values
+            $transaction->pid = 0;
+            $transaction->tstamp = time();
+            $member = FrontendUser::getInstance();
+            $transaction->psychologist = $member->id;
+            
+            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+            
+            $transaction->district = $submittedData['district'];
+            $transaction->school = $submittedData['school'];
+            $transaction->student_initials = $submittedData['student_initials'];
+            $transaction->lasid = $submittedData['lasid'];
+            $transaction->sasid = $submittedData['sasid'];
+
+            
+            $transaction->service = $submittedData['service'];
+            $service = Service::findBy('id', $transaction->service);
+            $transaction->service_label = "Covering - " . $service->name;
+            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+            $transaction->meeting_date = strtotime($submittedData['meeting_date']);
+            $transaction->meeting_start = $submittedData['start_time'];
+            $transaction->meeting_end = $submittedData['end_time'];
+            $transaction->meeting_duration = $this->timeDifferenceInMinutes($submittedData['start_time'],$submittedData['end_time']);
+            $transaction->notes = $submittedData['notes'];
+            
+            // Save our new Transaction
+            $transaction->save();  
+        }
 
         // Assignment Misc. Billing Form
         else if($formData['formID'] == 'assignment_misc_billing') {
@@ -184,7 +219,7 @@ class FormHooks
 
         // Assignment Editing Services form
         else if($formData['formID'] == 'assignment_editing_services') {
-
+            
             // Create a new Transaction
             $transaction = new TransactionMisc();
             
