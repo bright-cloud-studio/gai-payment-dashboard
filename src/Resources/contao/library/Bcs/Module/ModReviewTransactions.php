@@ -19,6 +19,7 @@ use Bcs\Model\School;
 use Bcs\Model\Service;
 use Bcs\Model\Student;
 use Bcs\Model\Transaction;
+use Bcs\Model\TransactionMisc;
 
 use Contao\BackendTemplate;
 use Contao\System;
@@ -32,6 +33,7 @@ class ModReviewTransactions extends \Contao\Module
     protected $strTemplate = 'mod_review_transactions';
     
     protected static $template_transactions = array();
+    protected static $template_transactions_misc = array();
     protected static $template_assignments = array();
     
     public $is_admin = false;
@@ -78,33 +80,130 @@ class ModReviewTransactions extends \Contao\Module
 
         $transactions = Transaction::findBy(['psychologist = ?'], [$member->id]);
         
+        $transactions_total = 0.00;
+        
         foreach($transactions as $transaction) {
 
-            $assignment = Assignment::findOneBy('id', $transactiom->pid);
+            $assignment = Assignment::findOneBy('id', $transaction->pid);
+            
+            $template_transactions[$transaction->id]['id'] = $transaction->id;
 
+            // Reviewed
+            if($transaction->published == '1')
+                $template_transactions[$transaction->id]['reviewed'] = 'Reviewed';
+            else
+                $template_transactions[$transaction->id]['reviewed'] = 'Unreviewed';
+            
             // District
             $district = District::findOneBy('id', $assignment->district);
-            $template_assignments[$assignment->id]['district'] = $district->name;
+            $template_transactions[$transaction->id]['district'] = $district->district_name;
             // School
             $school = School::findOneBy('id', $assignment->school);
-            $template_assignments[$assignment->id]['school'] = $school->school_name;
+            $template_transactions[$transaction->id]['school'] = $school->school_name;
             // Student
             $student = Student::findOneBy('id', $assignment->student );
-            $template_assignments[$assignment->id]['student'] = $student->name;
+            $template_transactions[$transaction->id]['student'] = $student->name;
             // Lasid
-            $template_assignments[$assignment->id]['student'] = $student->lasid;
+            $template_transactions[$transaction->id]['lasid'] = $student->lasid;
             // Sasid
-            $template_assignments[$assignment->id]['student'] = $student->sasid;
+            $template_transactions[$transaction->id]['sasid'] = $student->sasid;
+            
             // Service
             $service = Service::findOneBy('service_code', $transaction->service);
-            $template_assignments[$assignment->id]['service'] = $service->name;
+            if($transaction->meeting_duration > 0) {
+                $template_transactions[$transaction->id]['service'] = $service->name . " (" . $transaction->meeting_duration . " minutes)";
+            } else {
+                $template_transactions[$transaction->id]['service'] = $service->name;
+            }
+            
+            
             // Price
-            $template_assignments[$transaction->id]['price'] = $transaction->price;
+            if($transaction->price != '') {
+                if($service->service_code == 1) {
+                    
+                    $dur = ceil(intval($transaction->meeting_duration) / 60);
+                    $final_price = $dur * $transaction->price;
+                    
+                    $template_transactions[$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', '');
+                    $transactions_total += number_format(floatval($final_price), 2, '.', '');
+                } else if($service->service_code == 19) {
+                    $final_price = $transaction->meeting_duration * 0.50;
+                    $template_transactions[$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', '');
+                    $transactions_total += number_format(floatval($final_price), 2, '.', '');
+                } else {
+                    $template_transactions[$transaction->id]['price'] = number_format(floatval($transaction->price), 2, '.', '');
+                    $transactions_total += number_format(floatval($transaction->price), 2, '.', '');
+                }
+            }
+            
+            
+        }
+        
+        
+        $transactions_misc = TransactionMisc::findBy(['psychologist = ?'], [$member->id]);
+        foreach($transactions_misc as $transaction) {
+
+            $assignment = Assignment::findOneBy('id', $transaction->pid);
+            
+            $template_transactions_misc[$transaction->id]['id'] = $transaction->id;
+
+            // Reviewed
+            if($transaction->published == '1')
+                $template_transactions_misc[$transaction->id]['reviewed'] = 'Reviewed';
+            else
+                $template_transactions_misc[$transaction->id]['reviewed'] = 'Unreviewed';
+            
+            // District
+            $district = District::findOneBy('id', $assignment->district);
+            $template_transactions_misc[$transaction->id]['district'] = $district->district_name;
+            // School
+            $school = School::findOneBy('id', $assignment->school);
+            $template_transactions_misc[$transaction->id]['school'] = $school->school_name;
+            // Student
+            $student = Student::findOneBy('id', $assignment->student );
+            $template_transactions_misc[$transaction->id]['student'] = $student->name;
+            // Lasid
+            $template_transactions_misc[$transaction->id]['lasid'] = $student->lasid;
+            // Sasid
+            $template_transactions_misc[$transaction->id]['sasid'] = $student->sasid;
+            
+            // Service
+            $template_transactions_misc[$transaction->id]['service'] = $transaction->service_label;
+            
+            // Service
+            $service = Service::findOneBy('service_code', $transaction->service);
+            if($transaction->meeting_duration > 0) {
+                $template_transactions_misc[$transaction->id]['service'] = $service->name . " (" . $transaction->meeting_duration . " minutes)";
+            } else {
+                $template_transactions_misc[$transaction->id]['service'] = $service->name;
+            }
+            
+            // Price
+            if($transaction->price != '') {
+                if($service->service_code == 1) {
+                    $dur = ceil(intval($transaction->meeting_duration) / 60);
+                    $final_price = $dur * $transaction->price;
+                    
+                    $template_transactions_misc[$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', '');
+                    $transactions_total += number_format(floatval($final_price), 2, '.', '');
+                } else if($service->service_code == 19) {
+                    
+                    
+                    $final_price = $transaction->meeting_duration * 0.50;
+                    $template_transactions_misc[$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', '');
+                    $transactions_total += number_format(floatval($final_price), 2, '.', '');
+                } else {
+                    $template_transactions_misc[$transaction->id]['price'] = number_format(floatval($transaction->price), 2, '.', '');
+                    $transactions_total += number_format(floatval($transaction->price), 2, '.', '');
+                }
+            }
             
             
         }
         
         $this->Template->transactions = $template_transactions;
+        $this->Template->transactions_misc = $template_transactions_misc;
+        $this->Template->transactions_total = number_format($transactions_total, 2, '.', '');
         
     }
   
