@@ -1,4 +1,0 @@
-services:
-    Bcs\Cron\GenerateInvoices:
-        tags:
-            - { name: contao.cronjob, interval: minutely }
