@@ -154,21 +154,24 @@ class ModReviewTransactions extends \Contao\Module
                 $template_transactions_misc[$transaction->id]['reviewed'] = 'Unreviewed';
             
             // District
-            $district = District::findOneBy('id', $assignment->district);
+            $district = District::findOneBy('id', $transaction->district);
             $template_transactions_misc[$transaction->id]['district'] = $district->district_name;
             // School
-            $school = School::findOneBy('id', $assignment->school);
+            $school = School::findOneBy('id', $transaction->school);
             $template_transactions_misc[$transaction->id]['school'] = $school->school_name;
+
+            
             // Student
-            $student = Student::findOneBy('id', $assignment->student );
-            $template_transactions_misc[$transaction->id]['student'] = $student->name;
+            //$student = Student::findOneBy('id', $transaction->student );
+            
+            $template_transactions_misc[$transaction->id]['student'] = $transaction->student_initials;
             // Lasid
-            $template_transactions_misc[$transaction->id]['lasid'] = $student->lasid;
+            $template_transactions_misc[$transaction->id]['lasid'] = $transaction->lasid;
             // Sasid
-            $template_transactions_misc[$transaction->id]['sasid'] = $student->sasid;
+            $template_transactions_misc[$transaction->id]['sasid'] = $transaction->sasid;
             
             // Service
-            $template_transactions_misc[$transaction->id]['service'] = $transaction->service_label;
+            //$template_transactions_misc[$transaction->id]['service'] = $transaction->service_label;
             
             // Service
             $service = Service::findOneBy('service_code', $transaction->service);
