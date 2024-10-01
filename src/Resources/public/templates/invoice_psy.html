@@ -1,0 +1,115 @@
+<html>
+	<head>
+		<style>
+		
+		    /* These are necessary to remove the margin on the paper */
+		    @page { margin: 5px; }
+            body { margin: 5px; }
+
+            /* Images */
+			.logo {
+			    width: 263px;
+			    height: 68px;
+			}
+			.product_image {
+			    width: 400px;
+			    height: 350px;
+			}
+			
+			label {
+			    width: 10px;
+			    height: 10px;
+			    display: inline-block;
+			}
+			
+			input { display: none; }
+			
+			
+			legend { display: none; }
+			
+			
+			/* Colors */
+			fieldset { border: 0; }
+            fieldset label {
+                width: 48px;
+                height: 48px;
+                margin: 0;
+                padding: 0;
+                border-radius: 5px;
+                border: 1px solid black;
+                margin-bottom: 10px;
+            }
+			
+			
+			/* Table */
+			table {
+			    width: 100%;
+			    height: auto;
+			}
+			table , td, th {
+            	border: 1px solid #595959;
+            	border-collapse: collapse;
+            	border: 0;
+            }
+
+		</style>
+	</head>
+	<body>
+	    
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="2" style="padding-bottom: 15px;">
+                        <img id="logo" class="logo" src="https://acousticalproducts.brightcloudstudioserver.com/files/structure/images/logos/logo_png.png">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%;">
+                        <img id="product_image" class="product_image" src="{{img_src}}">
+                    </td>
+                    <td style="width: 50%; padding-left: 15px;">
+                        <h1>{{product::name}}</h1>
+                        {{product::description}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        
+                        <div style="margin-bottom: 15px;">
+                            <h3>Specifications</h3>
+                            {{product::specifications}}
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <h3>Fire Rating</h3>
+                            {{product::fire_rating}}
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <h3>Performance</h3>
+                            {{product::performance}}
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <h3>Notes</h3>
+                            {{product::notes}}
+                        </div>
+                        
+                        <h3>Warranty</h3>
+                        <p>All products are warranted against workmanship and manufacturing defects for two (2) years from the date of purchase.</p>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        
+                        <h3>Color Options Available</h3>
+                        {{options::html}}
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+		
+	</body>
+</html>
