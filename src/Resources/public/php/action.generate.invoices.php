@@ -87,5 +87,5 @@
 	
 	$output = $dompdf->output();
     $file_addr = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/';
-    file_put_contents($file_addr . 'Test.pdf', $output);
+    file_put_contents($file_addr . 'Test_' . time() . '.pdf', $output);
 
