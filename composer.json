@@ -19,7 +19,8 @@
     },
     "require":{
         "php": "^7.3 || ^8.0",
-        "contao/core-bundle": "^4.9 || ^5.3"
+        "contao/core-bundle": "^4.9 || ^5.3",
+        "dompdf/dompdf": "v3.0.0"
     },
     "extra":{
         "contao-manager-plugin": "Bcs\\PaymentDashboardBundle\\ContaoManager\\Plugin"
