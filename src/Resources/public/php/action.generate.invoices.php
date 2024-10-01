@@ -39,37 +39,9 @@
 	/*******************/
   	
     // Load our HTML template
-    $html = file_get_contents('../templates/invoice_psy.html', true);
+    $html = file_get_contents('/../templates/invoice_psy.html', true);
     
-    // Replace our tags with the proper values
-    //$html = str_replace("{{img_src}}", $img_src, $html);
     
-    // Find all instances of our tag brackets '{{tag}}' and store them in the $tags array
-    preg_match_all('/\{{2}(.*?)\}{2}/is', $html, $tags);
-    
-    // Loop through those tags and replace them with the correct product data
-    foreach($tags[0] as $tag) {
-        
-        // Remove brackets from our tag
-        $cleanTag = str_replace("{{","",$tag);
-        $cleanTag = str_replace("}}","",$cleanTag);
-        
-        // Explode our tag into two parts
-	    $explodedTag = explode("::", $cleanTag);
-	    
-	    // Do different things based on the first part of our tag
-	    switch($explodedTag[0]) {
-
-		    case 'site_url':
-		        $buffer = "https://" . $_SERVER['SERVER_NAME'];
-                $html = str_replace($tag, $buffer, $html);
-		        
-		        break;
-		        
-		  
-	    }
-        
-    }
     
     
     /***********************/
@@ -78,6 +50,7 @@
 	
     // Load our HTML into dompdf
 	$dompdf->loadHtml($html);
+	//$dompdf->loadHtml('hello world');
 	
 	// Set our paper size and orientation
 	$dompdf->setPaper('A4', 'portrait');
@@ -87,5 +60,6 @@
 	
 	$output = $dompdf->output();
     $file_addr = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/';
-    file_put_contents($file_addr . 'Test_' . time() . '.pdf', $output);
+    //file_put_contents($file_addr . 'Test_' . time() . '.pdf', $output);
+    file_put_contents($file_addr . 'LOG_' . time() . '.html', $html);
 
