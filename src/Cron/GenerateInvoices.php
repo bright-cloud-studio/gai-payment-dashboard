@@ -7,17 +7,11 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsCronJob;
 #[AsCronJob('minutely')]
 class InactiveMembershipCron
 {
-    use ErrorHandlingTrait;
-
-    public function __construct(
-        private readonly ContaoFramework $framework,
-        private readonly Connection $connection,
-    ) {
-    }
-
     public function __invoke(): void
     {
+        $myfile = fopen($_SERVER['DOCUMENT_ROOT'] . "cron_log_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
+        fwrite($myfile, "CRON Triggered! \n");
+        fclose($myfile);
         
-      
     }
 }
