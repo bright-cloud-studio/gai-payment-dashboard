@@ -611,6 +611,40 @@ class FormHooks
                     // Save back as a serialized array
                     $field->options = serialize($options);
                 }
+                
+                // If this is our assignment uuid radio field
+                else if($field->name == 'school') {
+                    
+                    // Convert to php array
+                    $options = unserialize($field->options);
+                    
+                    $opt = [
+                        'order' => 'school_name ASC'
+                    ];
+                    // Hold the psys
+                    $schools = School::findBy('published', '1', $opt);
+                    
+                    $options[] = array (
+                        'value' => '',
+                        'label' => 'First, select a District',
+                        'mandatory' => false
+                    );
+                    
+                    // loop through each service
+                    foreach($schools as $school) {
+        
+                        $options[] = array (
+                            'value' => $school->id,
+                            'label' => $school->school_name,
+                            'mandatory' => false
+                        );
+                        
+                    }
+
+                    // Save back as a serialized array
+                    $field->options = serialize($options);
+                }
+                
             }
 
             // Prefill in our Work Assignment information
