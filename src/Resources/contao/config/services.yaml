@@ -1,0 +1,3 @@
+services:
+    gai.cron.generate_invoices:
+        class: Bcs\Cron\GenerateInvoices
