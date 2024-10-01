@@ -1,0 +1,18 @@
+services:
+    _defaults:
+        autoconfigure: true
+
+    _instanceof:
+        Contao\CoreBundle\Framework\FrameworkAwareInterface:
+            calls:
+                - ['setFramework', ['@contao.framework']]
+
+    bcs.cron.generator:
+        class: Bcs\Cron\GenerateInvoices
+        arguments:
+            - '@contao.framework'
+        tags:
+            -
+                name: contao.cronjob
+                interval: 'minutely'
+                method: updateResults
