@@ -45,7 +45,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE,
+            'mode'                    => DataContainer::MODE_SORTED,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
