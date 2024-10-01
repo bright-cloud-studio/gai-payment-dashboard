@@ -23,7 +23,6 @@ class GenerateInvoices
     public function __construct(
         private ContaoFramework $framework,
         private EntityCacheTags $entityCacheTags,
-        private H4aEventAutomator $h4aEventAutomator,
     ) {
         $this->framework->initialize();
     }
