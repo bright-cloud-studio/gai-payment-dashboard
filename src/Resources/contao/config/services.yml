@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    bcs.cron.generator:
+        class: Bcs\PaymentDashboardBundle\Cron\Generator
+        arguments:
+            - '@filesystem'
+            - '%kernel.project_dir%'
+            - '@monolog.logger.contao.cron'
+            - '@database_connection'
+            - '@translator'
+            - '@contao.framework'
