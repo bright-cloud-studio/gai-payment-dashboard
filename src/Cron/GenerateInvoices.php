@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Cron;
+declare(strict_types=1);
+
+namespace Bcs\PaymentDashboardBundle\Cron;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCronJob;
 
-#[AsCronJob('minutely')]
+
+/** 
+ * @CronJob("minutely")
+ */
 class GenerateInvoices
 {
-    public function __invoke(): void
+    public function __invoke()
     {
 
-        if (null !== $this->contaoCronLogger) {
-            $this->contaoCronLogger->info("GAI Cron Triggered!");
-        }
+        $this->contaoCronLogger->info("GAI Cron Triggered!");
         
         $myfile = fopen($_SERVER['DOCUMENT_ROOT'] . "cron_log_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
         fwrite($myfile, "CRON Triggered! \n");
