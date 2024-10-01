@@ -19,9 +19,6 @@ class GenerateInvoices
 
     public function __invoke(): void
     {
-        if (null !== $this->contaoCronLogger) {
-            $this->contaoCronLogger->info("Cron Hit!");
-        }
-        
+        echo "blamo";
     }
 }
