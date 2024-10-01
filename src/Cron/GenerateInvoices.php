@@ -1,7 +1,10 @@
 <?php
 
-namespace Bcs\Cron;
+namespace App\Cron;
 
+use Contao\CoreBundle\DependencyInjection\Attribute\AsCronJob;
+
+#[AsCronJob('minutely')]
 class GenerateInvoices
 {
     public function __invoke()
