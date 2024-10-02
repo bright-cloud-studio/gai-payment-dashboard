@@ -94,7 +94,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{publish_legend},published;'
+        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{publish_legend},published;{generator_legend},created_invoice_dcas,generation_completed;'
     ),
  
     // Fields
@@ -171,7 +171,31 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\InvoiceRequestBackend', 'getDistricts'),
             'sql'                     => "blob NULL"
-        )
+        ),
+
+        
+        'created_invoice_dcas' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['created_invoice_dcas'],
+            'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => true,
+            'default'                 => 'no',
+            'options'                  => array('yes' => 'Yes', 'no' => 'No'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Yes/No'),
+    		'sql'                      => "varchar(10) NOT NULL default 'no'"
+        ),
+        'generation_completed' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['generation_completed'],
+            'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => true,
+            'default'                 => 'no',
+            'options'                  => array('yes' => 'Yes', 'no' => 'No'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Yes/No'),
+    		'sql'                      => "varchar(10) NOT NULL default 'no'"
+        ),
 
 
 
