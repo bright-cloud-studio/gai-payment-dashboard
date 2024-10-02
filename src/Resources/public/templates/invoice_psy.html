@@ -46,29 +46,56 @@
 			    width: 100%;
 			    height: auto;
 			}
-			table , td, th {
-            	border: 1px solid #595959;
+			#invoice_wrapper,
+			#invoice_wrapper td,
+			#invoice_wrapper th {
+            	border: 1px solid #000;
             	border-collapse: collapse;
-            	border: 0;
             }
+            
+            #transactions_wrapper,
+			#transactions_wrapper td,
+			#transactions_wrapper th {
+            	border: 1px solid #ff0000;
+            	border-collapse: collapse;
+            }
+
+            
 
 		</style>
 	</head>
 	<body>
 	    
-        <table>
+        <table id="invoice_wrapper">
             <tbody>
                 <tr>
-                    <td colspan="2" style="padding-bottom: 15px;">
-                        LOGO
+                    <td colspan="2">{{psychologist::name}}</td>
+                <td>Invoice #{{psychologist::invoice_number}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <table id="#transactions_wrapper">
+                        	<tbody>
+                        		<tr>
+                        			<td>DISTRICT</td>
+                        			<td>SCHOOL</td>
+                        			<td>STUDENT</td>
+                        			<td>NUMBER</td>
+                        			<td>SERVICE</td>
+                        			<td>PRICE</td>
+                        		</tr>
+                        	</tbody>
+                        </table>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        
-                        TEST - HEYO
-                        
+                        Bill To <br>
+                        LINE_1 <br>
+                        LINE_2 <br>
+                        LINE_3
                     </td>
+                <td>TOTAL: $123.45</td>
                 </tr>
             </tbody>
         </table>
