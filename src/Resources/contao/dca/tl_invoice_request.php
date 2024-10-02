@@ -18,7 +18,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         'enableVersioning'            => true,
         'onsubmit_callback' => array
 		(
-			array('tl_invoice_request', 'createInvoiceDCAs')
+			array('Bcs\Backend\InvoiceRequestBackend', 'createInvoiceDCAs')
 		),
         'onload_callback' => array
 		(
@@ -207,19 +207,6 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
 
 class tl_invoice_request extends Backend
 {
-
-    public function createInvoiceDCAs(DataContainer $dc) {
-
-        if (!$dc->activeRecord)
-		{
-			return;
-		}
-        echo "<pre>";
-        print_r($dc->activeRecord);
-        die();
-        
-    }
-    
 	public function setRootType(DataContainer $dc)
 	{
 		if (Input::get('act') != 'create')
