@@ -187,7 +187,7 @@ class tl_invoice_request extends Backend
     public function createInvoiceDCAs($strTable, $insertID, $arrSet, $dc) {
 
         echo "<pre>";
-        print_r($dc);
+        print_r($arrSet);
         die();
         
     }
