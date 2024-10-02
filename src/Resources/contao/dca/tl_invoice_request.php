@@ -11,13 +11,19 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
     'config' => array
     (
         'dataContainer'               => DC_Table::class,
+        'ctable'                      => array('tl_invoice'),
+        'switchToEdit'                => false,
         'enableVersioning'            => true,
+        'onload_callback' => array
+		(
+			array('tl_invoice_request', 'setRootType')
+		),
         'sql' => array
         (
             'keys' => array
             (
                 'id' 	=> 	'primary',
-                //'name' =>  'index'
+                'pid'   => 'index'
             )
         )
     ),
@@ -28,10 +34,12 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         'sorting' => array
         (
             'mode'                    => DataContainer::MODE_SORTED,
-            'fields'                  => array('date_start'),
+            'rootPaste'               => false,
+            'showRootTrails'          => false,
+            'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
-            'panelLayout'             => 'filter;search,limit',
-            //'defaultSearchField'      => 'name'
+            'fields'                  => array('date_start DESC'),
+            'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
@@ -42,6 +50,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         (
             'all' => array
             (
+                'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
                 'href'                => 'act=select',
                 'class'               => 'header_edit_all',
                 'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
@@ -49,18 +58,16 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         ),
         'operations' => array
         (
+            'invoices' => array
+            (
+                'href'                => 'do=invoice',
+                'icon'                => 'articles.svg'
+            ),
             'edit' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_invoice_request']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
-            ),
-			
-            'copy' => array
-            (
-                'label'               => &$GLOBALS['TL_LANG']['tl_invoice_request']['copy'],
-                'href'                => 'act=copy',
-                'icon'                => 'copy.gif'
             ),
             'delete' => array
             (
@@ -91,9 +98,13 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         (
             'sql'                   => "int(10) unsigned NOT NULL auto_increment"
         ),
+        'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default 0"
+		),
         'tstamp' => array
         (
-            'sql'                   => "int(10) unsigned NOT NULL default '0'"
+		    'sql'                     => "int(10) unsigned NOT NULL default '0'"
         ),
         'sorting' => array
         (
@@ -162,3 +173,37 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         
     )
 );
+
+
+class tl_invoice_request extends Backend
+{
+	public function setRootType(DataContainer $dc)
+	{
+		if (Input::get('act') != 'create')
+		{
+			return;
+		}
+		if (Input::get('pid') == 0)
+		{
+			$GLOBALS['TL_DCA']['tl_invoice_request']['fields']['type']['default'] = 'root';
+		}
+		elseif (Input::get('mode') == 1)
+		{
+			$objPage = Database::getInstance()
+				->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+				->limit(1)
+				->execute(Input::get('pid'));
+
+			if ($objPage->pid == 0)
+			{
+				$GLOBALS['TL_DCA']['tl_invoice_request']['fields']['type']['default'] = 'root';
+			}
+		}
+	}
+
+    public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
+	{
+		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
+	}
+    
+}
