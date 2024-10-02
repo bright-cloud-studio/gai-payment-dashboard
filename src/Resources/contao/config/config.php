@@ -45,6 +45,10 @@ $GLOBALS['TL_LANG']['MOD']['gai'][0] = "Invoices - Generator";
 $GLOBALS['BE_MOD']['gai']['invoice_request'] = array(
 	'tables' => array('tl_invoice_request')
 );
+$GLOBALS['BE_MOD']['gai']['invoice'] = array(
+	'tables' => array('tl_invoice')
+);
+
 $GLOBALS['BE_MOD']['gai']['assignment'] = array(
 	'tables' => array('tl_assignment')
 );
