@@ -4,6 +4,7 @@ use Contao\Backend;
 use Contao\DataContainer;
 use Contao\DC_Table;
 use Contao\System;
+use Contap\StringUtil;
  
 /* Table tl_services */
 $GLOBALS['TL_DCA']['tl_invoice'] = array
