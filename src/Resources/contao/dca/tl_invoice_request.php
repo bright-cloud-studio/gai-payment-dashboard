@@ -184,7 +184,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
 class tl_invoice_request extends Backend
 {
 
-    public function updateNewRecord($strTable, $insertID, $arrSet, $dc) {
+    public function createInvoiceDCAs($strTable, $insertID, $arrSet, $dc) {
 
         echo "<pre>";
         print_r($dc);
