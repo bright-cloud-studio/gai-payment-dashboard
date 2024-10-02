@@ -11,13 +11,15 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
     'config' => array
     (
         'dataContainer'               => DC_Table::class,
-        'enableVersioning'            => true,
+        'ptable'                      => 'tl_invoice_request',
+        'switchToEdit'                => false,
+		'enableVersioning'            => true,
         'sql' => array
         (
             'keys' => array
             (
                 'id' 	=> 	'primary',
-                //'name' =>  'index'
+                'pid'   =>  'index'
             )
         )
     ),
@@ -27,16 +29,22 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTED,
-            'fields'                  => array('date_start'),
+            'mode'                    => DataContainer::MODE_TREE_EXTENDED,
+            'rootPaste'               => false,
+            'icon'                    => 'pagemounts.svg',
+            'defaultSearchField'      => 'psychologist',
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
-            'panelLayout'             => 'filter;search,limit',
+            'fields'                  => array('psychologist DESC'),
+            'panelLayout'             => 'sort,filter;search,limit'
+
+            
             //'defaultSearchField'      => 'name'
         ),
         'label' => array
         (
-            'fields'                  => array('date_start', 'date_end'),
-            'format'                  => '%s - %s'
+            'fields'                  => array('psychologist'),
+            'format'                  => '%s',
+            'label_callback'          => array('tl_invoice', 'addIcon')
         ),
         'global_operations' => array
         (
@@ -81,7 +89,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{publish_legend},published;'
+        'default'                     => '{invoice_legend}, psychologist, invoice_url;{publish_legend},published;'
     ),
  
     // Fields
@@ -112,49 +120,26 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
 
       
       
-        'date_start' => array
+        'psychologist' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['date_start'],
-            'inputType'               => 'text',
-            'default'                 => '',
+            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['psychologist'],
+            'inputType'               => 'select',
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y"),
+            'flag'                    => DataContainer::SORT_ASC,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Psychologist'),
+            'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'date_end' => array
+        'invoice_url' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['date_end'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['invoice_url'],
             'inputType'               => 'text',
             'default'                 => '',
-            'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y"),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "text NOT NULL default ''"
         ),
-
-        'exclude_psychologists' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['exclude_psychologists'],
-            'inputType'               => 'checkbox',
-            'search'                  => true,
-            'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
-            'options_callback'	      => array('Bcs\Backend\InvoiceRequestBackend', 'getPsychologists'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'exclude_districts' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['exclude_districts'],
-            'inputType'               => 'checkbox',
-            'search'                  => true,
-            'flag'                    => DataContainer::SORT_ASC,
-            'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
-            'options_callback'	      => array('Bcs\Backend\InvoiceRequestBackend', 'getDistricts'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        )
 
 
 
@@ -162,3 +147,42 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
         
     )
 );
+
+
+
+
+class tl_invoice extends Backend
+{
+	public function addIcon($row, $label)
+	{      
+		$sub = 0;
+		$unpublished = ($row['start'] && $row['start'] > time()) || ($row['stop'] && $row['stop'] <= time());
+
+		if ($unpublished || !$row['published'])
+		{
+			++$sub;
+		}
+
+		if ($row['protected'])
+		{
+			$sub += 2;
+		}
+
+		$image = 'articles.svg';
+
+		if ($sub > 0)
+		{
+			$image = 'articles_' . $sub . '.svg';
+		}
+
+		$attributes = sprintf(
+			'data-icon="%s" data-icon-disabled="%s"',
+			$row['protected'] ? 'articles_2.svg' : 'articles.svg',
+			$row['protected'] ? 'articles_3.svg' : 'articles_1.svg',
+		);
+
+		$href = System::getContainer()->get('router')->generate('contao_backend_preview', array('page'=>$row['pid'], 'article'=>($row['alias'] ?: $row['id'])));
+
+		return '<a href="' . StringUtil::specialcharsUrl($href) . '" title="' . StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['view']) . '" target="_blank">' . Image::getHtml($image, '', $attributes) . '</a> ' . $label;
+	}
+}
