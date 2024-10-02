@@ -128,7 +128,7 @@ class TransactionMiscBackend extends Backend
 
         // Use the DB to grab all of our enabled members, aka our psychologists
 		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1")->execute();
+		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1 ORDER BY district_name ASC")->execute();
 		while($result->next())
 		{
             // Add ti array with ID as the value and firstname lastname as the label
@@ -148,7 +148,7 @@ class TransactionMiscBackend extends Backend
             // Use the DB to grab all of our enabled members, aka our psychologists
     		$this->import('Database');
     		
-    		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=".$dc->activeRecord->district)->execute();
+    		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=".$dc->activeRecord->district . " ORDER BY school_name ASC")->execute();
     		while($result->next())
     		{
                 // Add ti array with ID as the value and firstname lastname as the label
@@ -169,7 +169,7 @@ class TransactionMiscBackend extends Backend
 
       // Use the DB to grab all of our enabled members, aka our psychologists
   		$this->import('Database');
-  		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0")->execute();
+  		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0 ORDER BY firstname ASC")->execute();
   		while($result->next())
   		{
               // Add ti array with ID as the value and firstname lastname as the label
@@ -188,7 +188,7 @@ class TransactionMiscBackend extends Backend
         
         // Use the DB to grab all of our enabled members, aka our psychologists
         $this->import('Database');
-        $result = $this->Database->prepare("SELECT * FROM tl_service WHERE published=1")->execute();
+        $result = $this->Database->prepare("SELECT * FROM tl_service WHERE published=1 ORDER BY name ASC")->execute();
         while($result->next())
         {
             // Add ti array with ID as the value and firstname lastname as the label
