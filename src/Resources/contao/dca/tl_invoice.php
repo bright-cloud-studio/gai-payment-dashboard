@@ -3,6 +3,7 @@
 use Contao\Backend;
 use Contao\DataContainer;
 use Contao\DC_Table;
+use Contao\Image;
 use Contao\System;
 use Contao\StringUtil;
  
