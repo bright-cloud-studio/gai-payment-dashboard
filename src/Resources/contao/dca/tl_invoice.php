@@ -136,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'inputType'               => 'select',
             'filter'                  => true,
             'search'                  => true,
-            'foreignKey'              => 'tl_psychologist.id',
+            'foreignKey'              => 'tl_member.CONCAT(firstname,' ',lastname)',
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Psychologist'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
