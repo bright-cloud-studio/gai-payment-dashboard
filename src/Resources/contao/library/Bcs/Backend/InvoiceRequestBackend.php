@@ -13,7 +13,19 @@ use Bcs\Model\Transaction;
 
 class InvoiceRequestBackend extends Backend
 {
-  
+
+    public function createInvoiceDCAs(DataContainer $dc) {
+
+        if (!$dc->activeRecord)
+		{
+			return;
+		}
+        echo "<pre>";
+        print_r($dc->activeRecord);
+        die();
+        
+    }
+    
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
         if (strlen(Input::get('tid')))
