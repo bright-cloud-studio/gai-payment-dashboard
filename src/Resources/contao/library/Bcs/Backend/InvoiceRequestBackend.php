@@ -28,19 +28,17 @@ class InvoiceRequestBackend extends Backend
 			return;
 		}
 
+
 		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' ORDER BY date_submitted ASC");
 		while ($transactions->next())
 		{
-		    echo "Transaction: " . $transactions->id . "<br>";
-		    echo "Date Submitted: " . date("m/d/y", $transactions->date_submitted) . "<br><br>";
+		    //echo "Transaction: " . $transactions->id . "<br>";
+		    //echo "Date Submitted: " . date("m/d/y", $transactions->date_submitted) . "<br><br>";
 		}
-		
-		
-		die();
-		
-		
+		//die();
+	
 
-        /*
+        
         if($dc->activeRecord->created_invoice_dcas != 'yes') {
     		// Arrays of IDs for the excluded selections
     		$exclude_psys = unserialize($dc->activeRecord->exclude_psychologists);
@@ -73,7 +71,7 @@ class InvoiceRequestBackend extends Backend
             $ir->created_invoice_dcas = 'yes';
             $ir->save();
         }
-        */
+        
 
         
     }
