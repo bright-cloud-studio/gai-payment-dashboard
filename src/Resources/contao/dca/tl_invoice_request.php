@@ -16,6 +16,10 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         'ctable'                      => array('tl_invoice'),
         'switchToEdit'                => false,
         'enableVersioning'            => true,
+        'oncreate_callback' => array
+		(
+			array('tl_invoice_request', 'createInvoiceDCAs')
+		),
         'onload_callback' => array
 		(
 			array('tl_invoice_request', 'setRootType')
@@ -179,6 +183,15 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
 
 class tl_invoice_request extends Backend
 {
+
+    public function updateNewRecord($strTable, $insertID, $arrSet, $dc) {
+
+        echo "<pre>";
+        print_r($dc);
+        die();
+        
+    }
+    
 	public function setRootType(DataContainer $dc)
 	{
 		if (Input::get('act') != 'create')
