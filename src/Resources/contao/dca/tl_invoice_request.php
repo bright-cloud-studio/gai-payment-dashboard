@@ -16,7 +16,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         'ctable'                      => array('tl_invoice'),
         'switchToEdit'                => false,
         'enableVersioning'            => true,
-        'oncreate_callback' => array
+        'onsubmit_callback' => array
 		(
 			array('tl_invoice_request', 'createInvoiceDCAs')
 		),
@@ -184,10 +184,13 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
 class tl_invoice_request extends Backend
 {
 
-    public function createInvoiceDCAs($strTable, $insertID, $arrSet, $dc) {
+    public function createInvoiceDCAs(DataContainer $dc) {
 
-        echo "<pre>";
-        print_r($arrSet);
+        if (!$dc->activeRecord)
+		{
+			return;
+		}
+        echo "ID: " . $dc->activeRecord->id;
         die();
         
     }
