@@ -22,8 +22,9 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
         (
             'keys' => array
             (
-                'id' 	=> 	'primary',
-                'pid'   =>  'index'
+                'id'            => 	'primary',
+                'pid'           =>  'index',
+                'invoice_url'   =>  'index'
             )
         )
     ),
@@ -40,9 +41,6 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'fields'                  => array('psychologist DESC'),
             'panelLayout'             => 'sort,filter;search,limit'
-
-            
-            //'defaultSearchField'      => 'name'
         ),
         'label' => array
         (
