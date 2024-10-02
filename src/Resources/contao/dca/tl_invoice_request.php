@@ -3,6 +3,7 @@
 use Contao\Backend;
 use Contao\DataContainer;
 use Contao\DC_Table;
+use Contao\Input;
  
 /* Table tl_services */
 $GLOBALS['TL_DCA']['tl_invoice_request'] = array
