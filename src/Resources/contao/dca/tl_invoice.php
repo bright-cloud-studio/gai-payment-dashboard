@@ -148,7 +148,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "text NOT NULL default ''"
+            'sql'                     => "text NULL"
         ),
 
 
