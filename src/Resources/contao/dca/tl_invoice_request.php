@@ -138,7 +138,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'search'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y"),
+            'default'                 => "",
         ),
         'date_end' => array
         (
@@ -149,7 +149,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'search'                  => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y"),
+            'default'                 => "",
         ),
 
         'exclude_psychologists' => array
@@ -160,7 +160,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\InvoiceRequestBackend', 'getPsychologists'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "blob NULL"
         ),
         'exclude_districts' => array
         (
@@ -170,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\InvoiceRequestBackend', 'getDistricts'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "blob NULL"
         )
 
 
