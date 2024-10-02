@@ -1,5 +1,6 @@
 <?php
 
+use Contao\Backend;
 use Contao\DataContainer;
 use Contao\DC_Table;
  
