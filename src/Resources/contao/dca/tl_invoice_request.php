@@ -214,7 +214,8 @@ class tl_invoice_request extends Backend
 		{
 			return;
 		}
-        echo "ID: " . $dc->activeRecord->id;
+        echo "<pre>";
+        print_r($dc->activeRecord);
         die();
         
     }
