@@ -25,8 +25,8 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
     (
         'dataContainer'               => DC_Table::class,
         'switchToEdit'                => false,
-		    'enableVersioning'            => true,
-		    'markAsCopy'                  => 'title',
+		'enableVersioning'            => true,
+		'markAsCopy'                  => 'title',
         'sql' => array
         (
             'keys' => array
