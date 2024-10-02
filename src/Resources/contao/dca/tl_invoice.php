@@ -1,5 +1,6 @@
 <?php
 
+use Contao\Backend;
 use Contao\DataContainer;
 use Contao\DC_Table;
  
@@ -98,6 +99,12 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
         'id' => array
         (
             'sql'                   => "int(10) unsigned NOT NULL auto_increment"
+        ),
+        'pid' => array
+        (
+		    'foreignKey'              => 'tl_invoice_request.id',
+			'sql'                     => "int(10) unsigned NOT NULL default 0",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
         ),
         'tstamp' => array
         (
