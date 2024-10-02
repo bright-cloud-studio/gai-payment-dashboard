@@ -133,7 +133,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'inputType'               => 'select',
             'filter'                  => true,
             'search'                  => true,
-            'flag'                    => DataContainer::SORT_ASC,
+            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Psychologist'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
