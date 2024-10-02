@@ -3,6 +3,7 @@
 namespace Bcs\Backend;
 
 use Bcs\Model\Invoice;
+use Bcs\Model\InvoiceRequest;
 
 use Contao\Backend;
 use Contao\DataContainer;
@@ -25,33 +26,41 @@ class InvoiceRequestBackend extends Backend
 		{
 			return;
 		}
-		
-		// Arrays of IDs for the excluded selections
-		$exclude_psys = unserialize($dc->activeRecord->exclude_psychologists);
-		$exclude_schools = unserialize($dc->activeRecord->exclude_districts);
-		
-		$options = [
-            'order' => 'firstname ASC'
-        ];
-		$psychologists = MemberModel::findBy('disable', '', $options);
-		
-		foreach($psychologists as $psy) {
 
-            // Only continue if this Member is fully filled out
-		    if($psy->firstname != '') {
-		        // Only continue if we arent excluding this PSY
-    		    if(!in_array($psy->id, $exclude_psys)) {
-    		        
-    		        // Generate children "Invoice" DCAs for each PSY we want to generate
-    		        $invoice = new Invoice();
-    		        $invoice->pid = $dc->activeRecord->id;
-    		        $invoice->psychologist = $psy->id;
-    		        $invoice->save();
-    		        
+        if($dc->activeRecord->created_invoice_dcas != 'yes') {
+    		// Arrays of IDs for the excluded selections
+    		$exclude_psys = unserialize($dc->activeRecord->exclude_psychologists);
+    		$exclude_schools = unserialize($dc->activeRecord->exclude_districts);
+    		
+    		$options = [
+                'order' => 'firstname ASC'
+            ];
+    		$psychologists = MemberModel::findBy('disable', '', $options);
+    		
+    		foreach($psychologists as $psy) {
+    
+                // Only continue if this Member is fully filled out
+    		    if($psy->firstname != '') {
+    		        // Only continue if we arent excluding this PSY
+        		    if(!in_array($psy->id, $exclude_psys)) {
+        		        
+        		        // Generate children "Invoice" DCAs for each PSY we want to generate
+        		        $invoice = new Invoice();
+        		        $invoice->pid = $dc->activeRecord->id;
+        		        $invoice->psychologist = $psy->id;
+        		        $invoice->save();
+        		        
+        		    }
     		    }
-		    }
-		    
-		}
+    		    
+    		}
+    
+            $ir = InvoiceRequest::findOneBy('id', $dc->activeRecord->id);
+            $ir->created_invoice_dcas = 'yes';
+            $ir->save();
+        }
+
+        
     }
     
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
