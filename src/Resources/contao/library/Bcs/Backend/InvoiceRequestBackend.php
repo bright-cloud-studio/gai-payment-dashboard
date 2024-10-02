@@ -2,10 +2,13 @@
 
 namespace Bcs\Backend;
 
+use Bcs\Model\Invoice;
+
 use Contao\Backend;
+use Contao\DataContainer;
 use Contao\Image;
 use Contao\Input;
-use Contao\DataContainer;
+use Contao\MemberModel;
 use Contao\StringUtil;
 
 use Bcs\Model\Transaction;
@@ -14,16 +17,41 @@ use Bcs\Model\Transaction;
 class InvoiceRequestBackend extends Backend
 {
 
+    // Create 'Invoice' DCAs for each Invoice we want to create
     public function createInvoiceDCAs(DataContainer $dc) {
-
+        
+        // do nothing if we havent saved this record
         if (!$dc->activeRecord)
 		{
 			return;
 		}
-        echo "<pre>";
-        print_r($dc->activeRecord);
-        die();
-        
+		
+		// Arrays of IDs for the excluded selections
+		$exclude_psys = unserialize($dc->activeRecord->exclude_psychologists);
+		$exclude_schools = unserialize($dc->activeRecord->exclude_districts);
+		
+		$options = [
+            'order' => 'firstname ASC'
+        ];
+		$psychologists = MemberModel::findBy('disable', '', $options);
+		
+		foreach($psychologists as $psy) {
+
+            // Only continue if this Member is fully filled out
+		    if($psy->firstname != '') {
+		        // Only continue if we arent excluding this PSY
+    		    if(!in_array($psy->id, $exclude_psys)) {
+    		        
+    		        // Generate children "Invoice" DCAs for each PSY we want to generate
+    		        $invoice = new Invoice();
+    		        $invoice->pid = $dc->activeRecord->id;
+    		        $invoice->psychologist = $psy->id;
+    		        $invoice->save();
+    		        
+    		    }
+		    }
+		    
+		}
     }
     
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
