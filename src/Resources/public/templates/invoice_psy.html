@@ -46,19 +46,56 @@
 			    width: 100%;
 			    height: auto;
 			}
-			#invoice_wrapper,
-			#invoice_wrapper td,
-			#invoice_wrapper th {
+			#invoice_wrapper {
             	border: 1px solid #000;
-            	border-collapse: collapse;
+            	border-collapse: initial;
             }
             
-            #transactions_wrapper,
-			#transactions_wrapper td,
-			#transactions_wrapper th {
-            	border: 1px solid #ff0000;
-            	border-collapse: collapse;
+            table#invoice_wrapper {
+                border-top: 5px solid red;
+                border-collapse: initial;
             }
+            
+            
+            #invoice_details,
+			#invoice_details td,
+			#invoice_details th {
+            	border: 0;
+            	text-align: right;
+            	font-size: 12px;
+            }
+            
+            #transactions_wrapper {
+            	border: 1px solid black;
+            	border-collapse: initial;
+            	border-spacing: 0;
+            }
+
+            
+            h1, h2, h3, h4, p { margin: 0; padding: 0; }
+            h2 { margin-bottom: 10px; }
+            
+            span.date_issued,
+            span.invoice_number { font-weight: 600; }
+            
+            span.bill_to { font-weight: 600; }
+            .bill_to_wrapper { font-size: 9px; }
+            
+            thead {
+                background-color: #bdbdbe;
+                font-weight: 600;
+            }
+            
+            td.total { text-align: right; }
+            
+            #transactions_wrapper td {
+                font-size: 12px;
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+                border-bottom: 1px solid black;
+                border-spacing: 0;
+            }
+            #transactions_wrapper { min-height: 960px; }
 
             
 
@@ -69,13 +106,31 @@
         <table id="invoice_wrapper">
             <tbody>
                 <tr>
-                    <td colspan="2">{{psychologist::name}}</td>
-                <td>Invoice #{{psychologist::invoice_number}}</td>
+                    <td colspan="2"><h2>{{psychologist::name}}</h2></td>
+                    <td>
+                        
+                        <table id="invoice_details">
+                        	<tbody>
+                        		<tr>
+                        			<td colspan='2'><h2>Invoice</h2></td>
+                        		</tr>
+                        		<tr>
+                        			<td><span class="date_issued">DATE ISSUED</span></td>
+                        			<td><span class="invoice_number">INVOICE #</span></td>
+                        		</tr>
+                        		<tr>
+                        			<td><span class="date_issued_val">{{psychologist::date_issued}}</span></td>
+                        			<td><span class="invoice_number_val">{{psychologist::invoice_number}}</span></td>
+                        		</tr>
+                        	</tbody>
+                        </table>
+                        
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <table id="#transactions_wrapper">
-                        	<tbody>
+                        <table id="transactions_wrapper">
+                        	<thead>
                         		<tr>
                         			<td>DISTRICT</td>
                         			<td>SCHOOL</td>
@@ -84,18 +139,24 @@
                         			<td>SERVICE</td>
                         			<td>PRICE</td>
                         		</tr>
+                        	</thead>
+                        	<tbody>
+                        		{{invoice::transactions}}
                         	</tbody>
                         </table>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        Bill To <br>
-                        LINE_1 <br>
-                        LINE_2 <br>
-                        LINE_3
+                    <td colspan="2" class="bill_to_wrapper" style="background-color: #bdbdbe;">
+                        <span class="bill_to">Bill To</span><br>
+                        <span class="name">{{psychologist::name}}</span><br>
+                        <span class="addr_2">{{psychologist::addr_1}}</span><br>
+                        <span class="addr_3">{{psychologist::addr_2}}</span><br>
                     </td>
-                <td>TOTAL: $123.45</td>
+                    <td class="total" style="background-color: #dad9da;">
+                        <span class="total_label">Total</span><br>
+                        <span class="total_value">$123.54</span>
+                    </td>
                 </tr>
             </tbody>
         </table>
