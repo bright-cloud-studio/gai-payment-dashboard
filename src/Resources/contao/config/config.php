@@ -48,6 +48,9 @@ $GLOBALS['BE_MOD']['gai']['invoice_request'] = array(
 $GLOBALS['BE_MOD']['gai']['invoice'] = array(
 	'tables' => array('tl_invoice')
 );
+$GLOBALS['BE_MOD']['gai']['invoice_district'] = array(
+	'tables' => array('tl_invoice_district')
+);
 
 $GLOBALS['BE_MOD']['gai']['assignment'] = array(
 	'tables' => array('tl_assignment')
@@ -77,6 +80,7 @@ $GLOBALS['FE_MOD']['gai']['mod_review_transactions']     = 'Bcs\Module\ModReview
 $GLOBALS['TL_MODELS']['tl_assignment']         = 'Bcs\Model\Assignment';
 $GLOBALS['TL_MODELS']['tl_district']           = 'Bcs\Model\District';
 $GLOBALS['TL_MODELS']['tl_invoice']            = 'Bcs\Model\Invoice';
+$GLOBALS['TL_MODELS']['tl_invoice_district']   = 'Bcs\Model\InvoiceDistrict';
 $GLOBALS['TL_MODELS']['tl_invoice_request']    = 'Bcs\Model\InvoiceRequest';
 $GLOBALS['TL_MODELS']['tl_school']             = 'Bcs\Model\School';
 $GLOBALS['TL_MODELS']['tl_service']            = 'Bcs\Model\Service';
