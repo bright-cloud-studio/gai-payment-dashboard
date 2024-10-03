@@ -112,11 +112,11 @@ class InvoiceRequestBackend extends Backend
 
         // Find all Invoice children
         $invoices = Invoice::findBy(['pid = ?'], [$dc->activeRecord->id]);
+        
         foreach($invoices as $invoice) {
-            // Delete the PDF file if it exists
-            if (file_exists($invoice->invoice_url)) {
-                unlink($invoice->invoice_url);
-            }
+            
+            $local_url = str_replace("https://ga.inc/","",$invoice->invoice_url);
+            unlink($local_url);
             // Delete the Invoice itself
             $invoice->delete();
         }
