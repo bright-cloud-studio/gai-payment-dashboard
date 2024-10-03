@@ -95,6 +95,31 @@ class InvoiceRequestBackend extends Backend
 
         
     }
+
+
+    public function deleteInvoiceRequest(DataContainer $dc) {
+        // do nothing if we don't have an ID
+        if (!$dc->activeRecord?->id)
+		{
+			return;
+		}
+
+        // Find all Invoice children
+        $invoices = Invoice::findBy(['pid = ?'], [$dc->activeRecord->id]);
+        foreach($invoices as $invoice) {
+            // Delete the PDF file if it exists
+            if (file_exists($invoice->invoice_url)) {
+                unlink($invoice->invoice_url);
+            }
+            // Delete the Invoice itself
+            $invoice->delete();
+        }
+        
+    }
+
+
+
+    
     
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
