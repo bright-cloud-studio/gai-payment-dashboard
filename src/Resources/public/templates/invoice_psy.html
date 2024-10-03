@@ -95,7 +95,9 @@
                 border-bottom: 1px solid black;
                 border-spacing: 0;
             }
-            #transactions_wrapper { min-height: 960px; }
+            #transactions_wrapper { min-height: 950px; }
+            
+            #total_value { font-size: 26px; font-weight: 600; }
 
             
 
@@ -155,7 +157,7 @@
                     </td>
                     <td class="total" style="background-color: #dad9da;">
                         <span class="total_label">Total</span><br>
-                        <span class="total_value">$123.54</span>
+                        <span id="total_value">{{invoice::price_total}}</span>
                     </td>
                 </tr>
             </tbody>
