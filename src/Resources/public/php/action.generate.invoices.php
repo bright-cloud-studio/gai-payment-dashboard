@@ -51,11 +51,12 @@
                     // Step Three
                     // Generate a folder for this Psy if it doesn't exist already
                     $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/' . cleanName($db_inv['psychologist_name']);
+                    $filename = "invoice_" . date('yy_mm');
                     if (!file_exists($addr_folder)) {
                         mkdir($addr_folder, 0777, true);
                     }
                     
-                    generateInvoice($addr_folder, $dompdf);
+                    generateInvoice($dompdf, $addr_folder, $filename);
                     
                     // Step Four
                     // Generate Our Invoice!
@@ -76,7 +77,7 @@
     }
     
     
-    function generateInvoice($addr_folder, $dompdf) {
+    function generateInvoice($dompdf, $addr_folder, $filename) {
         
         
         /*******************/
@@ -180,7 +181,7 @@
     	$dompdf->render();
     	
     	$output = $dompdf->output();
-        file_put_contents($addr_folder . '/Test_' . time() . '.pdf', $output);
+        file_put_contents($addr_folder . '/' . $filename . '.pdf', $output);
         //file_put_contents($file_addr . 'LOG_' . time() . '.html', $html);
         
         
