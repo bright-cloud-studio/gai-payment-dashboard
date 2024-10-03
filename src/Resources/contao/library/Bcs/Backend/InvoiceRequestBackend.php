@@ -28,45 +28,45 @@ class InvoiceRequestBackend extends Backend
 			return;
 		}
         
+        // Build an array with Psy ID as the first key and Transaction IDs as the second
         $arrTransactions = array();
-        
-		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' ORDER BY date_submitted ASC");
+		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' and published='1' ORDER BY date_submitted ASC");
 		while ($transactions->next())
 		{
-		    //echo "Transaction: " . $transactions->id . "<br>";
-		    //echo "Date Submitted: " . date("m/d/y", $transactions->date_submitted) . "<br><br>";
 		    $arrTransactions[$transactions->psychologist][] = $transactions->id;
 		}
-		
-		//echo "<pre>";
-		//print_r($arrTransactions);
-		//die();
-	
 
-        
+        // If we have not yet created the Invoices for this request
         if($dc->activeRecord->created_invoice_dcas != 'yes') {
-    		// Arrays of IDs for the excluded selections
-    		$exclude_psys = unserialize($dc->activeRecord->exclude_psychologists);
+
+    		
+    		// Build arrays of IDs for which Psys and Schools to skip
+    		$exclude_psys = array();
+    		$exclude_schools = array();
+    		if(is_array($dc->activeRecord->exclude_psychologists))
+    		    $exclude_psys = unserialize($dc->activeRecord->exclude_psychologists);
+		    if(is_array($dc->activeRecord->exclude_districts))
     		$exclude_schools = unserialize($dc->activeRecord->exclude_districts);
     		
-    		$options = [
-                'order' => 'firstname ASC'
-            ];
-    		$psychologists = MemberModel::findBy('disable', '', $options);
     		
+    		// Loop through all active Psychologists
+    		$options = ['order' => 'firstname ASC'];
+    		$psychologists = MemberModel::findBy('disable', '', $options);
     		foreach($psychologists as $psy) {
     
                 // Only continue if this Member is fully filled out
     		    if($psy->firstname != '') {
+    		        
     		        // Only continue if we arent excluding this PSY
         		    if(!in_array($psy->id, $exclude_psys)) {
         		        
-        		        // Generate children "Invoice" DCAs for each PSY we want to generate
+        		        // Create a new Invoice child for this request, set our datam save and move on
         		        $invoice = new Invoice();
         		        $invoice->pid = $dc->activeRecord->id;
         		        $invoice->psychologist = $psy->id;
-        		        $invoice->psycholigist_name = $psy->firstname . " " . $psy->lastname;
+        		        $invoice->psychologist_name = $psy->firstname . " " . $psy->lastname;
         		        
+        		        // Build a csv string of the transaction ids for this invoice
         		        $first = true;
         		        foreach($arrTransactions[$psy->id] as $id) {
         		            if($first) {
@@ -77,13 +77,16 @@ class InvoiceRequestBackend extends Backend
         		            }
         		        }
         		        
-        		        $invoice->save();
+        		        // Only save if we have Transactions attached to this Invoice
+        		        if($invoice->transaction_ids != '')
+        		            $invoice->save();
         		        
         		    }
     		    }
     		    
     		}
-    
+            
+            // We have just created our Invoice children, mark as such so we don't do this over and over
             $ir = InvoiceRequest::findOneBy('id', $dc->activeRecord->id);
             $ir->created_invoice_dcas = 'yes';
             $ir->save();
