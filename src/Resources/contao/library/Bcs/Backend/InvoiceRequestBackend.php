@@ -77,9 +77,11 @@ class InvoiceRequestBackend extends Backend
         		            }
         		        }
 
-                        $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/' . $this->cleanName($invoice->psychologist_name);
-                        $filename = 'invoice_' . date('yy_mm') . '.pdf';
-                        $invoice->invoice_url = $add_folder . $filename;
+                        //$addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/' . $this->cleanName($invoice->psychologist_name);
+                        //$filename = 'invoice_' . date('yy_mm') . '.pdf';
+
+                        //$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+                        //$invoice->invoice_url = $root . 'files/invoices/' . $this->cleanName($invoice->psychologist_name) . '/' . $filename;
         		        
         		        // Only save if we have Transactions attached to this Invoice
         		        if($invoice->transaction_ids != '')
@@ -103,7 +105,7 @@ class InvoiceRequestBackend extends Backend
 
     public function deleteInvoiceRequest(DataContainer $dc) {
         // do nothing if we don't have an ID
-        if (!$dc->activeRecord?->id)
+        if (!$dc->activeRecord->id)
 		{
 			return;
 		}
