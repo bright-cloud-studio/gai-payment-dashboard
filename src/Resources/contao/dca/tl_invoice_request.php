@@ -24,6 +24,10 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
 		(
 			array('tl_invoice_request', 'setRootType')
 		),
+        'ondelete_callback' => array
+		(
+			array('Bcs\Backend\InvoiceRequestBackend', 'deleteInvoiceRequest')
+		),
         'sql' => array
         (
             'keys' => array
