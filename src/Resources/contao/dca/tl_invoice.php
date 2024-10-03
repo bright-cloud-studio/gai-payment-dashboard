@@ -167,6 +167,15 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
+        'misc_transaction_ids' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['misc_transaction_ids'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "text NULL"
+        ),
 
 
 
