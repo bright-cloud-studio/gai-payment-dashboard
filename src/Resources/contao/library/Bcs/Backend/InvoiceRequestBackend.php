@@ -4,6 +4,7 @@ namespace Bcs\Backend;
 
 use DateTime;
 
+use Bcs\Model\District;
 use Bcs\Model\Invoice;
 use Bcs\Model\InvoiceRequest;
 use Bcs\Model\Transaction;
@@ -54,7 +55,7 @@ class InvoiceRequestBackend extends Backend
     		if(is_array($dc->activeRecord->exclude_psychologists))
     		    $exclude_psys = unserialize($dc->activeRecord->exclude_psychologists);
 		    if(is_array($dc->activeRecord->exclude_districts))
-    		$exclude_schools = unserialize($dc->activeRecord->exclude_districts);
+    		$exclude_districts = unserialize($dc->activeRecord->exclude_districts);
     		
     		
     		// Loop through all active Psychologists
@@ -108,6 +109,69 @@ class InvoiceRequestBackend extends Backend
     		    }
     		    
     		}
+
+
+
+
+
+            // Loop through all active Psychologists
+    		$options = ['order' => 'district_name ASC'];
+    		$districts = District::findBy('published', '1', $options);
+    		foreach($districts as $district) {
+    
+                // Only continue if this Member is fully filled out
+    		    if($district->district_name != '') {
+    		        
+    		        // Only continue if we arent excluding this PSY
+        		    if(!in_array($district->id, $exclude_districts)) {
+        		        
+        		        // Create a new Invoice child for this request, set our datam save and move on
+        		        $invoice = new InvoiceDistrict();
+        		        $invoice->pid = $dc->activeRecord->id;
+        		        $invoice->district = $district->id;
+        		        $invoice->district_name = $district->district_name;
+        		        
+        		        // Build a csv string of the transaction ids for this invoice
+        		        $first = true;
+        		        foreach($arrTransactions[$psy->id] as $id) {
+        		            if($first) {
+        		                $first = false;
+        		                $invoice->transaction_ids .= $id;
+        		            } else {
+        		                $invoice->transaction_ids .= "," . $id;
+        		            }
+        		        }
+        		        $first = true;
+        		        foreach($arrTransactionsMisc[$psy->id] as $id) {
+        		            if($first) {
+        		                $first = false;
+        		                $invoice->misc_transaction_ids .= $id;
+        		            } else {
+        		                $invoice->misc_transaction_ids .= "," . $id;
+        		            }
+        		        }
+
+                        //$addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/' . $this->cleanName($invoice->psychologist_name);
+                        //$filename = 'invoice_' . date('yy_mm') . '.pdf';
+
+                        //$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+                        //$invoice->invoice_url = $root . 'files/invoices/' . $this->cleanName($invoice->psychologist_name) . '/' . $filename;
+        		        
+        		        // Only save if we have Transactions attached to this Invoice
+        		        if($invoice->transaction_ids != '' || $invoice->misc_transaction_ids != '')
+        		            $invoice->save();
+        		        
+        		    }
+    		    }
+    		    
+    		}
+
+
+
+
+
+
+            
             
             // We have just created our Invoice children, mark as such so we don't do this over and over
             $ir = InvoiceRequest::findOneBy('id', $dc->activeRecord->id);
