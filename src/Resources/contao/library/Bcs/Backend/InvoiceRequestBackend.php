@@ -35,6 +35,14 @@ class InvoiceRequestBackend extends Backend
 		{
 		    $arrTransactions[$transactions->psychologist][] = $transactions->id;
 		}
+		
+		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
+        $arrTransactionsMisc = array();
+		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' and published='1' ORDER BY date_submitted ASC");
+		while ($transactions_misc->next())
+		{
+		    $arrTransactionsMisc[$transactions_misc->psychologist][] = $transactions_misc->id;
+		}
 
         // If we have not yet created the Invoices for this request
         if($dc->activeRecord->created_invoice_dcas != 'yes') {
@@ -76,6 +84,15 @@ class InvoiceRequestBackend extends Backend
         		                $invoice->transaction_ids .= "," . $id;
         		            }
         		        }
+        		        $first = true;
+        		        foreach($arrTransactionsMisc[$psy->id] as $id) {
+        		            if($first) {
+        		                $first = false;
+        		                $invoice->misc_transaction_ids .= $id;
+        		            } else {
+        		                $invoice->misc_transaction_ids .= "," . $id;
+        		            }
+        		        }
 
                         //$addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/' . $this->cleanName($invoice->psychologist_name);
                         //$filename = 'invoice_' . date('yy_mm') . '.pdf';
@@ -84,7 +101,7 @@ class InvoiceRequestBackend extends Backend
                         //$invoice->invoice_url = $root . 'files/invoices/' . $this->cleanName($invoice->psychologist_name) . '/' . $filename;
         		        
         		        // Only save if we have Transactions attached to this Invoice
-        		        if($invoice->transaction_ids != '')
+        		        if($invoice->transaction_ids != '' || $invoice->misc_transaction_ids != '')
         		            $invoice->save();
         		        
         		    }
