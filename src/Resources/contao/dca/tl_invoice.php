@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_legend}, psychologist, invoice_url;{publish_legend},published;'
+        'default'                     => '{invoice_legend}, psychologist, psychologist_name, invoice_url, transaction_ids;{publish_legend},published;'
     ),
  
     // Fields
@@ -136,13 +136,31 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'search'                  => true,
             'foreignKey'              => 'tl_member.CONCAT(firstname," ",lastname)',
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Psychologist'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Psychologist'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'getPsychologists'),
             'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'psychologist_name' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['psychologist_name'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "text NULL"
         ),
         'invoice_url' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['invoice_url'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "text NULL"
+        ),
+        'transaction_ids' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['transaction_ids'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
