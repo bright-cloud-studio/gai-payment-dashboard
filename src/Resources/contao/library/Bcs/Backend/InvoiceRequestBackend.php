@@ -27,14 +27,19 @@ class InvoiceRequestBackend extends Backend
 		{
 			return;
 		}
-
-
+        
+        $arrTransactions = array();
+        
 		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' ORDER BY date_submitted ASC");
 		while ($transactions->next())
 		{
 		    //echo "Transaction: " . $transactions->id . "<br>";
 		    //echo "Date Submitted: " . date("m/d/y", $transactions->date_submitted) . "<br><br>";
+		    $arrTransactions[$transactions->psychologist][] = $transactions->id;
 		}
+		
+		//echo "<pre>";
+		//print_r($arrTransactions);
 		//die();
 	
 
@@ -60,6 +65,18 @@ class InvoiceRequestBackend extends Backend
         		        $invoice = new Invoice();
         		        $invoice->pid = $dc->activeRecord->id;
         		        $invoice->psychologist = $psy->id;
+        		        $invoice->psycholigist_name = $psy->firstname . " " . $psy->lastname;
+        		        
+        		        $first = true;
+        		        foreach($arrTransactions[$psy->id] as $id) {
+        		            if($first) {
+        		                $first = false;
+        		                $invoice->transaction_ids .= $id;
+        		            } else {
+        		                $invoice->transaction_ids .= "," . $id;
+        		            }
+        		        }
+        		        
         		        $invoice->save();
         		        
         		    }
