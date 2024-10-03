@@ -52,7 +52,22 @@
     $st_r = $dbh->query($st_q);
     if($st_r) {
         while($r = $st_r->fetch_assoc()) {
-            $students[$r['id']] = getInitials($r['name']);
+            $students[$r['id']]['name'] = getInitials($r['name']);
+            
+            if($r['lasid'] != '' && $r['sasid'] == '')
+                $students[$r['id']]['number'] = $r['lasid'];
+            if($r['lasid'] == '' && $r['sasid'] != '')
+                $students[$r['id']]['number'] = $r['sasid'];
+        }
+    }
+    
+    // Get all Services
+    $services = array();
+    $se_q =  "SELECT * FROM tl_service WHERE published='1'";
+    $se_r = $dbh->query($se_q);
+    if($se_r) {
+        while($r = $se_r->fetch_assoc()) {
+            $services[$r['id']] = $r['name'];
         }
     }
 
@@ -81,7 +96,7 @@
                     
                     // Step Three
                     // Generate a folder for this Psy if it doesn't exist already
-                    $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/' . cleanName($db_inv['psychologist_name']);
+                    $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/psychologists/' . cleanName($db_inv['psychologist_name']);
                     $filename = "invoice_" . date('y_m');
                     if (!file_exists($addr_folder)) {
                         mkdir($addr_folder, 0777, true);
@@ -90,9 +105,10 @@
                     $invoice_id = $db_inv['id'];
                     $psy_id = $db_inv['psychologist'];
                     $transaction_ids = $db_inv['transaction_ids'];
+                    $misc_transaction_ids = $db_inv['misc_transaction_ids'];
                     
-                    $invoice_folder = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/files/invoices/' . cleanName($db_inv['psychologist_name']) . '/';
-                    generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $districts, $schools, $students);
+                    $invoice_folder = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/files/invoices/psychologists/' . cleanName($db_inv['psychologist_name']) . '/';
+                    generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services);
                     
                     // Step Four
                     // Generate Our Invoice!
@@ -113,7 +129,10 @@
     }
     
     
-    function generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $districts, $schools, $students) {
+    function generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services) {
+        
+        
+        $price_total = 0.00;
         
         // Initialize Dompdf using our just set up Options
 	    $dompdf = new Dompdf($options);
@@ -128,6 +147,8 @@
         if($psy_result) {
             while($row = $psy_result->fetch_assoc()) {
                 $psy['name'] = $row['firstname'] . " " . $row['lastname'];
+                $psy['addr_1'] = $row['street'];
+                $psy['addr_2'] = $row['city'] . ", " . $row['state'] . " " . $row['postal'];
             }
         }
     	
@@ -165,6 +186,12 @@
     		            case 'invoice_number':
     		                $html = str_replace($tag, date('Y_m'), $html);
     		                break;
+    		            case 'addr_1':
+    		                $html = str_replace($tag, $psy['addr_1'], $html);
+    		                break;
+    		            case 'addr_2':
+    		                $html = str_replace($tag, $psy['addr_2'], $html);
+    		                break;
     		            default:
     		                break;
     		        }
@@ -178,55 +205,91 @@
     		        switch($explodedTag[1]) {
     		            case 'transactions':
     		                
-    		                $transactions = array();
-    		                $transactions_query =  "SELECT * FROM tl_transaction WHERE id IN (". $transaction_ids .") ORDER BY date_submitted ASC";
-                            $transactions_results = $dbh->query($transactions_query);
-                            if($transactions_results) {
-                                $i = 0;
-                                while($row = $transactions_results->fetch_assoc()) {
-                                    
-                                    // Get the Assignment for this Transaction
-                                    $a_district = '';
-                                    $a_school = '';
-                                    $a_student = '';
-                                    $a_q =  "SELECT * FROM tl_assignment WHERE id='".$row['pid']."'";
-                                    $a_r = $dbh->query($a_q);
-                                    if($a_r) {
-                                        while($a = $a_r->fetch_assoc()) {
-                                            $a_district = $a['district'];
-                                            $a_school = $a['school'];
-                                            $a_student = $a['student'];
-                                        }
-                                    }
-                                    
-                                    $transactions[$i]['district'] = $districts[$a_district];
-                                    $transactions[$i]['school'] = $schools[$a_school];
-                                    $transactions[$i]['student'] = $students[$a_student];
-                                    
-                                    $transactions[$i]['number'] = 'L123/S456';
-                                    
-                                    $transactions[$i]['service'] = $row['service'];
-                                    $transactions[$i]['price'] = $row['price'];
-                                    $i++;
-                                }
-                            }
-    		                
-    		                
     		                $trans_html = '';
-    		                foreach($transactions as $transaction) {
-    		                    $trans_html .= "<tr>";
-        		                $trans_html .= "<td>" . $transaction['district'] . "</td>";
-        		                $trans_html .= "<td>" . $transaction['school'] . "</td>";
-        		                $trans_html .= "<td>" . $transaction['student'] . "</td>";
-        		                $trans_html .= "<td>" . $transaction['number'] . "</td>";
-        		                $trans_html .= "<td>" . $transaction['service'] . "</td>";
-        		                $trans_html .= "<td>" . $transaction['price'] . "</td>";
-        		                $trans_html .= "</tr>";
+    		                $misc_trans_html = '';
+    		                
+    		                if($transaction_ids != '') {
+        		                $transactions = array();
+        		                $transactions_query =  "SELECT * FROM tl_transaction WHERE id IN (". $transaction_ids .") ORDER BY date_submitted ASC";
+                                $transactions_results = $dbh->query($transactions_query);
+                                if($transactions_results) {
+                                    $i = 0;
+                                    while($row = $transactions_results->fetch_assoc()) {
+                                        
+                                        // Get the Assignment for this Transaction
+                                        $a_district = '';
+                                        $a_school = '';
+                                        $a_student = '';
+                                        $a_q =  "SELECT * FROM tl_assignment WHERE id='".$row['pid']."'";
+                                        $a_r = $dbh->query($a_q);
+                                        if($a_r) {
+                                            while($a = $a_r->fetch_assoc()) {
+                                                $a_district = $a['district'];
+                                                $a_school = $a['school'];
+                                                $a_student = $a['student'];
+                                            }
+                                        }
+                                        
+                                        $transactions[$i]['district'] = $districts[$a_district];
+                                        $transactions[$i]['school'] = $schools[$a_school];
+                                        $transactions[$i]['student'] = $students[$a_student]['name'];
+                                        
+                                        $transactions[$i]['number'] = $students[$a_student]['number'];
+                                        
+                                        $transactions[$i]['service'] = $services[$row['service']];
+                                        $transactions[$i]['price'] = $row['price'];
+                                        $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($row['price']), 2, '.', '');
+                                        $i++;
+                                    }
+                                }
+        		                
+        		                foreach($transactions as $transaction) {
+        		                    $trans_html .= "<tr>";
+            		                $trans_html .= "<td>" . $transaction['district'] . "</td>";
+            		                $trans_html .= "<td>" . $transaction['school'] . "</td>";
+            		                $trans_html .= "<td>" . $transaction['student'] . "</td>";
+            		                $trans_html .= "<td>" . $transaction['number'] . "</td>";
+            		                $trans_html .= "<td>" . $transaction['service'] . "</td>";
+            		                $trans_html .= "<td>" . $transaction['price'] . "</td>";
+            		                $trans_html .= "</tr>";
+        		                }
     		                }
     		                
     		                
+    		                if($misc_transaction_ids != '') {
+        		                $transactions = array();
+        		                $transactions_query =  "SELECT * FROM tl_transaction_misc WHERE id IN (". $misc_transaction_ids .") ORDER BY date_submitted ASC";
+                                $transactions_results = $dbh->query($transactions_query);
+                                if($transactions_results) {
+                                    $i = 0;
+                                    while($row = $transactions_results->fetch_assoc()) {
+                                        
+                                        $transactions[$i]['service'] = $row['service_label'];
+                                        $transactions[$i]['price'] = $row['price'];
+                                        $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($row['price']), 2, '.', '');
+                                        $i++;
+                                    }
+                                }
+        		                
+        		                foreach($transactions as $transaction) {
+        		                    $misc_trans_html .= "<tr>";
+            		                $misc_trans_html .= "<td>" . $transaction['district'] . "</td>";
+            		                $misc_trans_html .= "<td>" . $transaction['school'] . "</td>";
+            		                $misc_trans_html .= "<td>" . $transaction['student'] . "</td>";
+            		                $misc_trans_html .= "<td>" . $transaction['number'] . "</td>";
+            		                $misc_trans_html .= "<td>" . $transaction['service'] . "</td>";
+            		                $misc_trans_html .= "<td>" . $transaction['price'] . "</td>";
+            		                $misc_trans_html .= "</tr>";
+        		                }
+    		                }
+    		                
+    		                $trans_html .= $misc_trans_html;
     		                
     		                $html = str_replace($tag, $trans_html, $html);
+    		                break;
+    		                
+    		            case 'price_total':
+    		                $html = str_replace($tag, '$' . number_format(floatval($price_total), 2, '.', ''), $html);
     		                break;
     		        }
     		        
