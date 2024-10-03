@@ -76,6 +76,10 @@ class InvoiceRequestBackend extends Backend
         		                $invoice->transaction_ids .= "," . $id;
         		            }
         		        }
+
+                        $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/' . $this->cleanName($invoice->psychologist_name);
+                        $filename = 'invoice_' . date('yy_mm') . '.pdf';
+                        $invoice->invoice_url = $add_folder . $filename;
         		        
         		        // Only save if we have Transactions attached to this Invoice
         		        if($invoice->transaction_ids != '')
@@ -307,6 +311,18 @@ class InvoiceRequestBackend extends Backend
         } else {
             return false; // Invalid date format
         }
+    }
+    public function cleanName($name) {
+        // Remove special characters using regular expression
+        $name = preg_replace('/[^a-zA-Z0-9 ]/', '', $name);
+    
+        // Convert to lowercase
+        $name = strtolower($name);
+    
+        // Replace spaces with underscores
+        $name = str_replace(' ', '_', $name);
+    
+        return $name;
     }
     
 
