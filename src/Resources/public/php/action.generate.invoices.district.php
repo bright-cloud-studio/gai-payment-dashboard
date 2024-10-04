@@ -89,35 +89,30 @@
             // Step Two
             // Find Invoices without a PDF link
             //$invoice_query =  "SELECT * FROM tl_invoice WHERE pid='$request' AND invoice_url IS NULL ORDER BY id ASC";
-            $invoice_query =  "SELECT * FROM tl_invoice WHERE pid='$request' ORDER BY id ASC";
+            $invoice_query =  "SELECT * FROM tl_invoice_district WHERE pid='$request' ORDER BY id ASC";
             $invoice_result = $dbh->query($invoice_query);
             if($invoice_result) {
                 while($db_inv = $invoice_result->fetch_assoc()) {
                     
                     // Step Three
                     // Generate a folder for this Psy if it doesn't exist already
-                    $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/psychologists/' . cleanName($db_inv['psychologist_name']);
+                    $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/districts/' . cleanName($db_inv['district_name']);
                     $filename = "invoice_" . date('y_m');
                     if (!file_exists($addr_folder)) {
                         mkdir($addr_folder, 0777, true);
                     }
                     
                     $invoice_id = $db_inv['id'];
-                    $psy_id = $db_inv['psychologist'];
+                    $district_id = $db_inv['district'];
                     $transaction_ids = $db_inv['transaction_ids'];
                     $misc_transaction_ids = $db_inv['misc_transaction_ids'];
                     
-                    $invoice_folder = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/files/invoices/psychologists/' . cleanName($db_inv['psychologist_name']) . '/';
-                    generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services);
+                    $invoice_folder = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/files/invoices/districts/' . cleanName($db_inv['district_name']) . '/';
+                    generateInvoice($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services);
                     
                     // Step Four
                     // Generate Our Invoice!
-                    
-                    
-                    
-                    
-                    
-                    
+
                 }
             }
             
@@ -129,7 +124,7 @@
     }
     
     
-    function generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services) {
+    function generateInvoice($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services) {
         
         
         $price_total = 0.00;
@@ -141,20 +136,20 @@
     	/* TEMPLATE STUFFS */
     	/*******************/
     	
-    	$psy_query =  "SELECT * FROM tl_member WHERE id='$psy_id'";
-        $psy_result = $dbh->query($psy_query);
-        $psy = [];
-        if($psy_result) {
-            while($row = $psy_result->fetch_assoc()) {
-                $psy['name'] = $row['firstname'] . " " . $row['lastname'];
-                $psy['addr_1'] = $row['street'];
-                $psy['addr_2'] = $row['city'] . ", " . $row['state'] . " " . $row['postal'];
+    	$district_query =  "SELECT * FROM tl_district WHERE id='$district_id'";
+        $district_result = $dbh->query($district_query);
+        $district = [];
+        if($district_result) {
+            while($row = $district_result->fetch_assoc()) {
+                $district['name'] = $row['district_name'];
+                $district['addr_1'] = "ADDR_1";
+                $district['addr_2'] = "ADDR_2";
             }
         }
     	
       	
         // Load our HTML template
-        $html = file_get_contents('bundles/bcspaymentdashboard/templates/invoice_psy.html', true);
+        $html = file_get_contents('bundles/bcspaymentdashboard/templates/invoice_district.html', true);
     
          // Find all instances of our tag brackets '{{tag}}' and store them in the $tags array
         preg_match_all('/\{{2}(.*?)\}{2}/is', $html, $tags);
@@ -173,12 +168,12 @@
     	    switch($explodedTag[0]) {
     		    
     		    // If the first part of our exploded tag is "product" we are looking for an attribute
-    		    case 'psychologist':
+    		    case 'district':
     		        
 
     		        switch($explodedTag[1]) {
     		            case 'name':
-    		                $html = str_replace($tag, $psy['name'], $html);
+    		                $html = str_replace($tag, $district['name'], $html);
     		                break;
     		            case 'date_issued':
     		                $html = str_replace($tag, date('m/d/y'), $html);
@@ -187,10 +182,10 @@
     		                $html = str_replace($tag, date('Y_m'), $html);
     		                break;
     		            case 'addr_1':
-    		                $html = str_replace($tag, $psy['addr_1'], $html);
+    		                $html = str_replace($tag, $district['addr_1'], $html);
     		                break;
     		            case 'addr_2':
-    		                $html = str_replace($tag, $psy['addr_2'], $html);
+    		                $html = str_replace($tag, $district['addr_2'], $html);
     		                break;
     		            default:
     		                break;
@@ -235,6 +230,8 @@
                                         $transactions[$i]['student'] = $students[$a_student]['name'];
                                         
                                         $transactions[$i]['number'] = $students[$a_student]['number'];
+
+                                        $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['date_submitted']));
                                         
                                         $transactions[$i]['service'] = $services[$row['service']];
                                         $transactions[$i]['price'] = $row['price'];
@@ -245,11 +242,12 @@
         		                
         		                foreach($transactions as $transaction) {
         		                    $trans_html .= "<tr>";
-            		                $trans_html .= "<td>" . $transaction['district'] . "</td>";
+            		                $trans_html .= "<td>" . $transaction['service'] . "</td>";
+            		                $trans_html .= "<td>" . $transaction['date_submitted'] . "</td>";
             		                $trans_html .= "<td>" . $transaction['school'] . "</td>";
             		                $trans_html .= "<td>" . $transaction['student'] . "</td>";
             		                $trans_html .= "<td>" . $transaction['number'] . "</td>";
-            		                $trans_html .= "<td>" . $transaction['service'] . "</td>";
+            		                $trans_html .= "<td>" . $transaction['price'] . "</td>";
             		                $trans_html .= "<td>" . $transaction['price'] . "</td>";
             		                $trans_html .= "</tr>";
         		                }
@@ -266,6 +264,7 @@
                                         
                                         $transactions[$i]['service'] = $row['service_label'];
                                         $transactions[$i]['price'] = $row['price'];
+                                        $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['date_submitted']));
                                         $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($row['price']), 2, '.', '');
                                         $i++;
                                     }
@@ -273,11 +272,12 @@
         		                
         		                foreach($transactions as $transaction) {
         		                    $misc_trans_html .= "<tr>";
-            		                $misc_trans_html .= "<td>" . $transaction['district'] . "</td>";
+            		                $misc_trans_html .= "<td>" . $transaction['service'] . "</td>";
+            		                $misc_trans_html .= "<td>" . $transaction['date_submitted'] . "</td>";
             		                $misc_trans_html .= "<td>" . $transaction['school'] . "</td>";
             		                $misc_trans_html .= "<td>" . $transaction['student'] . "</td>";
             		                $misc_trans_html .= "<td>" . $transaction['number'] . "</td>";
-            		                $misc_trans_html .= "<td>" . $transaction['service'] . "</td>";
+            		                $misc_trans_html .= "<td>" . $transaction['price'] . "</td>";
             		                $misc_trans_html .= "<td>" . $transaction['price'] . "</td>";
             		                $misc_trans_html .= "</tr>";
         		                }
@@ -320,7 +320,7 @@
         file_put_contents($addr_folder . '/' . $filename . '.pdf', $output);
         
         $pdf_url = $invoice_folder . $filename . '.pdf';
-        $url_query =  "UPDATE tl_invoice SET invoice_url='$pdf_url' WHERE id='$invoice_id'";
+        $url_query =  "UPDATE tl_invoice_district SET invoice_url='$pdf_url' WHERE id='$invoice_id'";
         $url_result = $dbh->query($url_query);
 
         
