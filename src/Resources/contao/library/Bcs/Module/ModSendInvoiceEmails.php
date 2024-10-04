@@ -12,8 +12,6 @@
 
   
 namespace Bcs\Module;
-
-use Google;
  
 class ModSendInvoiceEmails extends \Contao\Module
 {
@@ -23,13 +21,7 @@ class ModSendInvoiceEmails extends \Contao\Module
      * @var string
      */
     protected $strTemplate = 'mod_send_invoice_emails';
-  
-    // our google api stuffs
-    protected $client;
-    protected $service;
-    public static $spreadsheetId;
- 
-	protected $arrStates = array();
+
  
 	/**
 	 * Initialize the object
@@ -40,18 +32,6 @@ class ModSendInvoiceEmails extends \Contao\Module
 	public function __construct($objModule, $strColumn='main')
 	{
         parent::__construct($objModule, $strColumn);
-
-        // Create a client connection to Google
-        $this->$client = new Google\Client();
-        // Load our auth key
-        $this->$client->setAuthConfig('key.json');
-        // Set our scope to use the Sheets service
-        $this->$client->addScope(Google\Service\Sheets::SPREADSHEETS);
-        // Assign our client to a service
-        $this->$service = new \Google_Service_Sheets($this->$client);
-        // Set the ID for our specific spreadsheet
-        ModSendInvoiceEmails::$spreadsheetId = '1PEJN5ZGlzooQrtIEdeo4_nZH73W0aJTUbRIoibzl3Lo';
-		
 	}
 	
     /**
@@ -79,16 +59,11 @@ class ModSendInvoiceEmails extends \Contao\Module
     /* Generate the module */
     protected function compile()
     {
-        $rand_ver = rand(1,9999);
-        $GLOBALS['TL_BODY']['send_invoice_emails'] = '<script src="system/modules/gai_invoices/assets/js/gai_invoice.js?v='.$rand_ver.'"></script>';
-        
         // get the user and build their name
         $objUser = \FrontendUser::getInstance();
         $user = $objUser->firstname . " " . $objUser->lastname;
         
-        // Get this user's unprocessed listings from Sheets
-        $spreadsheet = $this->$service->spreadsheets->get(ModSendInvoiceEmails::$spreadsheetId);
-        
+
         // an array to store this users entries
         $entryPsy = array();
         $psys = array();
