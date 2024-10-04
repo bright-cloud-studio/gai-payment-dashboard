@@ -282,20 +282,27 @@
                                     $i = 0;
                                     while($row = $transactions_results->fetch_assoc()) {
                                         
+                                        $transactions[$i]['student'] = $row['student_initials'];
+                                        
+                                        if($row['lasid'] != '' && $row['sasid'] == '')
+                                            $transactions[$i]['number'] = $row['lasid'];
+                                        if($row['lasid'] == '' && $row['sasid'] != '')
+                                            $transactions[$i]['number'] = $row['sasid'];
+                                            
+                                        $transactions[$i]['district'] = $districts[$row['district']];
+                                        $transactions[$i]['school'] = $schools[$row['school']];
                                        
                                         
                                         if($row['service'] == 1) {
                                             
-                                            //$transactions[$i]['service'] = $services[$row['service']] . ' ('.$row['meeting_duration'].' mins)';
-                                            //$transactions[$i]['price'] = $row['price'];
-                                            
+                                            $transactions[$i]['service'] = $services[$row['service']] . ' ('.$row['meeting_duration'].' mins)';
                                             $dur = ceil(intval($row['meeting_duration']) / 60);
                                             $final_price = $dur * $row['price'];
                                             $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
                                             $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($final_price), 2, '.', '');
                                             
                                         } else if($row['service'] == 19) {
-                                            //$transactions[$i]['price'] = $row['price'];
+                                            $transactions[$i]['service'] = $services[$row['service']] . ' ('.$row['meeting_duration'].' mins)';
                                             $transactions[$i]['service'] = $services[$row['service']];
                                             $final_price = $row['meeting_duration'] * 0.50;
                                             $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
