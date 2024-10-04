@@ -5,6 +5,7 @@ use DateTime;
 
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
+use Bcs\Model\Invoice;
 use Bcs\Model\PriceTier;
 use Bcs\Model\Psychologist;
 use Bcs\Model\Service;
@@ -650,6 +651,54 @@ class FormHooks
             // Prefill in our Work Assignment information
             return $fields;
         }
+        
+        
+        
+        /////////////////////////
+        // SEND INVOICE EMAILS //
+        /////////////////////////
+        
+        if($form->formID == 'dashboard_send_invoice_emails') {
+            
+            // Loop through the fields
+            foreach($fields as $field) {
+                
+                // If this is our assignment uuid radio field
+                if($field->name == 'psychologists') {
+                    
+                    // Convert to php array
+                    $options = unserialize($field->options);
+
+                    // Set Configuration options for the query
+                    $opt = [
+                        'order' => 'firstname ASC'
+                    ];
+                    
+                    // Hold the psys
+                    $invoices = Invoice::findBy(['invoice_url != ?'], ['']);
+            
+                    // loop through each service
+                    foreach($invoices as $invoice) {
+                        
+                        if($psy->firstname != '') {
+                            $options[] = array (
+                                'value' => $invoice->psychologist,
+                                'label' => $invoice->psychologist_name;
+                            );
+                        }
+                    }
+
+                    // Save back as a serialized array
+                    $field->options = serialize($options);
+                }
+            }
+
+            // Prefill in our Work Assignment information
+            return $fields;
+        }
+        
+        
+        
 
         // Return our modified fields
         return $fields;
