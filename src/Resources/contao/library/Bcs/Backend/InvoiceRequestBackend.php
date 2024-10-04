@@ -32,7 +32,7 @@ class InvoiceRequestBackend extends Backend
         
         // Build an array with Psy ID as the first key and Transaction IDs as the second
         $arrTransactions = array();
-		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' and published='1' ORDER BY date_submitted ASC");
+		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("08/30/24")."' AND '".$this->convertDateToTimestamp("10/01/24")."' and published='1' ORDER BY date_submitted ASC");
 		while ($transactions->next())
 		{
 		    $arrTransactions[$transactions->psychologist][] = $transactions->id;
@@ -40,7 +40,7 @@ class InvoiceRequestBackend extends Backend
 		
 		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
         $arrTransactionsMisc = array();
-		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' and published='1' ORDER BY date_submitted ASC");
+		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("08/30/24")."' AND '".$this->convertDateToTimestamp("10/01/24")."' and published='1' ORDER BY date_submitted ASC");
 		while ($transactions_misc->next())
 		{
 		    $arrTransactionsMisc[$transactions_misc->psychologist][] = $transactions_misc->id;
@@ -124,7 +124,7 @@ class InvoiceRequestBackend extends Backend
 
         // Build an array with Psy ID as the first key and Transaction IDs as the second
         $arrTransactions = array();
-		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' and published='1' ORDER BY date_submitted ASC");
+		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("08/30/24")."' AND '".$this->convertDateToTimestamp("10/01/24")."' and published='1' ORDER BY date_submitted ASC");
 		while ($transactions->next())
 		{
     		$assignment = $this->Database->query("SELECT * FROM tl_assignment WHERE id='". $transactions->pid ."'");
@@ -136,7 +136,7 @@ class InvoiceRequestBackend extends Backend
 		
 		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
         $arrTransactionsMisc = array();
-		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' and district!='' and published='1' ORDER BY date_submitted ASC");
+		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("08/30/24")."' AND '".$this->convertDateToTimestamp("10/01/24")."' and district!='' and published='1' ORDER BY date_submitted ASC");
 		while ($transactions_misc->next())
 		{
 		    $arrTransactionsMisc[$transactions_misc->district][] = $transactions_misc->id;
