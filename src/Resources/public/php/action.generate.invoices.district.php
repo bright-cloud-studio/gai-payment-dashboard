@@ -265,7 +265,10 @@
                                                 $dur = ceil(($row['meeting_duration']-30) / 15);
                                                 $final_price = number_format(floatval($rate_half), 2, '.', '') + ($dur * number_format(floatval($rate_quarter), 2, '.', ''));
                                             }
-                                            
+                                            $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
+                                        } else if($row['service'] == 19) {
+                                            $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
+                                            $final_price = $row['meeting_duration'] * 0.50;
                                             $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
                                         } else {
                                             $transactions[$i]['service'] = $services[$row['service']]['name'];
@@ -304,6 +307,15 @@
                                         $transactions[$i]['service'] = $services[$row['service']]['name'];
                                         $transactions[$i]['rate'] = $services[$row['service']]['price_school_1'];
                                         
+                                        $transactions[$i]['district'] = $row['district'];
+                                        $transactions[$i]['school'] = $schools[$row['school']];
+                                        $transactions[$i]['student'] = $row['student_initials'];
+                                        
+                                        if($row['lasid'] != '' && $row['sasid'] == '')
+                                            $transactions[$i]['number'] = $row['lasid'];
+                                        if($row['lasid'] == '' && $row['sasid'] != '')
+                                            $transactions[$i]['number'] = $row['sasid'];
+                                        
                                         if($row['service'] == 1) {
                                             $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
                                             
@@ -320,6 +332,10 @@
                                                 $final_price = number_format(floatval($rate_half), 2, '.', '') + ($dur * number_format(floatval($rate_quarter), 2, '.', ''));
                                             }
                                             
+                                            $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
+                                        }else if($row['service'] == 19) {
+                                            $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
+                                            $final_price = $row['meeting_duration'] * 0.50;
                                             $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
                                         } else {
                                             $transactions[$i]['service'] = $services[$row['service']]['name'];
