@@ -95,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_district'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{district_legend}, district_name, invoice_number, invoice_prefix, purchase_order, price_tier;{publish_legend},published;'
+        'default'                     => '{district_legend}, district_name, invoice_number, invoice_prefix, purchase_order, price_tier;{address_legend}, contact_name, contact_address, city, state, zip, phone, contact_email, contact_cc_email;{publish_legend},published;'
     ),
  
     // Fields
@@ -168,6 +168,89 @@ $GLOBALS['TL_DCA']['tl_district'] = array
         'purchase_order' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_district']['purchase_order'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+
+
+
+        'contact_name' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['contact_name'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'contact_address' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['contact_address'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'contact_email' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['contact_email'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'contact_cc_email' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['contact_cc_email'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'city' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['city'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'state' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['state'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'zip' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['zip'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'phone' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_district']['phone'],
             'inputType'               => 'text',
             'default'                 => '',
             'filter'                  => true,
