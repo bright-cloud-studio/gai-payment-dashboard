@@ -1,0 +1,18 @@
+<tr>
+	<td style="display: none;"><input type="text" name="row_id_psy_<?= $this->id ?>" id="row_id_psy_<?= $this->id ?>" class="row_id_psy row_id_psy_<?= $this->id ?>" value="<?= $this->row_id ?>"></td>
+	
+	<td><?= $this->billing_year ?></td>
+	
+	<td><?= $this->billing_month ?></td>
+	
+	<td style="display: none;"><input type="text" name="billing_month_<?= $this->id ?>" id="billing_month_<?= $this->id ?>" class="billing_month billing_month_<?= $this->id ?>" value="<?= $this->billing_month ?>"></td>
+	
+	<td style="display: none;"><input type="text" name="invoice_number_<?= $this->id ?>" id="invoice_number_<?= $this->id ?>" class="invoice_number invoice_number_<?= $this->id ?>" value="<?= $this->invoice_number ?>"></td>
+	
+	<td><input type="text" name="name_<?= $this->id ?>" id="name_<?= $this->id ?>" class="name name_<?= $this->id ?>" value="<?= $this->psychologist ?>"></td>
+	
+	<td><input type="text" name="email_psy_<?= $this->id ?>" id="email_psy_<?= $this->id ?>" class="email_psy email_psy_<?= $this->id ?>" value="<?= $this->email ?>"></td>
+	
+	<td style="display: none;"><input type="text" name="url_psy_<?= $this->id ?>" id="url_psy_<?= $this->id ?>" class="url_psy url_psy_<?= $this->id ?>" value="<?= $this->invoice_link ?>"></td>
+	
+</tr>
