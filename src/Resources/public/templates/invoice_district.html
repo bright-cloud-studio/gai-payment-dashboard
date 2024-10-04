@@ -95,10 +95,17 @@
                 border-bottom: 1px solid black;
                 border-spacing: 0;
             }
-            #transactions_wrapper { min-height: 950px; }
+            #transactions_wrapper { min-height: 910px; }
             
             #total_value { font-size: 26px; font-weight: 600; }
-
+            
+            
+            #header_details { font-size: 10px; }
+            .h_addr_1,
+            .bill_to { font-weight: 600; }
+            
+            .h_addr_4 { margin-bottom: 15px; }
+            .memo { width: 100%; text-align: center; }
             
 
 		</style>
@@ -108,7 +115,33 @@
         <table id="invoice_wrapper">
             <tbody>
                 <tr>
-                    <td colspan="2"><h2>{{district::name}}</h2></td>
+                    <td colspan="2">
+                        
+                    
+                    
+                        <table id="header_details">
+                        	<tbody>
+                        		<tr>
+                        			<td>
+                        			    <p class="h_addr_1">Global Assessments, Inc.</p>
+                        			    <p class="h_addr_2">88 Old Westfield Road</p>
+                        			    <p class="h_addr_3">Granville, MA 01034</p>
+                        			    <p class="h_addr_4">(617) 686-2587</p>
+                        			</td>
+                        		</tr>
+                        		<tr>
+                        			<td>
+                        			    <p class="bill_to">BILL TO:</p>
+                        			    <p class="name">{{district::name}}</p>
+                        			    <p class="addr_1">{{district::addr_1}}</p>
+                        			    <p class="addr_2">{{district::addr_2}}</p>
+                        			</td>
+                        		</tr>
+                        	</tbody>
+                        </table>    
+                    
+                    
+                    </td>
                     <td>
                         
                         <table id="invoice_details">
@@ -123,6 +156,14 @@
                         		<tr>
                         			<td><span class="date_issued_val">{{district::date_issued}}</span></td>
                         			<td><span class="invoice_number_val">{{district::invoice_number}}</span></td>
+                        		</tr>
+                        		<tr>
+                        			<td><span class="date_issued">DATE DUE</span></td>
+                        			<td><span class="invoice_number">PURCHASE ORDER #</span></td>
+                        		</tr>
+                        		<tr>
+                        			<td><span class="date_issued_val">{{district::date_due}}</span></td>
+                        			<td><span class="purchase_order_val">{{district::purchase_order}}</span></td>
                         		</tr>
                         	</tbody>
                         </table>
@@ -151,10 +192,9 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="bill_to_wrapper" style="background-color: #bdbdbe;">
-                        <span class="bill_to">Bill To</span><br>
-                        <span class="name">{{district::name}}</span><br>
-                        <span class="addr_2">{{district::addr_1}}</span><br>
-                        <span class="addr_3">{{district::addr_2}}</span><br>
+                        <span class="bill_to">MEMO</span><br>
+                        <span class="memo">We appreciate your business. Thank you.</span><br>
+                        
                     </td>
                     <td class="total" style="background-color: #dad9da;">
                         <span class="total_label">Total</span><br>
