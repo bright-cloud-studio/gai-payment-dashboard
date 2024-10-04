@@ -4,7 +4,9 @@ namespace Bcs\Backend;
 
 use DateTime;
 
+use Bcs\Model\District;
 use Bcs\Model\Invoice;
+use Bcs\Model\InvoiceDistrict;
 use Bcs\Model\InvoiceRequest;
 use Bcs\Model\Transaction;
 
@@ -19,7 +21,7 @@ use Contao\StringUtil;
 class InvoiceRequestBackend extends Backend
 {
 
-    // Create 'Invoice' DCAs for each Invoice we want to create
+    // Create 'Invoice' DCAs for Psychologists
     public function createInvoiceDCAs(DataContainer $dc) {
         
         // do nothing if we havent saved this record
@@ -47,15 +49,10 @@ class InvoiceRequestBackend extends Backend
         // If we have not yet created the Invoices for this request
         if($dc->activeRecord->created_invoice_dcas != 'yes') {
 
-    		
     		// Build arrays of IDs for which Psys and Schools to skip
     		$exclude_psys = array();
-    		$exclude_schools = array();
     		if(is_array($dc->activeRecord->exclude_psychologists))
     		    $exclude_psys = unserialize($dc->activeRecord->exclude_psychologists);
-		    if(is_array($dc->activeRecord->exclude_districts))
-    		$exclude_schools = unserialize($dc->activeRecord->exclude_districts);
-    		
     		
     		// Loop through all active Psychologists
     		$options = ['order' => 'firstname ASC'];
@@ -115,9 +112,120 @@ class InvoiceRequestBackend extends Backend
             $ir->save();
         }
         
-
-        
+        // Chain into the District Invoices
+        $this->createInvoiceDistrictDCAs($dc);
     }
+    
+    
+    
+    
+    // Create 'Invoice' DCAs for Districts
+    public function createInvoiceDistrictDCAs(DataContainer $dc) {
+
+        // Build an array with Psy ID as the first key and Transaction IDs as the second
+        $arrTransactions = array();
+		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' and published='1' ORDER BY date_submitted ASC");
+		while ($transactions->next())
+		{
+    		$assignment = $this->Database->query("SELECT * FROM tl_assignment WHERE id='". $transactions->pid ."'");
+    		while ($assignment->next())
+    		{
+    		    $arrTransactions[$assignment->district][] = $transactions->id;
+    		}
+		}
+		
+		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
+        $arrTransactionsMisc = array();
+		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/01/24")."' AND '".$this->convertDateToTimestamp("09/30/24")."' and district!='' and published='1' ORDER BY date_submitted ASC");
+		while ($transactions_misc->next())
+		{
+		    $arrTransactionsMisc[$transactions_misc->district][] = $transactions_misc->id;
+		}
+
+
+        // If we have not yet created the Invoices for this request
+        if($dc->activeRecord->created_invoice_dcas != 'yes') {
+
+    		
+    		// Build arrays of IDs for which Psys and Schools to skip
+    		$exclude_districts = array();
+		    if(is_array($dc->activeRecord->exclude_districts))
+    		$exclude_districts = unserialize($dc->activeRecord->exclude_districts);
+
+    		
+    		
+    		// Loop through all active Districts
+    		$options = ['order' => 'district_name ASC'];
+    		$districts = District::findBy('published', '1', $options);
+    		foreach($districts as $district) {
+    
+                // Only continue if this Member is fully filled out
+    		    if($district->district_name != '') {
+    		        
+    		        // Only continue if we arent excluding this PSY
+        		    if(!in_array($district->id, $exclude_districts)) {
+        		        
+        		        // Create a new Invoice child for this request, set our datam save and move on
+        		        $invoice = new InvoiceDistrict();
+        		        $invoice->pid = $dc->activeRecord->id;
+        		        $invoice->district = $district->id;
+        		        $invoice->district_name = $district->district_name;
+        		        
+        		        // Build a csv string of the transaction ids for this invoice
+        		        $first = true;
+        		        foreach($arrTransactions[$district->id] as $id) {
+        		            if($first) {
+        		                $first = false;
+        		                $invoice->transaction_ids .= $id;
+        		            } else {
+        		                $invoice->transaction_ids .= "," . $id;
+        		            }
+        		        }
+        		        $first = true;
+        		        foreach($arrTransactionsMisc[$district->id] as $id) {
+        		            if($first) {
+        		                $first = false;
+        		                $invoice->misc_transaction_ids .= $id;
+        		            } else {
+        		                $invoice->misc_transaction_ids .= "," . $id;
+        		            }
+        		        }
+
+                        //$addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/' . $this->cleanName($invoice->psychologist_name);
+                        //$filename = 'invoice_' . date('yy_mm') . '.pdf';
+
+                        //$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+                        //$invoice->invoice_url = $root . 'files/invoices/' . $this->cleanName($invoice->psychologist_name) . '/' . $filename;
+        		        
+        		        // Only save if we have Transactions attached to this Invoice
+        		        if($invoice->transaction_ids != '' || $invoice->misc_transaction_ids != '')
+        		            $invoice->save();
+        		        
+        		    }
+    		    }
+    		    
+    		}
+            
+            // We have just created our Invoice children, mark as such so we don't do this over and over
+            $ir = InvoiceRequest::findOneBy('id', $dc->activeRecord->id);
+            $ir->created_invoice_dcas = 'yes';
+            $ir->save();
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
     public function deleteInvoiceRequest(DataContainer $dc) {
