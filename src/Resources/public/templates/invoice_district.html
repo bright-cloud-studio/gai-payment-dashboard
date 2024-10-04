@@ -1,0 +1,167 @@
+<html>
+	<head>
+		<style>
+		
+		    /* These are necessary to remove the margin on the paper */
+		    @page { margin: 5px; }
+            body { margin: 5px; }
+
+            /* Images */
+			.logo {
+			    width: 263px;
+			    height: 68px;
+			}
+			.product_image {
+			    width: 400px;
+			    height: 350px;
+			}
+			
+			label {
+			    width: 10px;
+			    height: 10px;
+			    display: inline-block;
+			}
+			
+			input { display: none; }
+			
+			
+			legend { display: none; }
+			
+			
+			/* Colors */
+			fieldset { border: 0; }
+            fieldset label {
+                width: 48px;
+                height: 48px;
+                margin: 0;
+                padding: 0;
+                border-radius: 5px;
+                border: 1px solid black;
+                margin-bottom: 10px;
+            }
+			
+			
+			/* Table */
+			table {
+			    width: 100%;
+			    height: auto;
+			}
+			#invoice_wrapper {
+            	border: 1px solid #000;
+            	border-collapse: initial;
+            }
+            
+            table#invoice_wrapper {
+                border-top: 5px solid red;
+                border-collapse: initial;
+            }
+            
+            
+            #invoice_details,
+			#invoice_details td,
+			#invoice_details th {
+            	border: 0;
+            	text-align: right;
+            	font-size: 12px;
+            }
+            
+            #transactions_wrapper {
+            	border: 1px solid black;
+            	border-collapse: initial;
+            	border-spacing: 0;
+            }
+
+            
+            h1, h2, h3, h4, p { margin: 0; padding: 0; }
+            h2 { margin-bottom: 10px; }
+            
+            span.date_issued,
+            span.invoice_number { font-weight: 600; }
+            
+            span.bill_to { font-weight: 600; }
+            .bill_to_wrapper { font-size: 9px; }
+            
+            thead {
+                background-color: #bdbdbe;
+                font-weight: 600;
+            }
+            
+            td.total { text-align: right; }
+            
+            #transactions_wrapper td {
+                font-size: 12px;
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+                border-bottom: 1px solid black;
+                border-spacing: 0;
+            }
+            #transactions_wrapper { min-height: 950px; }
+            
+            #total_value { font-size: 26px; font-weight: 600; }
+
+            
+
+		</style>
+	</head>
+	<body>
+	    
+        <table id="invoice_wrapper">
+            <tbody>
+                <tr>
+                    <td colspan="2"><h2>{{psychologist::name}}</h2></td>
+                    <td>
+                        
+                        <table id="invoice_details">
+                        	<tbody>
+                        		<tr>
+                        			<td colspan='2'><h2>Invoice</h2></td>
+                        		</tr>
+                        		<tr>
+                        			<td><span class="date_issued">DATE ISSUED</span></td>
+                        			<td><span class="invoice_number">INVOICE #</span></td>
+                        		</tr>
+                        		<tr>
+                        			<td><span class="date_issued_val">{{psychologist::date_issued}}</span></td>
+                        			<td><span class="invoice_number_val">{{psychologist::invoice_number}}</span></td>
+                        		</tr>
+                        	</tbody>
+                        </table>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <table id="transactions_wrapper">
+                        	<thead>
+                        		<tr>
+                        			<td>DISTRICT</td>
+                        			<td>SCHOOL</td>
+                        			<td>STUDENT</td>
+                        			<td>NUMBER</td>
+                        			<td>SERVICE</td>
+                        			<td>PRICE</td>
+                        		</tr>
+                        	</thead>
+                        	<tbody>
+                        		{{invoice::transactions}}
+                        	</tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="bill_to_wrapper" style="background-color: #bdbdbe;">
+                        <span class="bill_to">Bill To</span><br>
+                        <span class="name">{{psychologist::name}}</span><br>
+                        <span class="addr_2">{{psychologist::addr_1}}</span><br>
+                        <span class="addr_3">{{psychologist::addr_2}}</span><br>
+                    </td>
+                    <td class="total" style="background-color: #dad9da;">
+                        <span class="total_label">Total</span><br>
+                        <span id="total_value">{{invoice::price_total}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+		
+	</body>
+</html>
