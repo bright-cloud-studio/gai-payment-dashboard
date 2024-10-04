@@ -74,6 +74,7 @@ $GLOBALS['FE_MOD']['gai']['mod_list_transactions']       = 'Bcs\Module\ModListTr
 $GLOBALS['FE_MOD']['gai']['mod_list_assignments_filter'] = 'Bcs\Module\ModListAssignmentsFilter';
 $GLOBALS['FE_MOD']['gai']['mod_psych_work_form']         = 'Bcs\Module\ModPsychWorkForm';
 $GLOBALS['FE_MOD']['gai']['mod_review_transactions']     = 'Bcs\Module\ModReviewTransactions';
+$GLOBALS['FE_MOD']['gai']['mod_send_invoice_emails']     = 'Bcs\Module\ModSendInvoiceEmails';
 
 
 /* Models */
@@ -93,3 +94,20 @@ $GLOBALS['TL_MODELS']['tl_transaction_misc']   = 'Bcs\Model\TransactionMisc';
 // Custom Form Fields
 $GLOBALS['BE_FFL']['select_dynamic'] = SelectMenuDynamic::class;
 $GLOBALS['TL_FFL']['select_dynamic'] = FormSelectDynamic::class;
+
+
+/** Add new notification type */
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['gai_invoices']['send_email'] = array
+(
+    'recipients'           => array('recipient_email'),
+    'email_subject'        => array('recipient_name', 'invoice_number', 'billing_month'),
+    'email_text'           => array('recipient_name', 'invoice_number', 'invoice_url', 'invoice_total', 'billing_month'),
+    'email_html'           => array('recipient_name', 'invoice_number', 'invoice_url'),
+    'file_name'            => array('invoice_filename', 'invoice_url'),
+    'file_content'         => array('invoice_url', 'invoice_file'),
+    'email_sender_name'    => array('sender_name'),
+    'email_sender_address' => array('sender_address'),
+    'email_recipient_cc'   => array('recipient_cc'),
+    'email_replyTo'        => array('reply_to_address'),
+    'attachment_tokens'    => array('invoice_token'),
+);
