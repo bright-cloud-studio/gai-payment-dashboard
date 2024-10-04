@@ -6,6 +6,7 @@ use DateTime;
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
 use Bcs\Model\Invoice;
+use Bcs\Model\InvoiceDistrict;
 use Bcs\Model\PriceTier;
 use Bcs\Model\Psychologist;
 use Bcs\Model\Service;
@@ -318,6 +319,13 @@ class FormHooks
             // Save our new Transaction
             $transaction->save();
             
+        }
+        // Assignment Generate Transaction Form
+        else if($formData['formID'] == 'dashboard_send_invoice_emails') {
+            
+            echo "<pre>";
+            print_r($submittedData['psychologists']);
+            die();
         }
         
     }
@@ -675,22 +683,48 @@ class FormHooks
                     ];
                     
                     // Hold the psys
-                    $invoices = Invoice::findBy(['invoice_url != ?'], ['']);
+                    $invoices = Invoice::findAll();
             
                     // loop through each service
                     foreach($invoices as $invoice) {
-                        
-                        if($psy->firstname != '') {
-                            $options[] = array (
-                                'value' => $invoice->psychologist,
-                                'label' => $invoice->psychologist_name;
-                            );
-                        }
+                        $options[] = array (
+                            'value' => $invoice->psychologist,
+                            'label' => $invoice->psychologist_name
+                        );
                     }
 
                     // Save back as a serialized array
                     $field->options = serialize($options);
                 }
+                
+                else if($field->name == 'districts') {
+                    
+                    // Convert to php array
+                    $options = unserialize($field->options);
+
+                    // Set Configuration options for the query
+                    $opt = [
+                        'order' => 'firstname ASC'
+                    ];
+                    
+                    // Hold the psys
+                    $invoices = InvoiceDistrict::findAll();
+            
+                    // loop through each service
+                    foreach($invoices as $invoice) {
+                        $options[] = array (
+                            'value' => $invoice->district,
+                            'label' => $invoice->district_name
+                        );
+                    }
+
+                    // Save back as a serialized array
+                    $field->options = serialize($options);
+                }
+                
+                
+                
+                
             }
 
             // Prefill in our Work Assignment information
