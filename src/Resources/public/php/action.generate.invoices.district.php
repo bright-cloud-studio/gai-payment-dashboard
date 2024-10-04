@@ -67,7 +67,8 @@
     $se_r = $dbh->query($se_q);
     if($se_r) {
         while($r = $se_r->fetch_assoc()) {
-            $services[$r['id']] = $r['name'];
+            $services[$r['id']]['name'] = $r['name'];
+            $services[$r['id']]['price_school_1'] = $r['school_tier_1_price'];
         }
     }
 
@@ -142,15 +143,18 @@
         if($district_result) {
             while($row = $district_result->fetch_assoc()) {
                 $district['name'] = $row['district_name'];
-                $district['addr_1'] = "ADDR_1";
-                $district['addr_2'] = "ADDR_2";
+                $district['invoice_prefix'] = $row['invoice_prefix'];
+                $district['purchase_order'] = $row['purchase_order'];
+                $district['addr_1'] = $row['contact_address'];
+                $district['addr_2'] = $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'];
             }
         }
     	
       	
         // Load our HTML template
         $html = file_get_contents('bundles/bcspaymentdashboard/templates/invoice_district.html', true);
-    
+        
+        
          // Find all instances of our tag brackets '{{tag}}' and store them in the $tags array
         preg_match_all('/\{{2}(.*?)\}{2}/is', $html, $tags);
         
@@ -171,25 +175,32 @@
     		    case 'district':
     		        
 
-    		        switch($explodedTag[1]) {
-    		            case 'name':
-    		                $html = str_replace($tag, $district['name'], $html);
-    		                break;
-    		            case 'date_issued':
-    		                $html = str_replace($tag, date('m/d/y'), $html);
-    		                break;
-    		            case 'invoice_number':
-    		                $html = str_replace($tag, date('Y_m'), $html);
-    		                break;
-    		            case 'addr_1':
-    		                $html = str_replace($tag, $district['addr_1'], $html);
-    		                break;
-    		            case 'addr_2':
-    		                $html = str_replace($tag, $district['addr_2'], $html);
-    		                break;
-    		            default:
-    		                break;
-    		        }
+                    switch($explodedTag[1]) {
+                        case 'name':
+                            $html = str_replace($tag, $district['name'], $html);
+                            break;
+                        case 'date_issued':
+                            $html = str_replace($tag, date('F'), $html);
+                            break;
+                        case 'date_due':
+                            $fifteen_days_from_now = time() + (15 * 24 * 60 * 60);
+                            $html = str_replace($tag, date('D M d, Y', $fifteen_days_from_now), $html);
+                            break;
+                        case 'invoice_number':
+                            $html = str_replace($tag, $district['invoice_prefix']. '_' . date('Y_m'), $html);
+                            break;
+                        case 'purchase_order':
+                            $html = str_replace($tag, $district['purchase_order'], $html);
+                            break;
+                        case 'addr_1':
+                            $html = str_replace($tag, $district['addr_1'], $html);
+                            break;
+                        case 'addr_2':
+                            $html = str_replace($tag, $district['addr_2'], $html);
+                            break;
+                        default:
+                            break;
+                    }
     		        
     		    
     		    break;
@@ -233,8 +244,36 @@
 
                                         $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['date_submitted']));
                                         
-                                        $transactions[$i]['service'] = $services[$row['service']];
-                                        $transactions[$i]['price'] = $row['price'];
+                                        
+                                        
+                                        $transactions[$i]['rate'] = $services[$row['service']]['price_school_1'];
+                                        
+                                        
+                                        
+                                        if($row['service'] == 1) {
+                                            $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
+                                            
+                                            // Get our half and quarter rate
+                                            $rate_half = $services[$row['service']]['price_school_1'] / 2;
+                                            $rate_quarter = $services[$row['service']]['price_school_1'] / 4;
+                                            $final_price = 0;
+                                            
+                                            // If duration is under 30 mins
+                                            if($row['meeting_duration'] <= 30) {
+                                                $final_price = number_format(floatval($rate_half), 2, '.', '');
+                                            } else {
+                                                $dur = ceil(($row['meeting_duration']-30) / 15);
+                                                $final_price = number_format(floatval($rate_half), 2, '.', '') + ($dur * number_format(floatval($rate_quarter), 2, '.', ''));
+                                            }
+                                            
+                                            $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
+                                        } else {
+                                            $transactions[$i]['service'] = $services[$row['service']]['name'];
+                                            $transactions[$i]['price'] = $services[$row['service']]['price_school_1'];
+                                        }
+                                        
+                                        
+                                        
                                         $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($row['price']), 2, '.', '');
                                         $i++;
                                     }
@@ -247,7 +286,7 @@
             		                $trans_html .= "<td>" . $transaction['school'] . "</td>";
             		                $trans_html .= "<td>" . $transaction['student'] . "</td>";
             		                $trans_html .= "<td>" . $transaction['number'] . "</td>";
-            		                $trans_html .= "<td>" . $transaction['price'] . "</td>";
+            		                $trans_html .= "<td>" . $transaction['rate'] . "</td>";
             		                $trans_html .= "<td>" . $transaction['price'] . "</td>";
             		                $trans_html .= "</tr>";
         		                }
@@ -262,8 +301,31 @@
                                     $i = 0;
                                     while($row = $transactions_results->fetch_assoc()) {
                                         
-                                        $transactions[$i]['service'] = $row['service_label'];
-                                        $transactions[$i]['price'] = $row['price'];
+                                        $transactions[$i]['service'] = $services[$row['service']]['name'];
+                                        $transactions[$i]['rate'] = $services[$row['service']]['price_school_1'];
+                                        
+                                        if($row['service'] == 1) {
+                                            $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
+                                            
+                                            // Get our half and quarter rate
+                                            $rate_half = $services[$row['service']]['price_school_1'] / 2;
+                                            $rate_quarter = $services[$row['service']]['price_school_1'] / 4;
+                                            $final_price = 0;
+                                            
+                                            // If duration is under 30 mins
+                                            if($row['meeting_duration'] <= 30) {
+                                                $final_price = number_format(floatval($rate_half), 2, '.', '');
+                                            } else {
+                                                $dur = ceil(($row['meeting_duration']-30) / 15);
+                                                $final_price = number_format(floatval($rate_half), 2, '.', '') + ($dur * number_format(floatval($rate_quarter), 2, '.', ''));
+                                            }
+                                            
+                                            $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
+                                        } else {
+                                            $transactions[$i]['service'] = $services[$row['service']]['name'];
+                                            $transactions[$i]['price'] = $services[$row['service']]['price_school_1'];
+                                        }
+                                        
                                         $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['date_submitted']));
                                         $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($row['price']), 2, '.', '');
                                         $i++;
@@ -277,7 +339,7 @@
             		                $misc_trans_html .= "<td>" . $transaction['school'] . "</td>";
             		                $misc_trans_html .= "<td>" . $transaction['student'] . "</td>";
             		                $misc_trans_html .= "<td>" . $transaction['number'] . "</td>";
-            		                $misc_trans_html .= "<td>" . $transaction['price'] . "</td>";
+            		                $misc_trans_html .= "<td>" . $transaction['rate'] . "</td>";
             		                $misc_trans_html .= "<td>" . $transaction['price'] . "</td>";
             		                $misc_trans_html .= "</tr>";
         		                }
