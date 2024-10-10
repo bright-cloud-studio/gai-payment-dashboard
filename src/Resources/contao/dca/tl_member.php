@@ -32,3 +32,12 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['price_tier_display'] = array
     'options_callback'	      => array('Bcs\Backend\ServiceBackend', 'getPriceTierDisplay'),
     'sql' => "blob NULL"
 );
+
+$GLOBALS['TL_DCA']['tl_member']['fields']['psych_work_form_colors'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_member']['psych_work_form_colors'],
+    'inputType'               => 'text',
+    'default'                 => '',
+    'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr'),
+    'sql'                     => "text NULL"
+);
