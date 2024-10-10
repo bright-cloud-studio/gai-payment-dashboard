@@ -320,12 +320,66 @@ class FormHooks
             $transaction->save();
             
         }
+       
         // Assignment Generate Transaction Form
         else if($formData['formID'] == 'dashboard_send_invoice_emails') {
             
-            echo "<pre>";
-            print_r($submittedData['psychologists']);
-            die();
+            $first = true;
+            
+            // Loop through listed districts
+            foreach($submittedData['districts'] as $district) {
+                $d = District::findBy('id', $district);
+                $i = InvoiceDistrict::findBy('district', $district);
+                
+                //$addr = 'mark@brightcloudstudio.com, ed@globalassessmentsinc.com';
+                //$addr = 'mark@brightcloudstudio.com';
+                $addr = $d->contact_email;
+                
+                // Always set content-type when sending HTML email
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                
+                // More headers
+                $headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+                $headers .= 'Cc: ed@globalassessmentsinc.com, ' . $d->contact_cc_email . "\r\n";
+                
+                $name = $d->district_name;
+                $month = 'October';
+                
+                $sub = "$name, your $month invoice is ready for you";
+                
+                $message = "
+                    <html>
+                    <head>
+                    <title>GAI - Invoice</title>
+                    </head>
+                    <body>
+                        <p>Dear $name</p>
+                        <p>Your $month invoice is ready for you. Please remit payment at your earliest convenience.</p>
+                        <p>You can access the PDF file using the link below.</p>
+                        <p>Link: <a href='$i->invoice_url'>Invoice PDF File</a></p>
+                        <p>Thank you for your business!</p>
+                        <p>Best,</p>
+                        <p>Global Assessments, Inc</p>
+                    </body>
+                    </html>
+                    ";
+                
+                // use wordwrap() if lines are longer than 70 characters
+                $msg = wordwrap($msg,70);
+                
+                if($first) {
+                    //$first = false;
+                    // send email
+                    mail($addr, $sub, $message, $headers);
+                    //mail($addr,$sub,$msg,$headers);
+                }
+                
+            }
+
+            
+
+            
         }
         
     }
