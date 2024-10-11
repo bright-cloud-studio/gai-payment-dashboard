@@ -67,6 +67,7 @@ class InvoiceRequestBackend extends Backend
         		        
         		        // Create a new Invoice child for this request, set our datam save and move on
         		        $invoice = new Invoice();
+                        $invoice->tstamp = time();
         		        $invoice->pid = $dc->activeRecord->id;
         		        $invoice->psychologist = $psy->id;
         		        $invoice->psychologist_name = $psy->firstname . " " . $psy->lastname;
@@ -167,6 +168,7 @@ class InvoiceRequestBackend extends Backend
         		        
         		        // Create a new Invoice child for this request, set our datam save and move on
         		        $invoice = new InvoiceDistrict();
+                        $invoice->tstamp = time();
         		        $invoice->pid = $dc->activeRecord->id;
         		        $invoice->district = $district->id;
         		        $invoice->district_name = $district->district_name;
