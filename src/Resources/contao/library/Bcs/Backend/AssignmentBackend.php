@@ -160,7 +160,9 @@ class AssignmentBackend extends Backend
 
         // Hold the psys
         $districts = array();
-
+        
+        $districts = $districts + array('0' => 'Select a District');
+        
         // Use the DB to grab all of our enabled members, aka our psychologists
 		$this->import('Database');
 		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1 ORDER BY district_name ASC")->execute();
@@ -179,7 +181,9 @@ class AssignmentBackend extends Backend
         $schools = array();
         
         if($dc->activeRecord->district != '') {
-    
+            
+            $schools = $schools + array('0' => 'Select a District');
+            
             // Use the DB to grab all of our enabled members, aka our psychologists
     		$this->import('Database');
     		
@@ -202,6 +206,8 @@ class AssignmentBackend extends Backend
         // Hold the psys
         $services = array();
 
+        $services = $services + array('0' => 'Select a Service');
+
         // Use the DB to grab all of our enabled members, aka our psychologists
 		$this->import('Database');
 		$result = $this->Database->prepare("SELECT * FROM tl_service WHERE published=1 ORDER BY name ASC")->execute();
@@ -221,6 +227,8 @@ class AssignmentBackend extends Backend
         $students = array();
 
         if($dc->activeRecord->district != '') {
+            
+            $students = $students + array('0' => 'Select a Student');
             
             // Use the DB to grab all of our enabled members, aka our psychologists
     		$this->import('Database');
@@ -250,6 +258,8 @@ class AssignmentBackend extends Backend
     
         // Hold the psys
         $students = array();
+        
+        $students = $students + array('0' => 'Select type of Eval');
 
         $students = $students + array('initial' => 'Initial');
         $students = $students + array('initial_504' => 'Initial 504');
