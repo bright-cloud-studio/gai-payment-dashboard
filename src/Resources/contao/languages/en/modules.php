@@ -21,8 +21,8 @@ $GLOBALS['TL_LANG']['MOD']['price_tier']               = array('Price Tier', 'Ma
 $GLOBALS['TL_LANG']['MOD']['student']                  = array('Student', 'Master List of all Students');
 
 $GLOBALS['TL_LANG']['MOD']['invoice_request']          = array('Generate Invoices', 'Create an Invoice Request to generate invoices for a certain date range');
-$GLOBALS['TL_LANG']['MOD']['invoice']                  = array('Invoices - Psychologists', 'Lists Invoices generated for Psychologists');
-$GLOBALS['TL_LANG']['MOD']['invoice_district']         = array('Invoices - Districts', 'Lists Invoices generated for Districts');
+$GLOBALS['TL_LANG']['MOD']['invoice']                  = array('Psy Invoices', 'Lists Invoices generated for Psychologists');
+$GLOBALS['TL_LANG']['MOD']['invoice_district']         = array('District Invoices', 'Lists Invoices generated for Districts');
 
 /* Front End modules */
 $GLOBALS['TL_LANG']['FMD']['mod_list_services']           = array('List Services', 'Lists Service data on the Assignments page');
