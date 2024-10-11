@@ -312,7 +312,8 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['notes'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
             'sql'                     => "text NOT NULL default ''"
         )
