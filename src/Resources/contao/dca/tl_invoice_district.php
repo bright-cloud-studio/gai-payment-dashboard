@@ -133,7 +133,7 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_district']['district'],
             'inputType'               => 'select',
             'filter'                  => true,
-            'search'                  => true,
+            'search'                  => false,
             'foreignKey'              => 'tl_district.district_name',
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a District'),
@@ -145,7 +145,8 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_district']['district_name'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
@@ -154,7 +155,8 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_district']['invoice_url'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
@@ -163,7 +165,8 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_district']['transaction_ids'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
@@ -172,7 +175,8 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_district']['misc_transaction_ids'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
