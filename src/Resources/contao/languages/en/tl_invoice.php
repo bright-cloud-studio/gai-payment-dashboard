@@ -16,7 +16,9 @@ $GLOBALS['TL_LANG']['tl_invoice']['published']                  = array('Publish
 /* Fields */
 $GLOBALS['TL_LANG']['tl_invoice']['invoice_legend']             = 'Invoice Information';
 $GLOBALS['TL_LANG']['tl_invoice']['psychologist']               = array('Psychologist', 'The Psychologist this Invoice belongs to');
-$GLOBALS['TL_LANG']['tl_invoice']['psychologist_name']          = array('Psychologist Name', 'Display Name used for internal purposes');
 $GLOBALS['TL_LANG']['tl_invoice']['invoice_url']                = array('Invoice URL', 'URL Address to the PDF of this Invoice');
+
+$GLOBALS['TL_LANG']['tl_invoice']['internal_legend']            = 'INTERNAL Information';
+$GLOBALS['TL_LANG']['tl_invoice']['psychologist_name']          = array('Psychologist Name', 'Display Name used for internal purposes');
 $GLOBALS['TL_LANG']['tl_invoice']['transaction_ids']            = array('Transaction IDs', 'IDs for the Transactions stamped on this Invoice');
 $GLOBALS['TL_LANG']['tl_invoice']['misc_transaction_ids']       = array('Misc. Transaction IDs', 'IDs for the Misc. Transactions stamped on this Invoice');
