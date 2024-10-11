@@ -25,8 +25,12 @@ $GLOBALS['TL_LANG']['tl_invoice_request']['published']                  = array(
 
 /* Fields */
 $GLOBALS['TL_LANG']['tl_invoice_request']['invoice_request_legend']        = 'Invoice Request Information';
-$GLOBALS['TL_LANG']['tl_invoice_request']['date_start']                    = array('Date Range - Start', 'asdf');
-$GLOBALS['TL_LANG']['tl_invoice_request']['date_end']                      = array('Date Range - End', 'asdf');
+$GLOBALS['TL_LANG']['tl_invoice_request']['date_start']                    = array('Date Start', 'The Start Date for our range of Trnsactions to generate invoices for');
+$GLOBALS['TL_LANG']['tl_invoice_request']['date_end']                      = array('Date End', 'The End Date for our range of Trnsactions to generate invoices for');
 
-$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_psychologists']          = array('Exclude Psychologists', 'asdf');
-$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_districts']              = array('Exclude Districts', 'asdf');
+$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_psychologists']          = array('Exclude Psychologists', 'Check a Psychologist to exclude them from this Generation Request. Even if they have Transactions, excluded Psychologists will NOT have an Invoice generated');
+$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_districts']              = array('Exclude Districts', 'Check a Distrct to exclude it from this Generation Request. Even if it has Transactions, excluded Districts will NOT have an Invoice generated');
+
+$GLOBALS['TL_LANG']['tl_invoice_request']['internal_legend']                = 'INTERNAL Information';
+$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_districts']              = array('created_invoice_dcas', 'INTERNAL Flag to determine if we have created the entries in the Invoice sections for this Generation Request.');
+$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_districts']              = array('generation_completed', 'INTERNAL FLag to mark when a Generation Request has been fully processed');
