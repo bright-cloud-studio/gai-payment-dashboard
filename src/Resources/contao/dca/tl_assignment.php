@@ -132,7 +132,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['alias'],
             'exclude'                 => true,
             'inputType'               => 'text',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('unique'=>true, 'rgxp'=>'alias', 'doNotCopy'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
             'save_callback' => array
             (
@@ -161,7 +162,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_30_day'],
             'inputType'               => 'text',
             'default'                 => '',
-            'filter'                  => true,
+            'filter'                  => false,
+            'search'                  => false,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => "",
@@ -294,7 +296,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['contact_info_parent'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NOT NULL default ''"
         ),
@@ -303,7 +306,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['contact_info_teacher'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NOT NULL default ''"
         ),
@@ -312,7 +316,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['team_chair'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
@@ -321,7 +326,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['email'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
@@ -330,7 +336,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['report_submitted'],
             'inputType'               => 'select',
             'filter'                  => true,
-            'search'                  => true,
+            'search'                  => false,
             'default'                 => 'no',
             'options'                  => array('no' => 'No', 'yes' => 'Yes'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
@@ -341,7 +347,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['notes'],
             'inputType'               => 'textarea',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100'),
             'sql'                     => "text NOT NULL default ''"
         ),
