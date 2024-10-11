@@ -162,7 +162,8 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'flag'                    => DataContainer::SORT_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'submitOnChange'=>true),
             'options_callback'	      => array('Bcs\Backend\TransactionMiscBackend', 'getDistricts'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "varchar(255) NOT NULL default ''",
+            'foreignKey'              => 'tl_district.district_name'
         ),
         'school' => array
         (
