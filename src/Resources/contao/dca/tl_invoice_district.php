@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_legend}, district, district_name, invoice_url, transaction_ids, misc_transaction_ids;{publish_legend},published;'
+        'default'                     => '{invoice_legend}, district, invoice_url; {internal_legend:hide}, district_name, transaction_ids, misc_transaction_ids;{publish_legend},published;'
     ),
  
     // Fields
