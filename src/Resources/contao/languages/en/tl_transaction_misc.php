@@ -11,7 +11,7 @@
 **/
 
 /* System Buttons */
-$GLOBALS['TL_LANG']['tl_transaction_misc']['new']                   = array('New Transaction', 'Add a new record');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['new']                        = array('New Transaction', 'Add a new record');
 $GLOBALS['TL_LANG']['tl_transaction_misc']['show']                       = array('Transaction Details', 'Show the details of record ID %s');
 $GLOBALS['TL_LANG']['tl_transaction_misc']['edit']                       = array('Edit Transaction', 'Edit record ID %s');
 $GLOBALS['TL_LANG']['tl_transaction_misc']['copy']                       = array('Copy Transaction', 'Copy record ID %s');
@@ -23,20 +23,27 @@ $GLOBALS['TL_LANG']['tl_transaction_misc']['alias']                      = array
 $GLOBALS['TL_LANG']['tl_transaction_misc']['published']                  = array('Reviewed', 'Indicates if this Transaction has been Reviewed by the submitting Psychologist');
 
 /* Fields */
-$GLOBALS['TL_LANG']['tl_transaction_misc']['transaction_legend']         = 'Transaction Information';
-$GLOBALS['TL_LANG']['tl_transaction_misc']['date_submitted']             = array('Date Submitted', 'asdf');
-$GLOBALS['TL_LANG']['tl_transaction_misc']['psychologist']               = array('Psychologist', 'asdf');
-$GLOBALS['TL_LANG']['tl_transaction_misc']['service']                    = array('Service Code', 'The Service Code assigned to this Transaction');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['transaction_legend']         = 'Misc. Transaction Information';
+$GLOBALS['TL_LANG']['tl_transaction_misc']['date_submitted']             = array('Date Submitted', 'The date this Misc. Transaction was created');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['psychologist']               = array('Psychologist', 'The Psychologist who created this Misc. Transaction');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['service']                    = array('Service Code', 'The Service Code assigned to this Misc. Transaction');
 $GLOBALS['TL_LANG']['tl_transaction_misc']['service_label']              = array('Service Label', 'The manual label entered when creating this Misc. Transaction');
-$GLOBALS['TL_LANG']['tl_transaction_misc']['price']                      = array('Price', 'asdf');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['price']                      = array('Price', 'The Price Tier price assigned to the selected Service');
 $GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_legend']             = 'Meeting Information';
-$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_date']               = array('Meeting Date', 'asdf');
-$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_start']              = array('Meeting Start', 'asdf');
-$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_end']                = array('Meeting End', 'asdf');
-$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_duration']           = array('Meeting Duration', 'asdf');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_date']               = array('Meeting Date', 'The date whcih a Meeting service has taken place');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_start']              = array('Meeting Start', 'The start time of the meeting');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_end']                = array('Meeting End', 'The end time of the meeting');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_duration']           = array('Meeting Duration', 'The total duration of the meeting in minutes');
 
-$GLOBALS['TL_LANG']['tl_transaction_misc']['notes_legend']                = 'Notes';
-$GLOBALS['TL_LANG']['tl_transaction_misc']['notes']                      = array('Notes', 'asdf');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['notes_legend']               = 'Notes';
+$GLOBALS['TL_LANG']['tl_transaction_misc']['notes']                      = array('Notes', 'Custom notes entered by the Psychologist who created this Misc. Transaction');
 
 $GLOBALS['TL_LANG']['tl_transaction_misc']['publish_legend']             = 'Reviewed Information';
-$GLOBALS['TL_LANG']['tl_transaction_misc']['reviewed']                   = array('Reviewed', 'asdf');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['reviewed']                   = array('Reviewed', 'Indicates if this Misc. Transaction has been Reviewed by the submitting Psychologist');
+
+
+$GLOBALS['TL_LANG']['tl_transaction_misc']['district']                   = array('District', 'The District selected by the Psychologist who created this Misc. Transaction');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['school']                     = array('School', 'The School selected by the Psychologist who created this Misc. Transaction');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['student_initials']           = array('Student Initials', 'The initials of the Student who this Misc. Transaction is about');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['lasid']                      = array('LASID', 'The assigned LASID for the Student');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['sasid']                      = array('SASID', 'The assigned SASID for the Student');
