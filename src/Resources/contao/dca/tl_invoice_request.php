@@ -98,7 +98,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{publish_legend},published;{generator_legend},created_invoice_dcas,generation_completed;'
+        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{internal_legend},created_invoice_dcas,generation_completed;{publish_legend},published;'
     ),
  
     // Fields
