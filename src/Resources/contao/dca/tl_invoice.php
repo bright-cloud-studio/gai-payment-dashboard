@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_legend}, psychologist, psychologist_name, invoice_url, transaction_ids, misc_transaction_ids;{publish_legend},published;'
+        'default'                     => '{invoice_legend}, psychologist, invoice_url; {internal_legend:hide},psychologist_name, transaction_ids, misc_transaction_ids;{publish_legend},published;'
     ),
  
     // Fields
