@@ -76,9 +76,27 @@ class ModPsychWorkForm extends \Contao\Module
         $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/bcspaymentdashboard/js/datatables.min.js';
         $GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/datatables.min.css';
 
+
+        // Find our colorized rows
+        $db_colors = str_getcsv($member->psych_work_form_colors);
+        $colors = array();
+        foreach($db_colors as $color) {
+            $split = explode('_', $color);
+            $colors[$split[0]] = $split[1];
+        }
+            
+
         $assignments = Assignment::findBy(['psychologist = ?'], [$member->id]);
-        
         foreach($assignments as $assignment) {
+            
+            // ID
+            $template_assignments[$assignment->id]['id'] = $assignment->id;
+            
+            if($colors[$assignment->id] != '') {
+                $template_assignments[$assignment->id]['color_data'] = 'data-color="'.$colors[$assignment->id].'"';
+                $template_assignments[$assignment->id]['color_class'] = 'class="colorize_'.$colors[$assignment->id].'"';
+            }
+            
             
             // Date Created
             if($is_admin) {
@@ -374,6 +392,7 @@ class ModPsychWorkForm extends \Contao\Module
             
         }
         
+        //$this->Template->colors = $colors;
         $this->Template->assignments = $template_assignments;
         
     }
