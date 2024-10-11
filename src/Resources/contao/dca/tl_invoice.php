@@ -133,7 +133,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['psychologist'],
             'inputType'               => 'select',
             'filter'                  => true,
-            'search'                  => true,
+            'search'                  => false,
             'foreignKey'              => 'tl_member.CONCAT(firstname," ",lastname)',
             'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Psychologist'),
@@ -145,7 +145,8 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['psychologist_name'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
@@ -154,7 +155,8 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['invoice_url'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
@@ -163,7 +165,8 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['transaction_ids'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
@@ -172,7 +175,8 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['misc_transaction_ids'],
             'inputType'               => 'text',
             'default'                 => '',
-            'search'                  => true,
+            'search'                  => false,
+            'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
