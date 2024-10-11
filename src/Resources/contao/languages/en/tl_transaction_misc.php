@@ -23,10 +23,10 @@ $GLOBALS['TL_LANG']['tl_transaction_misc']['alias']                      = array
 $GLOBALS['TL_LANG']['tl_transaction_misc']['published']                  = array('Reviewed', 'Indicates if this Transaction has been Reviewed by the submitting Psychologist');
 
 /* Fields */
-$GLOBALS['TL_LANG']['tl_transaction_misc']['transaction_legend']         = 'Misc. Transaction Information';
+$GLOBALS['TL_LANG']['tl_transaction_misc']['misc_transaction_legend']    = 'Misc. Transaction Information';
 $GLOBALS['TL_LANG']['tl_transaction_misc']['date_submitted']             = array('Date Submitted', 'The date this Misc. Transaction was created');
 $GLOBALS['TL_LANG']['tl_transaction_misc']['psychologist']               = array('Psychologist', 'The Psychologist who created this Misc. Transaction');
-$GLOBALS['TL_LANG']['tl_transaction_misc']['service']                    = array('Service Code', 'The Service Code assigned to this Misc. Transaction');
+$GLOBALS['TL_LANG']['tl_transaction_misc']['service']                    = array('Service', 'The Service Code assigned to this Misc. Transaction');
 $GLOBALS['TL_LANG']['tl_transaction_misc']['service_label']              = array('Service Label', 'The manual label entered when creating this Misc. Transaction');
 $GLOBALS['TL_LANG']['tl_transaction_misc']['price']                      = array('Price', 'The Price Tier price assigned to the selected Service');
 $GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_legend']             = 'Meeting Information';
