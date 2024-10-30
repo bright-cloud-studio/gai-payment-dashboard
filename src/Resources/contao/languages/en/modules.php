@@ -29,5 +29,5 @@ $GLOBALS['TL_LANG']['FMD']['mod_list_services']           = array('List Services
 $GLOBALS['TL_LANG']['FMD']['mod_list_transactions']       = array('List Transactions', 'Lists a Psychologist\'s Transactions');
 $GLOBALS['TL_LANG']['FMD']['mod_list_assignments_filter'] = array('List Assignments Filter', 'Contains filters for the Select Assignment page');
 $GLOBALS['TL_LANG']['FMD']['mod_psych_work_form']         = array('Psych Work Form', 'Lists a Psychologist\'s Transactions in a spreadsheet format');
-$GLOBALS['TL_LANG']['FMD']['mod_invoice_history']         = array('Invoice History', 'Lists a Psychologist\'s Invoices so they can be redownloaded');
-$GLOBALS['TL_LANG']['FMD']['mod_admin_review']            = array('Admin Review', 'A way for Ed to do a final review of Invoices before a generation');
+
+$GLOBALS['TL_LANG']['FMD']['mod_review_transactions']     = array('Review Transactions', 'End of Month review by Psychologists');
