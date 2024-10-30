@@ -2,37 +2,26 @@
 <!-- Include DataTables for better formatting -->
 
 <div class="mod_invoice_history size100 marbot60">
-	<h2>Review Your Transactions</h2>
+	<h2>Invoice History</h2>
 
 
 	<table id="invoice_history" class="display compact cell-border hover order-column row-borders stripe" style="width:100%">
 		<thead>
 			<tr>
 				<th></th>
-				<th>District</th>
-				<th>School</th>
-				<th>Student</th>
-				<th>LASID</th>
-				<th>SASID</th>
-				<th>Service</th>
-				<th>Price</th>
-
+				<th style="min-width: 75px; max-width: 75px;" class='col_created'>Created</th>
+				<th>Invoice URL</th>
 			</tr>
 		</thead>
 		<tbody>
 			
 			<?php
-				foreach ($this->transactions as $transaction) {
+				foreach ($this->invoices as $invoice) {
 					$buffer = '';
 					$buffer .= "<tr>";
 					$buffer .= "<td></td>";
-					$buffer .= "<td>" . $transaction['district'] . "</td>";
-					$buffer .= "<td>" . $transaction['school'] . "</td>";
-					$buffer .= "<td>" . $transaction['student'] . "</td>";
-					$buffer .= "<td>" . $transaction['lasid'] . "</td>";
-					$buffer .= "<td>" . $transaction['sasid'] . "</td>";
-					$buffer .= "<td>" . $transaction['service'] . "</td>";
-					$buffer .= "<td>" . $transaction['price'] . "</td>";
+					$buffer .= "<td class='col_created'>" . $invoice['created'] . "</td>";
+					$buffer .= "<td><a href='".$invoice['invoice_url']."' target='_blank'>" . $invoice['invoice_url'] . "</a></td>";
 					$buffer .= "</tr>";
 					echo $buffer;
 				}
