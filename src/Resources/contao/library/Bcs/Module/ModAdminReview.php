@@ -73,9 +73,6 @@ class ModAdminReview extends \Contao\Module
         $GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/datatables.min.css';
 
 
-
-
-
         // Get all active Psychologists
         $opt = ['order' => 'firstname ASC'];
         $psychologists = MemberModel::findBy('disable', '0', $opt);
@@ -104,6 +101,7 @@ class ModAdminReview extends \Contao\Module
     
                     $assignment = Assignment::findOneBy('id', $transaction->pid);
                     
+                    $template_psychologists[$psy->id][$transaction->id]['psychologist_name'] = $psy->firstname . " " . $psy->lastname;
                     $template_psychologists[$psy->id][$transaction->id]['id'] = $transaction->id;
                     $template_psychologists[$psy->id][$transaction->id]['transaction_type'] = "transaction";
                     $template_psychologists[$psy->id][$transaction->id]['date_submitted'] = date('m_d_y', $transaction->date_submitted);
