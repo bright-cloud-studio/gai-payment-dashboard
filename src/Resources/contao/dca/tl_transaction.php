@@ -158,9 +158,9 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'default'                 => '',
             'filter'                  => false,
             'search'                  => false,
-            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y"),
+            'default'                 => date("m/d/y")
         ),
         'psychologist' => array
         (
@@ -202,9 +202,9 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'default'                 => '',
             'filter'                  => false,
             'search'                  => false,
-            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
-            'default'                 => date("m/d/y"),
+            'default'                 => date("m/d/y")
         ),
         'meeting_start' => array
         (
