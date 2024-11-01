@@ -97,7 +97,8 @@
                     // Step Three
                     // Generate a folder for this Psy if it doesn't exist already
                     $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/psychologists/' . cleanName($db_inv['psychologist_name']);
-                    $filename = "invoice_" . date('y_m');
+                    $filename = "invoice_" . date('y_m', strtotime('-1 month')) . "_" . date(11111,99999);
+                    
                     if (!file_exists($addr_folder)) {
                         mkdir($addr_folder, 0777, true);
                     }
@@ -181,10 +182,10 @@
     		                $html = str_replace($tag, $psy['name'], $html);
     		                break;
     		            case 'date_issued':
-    		                $html = str_replace($tag, date('m/d/y'), $html);
+    		                $html = str_replace($tag, date('m/d/Y', strtotime('-1 month')), $html);
     		                break;
     		            case 'invoice_number':
-    		                $html = str_replace($tag, date('Y_m'), $html);
+    		                $html = str_replace($tag, date('Y_m', strtotime('-1 month')), $html);
     		                break;
     		            case 'addr_1':
     		                $html = str_replace($tag, $psy['addr_1'], $html);
