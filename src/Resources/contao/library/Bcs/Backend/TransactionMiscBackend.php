@@ -126,6 +126,8 @@ class TransactionMiscBackend extends Backend
         // Hold the psys
         $districts = array();
 
+        $districts = $districts + array('' => ''); 
+
         // Use the DB to grab all of our enabled members, aka our psychologists
 		$this->import('Database');
 		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1 ORDER BY district_name ASC")->execute();
