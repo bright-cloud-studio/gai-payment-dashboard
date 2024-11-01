@@ -98,7 +98,7 @@
                     // Step Three
                     // Generate a folder for this Psy if it doesn't exist already
                     $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/districts/' . cleanName($db_inv['district_name']);
-                    $filename = "invoice_" . date('y_m');
+                    $filename = "invoice_" . date('y_m', strtotime('-1 month')) . "_" . rand(11111,99999);
                     if (!file_exists($addr_folder)) {
                         mkdir($addr_folder, 0777, true);
                     }
@@ -180,14 +180,14 @@
                             $html = str_replace($tag, $district['name'], $html);
                             break;
                         case 'date_issued':
-                            $html = str_replace($tag, date('F'), $html);
+                            $html = str_replace($tag, date('F', strtotime('-1 month')), $html);
                             break;
                         case 'date_due':
                             $fifteen_days_from_now = time() + (15 * 24 * 60 * 60);
                             $html = str_replace($tag, date('D M d, Y', $fifteen_days_from_now), $html);
                             break;
                         case 'invoice_number':
-                            $html = str_replace($tag, $district['invoice_prefix']. '_' . date('Y_m'), $html);
+                            $html = str_replace($tag, $district['invoice_prefix']. '_' . date('Y_m', strtotime('-1 month')), $html);
                             break;
                         case 'purchase_order':
                             $html = str_replace($tag, $district['purchase_order'], $html);
