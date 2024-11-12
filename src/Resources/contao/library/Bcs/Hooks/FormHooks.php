@@ -7,6 +7,7 @@ use Bcs\Model\Assignment;
 use Bcs\Model\District;
 use Bcs\Model\Invoice;
 use Bcs\Model\InvoiceDistrict;
+use Bcs\Model\InvoiceRequest;
 use Bcs\Model\PriceTier;
 use Bcs\Model\Psychologist;
 use Bcs\Model\Service;
@@ -328,8 +329,9 @@ class FormHooks
             
             // Loop through listed districts
             foreach($submittedData['districts'] as $district) {
-                $d = District::findBy('id', $district);
-                $i = InvoiceDistrict::findBy('district', $district);
+               
+                $i = InvoiceDistrict::findBy('id', $district);
+                $d = District::findBy('id', $i->district);
                 
                 //$addr = 'mark@brightcloudstudio.com, ed@globalassessmentsinc.com';
                 //$addr = 'mark@brightcloudstudio.com';
@@ -364,18 +366,18 @@ class FormHooks
                     </body>
                     </html>
                     ";
-                
-                // use wordwrap() if lines are longer than 70 characters
-                $msg = wordwrap($msg,70);
+
                 
                 if($first) {
                     //$first = false;
-                    // send email
-                    mail($addr, $sub, $message, $headers);
-                    //mail($addr,$sub,$msg,$headers);
+                    //mail($addr, $sub, $message, $headers);
                 }
                 
+                echo $message . "<br><br>";
+                
             }
+            
+            die();
 
             
 
@@ -722,14 +724,15 @@ class FormHooks
         
         if($form->formID == 'dashboard_send_invoice_emails') {
             
+            $gen_id = $_GET['gen_req'];
+            
             // Loop through the fields
             foreach($fields as $field) {
-                
-                // If this is our assignment uuid radio field
-                if($field->name == 'psychologists') {
+
+                if($field->name == 'districts') {
                     
                     // Convert to php array
-                    $options = unserialize($field->options);
+                    //$options = unserialize($field->options);
 
                     // Set Configuration options for the query
                     $opt = [
@@ -737,53 +740,76 @@ class FormHooks
                     ];
                     
                     // Hold the psys
-                    $invoices = Invoice::findAll();
-            
+                    $invoices = InvoiceDistrict::findBy(['published = ?', 'pid = ?'], ['', $gen_id]);
+                    
+                    $opt_dis = array();
                     // loop through each service
                     foreach($invoices as $invoice) {
-                        $options[] = array (
-                            'value' => $invoice->psychologist,
-                            'label' => $invoice->psychologist_name
-                        );
-                    }
-
-                    // Save back as a serialized array
-                    $field->options = serialize($options);
-                }
-                
-                else if($field->name == 'districts') {
-                    
-                    // Convert to php array
-                    $options = unserialize($field->options);
-
-                    // Set Configuration options for the query
-                    $opt = [
-                        'order' => 'firstname ASC'
-                    ];
-                    
-                    // Hold the psys
-                    $invoices = InvoiceDistrict::findAll();
-            
-                    // loop through each service
-                    foreach($invoices as $invoice) {
-                        $options[] = array (
-                            'value' => $invoice->district,
+                        $opt_dis[] = array (
+                            'value' => $invoice->id,
                             'label' => $invoice->district_name
                         );
                     }
 
                     // Save back as a serialized array
-                    $field->options = serialize($options);
+                    $field->options = serialize($opt_dis);
                 }
-                
-                
-                
                 
             }
 
             // Prefill in our Work Assignment information
             return $fields;
         }
+        
+        
+        /////////////////////////////////////
+        // SEND INVOICE EMAILS - SELECTOR //
+        ////////////////////////////////////
+        
+        if($form->formID == 'dashboard_send_invoice_emails_selector') {
+            
+            // Loop through the fields
+            foreach($fields as $field) {
+                
+                // If this is our assignment uuid radio field
+                if($field->name == 'selector') {
+                    
+                    // Convert to php array
+                    //$options = unserialize($field->options);
+
+                    // Set Configuration options for the query
+                    $opt = [
+                        'order' => 'id ASC'
+                    ];
+                    
+                    // Hold the psys
+                    $invoice_requests = InvoiceRequest::findBy('published', '');
+                    Invoice::findBy(['psychologist = ?'], [$member->id]);
+                    
+                    $options[] = array (
+                        'value' => '',
+                        'label' => "First, select a Generation"
+                    );
+                    
+                    // loop through each service
+                    foreach($invoice_requests as $request) {
+                        $options[] = array (
+                            'value' => $request->id,
+                            'label' => date('m/d/y', strtotime($request->date_start)) . " - " . date('m/d/y', strtotime($request->date_end))
+                        );
+                    }
+
+                    // Save back as a serialized array
+                    $field->options = serialize($options);
+                }
+                
+            }
+
+            // Prefill in our Work Assignment information
+            return $fields;
+        }
+        
+        
         
         
         
