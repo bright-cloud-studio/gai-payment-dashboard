@@ -70,7 +70,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
                 'label'               => &$GLOBALS['TL_LANG']['tl_issue']['toggle'],
                 'icon'                => 'visible.gif',
                 'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-                'button_callback'     => array('Bcs\Backend\DistrictBackend', 'toggleIcon')
+                'button_callback'     => array('Bcs\Backend\IssueBackend', 'toggleIcon')
             ),
             'show' => array
             (
