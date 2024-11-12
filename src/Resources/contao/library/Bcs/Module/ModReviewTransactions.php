@@ -85,7 +85,7 @@ class ModReviewTransactions extends \Contao\Module
         foreach($transactions as $transaction) {
             
             // Get the current month and current year as two digit numbers
-            $last_month = date('m', strtotime('-1 month'));
+            $last_month = date('m');
             $current_year = date('y');
             $transaction_month = date('m', $transaction->date_submitted);
             $transaction_year = date('y', $transaction->date_submitted);
@@ -158,7 +158,7 @@ class ModReviewTransactions extends \Contao\Module
         foreach($transactions_misc as $transaction) {
             
             // Get the current month and current year as two digit numbers
-            $last_month = date('m', strtotime('-1 month'));
+            $last_month = date('m');
             $current_year = date('y');
             $transaction_month = date('m', $transaction->date_submitted);
             $transaction_year = date('y', $transaction->date_submitted);
@@ -168,7 +168,7 @@ class ModReviewTransactions extends \Contao\Module
             //echo "Trans Month: " . $transaction_month . "<br>";
             //echo "Trans Year: " . $transaction_year . "<br>";
             
-            //if($transaction_year == $current_year && $transaction_month == $last_month) {
+            if($transaction_year == $current_year && $transaction_month == $last_month) {
 
                 $assignment = Assignment::findOneBy('id', $transaction->pid);
                 
@@ -229,7 +229,7 @@ class ModReviewTransactions extends \Contao\Module
                         $transactions_total += number_format(floatval($transaction->price), 2, '.', '');
                     }
                 }
-            //}
+            }
             
         }
         
