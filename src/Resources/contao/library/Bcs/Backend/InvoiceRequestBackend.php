@@ -29,21 +29,35 @@ class InvoiceRequestBackend extends Backend
 		{
 			return;
 		}
+		
         
         // Build an array with Psy ID as the first key and Transaction IDs as the second
         $arrTransactions = array();
-		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/30/24")."' AND '".$this->convertDateToTimestamp("11/01/24")."' and published='1' ORDER BY date_submitted ASC");
+		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE published='1' ORDER BY date_submitted ASC");
+		//$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp($dc->activeRecord->date_start)."' AND '".$this->convertDateToTimestamp($dc->activeRecord->date_end)."' and published='1' ORDER BY date_submitted ASC");
 		while ($transactions->next())
 		{
-		    $arrTransactions[$transactions->psychologist][] = $transactions->id;
+
+            $start_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_start));
+            $end_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_end));
+            $transaction_date = date('m/d/y', $transactions->date_submitted);
+
+            if($this->isDateWithinRange($start_date, $end_date, $transaction_date))
+		        $arrTransactions[$transactions->psychologist][] = $transactions->id;
 		}
 		
 		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
         $arrTransactionsMisc = array();
-		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/30/24")."' AND '".$this->convertDateToTimestamp("11/01/24")."' and published='1' ORDER BY date_submitted ASC");
+		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE published='1' ORDER BY date_submitted ASC");
+		//$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp($dc->activeRecord->date_start)."' AND '".$this->convertDateToTimestamp($dc->activeRecord->date_end)."' and published='1' ORDER BY date_submitted ASC");
 		while ($transactions_misc->next())
 		{
-		    $arrTransactionsMisc[$transactions_misc->psychologist][] = $transactions_misc->id;
+		    $start_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_start));
+            $end_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_end));
+            $transaction_date = date('m/d/y', $transactions_misc->date_submitted);
+            
+		    if($this->isDateWithinRange($start_date, $end_date, $transaction_date))
+		        $arrTransactionsMisc[$transactions_misc->psychologist][] = $transactions_misc->id;
 		}
 
         // If we have not yet created the Invoices for this request
@@ -125,22 +139,35 @@ class InvoiceRequestBackend extends Backend
 
         // Build an array with Psy ID as the first key and Transaction IDs as the second
         $arrTransactions = array();
-		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/30/24")."' AND '".$this->convertDateToTimestamp("11/01/24")."' and published='1' ORDER BY date_submitted ASC");
+		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE published='1' ORDER BY date_submitted ASC");
+		//$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp($dc->activeRecord->date_start)."' AND '".$this->convertDateToTimestamp($dc->activeRecord->date_end)."' and published='1' ORDER BY date_submitted ASC");
 		while ($transactions->next())
 		{
-    		$assignment = $this->Database->query("SELECT * FROM tl_assignment WHERE id='". $transactions->pid ."'");
-    		while ($assignment->next())
-    		{
-    		    $arrTransactions[$assignment->district][] = $transactions->id;
-    		}
+		    $start_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_start));
+            $end_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_end));
+            $transaction_date = date('m/d/y', $transactions->date_submitted);
+
+            if($this->isDateWithinRange($start_date, $end_date, $transaction_date)) {
+        		$assignment = $this->Database->query("SELECT * FROM tl_assignment WHERE id='". $transactions->pid ."'");
+        		while ($assignment->next())
+        		{
+        		    $arrTransactions[$assignment->district][] = $transactions->id;
+        		}
+            }
 		}
 		
 		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
         $arrTransactionsMisc = array();
-		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp("09/30/24")."' AND '".$this->convertDateToTimestamp("11/01/24")."' and district!='' and published='1' ORDER BY date_submitted ASC");
+		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE district!='' and published='1' ORDER BY date_submitted ASC");
+		//$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp($dc->activeRecord->date_start)."' AND '".$this->convertDateToTimestamp($dc->activeRecord->date_end)."' and district!='' and published='1' ORDER BY date_submitted ASC");
 		while ($transactions_misc->next())
 		{
-		    $arrTransactionsMisc[$transactions_misc->district][] = $transactions_misc->id;
+		    $start_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_start));
+            $end_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_end));
+            $transaction_date = date('m/d/y', $transactions_misc->date_submitted);
+
+            if($this->isDateWithinRange($start_date, $end_date, $transaction_date))
+		        $arrTransactionsMisc[$transactions_misc->district][] = $transactions_misc->id;
 		}
 
 
@@ -231,21 +258,33 @@ class InvoiceRequestBackend extends Backend
 
 
     public function deleteInvoiceRequest(DataContainer $dc) {
+        
         // do nothing if we don't have an ID
         if (!$dc->activeRecord->id)
 		{
 			return;
 		}
 
-        // Find all Invoice children
+        // Get all of the Psychologist invoices that belong to this Generation Request
         $invoices = Invoice::findBy(['pid = ?'], [$dc->activeRecord->id]);
-        
         foreach($invoices as $invoice) {
             
+            // Delete the generated Invoice
             $local_url = str_replace("https://ga.inc/","",$invoice->invoice_url);
             unlink($local_url);
-            // Delete the Invoice itself
+            // Delete the Invoice Record itself
             $invoice->delete();
+        }
+        
+        // Get all of the District invoices that belong to this Generation Request
+        $invoices_districts = InvoiceDistrict::findBy(['pid = ?'], [$dc->activeRecord->id]);
+        foreach($invoices_districts as $invoice_district) {
+            
+            // Delete the generated Invoice
+            $local_url = str_replace("https://ga.inc/","",$invoice_district->invoice_url);
+            unlink($local_url);
+            // Delete the Invoice Record itself
+            $invoice_district->delete();
         }
         
     }
@@ -452,6 +491,17 @@ class InvoiceRequestBackend extends Backend
         $name = str_replace(' ', '_', $name);
     
         return $name;
+    }
+    
+    public function isDateWithinRange($start_date, $end_date, $transaction_date) {
+
+        // Check if the test date is equal to either the start or end date
+        if ($transaction_date === $start_date || $transaction_date === $end_date) {
+            return true;
+        }
+    
+        // Check if the test date is between the start and end dates
+        return ($transaction_date > $start_date && $transaction_date < $end_date);
     }
     
 
