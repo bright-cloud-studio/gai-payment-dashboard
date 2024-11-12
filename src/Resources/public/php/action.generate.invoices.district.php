@@ -54,9 +54,9 @@
         while($r = $st_r->fetch_assoc()) {
             $students[$r['id']]['name'] = getInitials($r['name']);
             
-            if($r['lasid'] != '' && $r['sasid'] == '')
+            if($r['lasid'] != '')
                 $students[$r['id']]['number'] = $r['lasid'];
-            if($r['lasid'] == '' && $r['sasid'] != '')
+            else
                 $students[$r['id']]['number'] = $r['sasid'];
         }
     }
@@ -85,6 +85,7 @@
         while($row = $request_result->fetch_assoc()) {
             
             $request = $row['id'];
+            $date_start = $row['date_start'];
 
 
             // Step Two
@@ -98,7 +99,7 @@
                     // Step Three
                     // Generate a folder for this Psy if it doesn't exist already
                     $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/districts/' . cleanName($db_inv['district_name']);
-                    $filename = "invoice_" . date('y_m', strtotime('-1 month')) . "_" . rand(11111,99999);
+                    $filename = "invoice_" . date('y_m', strtotime($date_start));
                     if (!file_exists($addr_folder)) {
                         mkdir($addr_folder, 0777, true);
                     }
@@ -109,7 +110,7 @@
                     $misc_transaction_ids = $db_inv['misc_transaction_ids'];
                     
                     $invoice_folder = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/files/invoices/districts/' . cleanName($db_inv['district_name']) . '/';
-                    generateInvoice($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services);
+                    generateInvoice($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start);
                     
                     // Step Four
                     // Generate Our Invoice!
@@ -125,7 +126,7 @@
     }
     
     
-    function generateInvoice($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services) {
+    function generateInvoice($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start) {
         
         
         $price_total = 0.00;
@@ -180,14 +181,14 @@
                             $html = str_replace($tag, $district['name'], $html);
                             break;
                         case 'date_issued':
-                            $html = str_replace($tag, date('F', strtotime('-1 month')), $html);
+                            $html = str_replace($tag, date('F', strtotime($date_start)), $html);
                             break;
                         case 'date_due':
                             $fifteen_days_from_now = time() + (15 * 24 * 60 * 60);
                             $html = str_replace($tag, date('D M d, Y', $fifteen_days_from_now), $html);
                             break;
                         case 'invoice_number':
-                            $html = str_replace($tag, $district['invoice_prefix']. '_' . date('Y_m', strtotime('-1 month')), $html);
+                            $html = str_replace($tag, $district['invoice_prefix']. '_' . date('Y_m', strtotime($date_start)), $html);
                             break;
                         case 'purchase_order':
                             $html = str_replace($tag, $district['purchase_order'], $html);
@@ -265,9 +266,10 @@
                                                 $dur = ceil(($row['meeting_duration']-30) / 15);
                                                 $final_price = number_format(floatval($rate_half), 2, '.', '') + ($dur * number_format(floatval($rate_quarter), 2, '.', ''));
                                             }
-                                            $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
                                             
+                                            $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
                                             $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($final_price), 2, '.', '');
+                                            
                                             
                                         } else if($row['service'] == 19) {
                                             $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
@@ -312,16 +314,19 @@
                                     while($row = $transactions_results->fetch_assoc()) {
                                         
                                         $transactions[$i]['service'] = $services[$row['service']]['name'];
+                                        
+                                        
                                         $transactions[$i]['rate'] = $services[$row['service']]['price_school_1'];
                                         
                                         $transactions[$i]['district'] = $row['district'];
                                         $transactions[$i]['school'] = $schools[$row['school']];
                                         $transactions[$i]['student'] = $row['student_initials'];
                                         
-                                        if($row['lasid'] != '' && $row['sasid'] == '')
+                                        if($row['lasid'] != '')
                                             $transactions[$i]['number'] = $row['lasid'];
-                                        if($row['lasid'] == '' && $row['sasid'] != '')
+                                        else
                                             $transactions[$i]['number'] = $row['sasid'];
+                                        
                                         
                                         if($row['service'] == 1) {
                                             $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
@@ -340,22 +345,27 @@
                                             }
                                             
                                             $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
-                                            
                                             $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($final_price), 2, '.', '');
                                             
-                                        }else if($row['service'] == 19) {
+                                        }
+                                        
+                                        
+                                        else if($row['service'] == 14) {
+                                            $transactions[$i]['service'] = $services[$row['service']]['name'];
+                                            $transactions[$i]['price'] = $row['price'];
+                                            $transactions[$i]['rate'] = $row['price'];
+                                            $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($row['price']), 2, '.', '');
+                                        }
+                                        else if($row['service'] == 19) {
                                             $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
                                             $final_price = $row['meeting_duration'] * 0.50;
                                             $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
-                                            
                                             $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($final_price), 2, '.', '');
-                                            
-                                        } else {
+                                        }
+                                        else {
                                             $transactions[$i]['service'] = $services[$row['service']]['name'];
                                             $transactions[$i]['price'] = $services[$row['service']]['price_school_1'];
-                                            
                                             $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', '');
-                                            
                                         }
                                         
                                         $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['date_submitted']));
@@ -417,9 +427,6 @@
         $url_query =  "UPDATE tl_invoice_district SET invoice_url='$pdf_url' WHERE id='$invoice_id'";
         $url_result = $dbh->query($url_query);
 
-        
-        
-        
         
     }
 
