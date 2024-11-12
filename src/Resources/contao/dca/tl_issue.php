@@ -43,9 +43,9 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
         ),
         'label' => array
         (
-            'fields'                  => array('status', 'name'),
-			      'format'                  => '%s - %s',
-			      'label_callback'          => array('tl_issue', 'addIcon')
+            'fields'                  => array('status', 'title'),
+            'format'                  => '%s - %s',
+            'label_callback'          => array('tl_issue', 'addIcon')
         ),
         'global_operations' => array
         (
@@ -118,9 +118,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['title'],
             'inputType'               => 'text',
             'default'                 => '',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'description' => array
@@ -130,8 +128,8 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
+            'sql'                     => "text NOT NULL default ''"
         ),
 
 
