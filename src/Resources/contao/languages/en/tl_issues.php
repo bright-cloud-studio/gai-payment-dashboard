@@ -18,4 +18,4 @@ $GLOBALS['TL_LANG']['tl_issue']['issue_legend']       = 'Issue Information';
 $GLOBALS['TL_LANG']['tl_issue']['status']             = array('Status', 'Select the Status of this Issue, by default all Issues start as Outstanding');
 $GLOBALS['TL_LANG']['tl_issue']['title']              = array('Title', 'Enter a short, but to the point, title for easy reading');
 $GLOBALS['TL_LANG']['tl_issue']['description']        = array('Description', 'Enter as many details as you can regarding this Issue');
-$GLOBALS['TL_LANG']['tl_issue']['publish']            = array('Active', 'Issues marked Active will be worked on')
+$GLOBALS['TL_LANG']['tl_issue']['publish']            = array('Active', 'Issues marked Active will be worked on');
