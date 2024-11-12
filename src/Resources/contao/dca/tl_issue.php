@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
         'label' => array
         (
             'fields'                  => array('status', 'title'),
-            'format'                  => '%s - %s',
+            'format'                  => '<p>%s</p> %s',
             'label_callback'          => array('tl_issue', 'addIcon')
         ),
         'global_operations' => array
