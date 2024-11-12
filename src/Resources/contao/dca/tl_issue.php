@@ -16,9 +16,9 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
         'dataContainer'               => DC_Table::class,
         'switchToEdit'                => false,
         'onload_callback' => array
-    		(
-    			  array('tl_issue', 'setRootType')
-    		),
+        (
+              array('tl_issue', 'setRootType')
+        ),
         'sql' => array
         (
             'keys' => array
@@ -66,12 +66,12 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
                 'icon'                => 'edit.gif'
             ),
             'toggle' => array
-      			(
-      				'label'               => &$GLOBALS['TL_LANG']['tl_issue']['toggle'],
-      				'icon'                => 'visible.gif',
-      				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-      				'button_callback'     => array('Bcs\Backend\DistrictBackend', 'toggleIcon')
-      			),
+            (
+                'label'               => &$GLOBALS['TL_LANG']['tl_issue']['toggle'],
+                'icon'                => 'visible.gif',
+                'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                'button_callback'     => array('Bcs\Backend\DistrictBackend', 'toggleIcon')
+            ),
             'show' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_issue']['show'],
