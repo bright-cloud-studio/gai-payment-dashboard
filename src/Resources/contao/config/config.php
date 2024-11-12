@@ -63,6 +63,14 @@ $GLOBALS['BE_MOD']['gai']['transaction_misc'] = array(
 );
 
 
+
+/* Back end modules - Work DCAs */
+$GLOBALS['TL_LANG']['MOD']['gai_issue'][0] = "Issues";
+$GLOBALS['BE_MOD']['gai_issue']['issue'] = array(
+	'tables' => array('tl_issue')
+);
+
+
 /* Hooks */
 $GLOBALS['TL_HOOKS']['processFormData'][]        = array('Bcs\Hooks\FormHooks', 'onFormSubmit');
 $GLOBALS['TL_HOOKS']['compileFormFields'][]      = array('Bcs\Hooks\FormHooks', 'onPrepareForm');
