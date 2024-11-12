@@ -72,6 +72,13 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
                 'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
                 'button_callback'     => array('Bcs\Backend\IssueBackend', 'toggleIcon')
             ),
+            'delete' => array
+            (
+                'label'               => &$GLOBALS['TL_LANG']['tl_issue']['delete'],
+                'href'                => 'act=delete',
+                'icon'                => 'delete.svg',
+                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
+            ),
             'show' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_issue']['show'],
