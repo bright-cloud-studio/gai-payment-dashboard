@@ -54,9 +54,9 @@
         while($r = $st_r->fetch_assoc()) {
             $students[$r['id']]['name'] = getInitials($r['name']);
             
-            if($r['lasid'] != '' && $r['sasid'] == '')
+            if($r['lasid'] != '')
                 $students[$r['id']]['number'] = $r['lasid'];
-            if($r['lasid'] == '' && $r['sasid'] != '')
+            else
                 $students[$r['id']]['number'] = $r['sasid'];
         }
     }
@@ -84,6 +84,7 @@
         while($row = $request_result->fetch_assoc()) {
             
             $request = $row['id'];
+            $date_start = $row['date_start'];
 
 
             // Step Two
@@ -97,7 +98,7 @@
                     // Step Three
                     // Generate a folder for this Psy if it doesn't exist already
                     $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/psychologists/' . cleanName($db_inv['psychologist_name']);
-                    $filename = "invoice_" . date('y_m', strtotime('-1 month')) . "_" . date(11111,99999);
+                    $filename = "invoice_" . date('y_m', strtotime($date_start));
                     
                     if (!file_exists($addr_folder)) {
                         mkdir($addr_folder, 0777, true);
@@ -109,7 +110,7 @@
                     $misc_transaction_ids = $db_inv['misc_transaction_ids'];
                     
                     $invoice_folder = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/files/invoices/psychologists/' . cleanName($db_inv['psychologist_name']) . '/';
-                    generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services);
+                    generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start);
                     
                     // Step Four
                     // Generate Our Invoice!
@@ -130,7 +131,7 @@
     }
     
     
-    function generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services) {
+    function generateInvoice($dbh, $invoice_id, $psy_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start) {
         
         
         $price_total = 0.00;
@@ -182,10 +183,10 @@
     		                $html = str_replace($tag, $psy['name'], $html);
     		                break;
     		            case 'date_issued':
-    		                $html = str_replace($tag, date('m/d/Y', strtotime('-1 month')), $html);
+    		                $html = str_replace($tag, date('m/d/Y'), $html);
     		                break;
     		            case 'invoice_number':
-    		                $html = str_replace($tag, date('Y_m', strtotime('-1 month')), $html);
+    		                $html = str_replace($tag, date('Y_m', strtotime($date_start)), $html);
     		                break;
     		            case 'addr_1':
     		                $html = str_replace($tag, $psy['addr_1'], $html);
@@ -231,6 +232,7 @@
                                             }
                                         }
                                         
+                                        $transactions[$i]['id'] = $row['id'];
                                         $transactions[$i]['district'] = $districts[$a_district];
                                         $transactions[$i]['school'] = $schools[$a_school];
                                         $transactions[$i]['student'] = $students[$a_student]['name'];
@@ -285,9 +287,9 @@
                                         
                                         $transactions[$i]['student'] = $row['student_initials'];
                                         
-                                        if($row['lasid'] != '' && $row['sasid'] == '')
+                                        if($row['lasid'] != '')
                                             $transactions[$i]['number'] = $row['lasid'];
-                                        if($row['lasid'] == '' && $row['sasid'] != '')
+                                        else
                                             $transactions[$i]['number'] = $row['sasid'];
                                             
                                         $transactions[$i]['district'] = $districts[$row['district']];
