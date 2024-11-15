@@ -54,7 +54,6 @@ class FormHooks
             // Apply values
             $transaction->pid = $submittedData['assignment_uuid'];
             $transaction->tstamp = time();
-            
             $transaction->date_submitted = strtotime($submittedData['date_submitted']);
             $transaction->psychologist = $submittedData['psychologist'];
             $transaction->service = $submittedData['service_provided'];
@@ -62,10 +61,14 @@ class FormHooks
             $transaction->meeting_date = strtotime($submittedData['meeting_date']);
             $transaction->meeting_start = $submittedData['start_time'];
             $transaction->meeting_end = $submittedData['end_time'];
-            
             $transaction->meeting_duration = $this->timeDifferenceInMinutes($submittedData['start_time'],$submittedData['end_time']);
-                
             $transaction->notes = $submittedData['notes'];
+
+            // Get LASID / SASID
+            $assignment = Assignment::findBy('id', $transaction->pid);
+            $student = Student::findBy('id', $assignment->student);
+            $transaction->lasid = $student->lasid;
+            $transaction->sasid = $student->sasid;
             
             // Save our new Transaction
             $transaction->save();   
