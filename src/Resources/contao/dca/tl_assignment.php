@@ -49,7 +49,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTABLE,
+            'mode'                    => DataContainer::MODE_SORTED,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
@@ -157,7 +157,6 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'sorting'                 => true,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date("m/d/y"),
