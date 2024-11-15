@@ -158,11 +158,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'filter'                  => false,
             'search'                  => false,
             'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(20) NOT NULL default ''",
-            'load_callback' => array
-			(
-				array('tl_transaction', 'loadDate')
-			),
+            'sql'                     => "int(10) unsigned NOT NULL default 0",
             'default'                 => date("m/d/y")
         ),
         'psychologist' => array
@@ -257,11 +253,6 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
 
 class tl_transaction extends Backend
 {
-    public function loadDate($value)
-	{
-		return date('m Y', $value);
-	}
-    
 	public function addIcon($row, $label)
 	{
 
