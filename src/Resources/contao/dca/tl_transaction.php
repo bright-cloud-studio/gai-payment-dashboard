@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTED,
+            'mode'                    => DataContainer::MODE_UNSORTED,
             'rootPaste'               => false,
             'icon'                    => 'pagemounts.svg',
             'defaultSearchField'      => 'date_submitted',
