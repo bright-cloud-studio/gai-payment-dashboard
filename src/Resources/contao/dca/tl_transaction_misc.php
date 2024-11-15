@@ -42,13 +42,13 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTED,
+            'mode'                    => DataContainer::MODE_UNSORTED,
             'rootPaste'               => false,
             'icon'                    => 'pagemounts.svg',
             'defaultSearchField'      => 'date_submitted',
-            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'flag'                    => DataContainer::SORT_DESC,
             'fields'                  => array('date_submitted DESC'),
-            'panelLayout'             => 'sort,filter;search,limit'
+            'panelLayout'             => 'filter;sort,search,limit'
         ),
         'label' => array
         (
