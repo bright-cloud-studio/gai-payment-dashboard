@@ -31,6 +31,10 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         'switchToEdit'                => false,
 		'enableVersioning'            => true,
 		'markAsCopy'                  => 'title',
+        'onsubmit_callback' => array
+		(
+			array('Bcs\Backend\TransactionBackend', 'createTransaction')
+		),
         'sql' => array
         (
             'keys' => array
@@ -98,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;'
+        'default'                     => '{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, lasid, sasid;'
     ),
  
     // Fields
@@ -246,7 +250,34 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
             'sql'                     => "text NOT NULL default ''"
-        )
+        ),
+
+
+
+        // Hidden fields for search purposes
+        'lasid' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['lasid'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'sasid' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['sasid'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+
+
+        
     )
 );
 
