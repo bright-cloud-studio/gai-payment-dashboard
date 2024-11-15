@@ -39,3 +39,8 @@ $GLOBALS['TL_LANG']['tl_transaction']['notes']                      = array('Not
 
 $GLOBALS['TL_LANG']['tl_transaction']['publish_legend']             = 'Reviewed Information';
 $GLOBALS['TL_LANG']['tl_transaction']['reviewed']                   = array('Reviewed', 'asdf');
+
+/* Internal */
+$GLOBALS['TL_LANG']['tl_assignment']['internal_legend']           = 'Internal Information';
+$GLOBALS['TL_LANG']['tl_assignment']['lasid']                     = array('LASID', 'Internal copy of selected Student LASID to enable Search and Filter');
+$GLOBALS['TL_LANG']['tl_assignment']['sasid']                     = array('SASID', 'Internal copy of selected Student SASID to enable Search and Filter');
