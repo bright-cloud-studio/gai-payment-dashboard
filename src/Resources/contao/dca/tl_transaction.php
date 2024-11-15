@@ -5,6 +5,7 @@
 
 use Bcs\Model\District;
 use Bcs\Model\Service;
+use Bcs\Model\Student;
 use Bcs\Model\Assignment;
 
 use Contao\MemberModel;
@@ -272,8 +273,20 @@ class tl_transaction extends Backend
         $district = District::findBy('id', $assignment->district);
         $label .= $district->district_name . " - ";
 
+        // Add Service
         $service = Service::findBy('service_code', $row['service']);
-        $label .= $service->name;
+        $label .= $service->name . " - ";
+
+        // Add LASID / SASID
+        $student = Student::findBy('id', $row['student']);
+        if($student->lasid != '' && $student->sasid != '') {
+            $label .= $student->lasid . " / " . $student->sasid;
+        } else {
+            if($student->lasid != '')
+                $label .= $student->lasid;
+            if($student->sasid != '')
+                $label .= $student->sasid;
+        }
         
         
 		$sub = 0;
