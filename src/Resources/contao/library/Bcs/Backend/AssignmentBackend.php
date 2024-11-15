@@ -28,6 +28,13 @@ class AssignmentBackend extends Backend
         // If we have not yet created the Invoices for this request
         if($dc->activeRecord->student != '') {
 
+            $student = Student::findOneBy('id', $dc->activeRecord->student);
+            
+            $assignment = Assignment::findOneBy('id', $dc->activeRecord->id);
+            $assignment->lasid = $student->lasid;
+            $assignment->sasid = $student->sasid;
+            $assignment->save();
+
         }
 
     }
