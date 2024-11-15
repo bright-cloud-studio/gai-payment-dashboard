@@ -10,10 +10,36 @@ use Contao\StringUtil;
 use Contao\System;
 
 use Bcs\Model\Transaction;
+use Bcs\Model\Assignment;
+use Bcs\Model\Student;
 
 
 class TransactionBackend extends Backend
 {
+    // Create 'Invoice' DCAs for Psychologists
+    public function createTransaction(DataContainer $dc) {
+        
+        // do nothing if we havent saved this record
+        if (!$dc->activeRecord)
+		{
+			return;
+		}
+		
+
+        // If we have not yet created the Invoices for this request
+        if($dc->activeRecord->pid != '') {
+            
+            $assignment = Assignment::findOneBy('id', $dc->activeRecord->pid);
+            $student = Student::findOneBy('id', $assignment->student);
+
+            $transaction = Transaction::findOneBy('id', $dc->activeRecord->id);
+            $transaction->lasid = $student->lasid;
+            $transaction->sasid = $student->sasid;
+            $transaction->save();
+
+        }
+
+    }
   
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
