@@ -25,6 +25,10 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         'ctable'                      => array('tl_transaction'),
         'switchToEdit'                => false,
         'enableVersioning'            => true,
+        'onsubmit_callback' => array
+		(
+			array('Bcs\Backend\AssignmentBackend', 'createAssignment')
+		),
         'onload_callback' => array
 		(
 			array('tl_assignment', 'setRootType')
@@ -102,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     'palettes' => array
     (
         //'default'                     => '{assignment_legend}, date_created;'
-        'default'                     => '{assignment_legend}, date_created, date_30_day, date_45_day, psychologist, district, school, student, initial_reeval, type_of_testing, testing_date, meeting_required, meeting_date, contact_info_parent, contact_info_teacher, team_chair, email, report_submitted;{notes_legend},notes;{shared_legend},psychologists_shared;{publish_legend},published;'
+        'default'                     => '{assignment_legend}, date_created, date_30_day, date_45_day, psychologist, district, school, student, initial_reeval, type_of_testing, testing_date, meeting_required, meeting_date, contact_info_parent, contact_info_teacher, team_chair, email, report_submitted;{notes_legend},notes;{shared_legend},psychologists_shared;{internal_legend:hide}, lasid, sasid;{publish_legend},published;'
     ),
  
     // Fields
@@ -352,6 +356,31 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100'),
             'sql'                     => "text NOT NULL default ''"
         ),
+
+
+        // Hidden fields for search purposes
+        'lasid' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['lasid'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'sasid' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['sasid'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+
+        
         
         'published' => array
         (
