@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace Bcs\Backend;
 
 use Contao\Backend;
@@ -13,6 +15,26 @@ use Bcs\Model\Transaction;
 
 class AssignmentBackend extends Backend
 {
+    // Create 'Invoice' DCAs for Psychologists
+    public function createAssignment(DataContainer $dc) {
+        
+        // do nothing if we havent saved this record
+        if (!$dc->activeRecord)
+		{
+			return;
+		}
+		
+
+        // If we have not yet created the Invoices for this request
+        if($dc->activeRecord->student != '') {
+
+        }
+
+    }
+
+
+
+    
   
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
