@@ -3,7 +3,9 @@
 /* Transaction - Child to Assignment */
 
 
+use Bcs\Model\District;
 use Bcs\Model\Service;
+use Bcs\Model\Assignment;
 
 use Contao\MemberModel;
 
@@ -255,7 +257,6 @@ class tl_transaction extends Backend
 {
 	public function addIcon($row, $label)
 	{
-
         // Clear out our current label
         $label = '';
 
@@ -265,6 +266,11 @@ class tl_transaction extends Backend
         // Add the Psy's name
         $psy = MemberModel::findBy('id', $row['psychologist']);
         $label .= $psy->firstname . " " . $psy->lastname . " - ";
+
+        // Add Assignments District
+        $assignment = Assignment::findBy('id', $row['pid']);
+        $district = District::findBy('id', $assignment->district);
+        $label .= $district->district_name . " - ";
 
         $service = Service::findBy('service_code', $row['service']);
         $label .= $service->name;
