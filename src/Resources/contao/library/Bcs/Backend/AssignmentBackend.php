@@ -11,7 +11,8 @@ use Contao\DataContainer;
 use Contao\StringUtil;
 
 use Bcs\Model\Transaction;
-
+use Bcs\Model\Assignment;
+use Bcs\Model\Student;
 
 class AssignmentBackend extends Backend
 {
