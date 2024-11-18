@@ -123,13 +123,10 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
         'priority' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['priority'],
+            'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'filter'                  => false,
-            'search'                  => false,
-            'flag'                    => DataContainer::SORT_ASC,
-            'options'                  => array('yes' => 'Prioritize'),
-            'eval'                    => array('multiple'=> false, 'mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "blob NULL"
+            'eval'                    => array('submitOnChange'=>false, 'doNotCopy'=>true, 'mandatory'=>false),
+            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'title' => array
         (
