@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{issue_legend}, status, title, description;{publish_legend}, published;'
+        'default'                     => '{issue_legend}, status, priority,                                                                                                                                                                                                                                                                                                             title, description;{publish_legend}, published;'
     ),
  
     // Fields
@@ -117,8 +117,19 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'filter'                  => true,
             'search'                  => true,
             'options'                  => array('outstanding' => 'Outstanding', 'resolved' => 'Resolved'),
-    		    'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
-    		    'sql'                      => "varchar(15) NOT NULL default ''"
+            'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                      => "varchar(15) NOT NULL default ''"
+        ),
+        'priority' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['priority'],
+            'inputType'               => 'checkbox',
+            'filter'                  => false,
+            'search'                  => false,
+            'flag'                    => DataContainer::SORT_ASC,
+            'options'                  => array('yes' => 'Yes'),
+            'eval'                    => array('multiple'=> false, 'mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "blob NULL"
         ),
         'title' => array
         (
