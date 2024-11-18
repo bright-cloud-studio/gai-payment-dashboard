@@ -127,7 +127,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'filter'                  => false,
             'search'                  => false,
             'flag'                    => DataContainer::SORT_ASC,
-            'options'                  => array('prioritize' => 'Prioritize'),
+            'options'                  => array('yes' => 'Prioritize'),
             'eval'                    => array('multiple'=> false, 'mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "blob NULL"
         ),
