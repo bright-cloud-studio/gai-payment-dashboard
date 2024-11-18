@@ -37,7 +37,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
-            'flag'                    => DataContainer::SORT_ASC,
+            'flag'                    => DataContainer::SORT_DESC,
             'fields'                  => array('priority', 'status'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
