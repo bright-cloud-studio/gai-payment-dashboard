@@ -66,7 +66,7 @@ class InvoiceRequestBackend extends Backend
     		// Build arrays of IDs for which Psys and Schools to skip
     		$exclude_psys = array();
     		if(is_array($dc->activeRecord->exclude_psychologists))
-    		    $exclude_psys = unserialize($dc->activeRecord->exclude_psychologists);
+    		    $exclude_psys = $dc->activeRecord->exclude_psychologists;
     		
     		// Loop through all active Psychologists
     		$options = ['order' => 'firstname ASC'];
@@ -178,7 +178,7 @@ class InvoiceRequestBackend extends Backend
     		// Build arrays of IDs for which Psys and Schools to skip
     		$exclude_districts = array();
 		    if(is_array($dc->activeRecord->exclude_districts))
-    		$exclude_districts = unserialize($dc->activeRecord->exclude_districts);
+    		    $exclude_districts = $dc->activeRecord->exclude_districts;
 
     		
     		
