@@ -373,14 +373,14 @@ class FormHooks
                 
                 if($first) {
                     //$first = false;
-                    //mail($addr, $sub, $message, $headers);
+                    mail($addr, $sub, $message, $headers);
                 }
                 
-                echo $message . "<br><br>";
+                //echo $message . "<br><br>";
                 
             }
             
-            die();
+            //die();
 
             
 
