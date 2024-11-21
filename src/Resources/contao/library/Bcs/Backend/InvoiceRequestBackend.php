@@ -272,9 +272,20 @@ class InvoiceRequestBackend extends Backend
             // Delete the generated Invoice
             $local_url = str_replace("https://ga.inc/","",$invoice->invoice_url);
             unlink($local_url);
+            
+            // delete psy folder
+            $psy = MemberModel::findBy('id', $invoice->psychologist);
+            $psy_name = $psy->firstname . " " . $psy->lastname;
+            $psy_folder = '../files/invoices/generation_' . $invoice->pid . '/psychologists/' . $this->cleanName($psy_name);
+            rmdir($psy_folder);
+            
             // Delete the Invoice Record itself
             $invoice->delete();
         }
+        
+        // Delete 'psychologists' folder
+        $psychologists_folder = '../files/invoices/generation_' . $invoice->pid . '/psychologists/';
+        rmdir($psychologists_folder);
         
         // Get all of the District invoices that belong to this Generation Request
         $invoices_districts = InvoiceDistrict::findBy(['pid = ?'], [$dc->activeRecord->id]);
@@ -283,9 +294,22 @@ class InvoiceRequestBackend extends Backend
             // Delete the generated Invoice
             $local_url = str_replace("https://ga.inc/","",$invoice_district->invoice_url);
             unlink($local_url);
+            
+            // delete district folder
+            $dis_folder = '../files/invoices/generation_' . $invoice->pid . '/districts/' . $this->cleanName($invoice_district->district_name);
+            rmdir($dis_folder);
+            
             // Delete the Invoice Record itself
             $invoice_district->delete();
         }
+        
+        // Delete 'districts' folder
+        $districts_folder = '../files/invoices/generation_' . $invoice->pid . '/districts/';
+        rmdir($districts_folder);
+        
+        // Delete the "generation_id" folder
+        $generation_folder = '../files/invoices/generation_' . $invoice->pid;
+        rmdir($generation_folder);
         
     }
 
