@@ -98,7 +98,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{internal_legend:hide},created_invoice_dcas,generation_completed;{publish_legend},published;'
+        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{batch_legend},batch_url;{internal_legend:hide},created_invoice_dcas,generation_completed;{publish_legend},published;'
     ),
  
     // Fields
@@ -175,6 +175,16 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'eval'                    => array('mandatory'=>false, 'multiple'=>true, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\InvoiceRequestBackend', 'getDistricts'),
             'sql'                     => "blob NULL"
+        ),
+
+        'batch_url' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_request']['batch_url'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'eval'                    => array('tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default ''",
+            'default'                 => "",
         ),
 
         
