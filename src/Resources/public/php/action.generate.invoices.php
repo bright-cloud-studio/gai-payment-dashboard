@@ -137,7 +137,7 @@
             }
         }
         
-        // Get our Transaction and Misc. Transaction data as arrays
+        // Get Transaction/Misc Transaction data and merge into a single array
         $transactions = array();
         $transactions_misc = array();
         $transactions_normal = generateTransactions($dbh, $districts, $schools, $students, $services, $transaction_ids);
@@ -148,15 +148,6 @@
         if($transactions_misc != null)
             $transactions = array_merge($transactions, $transactions_misc);
             
-        //echo "<pre>";
-        //print_r($transactions_normal);
-        //echo "<hr>";
-        //print_r($transactions_misc);
-        //echo "<hr>";
-        //print_r($transactions);
-
-        
-
         // Tracks our final total for the end of the last sheet
         global $price_total;
         
@@ -245,7 +236,7 @@
             				    if($x < ($total_pages-1))
             				        $template[$x] = str_replace($tag, 'VIEW FINAL SHEET', $template[$x]);
             				    else
-            					    $template[$x] = str_replace($tag, '$' . number_format(floatval($price_total), 2, '.', ''), $template[$x]);
+            					    $template[$x] = str_replace($tag, '$' . number_format(floatval($price_total), 2, '.', ','), $template[$x]);
             					break;
             			}
             			
@@ -304,25 +295,16 @@
             			        $template[$x] = str_replace($tag, $trans_html, $template[$x]);
             			        break;
             			}
-            			
             			break;
-            
-            
             	}
             	
             }
-            
-            
             
             // Add our modified template to the HTML we are rendering into a PDF
             $render_html .= $template[$x];
             
         }
 
-        
-        
-        
-        
         
         // Load our modified HTML into the pdf generator
     	$dompdf->loadHtml($render_html);
@@ -341,13 +323,12 @@
         
         // Reset our global price total
         $price_total = 0;
-        
     }
 
     
     
     
-    
+    // Assembles Transaction data into a php array
     function generateTransactions($dbh, $districts, $schools, $students, $services, $transaction_ids) {
         global $price_total;
         
@@ -387,16 +368,16 @@
                         
                         $dur = ceil(intval($row['meeting_duration']) / 60);
                         $final_price = $dur * $row['price'];
-                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
+                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', ',');
                         $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($final_price), 2, '.', '');
                     } else if($row['service'] == 19) {
                         $transactions[$i]['service'] = $services[$row['service']];
                         $final_price = $row['meeting_duration'] * 0.50;
-                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
+                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', ',');
                         $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($final_price), 2, '.', '');
                     } else {
                         $transactions[$i]['service'] = $services[$row['service']];
-                        $transactions[$i]['price'] = $row['price'];
+                        $transactions[$i]['price'] = number_format(floatval($row['price']), 2, '.', ',');
                         $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($row['price']), 2, '.', '');
                     }
                     
@@ -410,6 +391,8 @@
     }
     
     
+    
+    // Assemble Misc. Transaction data into a php array
     function generateMiscTransactions($dbh, $districts, $schools, $students, $services, $misc_transaction_ids) {
         global $price_total;
         
@@ -461,11 +444,6 @@
         }
     }
     
-    
-    
-
-    
-
     // Generates our "clean name" which is 'first_last' format
     function cleanName($name) {
         // Remove special characters using regular expression
