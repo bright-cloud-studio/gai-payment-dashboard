@@ -138,14 +138,14 @@ class ModReviewTransactions extends \Contao\Module
                         $dur = ceil(intval($transaction->meeting_duration) / 60);
                         $final_price = $dur * $transaction->price;
                         
-                        $template_transactions[$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', '');
+                        $template_transactions[$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
                         $transactions_total += number_format(floatval($final_price), 2, '.', '');
                     } else if($service->service_code == 19) {
                         $final_price = $transaction->meeting_duration * 0.50;
-                        $template_transactions[$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', '');
+                        $template_transactions[$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
                         $transactions_total += number_format(floatval($final_price), 2, '.', '');
                     } else {
-                        $template_transactions[$transaction->id]['price'] = number_format(floatval($transaction->price), 2, '.', '');
+                        $template_transactions[$transaction->id]['price'] = number_format(floatval($transaction->price), 2, '.', ',');
                         $transactions_total += number_format(floatval($transaction->price), 2, '.', '');
                     }
                 }
@@ -169,8 +169,6 @@ class ModReviewTransactions extends \Contao\Module
             //echo "Trans Year: " . $transaction_year . "<br>";
             
             if($transaction_year == $current_year && $transaction_month == $last_month) {
-
-                $assignment = Assignment::findOneBy('id', $transaction->pid);
                 
                 $template_transactions_misc[$transaction->id]['id'] = $transaction->id;
                 $template_transactions_misc[$transaction->id]['transaction_type'] = "transaction_misc";
@@ -235,7 +233,7 @@ class ModReviewTransactions extends \Contao\Module
         
         $this->Template->transactions = $template_transactions;
         $this->Template->transactions_misc = $template_transactions_misc;
-        $this->Template->transactions_total = number_format($transactions_total, 2, '.', '');
+        $this->Template->transactions_total = number_format($transactions_total, 2, '.', ',');
         
     }
   
