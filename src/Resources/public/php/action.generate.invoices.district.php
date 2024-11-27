@@ -234,7 +234,7 @@
             				    if($x < ($total_pages-1))
             				        $template[$x] = str_replace($tag, 'VIEW FINAL SHEET', $template[$x]);
             				    else
-            					    $template[$x] = str_replace($tag, '$' . number_format(floatval($price_total), 2, '.', ''), $template[$x]);
+            					    $template[$x] = str_replace($tag, '$' . number_format(floatval($price_total), 2, '.', ','), $template[$x]);
             					break;
             			}
             			
@@ -325,7 +325,7 @@
     }
     
     
-    
+    // Assemble our Trnasaction data into a PHP array
     function generateTransactions($dbh, $districts, $schools, $students, $services, $transaction_ids) {
         global $price_total;
         
@@ -355,8 +355,8 @@
                     $transactions[$i]['school'] = $schools[$a_school];
                     $transactions[$i]['student'] = $students[$a_student]['name'];
                     $transactions[$i]['number'] = $students[$a_student]['number'];
-                    $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['date_submitted']));
-                    $transactions[$i]['rate'] = $services[$row['service']]['price_school_1'];
+                    
+                    $transactions[$i]['rate'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
                     
                     if($row['service'] == 1) {
                         $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
@@ -374,8 +374,14 @@
                             $final_price = number_format(floatval($rate_half), 2, '.', '') + ($dur * number_format(floatval($rate_quarter), 2, '.', ''));
                         }
                         
-                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
+                        $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['meeting_date']));
+                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', ',');
                         $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($final_price), 2, '.', '');
+                        
+                    } else if($row['service'] == 12) {
+                        $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['meeting_date']));
+                        $transactions[$i]['price'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
+                        $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', '');
                         
                     } else if($row['service'] == 19) {
                         $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
@@ -386,7 +392,7 @@
                         
                     } else {
                         $transactions[$i]['service'] = $services[$row['service']]['name'];
-                        $transactions[$i]['price'] = $services[$row['service']]['price_school_1'];
+                        $transactions[$i]['price'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
                         $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', '');
                     }
                     
@@ -398,7 +404,7 @@
         }
     }
     
-    
+    // Assemble our Misc. Transaction data into a PHP array
     function generateMiscTransactions($dbh, $districts, $schools, $students, $services, $misc_transaction_ids) {
         global $price_total;
     
@@ -411,7 +417,7 @@
                 while($row = $transactions_results->fetch_assoc()) {
                     
                     $transactions[$i]['service'] = $services[$row['service']]['name'];
-                    $transactions[$i]['rate'] = $services[$row['service']]['price_school_1'];
+                    $transactions[$i]['rate'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
                     $transactions[$i]['district'] = $row['district'];
                     $transactions[$i]['school'] = $schools[$row['school']];
                     $transactions[$i]['student'] = $row['student_initials'];
@@ -437,30 +443,37 @@
                             $final_price = number_format(floatval($rate_half), 2, '.', '') + ($dur * number_format(floatval($rate_quarter), 2, '.', ''));
                         }
                         
-                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
+                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', ',');
                         $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($final_price), 2, '.', '');
                         
+                        $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['meeting_date']));
+                        
+                    }
+                    else if($row['service'] == 12) {
+                        $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['meeting_date']));
+                        $transactions[$i]['price'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
+                        $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', '');
                     }
                     
                     else if($row['service'] == 14) {
                         $transactions[$i]['service'] = $services[$row['service']]['name'];
-                        $transactions[$i]['price'] = $row['price'];
-                        $transactions[$i]['rate'] = $row['price'];
+                        $transactions[$i]['price'] = number_format(floatval($row['price']), 2, '.', ',');
+                        $transactions[$i]['rate'] = number_format(floatval($row['price']), 2, '.', ',');
                         $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($row['price']), 2, '.', '');
                     }
                     else if($row['service'] == 19) {
                         $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
                         $final_price = $row['meeting_duration'] * 0.50;
-                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', '');
+                        $transactions[$i]['price'] = number_format(floatval($final_price), 2, '.', ',');
                         $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($final_price), 2, '.', '');
                     }
                     else {
                         $transactions[$i]['service'] = $services[$row['service']]['name'];
-                        $transactions[$i]['price'] = $services[$row['service']]['price_school_1'];
+                        $transactions[$i]['price'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
                         $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', '');
                     }
                     
-                    $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['date_submitted']));
+                    
                     
                     $i++;
                 }
