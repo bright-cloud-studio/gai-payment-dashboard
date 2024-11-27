@@ -98,7 +98,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{batch_legend},batch_url;{internal_legend:hide},created_invoice_dcas,generation_completed;{publish_legend},published;'
+        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{batch_legend},batch_url;{internal_legend:hide},created_invoice_dcas,generated_psys,generated_psys;{publish_legend},published;'
     ),
  
     // Fields
@@ -199,9 +199,20 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Yes/No'),
     		'sql'                      => "varchar(10) NOT NULL default 'no'"
         ),
-        'generation_completed' => array
+        'generated_psys' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['generation_completed'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['generated_psys'],
+            'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => true,
+            'default'                 => 'no',
+            'options'                  => array('yes' => 'Yes', 'no' => 'No'),
+    		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Yes/No'),
+    		'sql'                      => "varchar(10) NOT NULL default 'no'"
+        ),
+        'generated_districts' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['generated_districts'],
             'inputType'               => 'select',
             'filter'                  => true,
             'search'                  => true,
