@@ -55,7 +55,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         (
             'fields'                  => array('date_start', 'date_end'),
             'format'                  => '%s - %s',
-            'label_callback'          => array('tl_assignment', 'addIcon')
+            'label_callback'          => array('tl_invoice_request', 'addIcon')
         ),
         'global_operations' => array
         (
