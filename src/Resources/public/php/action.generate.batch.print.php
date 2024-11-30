@@ -35,45 +35,46 @@
             
             $request = $row['id'];
             
-            // Psy batch print
-            // Create our Dompdf Options class
             $options = new Options();
             // Set our options
             $options->set("defaultFont", "Helvetica");
             $options->set("isRemoteEnabled", "true");
-            
-            // Initialize Dompdf using our just set up Options
-        	$dompdf = new Dompdf($options);
-        	$batch_queue = $_SESSION['batch_psy_queue'];
-        	$dompdf->loadHtml($batch_queue);
-        	
-        	//$_SESSION['batch_psy_queue'] = '';
-        	//$_SESSION['batch_district_queue'] = '';
-        	
-        	//$dompdf->loadHtml('hello world');
-        	
-        	// Set to standard paper size and portrait orientation
-        	$dompdf->setPaper('A4', 'portrait');
-        	$dompdf->render();
-        	$output = $dompdf->output();
-        	$addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/generation_' . $request . '/batch_print_psy.pdf';
-            file_put_contents($addr_folder, $output);
-            
-            
-            
-            
-            
+
+            // Generate Psychologist's Batch Print file from their saved Invoice HTML
+            $psy_html = '';
+            $psy_query =  "SELECT * FROM tl_invoice WHERE pid='$request'";
+            $psy_result = $dbh->query($psy_query);
+            if($psy_result) {
+                while($psy = $invoice_result->fetch_assoc()) {
+                    $psy_html = $psy_html . $psy['invoice_html'];
+                }
+            }
+            $dompdf_psychologist = new Dompdf($options);
+        	$dompdf_psychologist->loadHtml($psy_html);
+        	$dompdf_psychologist->setPaper('A4', 'portrait');
+        	$dompdf_psychologist->render();
+        	$dompdf_psychologist = $dompdf_psychologist->output();
+        	$addr_folder_district = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/generation_' . $request . '/batch_print_psychologists.pdf';
+            file_put_contents($addr_folder_district, $output_district);
+
+            // Generate District Batch Print file from their saved Invoice HTML
+            $district_html = '';
+            $district_query =  "SELECT * FROM tl_invoice_district WHERE pid='$request'";
+            $district_result = $dbh->query($district_query);
+            if($district_result) {
+                while($district = $invoice_result->fetch_assoc()) {
+                    $district_html = $district_html . $district['invoice_html'];
+                }
+            }
             $dompdf_district = new Dompdf($options);
-        	$batch_queue_district = $_SESSION['batch_district_queue'];
-        	$dompdf_district->loadHtml($batch_queue_district);
+        	$dompdf_district->loadHtml($district_html);
         	$dompdf_district->setPaper('A4', 'portrait');
         	$dompdf_district->render();
         	$output_district = $dompdf_district->output();
-        	$addr_folder_district = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/generation_' . $request . '/batch_print_district.pdf';
+        	$addr_folder_district = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/generation_' . $request . '/batch_print_districts.pdf';
             file_put_contents($addr_folder_district, $output_district);
             
-            
-            
+            // ZIP Folder
             $folder_to_zip = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/generation_' . $request . '/';
             $folder_for_batch = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/generation_'.$request.'.zip';
             zipFolder($folder_to_zip, $folder_for_batch);
@@ -82,14 +83,9 @@
             $ir_q =  "update tl_invoice_request set batch_url='".$download_url."' WHERE id='".$request."'";
             $ir_r = $dbh->query($ir_q);
 
-            
-            
         }
     }
-    
-    
-    
-    
+
     function zipFolder($source, $destination)
     {
         if (!extension_loaded('zip') || !file_exists($source)) {
