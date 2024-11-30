@@ -79,7 +79,7 @@
 
     // Step One
     // Find our oldest unfinished Invoice Request
-    $request_query =  "SELECT * FROM tl_invoice_request WHERE generation_completed='no' ORDER BY id ASC";
+    $request_query =  "SELECT * FROM tl_invoice_request WHERE generated_districts='no' ORDER BY id ASC";
     $request_result = $dbh->query($request_query);
     if($request_result) {
         while($row = $request_result->fetch_assoc()) {
@@ -112,6 +112,10 @@
                     generateInvoice($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start);
                 }
             }
+            
+            $ir_q =  "update tl_invoice_request set generated_districts='yes' WHERE id='".$request."'";
+            $ir_r = $dbh->query($ir_q);
+            
         }
     }
     
@@ -302,7 +306,9 @@
             // Add our modified template to the HTML we are rendering into a PDF
             $render_html .= $template[$x];
         }
-
+        
+        // Add our HTML to the SESSION for this generation to collect them together for a batch print at the end
+        $_SESSION['batch_district_queue'] = $_SESSION['batch_district_queue'] . $render_html;
 
 
         // Load our HTML into dompdf
