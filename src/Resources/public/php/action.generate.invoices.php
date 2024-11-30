@@ -322,7 +322,7 @@
     	$output = $dompdf->output();
         file_put_contents($addr_folder . '/' . $filename . '.pdf', $output);
         $pdf_url = $invoice_folder . $filename . '.pdf';
-        $url_query =  "UPDATE tl_invoice SET invoice_url='$pdf_url', invoice_html='$render_html'  WHERE id='$invoice_id'";
+        $url_query =  "UPDATE tl_invoice SET invoice_url='$pdf_url', invoice_html='".$dbh->real_escape_string($render_html)."'  WHERE id='$invoice_id'";
         $url_result = $dbh->query($url_query);
         
         // Reset our global price total
