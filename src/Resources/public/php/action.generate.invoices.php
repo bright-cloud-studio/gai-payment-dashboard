@@ -310,10 +310,6 @@
             
         }
         
-        
-        // Add our HTML to the SESSION for this generation to collect them together for a batch print at the end
-        $_SESSION['batch_psy_queue'] = $_SESSION['batch_psy_queue'] . $render_html;
-        
         // Load our modified HTML into the pdf generator
     	$dompdf->loadHtml($render_html);
     	//$dompdf->loadHtml('hello world');
@@ -326,7 +322,7 @@
     	$output = $dompdf->output();
         file_put_contents($addr_folder . '/' . $filename . '.pdf', $output);
         $pdf_url = $invoice_folder . $filename . '.pdf';
-        $url_query =  "UPDATE tl_invoice SET invoice_url='$pdf_url' WHERE id='$invoice_id'";
+        $url_query =  "UPDATE tl_invoice SET invoice_url='$pdf_url', invoice_html='$render_html'  WHERE id='$invoice_id'";
         $url_result = $dbh->query($url_query);
         
         // Reset our global price total
