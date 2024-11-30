@@ -45,7 +45,7 @@
             $psy_query =  "SELECT * FROM tl_invoice WHERE pid='$request'";
             $psy_result = $dbh->query($psy_query);
             if($psy_result) {
-                while($psy = $invoice_result->fetch_assoc()) {
+                while($psy = $psy_result->fetch_assoc()) {
                     $psy_html = $psy_html . $psy['invoice_html'];
                 }
             }
@@ -53,16 +53,16 @@
         	$dompdf_psychologist->loadHtml($psy_html);
         	$dompdf_psychologist->setPaper('A4', 'portrait');
         	$dompdf_psychologist->render();
-        	$dompdf_psychologist = $dompdf_psychologist->output();
+        	$output_psychologist = $dompdf_psychologist->output();
         	$addr_folder_district = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/generation_' . $request . '/batch_print_psychologists.pdf';
-            file_put_contents($addr_folder_district, $output_district);
+            file_put_contents($addr_folder_district, $output_psychologist);
 
             // Generate District Batch Print file from their saved Invoice HTML
             $district_html = '';
             $district_query =  "SELECT * FROM tl_invoice_district WHERE pid='$request'";
             $district_result = $dbh->query($district_query);
             if($district_result) {
-                while($district = $invoice_result->fetch_assoc()) {
+                while($district = $district_result->fetch_assoc()) {
                     $district_html = $district_html . $district['invoice_html'];
                 }
             }
