@@ -54,7 +54,8 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         'label' => array
         (
             'fields'                  => array('date_start', 'date_end'),
-            'format'                  => '%s - %s'
+            'format'                  => '%s - %s',
+            'label_callback'          => array('tl_assignment', 'addIcon')
         ),
         'global_operations' => array
         (
@@ -258,6 +259,10 @@ class tl_invoice_request extends Backend
 
     public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
 	{
+        // Add link to Batch Print if it exists
+        if($row['batch_url'] != '')
+            $label .= "<a href='".$row['batch_url']."'>Download Batch Print</a>';
+        
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
     
