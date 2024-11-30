@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_legend}, psychologist, invoice_url; {internal_legend:hide},psychologist_name, transaction_ids, misc_transaction_ids;{publish_legend},published;'
+        'default'                     => '{invoice_legend}, psychologist, invoice_url; {internal_legend:hide},psychologist_name, transaction_ids, misc_transaction_ids, invoice_html;{publish_legend},published;'
     ),
  
     // Fields
@@ -180,6 +180,16 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "text NULL"
         ),
+        'invoice_html' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice']['invoice_html'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => false,
+            'filter'                  => false,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
+            'sql'                     => "text NULL"
+        ),
 
 
 
@@ -222,7 +232,6 @@ class tl_invoice extends Backend
 		);
 
 		$href = System::getContainer()->get('router')->generate('contao_backend_preview', array('page'=>$row['pid'], 'article'=>($row['alias'] ?: $row['id'])));
-
 		return '<a href="' . StringUtil::specialcharsUrl($href) . '" title="' . StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['view']) . '" target="_blank">' . Image::getHtml($image, '', $attributes) . '</a> ' . $label;
 	}
 }
