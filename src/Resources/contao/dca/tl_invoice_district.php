@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_legend}, district, invoice_url; {internal_legend:hide}, district_name, transaction_ids, misc_transaction_ids;{publish_legend},published;'
+        'default'                     => '{invoice_legend}, district, invoice_url; {internal_legend:hide}, district_name, transaction_ids, misc_transaction_ids, invoice_html;{publish_legend},published;'
     ),
  
     // Fields
@@ -178,6 +178,16 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
             'search'                  => false,
             'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "text NULL"
+        ),
+        'invoice_html' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_district']['invoice_html'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => false,
+            'filter'                  => false,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
             'sql'                     => "text NULL"
         ),
 
