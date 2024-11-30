@@ -261,7 +261,7 @@ class tl_invoice_request extends Backend
 	{
         // Add link to Batch Print if it exists
         if($row['batch_url'] != '')
-            $label .= "<a href='".$row['batch_url']."'>Download Batch Print</a>';
+            $label .= "<a href='".$row['batch_url']."'>Download Batch Print ZIP</a>";
         
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
