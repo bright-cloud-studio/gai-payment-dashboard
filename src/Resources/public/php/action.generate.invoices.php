@@ -73,6 +73,8 @@
     }
 
     
+    
+    
     /*****************/
 	/* END INITALIZE */
 	/*****************/
@@ -81,14 +83,14 @@
 
     // Step One
     // Find our oldest unfinished Invoice Request
-    $request_query =  "SELECT * FROM tl_invoice_request WHERE generation_completed='no' ORDER BY id ASC";
+    $request_query =  "SELECT * FROM tl_invoice_request WHERE generated_psys='no' ORDER BY id ASC";
     $request_result = $dbh->query($request_query);
     if($request_result) {
         while($row = $request_result->fetch_assoc()) {
             
             $request = $row['id'];
+            $session_id = $session_id . $request;
             $date_start = $row['date_start'];
-
 
             // Step Two
             // Find Invoices without a PDF link
@@ -117,6 +119,9 @@
 
                 }
             }
+            
+            $ir_q =  "update tl_invoice_request set generated_psys='yes' WHERE id='".$request."'";
+            $ir_r = $dbh->query($ir_q);
             
             
         }
@@ -304,7 +309,10 @@
             $render_html .= $template[$x];
             
         }
-
+        
+        
+        // Add our HTML to the SESSION for this generation to collect them together for a batch print at the end
+        $_SESSION['batch_psy_queue'] = $_SESSION['batch_psy_queue'] . $render_html;
         
         // Load our modified HTML into the pdf generator
     	$dompdf->loadHtml($render_html);
