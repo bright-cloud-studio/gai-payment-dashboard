@@ -306,10 +306,6 @@
             // Add our modified template to the HTML we are rendering into a PDF
             $render_html .= $template[$x];
         }
-        
-        // Add our HTML to the SESSION for this generation to collect them together for a batch print at the end
-        $_SESSION['batch_district_queue'] = $_SESSION['batch_district_queue'] . $render_html;
-
 
         // Load our HTML into dompdf
     	$dompdf->loadHtml($render_html);
@@ -323,7 +319,7 @@
     	$output = $dompdf->output();
         file_put_contents($addr_folder . '/' . $filename . '.pdf', $output);
         $pdf_url = $invoice_folder . $filename . '.pdf';
-        $url_query =  "UPDATE tl_invoice_district SET invoice_url='$pdf_url' WHERE id='$invoice_id'";
+        $url_query =  "UPDATE tl_invoice_district SET invoice_url='$pdf_url', invoice_html='$render_html' WHERE id='$invoice_id'";
         $url_result = $dbh->query($url_query);
         
         // Reset global price total
