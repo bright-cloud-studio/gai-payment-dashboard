@@ -238,49 +238,53 @@ class ModAdminReview extends \Contao\Module
                 
                 if($transaction_year == $current_year && $transaction_month == $last_month) {
                     
-                    $template_misc[$psy->id][$transaction->id]['id'] = $transaction->id;
-                    $template_misc[$psy->id][$transaction->id]['transaction_type'] = "transaction_misc";
-                    $template_misc[$psy->id][$transaction->id]['date_submitted'] = date('m_d_y', $transaction->date_submitted);
+                    $template_psychologist_names[$psy->id] = $psy->firstname . " " . $psy->lastname;
+                    
+                    $template_psychologists[$psy->id]['m_'.$transaction->id]['psychologist_name'] = $psy->firstname . " " . $psy->lastname;
+                    $template_psychologists[$psy->id]['m_'.$transaction->id]['id'] = $transaction->id;
+                    $template_psychologists[$psy->id]['m_'.$transaction->id]['transaction_type'] = "transaction_misc";
+                    $template_psychologists[$psy->id]['m_'.$transaction->id]['date_submitted'] = date('m_d_y', $transaction->date_submitted);
+
                     
                     
                     // District
                     $district = District::findOneBy('id', $transaction->district);
-                    $template_misc[$psy->id][$transaction->id]['district'] = $district->district_name;
+                    $template_psychologists[$psy->id]['m_'.$transaction->id]['district'] = $district->district_name;
                     
                     // School
                     $school = School::findOneBy('id', $transaction->school);
-                    $template_misc[$psy->id][$transaction->id]['school'] = $school->school_name;
+                    $template_psychologists[$psy->id]['m_'.$transaction->id]['school'] = $school->school_name;
                     
-                    $template_misc[$psy->id][$transaction->id]['student'] = $transaction->student_initials;
+                    $template_psychologists[$psy->id]['m_'.$transaction->id]['student'] = $transaction->student_initials;
                     // Lasid
-                    $template_misc[$psy->id][$transaction->id]['lasid'] = $transaction->lasid;
+                    $template_psychologists[$psy->id]['m_'.$transaction->id]['lasid'] = $transaction->lasid;
                     // Sasid
-                    $template_misc[$psy->id][$transaction->id]['sasid'] = $transaction->sasid;
+                    $template_psychologists[$psy->id]['m_'.$transaction->id]['sasid'] = $transaction->sasid;
                     
                     // Service
                     $service = Service::findOneBy('service_code', $transaction->service);
                     if($transaction->meeting_duration > 0) {
-                        $template_misc[$psy->id][$transaction->id]['service'] = $service->name . " (" . $transaction->meeting_duration . " minutes)";
+                        $template_psychologists[$psy->id]['m_'.$transaction->id]['service'] = $service->name . " (" . $transaction->meeting_duration . " minutes)";
                     } else {
-                        $template_misc[$psy->id][$transaction->id]['service'] = $service->name;
+                        $template_psychologists[$psy->id]['m_'.$transaction->id]['service'] = $service->name;
                     }
                     
                     // Price
                     if($transaction->price != '') {
                         
-                        $template_misc[$psy->id][$transaction->id]['rate'] = number_format(floatval($transaction->price), 2, '.', ',');
+                        $template_psychologists[$psy->id]['m_'.$transaction->id]['rate'] = number_format(floatval($transaction->price), 2, '.', ',');
                             
                         if($transaction->service == 1) {
                             $dur = ceil(intval($transaction->meeting_duration) / 60);
                             $final_price = $dur * $transaction->price;
-                            $template_misc[$psy->id][$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
+                            $template_psychologists[$psy->id]['m_'.$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
                             $transactions_total += number_format(floatval($final_price), 2, '.', '');
                         } else if($transaction->service == 19) {
                             $final_price = $transaction->meeting_duration * 0.50;
-                            $template_misc[$psy->id][$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
+                            $template_psychologists[$psy->id]['m_'.$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
                             $transactions_total += number_format(floatval($final_price), 2, '.', '');
                         } else {
-                            $template_misc[$psy->id][$transaction->id]['price'] = number_format(floatval($transaction->price), 2, '.', ',');
+                            $template_psychologists[$psy->id]['m_'.$transaction->id]['price'] = number_format(floatval($transaction->price), 2, '.', ',');
                             $transactions_total += number_format(floatval($transaction->price), 2, '.', '');
                         }
                         
@@ -311,7 +315,7 @@ class ModAdminReview extends \Contao\Module
         $this->Template->totals = $template_totals;
         $this->Template->psychologist_names = $template_psychologist_names;
         $this->Template->psychologists = $template_psychologists;
-        $this->Template->transactions_misc = $template_misc;
+        //$this->Template->transactions_misc = $template_misc;
         $this->Template->psychologists_active = $template_active;
         
     }
