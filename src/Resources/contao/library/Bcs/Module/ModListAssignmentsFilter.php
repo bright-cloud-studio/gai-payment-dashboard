@@ -90,6 +90,11 @@ class ModListAssignmentsFilter extends \Contao\Module
             $filter_students[] = $student->name;
         }
         
+        // Sort arrays alphabetically
+        asort($filter_districts);
+        asort($filter_schools);
+        asort($filter_students);
+        
         $this->Template->filter_districts = $filter_districts;
         $this->Template->filter_schools = $filter_schools;
         $this->Template->filter_students = $filter_students;
