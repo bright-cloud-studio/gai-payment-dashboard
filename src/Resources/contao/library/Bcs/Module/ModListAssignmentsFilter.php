@@ -94,7 +94,8 @@ class ModListAssignmentsFilter extends \Contao\Module
         asort($filter_districts);
         asort($filter_schools);
         asort($filter_students);
-        
+
+        // Add sorted arrays to our template
         $this->Template->filter_districts = $filter_districts;
         $this->Template->filter_schools = $filter_schools;
         $this->Template->filter_students = $filter_students;
