@@ -12,7 +12,7 @@
 
     // Get the current day and hour
     $year = date('y');
-    $month = date('n');
+    $month = date('m');
     $day = date('j');
     $hour = date("H");
 
@@ -22,27 +22,37 @@
         // If this is the fifth hour of the day
         //if($hour == 5) {
             
+            // Update Transactions
             $query = "select * from tl_transaction WHERE published=''";
             $result = $dbh->query($query);
             if($result) {
 
-                $myfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/transaction_rollover_' . date('m_d_y_hi') . '.txt', 'w') or die("Unable to open file!");
+                $myfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/transactions_rollover_' . date('m_d_y_hi') . '.txt', 'w') or die("Unable to open file!");
                 
                 while($row = $result->fetch_assoc()) {
                     
-                    $t_year = date('y', $row['date_submitted']);
-                    $t_month = date('n', $row['date_submitted']);
+                    $date_submitted = $row['date_submitted'];
+                    $t_year = date('y', $date_submitted);
+                    $t_month = date('m', $date_submitted);
+                    $t_id = $row['id'];
                     
                     // If the months don't match
                     if($t_month != $month) {
-                        fwrite($myfile, "YEAR: " . $year . " MONTH: " . $month . " DAY: " . $day . " HOUR: " . $hour . "\r\n");
-                        fwrite($myfile, "TYEAR: " . $t_year . " TMONTH: " . $t_month . "\r\n");
+                        fwrite($myfile, "CURRENT - YEAR: " . $year . " MONTH: " . $month . " DAY: " . $day . " HOUR: " . $hour . "\r\n");
+                        fwrite($myfile, "TRANSACTION " . $t_id . ": TYEAR: " . $t_year . " TMONTH: " . $t_month . "\r\n");
+                        
+                        echo "String: " . $month . '/01/' . $year . "<br>";
+                        $time = strtotime($month . '/01/' . $year);
+                        echo "Time: " . $time . "<br>";
+                        
+                        // Update the 'originally_submitted' date to our current date_submitted
+                        $update =  "update tl_transaction set originally_submitted='".$date_submitted."', date_submitted='".$time."' WHERE id='".$t_id."'";
+                        $result_update = $dbh->query($update);
                     }
                     
                 }
 
                 fclose($myfile);
-                
             }
 
         //}        
