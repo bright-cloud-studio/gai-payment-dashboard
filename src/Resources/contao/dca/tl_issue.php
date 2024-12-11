@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{issue_legend}, status'                                                                                                                                                                                                                                                                                                             title, description;{publish_legend}, published;'
+        'default'                     => '{issues_legend}, status, title, description;{publish_legend},published;'
     ),
  
     // Fields
