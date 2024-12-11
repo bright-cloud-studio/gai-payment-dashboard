@@ -17,25 +17,27 @@
     $hour = date("H");
 
     // If this is the first day of the month
-    if($day == 1) {
+    //if($day == 1) {
         
         // If this is the fifth hour of the day
-        if($hour == 5) {
+        //if($hour == 5) {
             
             $query = "select * from tl_transaction WHERE published=''";
             $result = $dbh->query($query);
             if($result) {
 
-                $myfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/transaction_rollover_' . date('m-d-Y_hia') . '.txt', 'w') or die("Unable to open file!");
+                $myfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/transaction_rollover_' . date('m_d_y_hi') . '.txt', 'w') or die("Unable to open file!");
                 
                 while($row = $result->fetch_assoc()) {
-
-                    write($myfile, "YEAR: " . $year . " MONTH: " . $month . " DAY: " . $day . " HOUR: " . $hour . "\r\n");
-
-                    $t_year = date_format($row['date_submitted'], 'y');
-                    $t_month = date_format($row['date_submitted'], 'n');
-
-                    write($myfile, "TYEAR: " . $t_year . " TMONTH: " . "\r\n");
+                    
+                    $t_year = date('y', $row['date_submitted']);
+                    $t_month = date('n', $row['date_submitted']);
+                    
+                    // If the months don't match
+                    if($t_month != $month) {
+                        fwrite($myfile, "YEAR: " . $year . " MONTH: " . $month . " DAY: " . $day . " HOUR: " . $hour . "\r\n");
+                        fwrite($myfile, "TYEAR: " . $t_year . " TMONTH: " . $t_month . "\r\n");
+                    }
                     
                 }
 
@@ -43,5 +45,5 @@
                 
             }
 
-        }        
-    }
+        //}        
+    //}
