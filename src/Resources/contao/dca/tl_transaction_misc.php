@@ -94,21 +94,21 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
     'palettes' => array
     (
         '__selector__' => ['service'],
-        'default'      => '{transaction_legend},date_submitted, psychologist, service, district, school, service_label, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{student_legend}, student_initials, lasid, sasid;{notes_legend},notes;{publish_legend},published;',
+        'default'      => '{transaction_legend},date_submitted, psychologist, service, district, school, service_label, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{student_legend}, student_initials, lasid, sasid;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, originally_submitted;',
         // Parking = 14
-        '14'           => '{transaction_legend},date_submitted ,psychologist, district, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
+        '14'           => '{transaction_legend},date_submitted ,psychologist, district, service, service_label, price;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, originally_submitted;',
         // Misc. Travel Expenses = 18
-        '18'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
+        '18'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, originally_submitted;',
         // Editing Serivces = 19
-        '19'           => '{transaction_legend},date_submitted, psychologist, service, service_label, meeting_duration, price;{notes_legend},notes;{publish_legend},published;',
+        '19'           => '{transaction_legend},date_submitted, psychologist, service, service_label, meeting_duration, price;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, originally_submitted;',
         // Manager = 20
-        '20'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
+        '20'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, originally_submitted;',
         // Test Late Cancel - First = 32
-        '32'           => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, lasid, sasid; {meeting_legend}, meeting_date, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
+        '32'           => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, lasid, sasid; {meeting_legend}, meeting_date, service, service_label, price;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, originally_submitted;',
         // Test Late Cancel - Additional = 33
-        '33'           => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, lasid, sasid; {meeting_legend}, meeting_date, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
+        '33'           => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, lasid, sasid; {meeting_legend}, meeting_date, service, service_label, price;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, originally_submitted;',
         // Misc. Billing = 99
-        '99'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;',
+        '99'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, originally_submitted;',
     ),
  
     // Fields
@@ -317,7 +317,22 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
             'sql'                     => "text NOT NULL default ''"
-        )
+        ),
+
+
+        'originally_submitted' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['originally_submitted'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => false,
+            'search'                  => false,
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "int(10) unsigned",
+            'default'                 => ''
+        ),
+
+        
     )
 );
 
