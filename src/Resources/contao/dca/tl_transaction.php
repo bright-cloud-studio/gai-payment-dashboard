@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, lasid, sasid;'
+        'default'                     => '{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, lasid, sasid, originally_submitted;'
     ),
  
     // Fields
@@ -274,6 +274,16 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'originally_submitted' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['originally_submitted'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => false,
+            'search'                  => false,
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "int(10) unsigned NOT NULL default 0"
         ),
 
 
