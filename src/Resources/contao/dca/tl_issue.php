@@ -38,7 +38,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('priority', 'status'),
+            'fields'                  => array('status'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'default'                 => 'outstanding',
             'filter'                  => true,
             'search'                  => true,
-            'options'                  => array('outstanding' => 'Outstanding', 'resolved' => 'Resolved'),
+            'options'                  => array('prioritize' => 'Prioritize', 'outstanding' => 'Outstanding', 'resolved' => 'Resolved'),
             'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                      => "varchar(15) NOT NULL default ''"
         ),
