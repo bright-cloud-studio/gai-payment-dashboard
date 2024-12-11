@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{issue_legend}, status, priority,                                                                                                                                                                                                                                                                                                             title, description;{publish_legend}, published;'
+        'default'                     => '{issue_legend}, status'                                                                                                                                                                                                                                                                                                             title, description;{publish_legend}, published;'
     ),
  
     // Fields
@@ -119,14 +119,6 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'options'                  => array('prioritize' => 'Priority', 'outstanding' => 'Outstanding', 'completed' => 'Completed'),
             'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                      => "varchar(15) NOT NULL default ''"
-        ),
-        'priority' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['priority'],
-            'exclude'                 => true,
-            'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>false, 'doNotCopy'=>true, 'mandatory'=>false),
-            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'title' => array
         (
@@ -190,6 +182,7 @@ class tl_issue extends Backend
 
     public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
 	{
+            $label = "<span style='color: red;'>" . $label . "</span>";
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
 }
