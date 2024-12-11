@@ -10,20 +10,17 @@
         die("Connection failed: " . $dbh->connect_error);
     }
 
-    // Trigger when X days before the end of the month
-    $weekly_reminder = 7;
-    $final_reminder = 0;
-    // Calculates remaining days until the next month
-    $how_many_days = date('t') - date('j');
-    // Gets the current Hour in 24 hour format
+    // Get the current day and hour
+    $day = date('j');
     $hour = date("H");
 
 
-    // Send the "Week Remaining" email
-    if($how_many_days == $weekly_reminder) {
+    // If this is the first day of the month
+    if($day == 1) {
         
-        // If this is the desired hour
-        if($hour == 12) {
+        // If this is the fifth hour of the day
+        if($hour == 5) {
+
             
             $query = "select * from tl_member WHERE disable='0' AND email!=''";
             $result = $dbh->query($query);
@@ -32,6 +29,9 @@
                     $row['lastname'];
                 }
             }
+
+
+            
 
         }
         
