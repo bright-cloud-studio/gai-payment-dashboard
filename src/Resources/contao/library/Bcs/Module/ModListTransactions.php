@@ -68,7 +68,12 @@ class ModListTransactions extends \Contao\Module
         $transactions = Transaction::findBy(['pid = ?', 'psychologist = ?'], [$_SESSION['assignment_uuid'], $member->id]);
         
         foreach($transactions as $transaction) {
+            
+            // DATE
             $template_transactions[$transaction->id]['date_submitted'] = $transaction->date_submitted;
+            
+            
+            
             $template_transactions[$transaction->id]['service'] = $transaction->service;
 
             $service = Service::findBy('id', $transaction->service);
