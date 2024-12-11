@@ -182,7 +182,7 @@ class tl_issue extends Backend
 
     public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
 	{
-            $label = "<span style='color: red;'>" . $label . "</span>";
+            $label = "<span class='".$row['status']."'>" . $label . "</span>";
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
 }
