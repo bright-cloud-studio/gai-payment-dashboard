@@ -283,7 +283,8 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'filter'                  => false,
             'search'                  => false,
             'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "int(10) unsigned NOT NULL default 0"
+            'sql'                     => "int(10) unsigned",
+            'default'                 => ''
         ),
 
 
