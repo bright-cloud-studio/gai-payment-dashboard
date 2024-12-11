@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'default'                 => 'outstanding',
             'filter'                  => true,
             'search'                  => true,
-            'options'                  => array('prioritize' => 'Prioritize', 'outstanding' => 'Outstanding', 'resolved' => 'Resolved'),
+            'options'                  => array('prioritize' => 'Priority', 'outstanding' => 'Outstanding', 'completed' => 'Completed'),
             'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                      => "varchar(15) NOT NULL default ''"
         ),
