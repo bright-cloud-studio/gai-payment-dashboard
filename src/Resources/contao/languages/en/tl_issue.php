@@ -14,7 +14,7 @@ $GLOBALS['TL_LANG']['tl_issue']['alias']                      = array('Alias', '
 $GLOBALS['TL_LANG']['tl_issue']['published']                  = array('Published', 'Show this record on the front end.');
 
 /* Fields */
-$GLOBALS['TL_LANG']['tl_issue']['issue_legend']       = 'Issue Information';
+$GLOBALS['TL_LANG']['tl_issue']['issues_legend']      = 'Issue Information';
 $GLOBALS['TL_LANG']['tl_issue']['status']             = array('Status', 'Select the Status of this Issue, by default all Issues start as Outstanding');
 $GLOBALS['TL_LANG']['tl_issue']['priority']           = array('Prioritize', 'Select to mark this Issue as a priority');
 $GLOBALS['TL_LANG']['tl_issue']['title']              = array('Title', 'Enter a short, but to the point, title for easy reading');
