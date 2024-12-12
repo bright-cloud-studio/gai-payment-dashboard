@@ -22,3 +22,4 @@ $GLOBALS['TL_LANG']['tl_invoice']['internal_legend']            = 'INTERNAL Info
 $GLOBALS['TL_LANG']['tl_invoice']['psychologist_name']          = array('Psychologist Name', 'Display Name used for internal purposes');
 $GLOBALS['TL_LANG']['tl_invoice']['transaction_ids']            = array('Transaction IDs', 'IDs for the Transactions stamped on this Invoice');
 $GLOBALS['TL_LANG']['tl_invoice']['misc_transaction_ids']       = array('Misc. Transaction IDs', 'IDs for the Misc. Transactions stamped on this Invoice');
+$GLOBALS['TL_LANG']['tl_invoice']['invoice_html']               = array('Invoice HTML', 'Stored HTML of the generated PDF, used in Batch Print process');
