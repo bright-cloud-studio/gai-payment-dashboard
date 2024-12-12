@@ -22,3 +22,4 @@ $GLOBALS['TL_LANG']['tl_invoice_district']['internal_legend']            = 'INTE
 $GLOBALS['TL_LANG']['tl_invoice_district']['district_name']              = array('District Name', 'Display Name used for internal purposes');
 $GLOBALS['TL_LANG']['tl_invoice_district']['transaction_ids']            = array('Transaction IDs', 'IDs for the Transactions stamped on this Invoice');
 $GLOBALS['TL_LANG']['tl_invoice_district']['misc_transaction_ids']       = array('Misc. Transaction IDs', 'IDs for the Misc. Transactions stamped on this Invoice');
+$GLOBALS['TL_LANG']['tl_invoice_district']['invoice_html']               = array('Invoice HTML', 'Stored HTML of the generated PDF, used in Batch Print process');
