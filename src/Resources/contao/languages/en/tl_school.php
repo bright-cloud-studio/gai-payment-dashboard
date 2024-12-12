@@ -26,11 +26,3 @@ $GLOBALS['TL_LANG']['tl_school']['published']                  = array('Publishe
 /* Fields */
 $GLOBALS['TL_LANG']['tl_school']['school_legend']            = 'School Information';
 $GLOBALS['TL_LANG']['tl_school']['school_name']              = array('School Name', 'Enter this school\'s name');
-$GLOBALS['TL_LANG']['tl_school']['contact_name']             = array('Contact Name', 'Name of this school\'s contact person');
-$GLOBALS['TL_LANG']['tl_school']['contact_address']          = array('Contact Address', 'Address of this school\'s contact person');
-$GLOBALS['TL_LANG']['tl_school']['contact_email']            = array('Contact Email', 'Email of this school\'s contact person');
-$GLOBALS['TL_LANG']['tl_school']['contact_cc_email']         = array('Contact CC Email', 'CC Email who will also receive this school\'s Invoice');
-$GLOBALS['TL_LANG']['tl_school']['phone']                    = array('Phone', 'Phone number of this school\'s contact person');
-$GLOBALS['TL_LANG']['tl_school']['city']                     = array('City', 'City this school is located in');
-$GLOBALS['TL_LANG']['tl_school']['state']                    = array('State', 'State this school is located in');
-$GLOBALS['TL_LANG']['tl_school']['zip']                      = array('Zip', 'Zip code this school is located in');
