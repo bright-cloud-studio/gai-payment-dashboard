@@ -73,12 +73,12 @@ $GLOBALS['TL_DCA']['tl_school'] = array
                 'icon'                => 'edit.gif'
             ),
             'toggle' => array
-      			(
-      				'label'               => &$GLOBALS['TL_LANG']['tl_school']['toggle'],
-      				'icon'                => 'visible.gif',
-      				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-      				'button_callback'     => array('Bcs\Backend\SchoolBackend', 'toggleIcon')
-      			),
+            (
+                'label'               => &$GLOBALS['TL_LANG']['tl_school']['toggle'],
+                'icon'                => 'visible.gif',
+                'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                'button_callback'     => array('Bcs\Backend\SchoolBackend', 'toggleIcon')
+            ),
             'show' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_school']['show'],
