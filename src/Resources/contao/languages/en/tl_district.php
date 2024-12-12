@@ -28,3 +28,13 @@ $GLOBALS['TL_LANG']['tl_district']['district_legend']            = 'District Inf
 $GLOBALS['TL_LANG']['tl_district']['district_name']              = array('District Name', 'Enter the name of this District');
 $GLOBALS['TL_LANG']['tl_district']['invoice_prefix']             = array('Invoice Prefix', 'Unique Prefix used before their invoice number');
 $GLOBALS['TL_LANG']['tl_district']['purchase_order']             = array('Purchase Order', 'Purchase Order used on this District\'s invoices');
+
+$GLOBALS['TL_LANG']['tl_district']['address_legend']             = 'Address Information';
+$GLOBALS['TL_LANG']['tl_district']['contact_name']               = array('Contact Name', 'The name of the contact person at this District. This is who will receive this District\'s Invoice when sending out emails.');
+$GLOBALS['TL_LANG']['tl_district']['contact_address']            = array('Contact Address', 'The address stamped on this District\'s Invoice');
+$GLOBALS['TL_LANG']['tl_district']['city']                       = array('City', 'The City for this address');
+$GLOBALS['TL_LANG']['tl_district']['state']                      = array('State', 'The State for this address');
+$GLOBALS['TL_LANG']['tl_district']['zip']                        = array('ZIP', 'The ZIP for this address');
+$GLOBALS['TL_LANG']['tl_district']['phone']                      = array('Phone Number', 'The Contact Person\'s phone number');
+$GLOBALS['TL_LANG']['tl_district']['contact_email']              = array('Contact Email', 'The primary email this District\'s Invoice will be sent to');
+$GLOBALS['TL_LANG']['tl_district']['contact_cc_email']           = array('Contact CC Email', 'A secondary email address that will be CCed in the Invoice email');
