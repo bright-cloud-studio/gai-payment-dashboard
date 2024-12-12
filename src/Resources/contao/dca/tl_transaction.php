@@ -90,6 +90,13 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('Bcs\Backend\TransactionBackend', 'toggleIcon')
 			),
+            'delete' => array
+            (
+                'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['delete'],
+                'href'                => 'act=delete',
+                'icon'                => 'delete.svg',
+                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
+            ),
             'show' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_transaction']['show'],
