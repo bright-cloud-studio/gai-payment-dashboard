@@ -31,6 +31,10 @@ $GLOBALS['TL_LANG']['tl_invoice_request']['date_end']                      = arr
 $GLOBALS['TL_LANG']['tl_invoice_request']['exclude_psychologists']          = array('Exclude Psychologists', 'Check a Psychologist to exclude them from this Generation Request. Even if they have Transactions, excluded Psychologists will NOT have an Invoice generated');
 $GLOBALS['TL_LANG']['tl_invoice_request']['exclude_districts']              = array('Exclude Districts', 'Check a Distrct to exclude it from this Generation Request. Even if it has Transactions, excluded Districts will NOT have an Invoice generated');
 
+$GLOBALS['TL_LANG']['tl_invoice_request']['batch_legend']                   = 'Batch Print Information';
+$GLOBALS['TL_LANG']['tl_invoice_request']['batch_url']                      = array('Link to Batch Print ZIP', 'Once this Invoice Request is completed this field will be filled in with a link to the generated Batch Print ZIP file');
+
 $GLOBALS['TL_LANG']['tl_invoice_request']['internal_legend']                = 'INTERNAL Information';
-$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_districts']              = array('created_invoice_dcas', 'INTERNAL Flag to determine if we have created the entries in the Invoice sections for this Generation Request.');
-$GLOBALS['TL_LANG']['tl_invoice_request']['exclude_districts']              = array('generation_completed', 'INTERNAL FLag to mark when a Generation Request has been fully processed');
+$GLOBALS['TL_LANG']['tl_invoice_request']['created_invoice_dcas']           = array('Created Invoice DCAs', 'Tracks if this Invoice Request has created the placeholder Invoices for Psychologists and Districts');
+$GLOBALS['TL_LANG']['tl_invoice_request']['generated_psys']                 = array('Generated Psychologist Invoices', 'Tracks if the Psychologist Invoices have been generated');
+$GLOBALS['TL_LANG']['tl_invoice_request']['generated_districts']            = array('Generated District Invoices', 'Tracks if the District Invoices have been generated');
