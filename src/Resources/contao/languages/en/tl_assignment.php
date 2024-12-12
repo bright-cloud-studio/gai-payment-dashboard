@@ -51,6 +51,6 @@ $GLOBALS['TL_LANG']['tl_assignment']['shared_legend']             = 'Shared Deta
 $GLOBALS['TL_LANG']['tl_assignment']['psychologists_shared']      = array('Psychologists Shared With', 'Determines who this Assignment is Shared with');
 
 /* Internal */
-$GLOBALS['TL_LANG']['tl_assignment']['internal_legend']           = 'Internal Information';
+$GLOBALS['TL_LANG']['tl_assignment']['internal_legend']           = 'INTERNAL Information';
 $GLOBALS['TL_LANG']['tl_assignment']['lasid']                     = array('LASID', 'Internal copy of selected Student LASID to enable Search and Filter');
 $GLOBALS['TL_LANG']['tl_assignment']['sasid']                     = array('SASID', 'Internal copy of selected Student SASID to enable Search and Filter');
