@@ -130,7 +130,10 @@ class ModPsychWorkForm extends \Contao\Module
             if($is_admin) {
                 $template_assignments[$assignment->id]['district'] .= "<select name='district_$assignment->id' class='district' id='district_$assignment->id'>";
                 $template_assignments[$assignment->id]['district'] .= "<option value='' selected disabled>Select a District</option>";
-                $districts = District::findAll();
+                $options = [
+                    'order' => 'district_name ASC'
+                ];
+                $districts = District::findAll($options);
                 foreach($districts as $district) {
                     if($assignment->district == $district->id)
                         $template_assignments[$assignment->id]['district'] .= "<option value='" . $district->id . "' selected>$district->district_name</option>";
@@ -150,7 +153,10 @@ class ModPsychWorkForm extends \Contao\Module
             if($is_admin) {
                 $template_assignments[$assignment->id]['school'] .= "<select name='school_$assignment->id' class='school' id='school_$assignment->id'>";
                 $template_assignments[$assignment->id]['school'] .= "<option value='' selected disabled>First, select a District</option>";
-                $schools = School::findAll();
+                $options = [
+                    'order' => 'school_name ASC'
+                ];
+                $schools = School::findAll($options);
                 foreach($schools as $school) {
                     if($school->pid == $assignment->district) {
                         if($assignment->school == $school->id)
@@ -173,7 +179,10 @@ class ModPsychWorkForm extends \Contao\Module
             if($is_admin) {
                 $template_assignments[$assignment->id]['student'] .= "<select name='student_$assignment->id' class='student' id='student_$assignment->id'>";
                 $template_assignments[$assignment->id]['student'] .= "<option value='' selected disabled>Select a Student</option>";
-                $students = Student::findAll();
+                $options = [
+                    'order' => 'name ASC'
+                ];
+                $students = Student::findAll($options);
                 foreach($students as $student) {
                     if($student->district == $assignment->district) {
                         if($assignment->student == $student->id)
@@ -237,12 +246,12 @@ class ModPsychWorkForm extends \Contao\Module
                 $template_assignments[$assignment->id]['initial_reeval'] .= "<select name='initial_reeval_$assignment->id' class='initial_reeval' id='initial_reeval_$assignment->id'>";
                 $template_assignments[$assignment->id]['initial_reeval'] .= "<option value='' selected disabled>Select Initial/Re-Eval</option>";
                 $initial_options = array();
+                $initial_options = $initial_options + array('extended' => 'Extended Eval');
+                $initial_options = $initial_options + array('independent' => 'Independent Eval');
                 $initial_options = $initial_options + array('initial' => 'Initial');
                 $initial_options = $initial_options + array('initial_504' => 'Initial 504');
                 $initial_options = $initial_options + array('re_eval' => 'Re-eval');
                 $initial_options = $initial_options + array('re_eval_504' => 'Re-eval 504');
-                $initial_options = $initial_options + array('extended' => 'Extended Eval');
-                $initial_options = $initial_options + array('independent' => 'Independent Eval');
                 $initial_options = $initial_options + array('other' => 'Other');
                 foreach($initial_options as $value => $title) {
 
@@ -265,7 +274,8 @@ class ModPsychWorkForm extends \Contao\Module
                 $template_assignments[$assignment->id]['type_of_testing'] .= "<option value='' selected disabled>Select Service</option>";
                 $aService = array(
         			'column' 	=> array("published=?"),
-        			'value'		=> 1
+        			'value'		=> 1,
+        			'order' => 'name ASC'
         		);
         		$services = Service::findAll($aService);
                 foreach($services as $service) {
