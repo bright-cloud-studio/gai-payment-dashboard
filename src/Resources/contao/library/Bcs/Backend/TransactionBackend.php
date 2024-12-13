@@ -191,7 +191,17 @@ class TransactionBackend extends Backend
 
     public function getAssignmentDetails(DataContainer $dc)
     {
-        return "<span style='font-weight: 800;'>TEST TEST TEST</span>";
+        $assignment_details = [];
+
+        $assignment = Assignment::findBy('id', $dc->pid);
+
+        $assignment_details['district']['label'] = "District";
+        $assignment_details['district']['value'] = $assignment->district;
+        
+        $template = new BackendTemplate('be_transaction_show_assignment');
+        $template->assignment_details = array_values($assignment_details);
+
+        return $template->parse();
     }
 
 
