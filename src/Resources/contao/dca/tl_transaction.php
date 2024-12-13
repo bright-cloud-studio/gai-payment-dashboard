@@ -339,7 +339,7 @@ class tl_transaction extends Backend
         // Add LASID / SASID
         $student = Student::findBy('id', $assignment->student);
         
-        $label .= " STUDENT NAME - ";
+        $label .= $student->name . " - ";
         
         if($student->lasid != '' && $student->sasid != '') {
             $label .= $student->lasid . " / " . $student->sasid;
