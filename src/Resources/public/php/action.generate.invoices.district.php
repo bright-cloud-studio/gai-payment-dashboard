@@ -386,6 +386,12 @@
                         $transactions[$i]['price'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
                         $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', '');
                         
+                    } else if($row['service'] == 13) {
+                        $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['meeting_date']));
+                        $transactions[$i]['service'] = $services[$row['service']]['name'];
+                        $transactions[$i]['price'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
+                        $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', '');
+                        
                     } else if($row['service'] == 19) {
                         $transactions[$i]['service'] = $services[$row['service']]['name'] . ' ('. $row['meeting_duration'].' mins)';
                         $final_price = $row['meeting_duration'] * 0.50;
@@ -456,8 +462,12 @@
                         $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['meeting_date']));
                         $transactions[$i]['price'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
                         $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', '');
+                    }else if($row['service'] == 13) {
+                        $transactions[$i]['date_submitted'] = date('m/d/y', intval($row['meeting_date']));
+                        $transactions[$i]['service'] = $services[$row['service']]['name'];
+                        $transactions[$i]['price'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
+                        $price_total = number_format(floatval($price_total), 2, '.', '') + number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', '');
                     }
-                    
                     else if($row['service'] == 14) {
                         $transactions[$i]['service'] = $services[$row['service']]['name'];
                         $transactions[$i]['price'] = number_format(floatval($row['price']), 2, '.', ',');
