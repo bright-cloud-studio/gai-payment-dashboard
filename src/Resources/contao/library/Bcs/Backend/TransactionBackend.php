@@ -3,6 +3,7 @@
 namespace Bcs\Backend;
 
 use Contao\Backend;
+use Contao\BackendTemplate;
 use Contao\Image;
 use Contao\Input;
 use Contao\DataContainer;
@@ -11,6 +12,9 @@ use Contao\System;
 
 use Bcs\Model\Transaction;
 use Bcs\Model\Assignment;
+use Bcs\Model\District;
+use Bcs\Model\School;
+use Bcs\Model\Service;
 use Bcs\Model\Student;
 
 
@@ -191,24 +195,131 @@ class TransactionBackend extends Backend
 
     public function getAssignmentDetails(DataContainer $dc)
     {
+        // Stores our template values
         $assignment_details = [];
 
-        $assignment = Assignment::findBy('id', $dc->pid);
-
+        // Get our Assignment
+        $assignment = Assignment::findOneBy('id', $dc->activeRecord->pid);
+        $assignment_details['assignment_id']['label'] = "Assignment ID";
+        $assignment_details['assignment_id']['value'] = $assignment->id;
+        
+        // Date Created
+        $assignment_details['date_created']['label'] = "Date Created";
+        $assignment_details['date_created']['value'] = $assignment->date_created;
+        
+        // Date 30 Days
+        $assignment_details['date_30_day']['label'] = "Date 30 Days";
+        $assignment_details['date_30_day']['value'] = $assignment->date_30_day;
+        
+        // Date 45 Days
+        $assignment_details['date_45_day']['label'] = "Date 45 Days";
+        $assignment_details['date_45_day']['value'] = $assignment->date_45_day;
+        
+        // District
+        $district = District::findOneBy('id', $assignment->district);
         $assignment_details['district']['label'] = "District";
-        $assignment_details['district']['value'] = $assignment->district;
+        $assignment_details['district']['value'] = $district->district_name;
+        
+        // School
+        $school = School::findOneBy('id', $assignment->school);
+        $assignment_details['school']['label'] = "School";
+        $assignment_details['school']['value'] = $school->school_name;
+        
+        // Student
+        $student = Student::findOneBy('id', $assignment->student);
+        $assignment_details['student']['label'] = "Student";
+        $assignment_details['student']['value'] = $student->name;
+        
+        // Initial / Re-eval
+        $assignment_details['initial_reeval']['label'] = "Initial / Re-Eval";
+        $assignment_details['initial_reeval']['value'] = $this->getInitialReeval($assignment->initial_reeval);
+        
+        // Type of Testing
+        $service = Service::findOneBy('id', $assignment->type_of_testing);
+        $assignment_details['type_of_testing']['label'] = "Type of Testing";
+        $assignment_details['type_of_testing']['value'] = $service->name;
+        
+        // Testing Date
+        $assignment_details['testing_date']['label'] = "Testing Date";
+        $assignment_details['testing_date']['value'] = $assignment->testing_date;
+        
+        // Meeting Required
+        $assignment_details['meeting_required']['label'] = "Meeting Required";
+        $assignment_details['meeting_required']['value'] = $this->getYesNo($assignment->meeting_required);
+        
+        // Meeting Date
+        $assignment_details['meeting_date']['label'] = "Meeting Date";
+        $assignment_details['meeting_date']['value'] = $assignment->meeting_date;
+        
+        // Contact Info - Parent
+        $assignment_details['contact_info_parent']['label'] = "Contact Info - Parent";
+        $assignment_details['contact_info_parent']['value'] = $assignment->contact_info_parent;
+        
+        // Contact Info - Teacher
+        $assignment_details['contact_info_teacher']['label'] = "Contact Info - Teacher";
+        $assignment_details['contact_info_teacher']['value'] = $assignment->contact_info_teacher;
+        
+        // Team Chair
+        $assignment_details['team_chair']['label'] = "Team Chair";
+        $assignment_details['team_chair']['value'] = $assignment->team_chair;
+        
+        // Email
+        $assignment_details['email']['label'] = "Email";
+        $assignment_details['email']['value'] = $assignment->email;
+        
+        // Report Submitted
+        $assignment_details['report_submitted']['label'] = "Report Submitted";
+        $assignment_details['report_submitted']['value'] = $this->getYesNo($assignment->report_submitted);
         
         $template = new BackendTemplate('be_transaction_show_assignment');
-        $template->assignment_details = array_values($assignment_details);
+        $template->assignment_details = $assignment_details;
 
         return $template->parse();
     }
-
-
-
-
-
     
+    public function getInitialReeval($value) {
+        switch ($value)
+		{
+			case 'initial':
+                return 'Initial';
+				break;
+			case 'initial_504':
+                return 'Initial 504';
+				break;
+			case 're_eval':
+                return 'Re-eval';
+				break;
+			case 're_eval_504':
+                return 'Re-eval 504';
+				break;
+			case 'extended':
+                return 'Extended Eval';
+				break;
+			case 'independent':
+                return 'Independent Eval';
+				break;
+			case 'other':
+                return 'Other';
+				break;
+			default:
+				return 'Not Selected';
+				break;
+		}
+    }
     
+    public function getYesNo($value) {
+        switch ($value)
+		{
+			case 'yes':
+                return 'Yes';
+				break;
+			case 'no':
+                return 'No';
+				break;
+			default:
+				return 'Not Selected';
+				break;
+		}
+    }
 
 }
