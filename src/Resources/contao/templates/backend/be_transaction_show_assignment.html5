@@ -3,10 +3,18 @@
 
         <table class="tl_show" style="margin-bottom:0">
             <tbody>
-                <tr>
-                    <td class="tl_bg"><span class="tl_label"><?= $this->assignment_details['district']['label'] ?></span></td>
-                    <td class="tl_bg"><?= $this->assignment_details['district']['value'] ?></td>
-                </tr>
+                
+                <?php foreach($this->assignment_details as $index => $detail) { ?>
+                
+                    <tr id="<?= $index ?>">
+                        <td>
+                            <span class="tl_label"><?= $detail['label'] ?>: </span>
+                            <?= $detail['value'] ?>
+                        </td>
+                    </tr>
+                
+                <?php } ?>
+                
             </tbody>
         </table>
     <?php else: ?>
