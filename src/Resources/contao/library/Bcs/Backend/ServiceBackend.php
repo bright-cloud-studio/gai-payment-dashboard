@@ -111,17 +111,19 @@ class ServiceBackend extends Backend
 
         if($tier != '') {
             
-            $services = Service::findBy('published', '1');
+            $services = Service::findAll();
+
+            
             
             // loop through each service
             foreach($services as $service) {
 
-                $options[] = "<span style='font-weight: 600;>" . $service->name . ":</span> $" . $service->{$tier};
+                $options[$service->service_code] = "<span style='font-weight: 600;'>" . $service->name . "</span>" . ': $' . $service->{$tier};
                 
             }
 
         }
-        
+
         return $options;
     }
         
