@@ -109,7 +109,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, lasid, sasid, originally_submitted;'
+        'default'                     => '{assignment_details_legend}, assignment_details;{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, lasid, sasid, originally_submitted;'
     ),
  
     // Fields
@@ -159,11 +159,23 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'sql'                     => "char(1) NOT NULL default ''"
         ),
 
+
+        /* ***************** */
+        // Assignment Details |
+        /* ***************** */
+        
+        'assignment_details' => array
+        (
+            'input_field_callback'  => array('Bcs\Backend\TransactionBackend', 'getAssignmentDetails'),
+            'eval'                  => array('doNotShow'=>true),
+        ),
+
         
         
         /* ******************* */
         // Transaction Fields
         /* ******************* */
+        
         'date_submitted' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction']['date_submitted'],
@@ -293,8 +305,6 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'sql'                     => "int(10) unsigned",
             'default'                 => ''
         ),
-
-
         
     )
 );
