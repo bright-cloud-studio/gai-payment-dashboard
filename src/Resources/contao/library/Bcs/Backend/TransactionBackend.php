@@ -187,6 +187,18 @@ class TransactionBackend extends Backend
 
 
 
+
+
+    public function getAssignmentDetails(DataContainer $dc)
+    {
+        return "<span style='font-weight: 800;'>TEST TEST TEST</span>";
+    }
+
+
+
+
+
+    
     
 
 }
