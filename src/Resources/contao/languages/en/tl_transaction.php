@@ -21,6 +21,9 @@ $GLOBALS['TL_LANG']['tl_transaction']['toggle']                     = array('Tog
 /* System Fields */
 $GLOBALS['TL_LANG']['tl_transaction']['alias']                      = array('Alias', 'Auto-generated alias.');
 
+/* Assignment Display */
+$GLOBALS['TL_LANG']['tl_transaction']['assignment_details_legend']  = 'Assignment Details';
+
 /* Fields */
 $GLOBALS['TL_LANG']['tl_transaction']['transaction_legend']         = 'Transaction Information';
 $GLOBALS['TL_LANG']['tl_transaction']['date_submitted']             = array('Date Submitted', 'The date this Transaction was created. This is the date the generator uses to determine which month it gets invoiced. Will be automatically updated to the first of each month if not Reviewed');
@@ -38,6 +41,7 @@ $GLOBALS['TL_LANG']['tl_transaction']['notes']                      = array('Not
 
 $GLOBALS['TL_LANG']['tl_transaction']['publish_legend']             = 'Reviewed Information';
 $GLOBALS['TL_LANG']['tl_transaction']['published']                  = array('Reviewed', 'Indicates if this Transaction has been Reviewed by the submitting Psychologist');
+
 /* Internal */
 $GLOBALS['TL_LANG']['tl_transaction']['internal_legend']           = 'Internal Information';
 $GLOBALS['TL_LANG']['tl_transaction']['lasid']                     = array('LASID', 'Internal copy of selected Student LASID to enable Search and Filter');
