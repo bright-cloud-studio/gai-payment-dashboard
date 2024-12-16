@@ -315,6 +315,17 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
 
 class tl_transaction extends Backend
 {
+
+    /** @return string */
+	public function generate()
+	{
+        $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+		if($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
+		{
+            $GLOBALS['TL_CSS'][] = 'bundles/bcspaymentdashboard/css/be_coloring.css';
+		}
+	}
+    
 	public function addIcon($row, $label)
 	{
         // Clear out our current label
