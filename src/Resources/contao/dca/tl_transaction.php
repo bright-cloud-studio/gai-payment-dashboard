@@ -317,7 +317,7 @@ class tl_transaction extends Backend
 {
 
     /** @return string */
-	public function generate()
+	public function compile()
 	{
         $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 		if($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
