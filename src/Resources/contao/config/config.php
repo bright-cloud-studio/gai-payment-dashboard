@@ -16,65 +16,31 @@ use Bcs\SelectMenuDynamic;
 * @see	       https://github.com/bright-cloud-studio/gai-payment-d
 */
 
-/* Create new sections in the Contao sidebar */
-
-
 /* Back end modules - Data DCAs */
 $GLOBALS['TL_LANG']['MOD']['gai_data'][0] = "Invoices - Data";
-
-$GLOBALS['BE_MOD']['gai_data']['district'] = array(
-	'tables' => array('tl_district')
-);
-$GLOBALS['BE_MOD']['gai_data']['school'] = array(
-	'tables' => array('tl_school')
-);
-$GLOBALS['BE_MOD']['gai_data']['student'] = array(
-	'tables' => array('tl_student')
-);
-$GLOBALS['BE_MOD']['gai_data']['service'] = array(
-	'tables' => array('tl_service')
-);
-
-$GLOBALS['BE_MOD']['gai_data']['service'] = array(
-	'tables' => array('tl_service')
-);
+$GLOBALS['BE_MOD']['gai_data']['district'] = array( 'tables' => array('tl_district') );
+$GLOBALS['BE_MOD']['gai_data']['school'] = array( 'tables' => array('tl_school') );
+$GLOBALS['BE_MOD']['gai_data']['student'] = array( 'tables' => array('tl_student') );
+$GLOBALS['BE_MOD']['gai_data']['service'] = array( 'tables' => array('tl_service') );
+$GLOBALS['BE_MOD']['gai_data']['service'] = array( 'tables' => array('tl_service') );
 
 /* Back end modules - Work DCAs */
 $GLOBALS['TL_LANG']['MOD']['gai'][0] = "Invoices - Generator";
-
-$GLOBALS['BE_MOD']['gai']['invoice_request'] = array(
-	'tables' => array('tl_invoice_request')
-);
-$GLOBALS['BE_MOD']['gai']['invoice'] = array(
-	'tables' => array('tl_invoice')
-);
-$GLOBALS['BE_MOD']['gai']['invoice_district'] = array(
-	'tables' => array('tl_invoice_district')
-);
-
-$GLOBALS['BE_MOD']['gai']['assignment'] = array(
-	'tables' => array('tl_assignment')
-);
-$GLOBALS['BE_MOD']['gai']['transaction'] = array(
-	'tables' => array('tl_transaction')
-);
-$GLOBALS['BE_MOD']['gai']['transaction_misc'] = array(
-	'tables' => array('tl_transaction_misc')
-);
-
-
+$GLOBALS['BE_MOD']['gai']['invoice_request'] = array( 'tables' => array('tl_invoice_request') );
+$GLOBALS['BE_MOD']['gai']['invoice'] = array( 'tables' => array('tl_invoice') );
+$GLOBALS['BE_MOD']['gai']['invoice_district'] = array( 'tables' => array('tl_invoice_district') );
+$GLOBALS['BE_MOD']['gai']['assignment'] = array( 'tables' => array('tl_assignment') );
+$GLOBALS['BE_MOD']['gai']['transaction'] = array( 'tables' => array('tl_transaction') );
+$GLOBALS['BE_MOD']['gai']['transaction_misc'] = array( 'tables' => array('tl_transaction_misc') );
 
 /* Back end modules - Work DCAs */
 $GLOBALS['TL_LANG']['MOD']['gai_issue'][0] = "Issues";
-$GLOBALS['BE_MOD']['gai_issue']['issue'] = array(
-	'tables' => array('tl_issue')
-);
-
+$GLOBALS['BE_MOD']['gai_issue']['issue'] = array( 'tables' => array('tl_issue') );
 
 /* Hooks */
 $GLOBALS['TL_HOOKS']['processFormData'][]        = array('Bcs\Hooks\FormHooks', 'onFormSubmit');
 $GLOBALS['TL_HOOKS']['compileFormFields'][]      = array('Bcs\Hooks\FormHooks', 'onPrepareForm');
-
+$GLOBALS['TL_HOOKS']['parseTemplate'][]          = array('Bcs\Hooks\TemplateHooks', 'onParseTemplate');
 
 /* Front End modules */
 $GLOBALS['FE_MOD']['gai']['mod_list_services']           = 'Bcs\Module\ModListServices';
@@ -84,7 +50,6 @@ $GLOBALS['FE_MOD']['gai']['mod_psych_work_form']         = 'Bcs\Module\ModPsychW
 $GLOBALS['FE_MOD']['gai']['mod_review_transactions']     = 'Bcs\Module\ModReviewTransactions';
 $GLOBALS['FE_MOD']['gai']['mod_invoice_history']         = 'Bcs\Module\ModInvoiceHistory';
 $GLOBALS['FE_MOD']['gai']['mod_admin_review']            = 'Bcs\Module\ModAdminReview';
-
 
 /* Models */
 $GLOBALS['TL_MODELS']['tl_assignment']         = 'Bcs\Model\Assignment';
@@ -99,7 +64,6 @@ $GLOBALS['TL_MODELS']['tl_price_tier']         = 'Bcs\Model\PriceTier';
 $GLOBALS['TL_MODELS']['tl_transaction']        = 'Bcs\Model\Transaction';
 $GLOBALS['TL_MODELS']['tl_transaction_misc']   = 'Bcs\Model\TransactionMisc';
 
-
-// Custom Form Fields
+/* Custom Form Fields */
 $GLOBALS['BE_FFL']['select_dynamic'] = SelectMenuDynamic::class;
 $GLOBALS['TL_FFL']['select_dynamic'] = FormSelectDynamic::class;
