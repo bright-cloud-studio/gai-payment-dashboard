@@ -21,7 +21,9 @@ class TemplateHooks
     // When a form is submitted
     public function onParseTemplate($template)
     {
-      
+        if ('be_welcome' === $template->getName()) {
+            $template->total_daily = '1000.00';
+        }
     }
   
 }
