@@ -1,5 +1,7 @@
-# config/config.yaml
+# Default configuration for extension with alias: "contao"
 contao:
-  backend:
-    custom_css:
-      - files/backend/custom.css
+    backend:
+        # Adds custom style sheets to the back end.
+        custom_css:
+            # Example:
+            - files/backend/custom.css
