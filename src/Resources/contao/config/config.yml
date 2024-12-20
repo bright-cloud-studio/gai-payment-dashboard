@@ -1,0 +1,5 @@
+# config/config.yaml
+contao:
+  backend:
+    custom_css:
+      - files/backend/custom.css
