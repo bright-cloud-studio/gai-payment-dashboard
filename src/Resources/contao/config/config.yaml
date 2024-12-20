@@ -1,7 +1,0 @@
-# Default configuration for extension with alias: "contao"
-contao:
-    backend:
-        # Adds custom style sheets to the back end.
-        custom_css:
-            # Example:
-            - files/backend/custom.css
