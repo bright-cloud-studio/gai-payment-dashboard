@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_student'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'options'                  => array('male' => 'Male', 'female' => 'Female', 'non_binary' => 'Non-binary', 'other' => 'Other', 'not_specified' => 'Not Specified'),
+            'options'                  => array('male' => 'Male', 'female' => 'Female', 'nonbinary' => 'Nonbinary', 'other' => 'Other', 'not_specified' => 'Not Specified'),
             'eval'                     => array('mandatory'=>false, 'tl_class'=>'w50', 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Gender'),
             'sql'                      => "varchar(32) NOT NULL default ''"
         ),
