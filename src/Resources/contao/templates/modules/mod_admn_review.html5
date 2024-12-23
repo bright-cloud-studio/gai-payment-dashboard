@@ -1,34 +1,86 @@
+<div class="mod_admin_review_nav marbot60">
+	<?php foreach ($this->psychologists as $id => $psychologist) { ?>
+
+		<a href='{{link_url::37}}?active=<?= $id ?>' class="select_psy <?= $this->psychologists_active[$id] ?>"><?= $this->psychologist_names[$id] ?></a>
+	<? } ?>
+</div>
+
 
 <!-- Include DataTables for better formatting -->
+<div class="mod_admin_review size100 marbot60 no-pad">
+	
+	<h2>Currently Reviewing: <?=$this->currently_reviewing ?></h2>
+	
+	<?php foreach ($this->psychologists as $id => $psychologist) { ?>
+	
+		<?php $type = 'transaction'; ?>
+		<?php if(str_contains($id, 'm_')) { $type = 'transaction_misc'; } ?>
+		
+		<?php $clean_id = 0; ?>
+		<?php if($type == 'transaction') { $clean_id = $id; } else { $clean_id = str_replace("m_","",$id); } ?>
+		
+		<div class="psy_wrapper <?= $this->psychologists_active[$clean_id] ?>" id="psy_<?= $clean_id ?>">
+			<h2>Psychologist: <?= $this->psychologist_names[$clean_id] ?></h2>
+		
+			<table id="admin_review" class="admin_review display compact cell-border hover order-column row-borders stripe" style="width:100%">
+				<thead>
+					<tr>
+						<th></th>
+						<th>District</th>
+						<th>School</th>
+						<th>Student</th>
+						<th>LASID</th>
+						<th>SASID</th>
+						<th>Service</th>
+						<th>Rate</th>
+						<th>Price</th>
+		
+					</tr>
+				</thead>
+				<tbody>
 
-<div class="mod_admin_review size100 marbot60">
-	<h2>Invoice History</h2>
-
-
-	<table id="invoice_history" class="display compact cell-border hover order-column row-borders stripe" style="width:100%">
-		<thead>
-			<tr>
-				<th></th>
-				<th style="min-width: 75px; max-width: 75px;" class='col_created'>Created</th>
-				<th>Invoice URL</th>
-			</tr>
-		</thead>
-		<tbody>
+					<?php
+					foreach ($psychologist as $transaction) {
+						
+						if($type == 'transaction') {
+							$buffer = '';
+							$buffer .= "<tr data-id='". $transaction['id'] ."' data-date-created='". $transaction['date_submitted'] ."' data-transaction-type='". $transaction['transaction_type'] ."'>";
+							$buffer .= "<td></td>";
+							$buffer .= "<td class='col_district'>" . $transaction['district'] . "</td>";
+							$buffer .= "<td class='col_school'>" . $transaction['school'] . "</td>";
+							$buffer .= "<td class='col_student'>" . $transaction['student'] . "</td>";
+							$buffer .= "<td class='col_lasid dt-body-center'>" . $transaction['lasid'] . "</td>";
+							$buffer .= "<td class='col_sasid dt-body-center'>" . $transaction['sasid'] . "</td>";
+							$buffer .= "<td class='col_service'>" . $transaction['service'] . "</td>";
+							$buffer .= "<td class='col_rate'>$" . $transaction['rate'] . "</td>";
+							$buffer .= "<td class='col_price'>$" . $transaction['price'] . "</td>";
+							$buffer .= "</tr>";
+							echo $buffer;
+						} else {
+							$buffer = '';
+							$buffer .= "<tr data-id='m_". $transaction['id'] ."' data-date-created='". $transaction['date_submitted'] ."' data-transaction-type='". $transaction['transaction_type'] ."'>";
+							$buffer .= "<td></td>";
+							$buffer .= "<td class='col_district'>" . $transaction['district'] . "</td>";
+							$buffer .= "<td class='col_school'>" . $transaction['school'] . "</td>";
+							$buffer .= "<td class='col_student'>" . $transaction['student'] . "</td>";
+							$buffer .= "<td class='col_lasid dt-body-center'>" . $transaction['lasid'] . "</td>";
+							$buffer .= "<td class='col_sasid dt-body-center'>" . $transaction['sasid'] . "</td>";
+							$buffer .= "<td class='col_service'>" . $transaction['service'] . "</td>";
+							$buffer .= "<td class='col_rate'>$" . $transaction['rate'] . "</td>";
+							$buffer .= "<td class='col_price'>$" . $transaction['price'] . "</td>";
+							$buffer .= "</tr>";
+							echo $buffer;
+						}
+					}
+					?>
+					
+				</tbody>
+			</table>
 			
-			<?php
-				foreach ($this->invoices as $invoice) {
-					$buffer = '';
-					$buffer .= "<tr>";
-					$buffer .= "<td></td>";
-					$buffer .= "<td class='col_created'>" . $invoice['created'] . "</td>";
-					$buffer .= "<td><a href='".$invoice['invoice_url']."' target='_blank'>" . $invoice['invoice_url'] . "</a></td>";
-					$buffer .= "</tr>";
-					echo $buffer;
-				}
-				
-			?>
-
-		</tbody>
-	</table>
+			<div class="total center_element">Total: $<?= $this->totals[$id] ?></div>
+			
+		</div>
+	
+	<?php } ?>
 
 </div>
