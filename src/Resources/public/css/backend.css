@@ -1,3 +1,52 @@
-#tl_gai {
-    color: red;
+html[data-color-scheme=dark] #tl_gai div.size25 .inside{
+    border: 1px solid var(--border);
+    background-color: #232529;
+    margin: 0 10px;
+    padding: 10px;
 }
+
+html[data-color-scheme=light] #tl_gai div.size25 .inside{
+    border: 1px solid var(--border);
+    background-color: #f7f7f;
+    margin: 0 10px;
+    padding: 10px;
+}
+
+#tl_soverview #tl_gai,
+#tl_soverview #tl_gai .psychologists_wrapper, 
+#tl_soverview #tl_gai .districts_wrapper {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#tl_gai div.size25 h3 { margin-bottom: 5px; }
+
+#tl_gai .total { font-size: 2.5em; margin-bottom: 5px; }
+
+#tl_gai .psychologists_wrapper,
+#tl_gai .districts_wrapper{ width: 100%; margin-bottom: 30px; }
+
+
+#tl_gai .psychologists_wrapper .total { color: red; }
+#tl_gai .districts_wrapper .total { color: green; }
+
+#tl_gai .transactions, #tl_gai .transactions_misc {
+    font-size: 0.8em;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.size100,
+.size50,
+.size33,
+.size25 {
+    margin-bottom: 15px;
+}
+
+.size100 { width: 100%; }
+.size50 { width: 50%; }
+.size33 { width: 33.33333%; }
+.size25 { width: 25%; }
+
+span.bold { font-weight: 600; font-size: 1.5em; margin-right: 5px; }
