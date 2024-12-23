@@ -42,16 +42,16 @@ class TemplateHooks
     public function calculateDay() {
         
         // Tracks the total price of the Transactions
-        $total_price = 0.00;
-        
+        $total_price_psychologists = 0.00;
+        $total_price_districts = 0.00;
         // Tracks the total number of Transactions
         $total_transactions = 0;
-        
         // Tracks the total number of Misc. Transactions
         $total_transactions_misc = 0;
-        
         // Get Today's Date
         $today = date('m/d/y');
+    
+        
         
         // Loop through Transactions
         $transactions = Transaction::findAll();
@@ -68,7 +68,8 @@ class TemplateHooks
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
                 $price = $service->{$psychologist->price_tier};
-                $total_price += $price;
+                $total_price_psychologists += $price;
+                $total_price_districts += $price * 2;
             }
 		}
 		
@@ -87,13 +88,18 @@ class TemplateHooks
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
                 $price = $service->{$psychologist->price_tier};
-                $total_price += $price;
+                $total_price_psychologists += $price;
+                $total_price_districts += $price;
             }
 		}
 		
 		
         // Return our template values for 'total_day'
-        return array('value' => number_format($total_price, 2, '.', ''), 'transactions' => $total_transactions, 'transactions_misc' => $total_transactions_misc);
+        return array(
+            'total_psycholigists' => number_format($total_price_psychologists, 2, '.', ''),
+            'total_districts' => number_format($total_price_districts, 2, '.', ''),
+            'transactions' => $total_transactions, 'transactions_misc' => $total_transactions_misc
+        );
     }
   
 }
