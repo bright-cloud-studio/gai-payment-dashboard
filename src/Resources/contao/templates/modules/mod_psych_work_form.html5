@@ -1,7 +1,7 @@
 
 <!-- Include DataTables for better formatting -->
 
-<div class="mod_psych_work_form size100 marbot60">
+<div class="mod_psych_work_form size100 marbot60" data-psych="{{user::id}}">
 	<h2>Your Psych Work Form</h2>
 
 
@@ -9,23 +9,27 @@
 		<thead>
 			<tr>
 				<th></th>
-				<th>Created</th>
-				<th>30 Day</th>
-				<th>45 Day</th>
-				<th>District</th>
-				<th>School</th>
-				<th>Student</th>
-				<th>Initial / Re-Eval</th>
-				<th>Type of Testing</th>
-				<th>Meeting Required</th>
-				<th>Testing Date</th>
-				<th>Meeting Date</th>
-				<th>Contact Info - Parent</th>
-				<th>Contact Info - Teacher</th>
-				<th>Team Chair</th>
-				<th>Email</th>
-				<th>Report Submitted</th>
-				<th>Notes</th>
+				<th style="min-width: 75px; max-width: 75px;" class='col_date_created'>Created</th>
+				<th style="min-width: 75px; max-width: 75px;" class="col_date_30_day">30 Day</th>
+				<th style="min-width: 75px; max-width: 75px;" class="col_date_45_day">45 Day</th>
+				<th style="min-width: 300px; max-width: 300px;" class="col_district">District</th>
+				<th style="min-width: 250px; max-width: 250px;" class="col_school">School</th>
+				<th style="min-width: 250px; max-width: 250px;" class="col_student">Student</th>
+				<th style="min-width: 75px; max-width: 75px;" class="col_date_of_birth">D.O.B.</th>
+				<th style="min-width: 75px; max-width: 75px;" class="col_grade">Grade</th>
+				<th style="min-width: 100px; max-width: 100px;" class="col_lasid">LASID#</th>
+				<th style="min-width: 100px; max-width: 100px;" class="col_sasid">SASID#</th>
+				<th style="min-width: 150px; max-width: 150px;" class="col_initial_reeval">Initial / Re-Eval</th>
+				<th style="min-width: 245px; max-width: 245px;" class="col_type_of_testing">Type of Testing</th>
+				<th style="min-width: 130px; max-width: 130px;" class="col_meeting_required">Meeting Required</th>
+				<th style="min-width: 100px; max-width: 100px;" class="col_testing_date">Testing Date</th>
+				<th style="min-width: 100px; max-width: 100px;" class="col_meeting_date">Meeting Date</th>
+				<th style="min-width: 500px; max-width: 500px;" class='col_contact_info_parent'>Contact Info - Parent</th>
+				<th style="min-width: 500px; max-width: 500px;" class='col_contact_info_teacher'>Contact Info - Teacher</th>
+				<th style="min-width: 200px; max-width: 200px;" class="col_team_chair">Team Chair</th>
+				<th style="min-width: 200px; max-width: 200px;" class="col_email">Email</th>
+				<th style="min-width: 130px; max-width: 130px;" class="col_report_submitted">Report Submitted</th>
+				<th style="min-width: 3000px; max-width: 3000px;" class='col_notes'>Notes</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,25 +37,31 @@
 			<?php
 				foreach ($this->assignments as $assignment) {
 					$buffer = '';
-					$buffer .= "<tr>";
+					$buffer .= "<tr data-id='assignment_".$assignment['id']."' ".$assignment['color_data']." ".$assignment['color_class'].">";
 					$buffer .= "<td></td>";
-					$buffer .= "<td>" . $assignment['date_created'] . "</td>";
-					$buffer .= "<td>" . $assignment['date_30_day'] . "</td>";
-					$buffer .= "<td>" . $assignment['date_45_day'] . "</td>";
-					$buffer .= "<td>" . $assignment['district'] . "</td>";
-					$buffer .= "<td>" . $assignment['school'] . "</td>";
-					$buffer .= "<td>" . $assignment['student'] . "</td>";
-					$buffer .= "<td>" . $assignment['initial_reeval'] . "</td>";
-					$buffer .= "<td>" . $assignment['type_of_testing'] . "</td>";
-					$buffer .= "<td>" . $assignment['meeting_required'] . "</td>";
-					$buffer .= "<td>" . $assignment['testing_date'] . "</td>";
-					$buffer .= "<td>" . $assignment['meeting_date'] . "</td>";
-					$buffer .= "<td>" . $assignment['contact_info_parent'] . "</td>";
-					$buffer .= "<td>" . $assignment['contact_info_teacher'] . "</td>";
-					$buffer .= "<td>" . $assignment['team_chair'] . "</td>";
-					$buffer .= "<td>" . $assignment['email'] . "</td>";
-					$buffer .= "<td>" . $assignment['report_submitted'] . "</td>";
-					$buffer .= "<td>" . $assignment['notes'] . "</td>";
+					$buffer .= "<td class='col_date_created'>" . $assignment['date_created'] . "</td>";
+					$buffer .= "<td class='col_date_30_day'>" . $assignment['date_30_day'] . "</td>";
+					$buffer .= "<td class='col_date_45_day'>" . $assignment['date_45_day'] . "</td>";
+					$buffer .= "<td class='col_district'>" . $assignment['district'] . "</td>";
+					$buffer .= "<td class='col_school'>" . $assignment['school'] . "</td>";
+					$buffer .= "<td class='col_student'>" . $assignment['student'] . "</td>";
+					
+					$buffer .= "<td class='col_date_of_birth'>" . $assignment['date_of_birth'] . "</td>";
+					$buffer .= "<td class='col_grade'>" . $assignment['grade'] . "</td>";
+					$buffer .= "<td class='col_lasid'>" . $assignment['lasid'] . "</td>";
+					$buffer .= "<td class='col_sasid'>" . $assignment['sasid'] . "</td>";
+					
+					$buffer .= "<td class='col_initial_reeval'>" . $assignment['initial_reeval'] . "</td>";
+					$buffer .= "<td class='col_type_of_testing'>" . $assignment['type_of_testing'] . "</td>";
+					$buffer .= "<td class='col_meeting_required'>" . $assignment['meeting_required'] . "</td>";
+					$buffer .= "<td class='col_testing_date'>" . $assignment['testing_date'] . "</td>";
+					$buffer .= "<td class='col_meeting_date'>" . $assignment['meeting_date'] . "</td>";
+					$buffer .= "<td class='col_contact_info_parent'>" . $assignment['contact_info_parent'] . "</td>";
+					$buffer .= "<td class='col_contact_info_teacher'>" . $assignment['contact_info_teacher'] . "</td>";
+					$buffer .= "<td class='col_team_chair'>" . $assignment['team_chair'] . "</td>";
+					$buffer .= "<td class='col_email'>" . $assignment['email'] . "</td>";
+					$buffer .= "<td class='col_report_submitted'>" . $assignment['report_submitted'] . "</td>";
+					$buffer .= "<td class='col_notes'>" . $assignment['notes'] . "</td>";
 					$buffer .= "</tr>";
 					echo $buffer;
 				}
@@ -60,5 +70,14 @@
 
 		</tbody>
 	</table>
+	
+	
+	
+	<div class="scroller">
+		<span>Horizontally Scroll</span>
+		<input type="range" id="scroll_percentage" name="scroll_percentage" min="0" max="100" value="0">
+	</div>
+	
+	
 
 </div>
