@@ -1,7 +1,7 @@
 
 <!-- Include DataTables for better formatting -->
 
-<div class="mod_invoice_history size100 marbot60">
+<div class="mod_invoice_history size100 marbot60 no-pad">
 	<h2>Invoice History</h2>
 
 
