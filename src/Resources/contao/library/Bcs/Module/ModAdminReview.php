@@ -82,7 +82,8 @@ class ModAdminReview extends \Contao\Module
         }
         
         // Get the current month and current year as two digit numbers
-        $current_year = date('y');
+        //$current_year = date('y');
+        $current_year = 24;
         $last_month = date('m', strtotime('-1 month'));
         $currently_reviewing = date('F, Y', strtotime('-1 month'));
         //$last_month = date('m');
