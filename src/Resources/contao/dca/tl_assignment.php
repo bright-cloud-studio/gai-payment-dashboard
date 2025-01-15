@@ -157,6 +157,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
+            'sorting'                 => true,
+			'flag'                    => DataContainer::SORT_DESC,
             'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => date("m/d/y"),
