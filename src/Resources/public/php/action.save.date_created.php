@@ -1,5 +1,7 @@
 <?php
     
+    date_default_timezone_set('America/New_York');
+    
     // Start PHP session and include Composer, which also brings in our Google Sheets PHP stuffs
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
@@ -19,7 +21,7 @@
     fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
     fwrite($myfile, "SAVING: Date Created: " . $date_created . "\r\n");
 
-    $update =  "update tl_assignment set date_created='".$date_created."' WHERE id='".$assignment_id."'";
+    $update =  "update tl_assignment set date_created='".strtotime($date_created)."' WHERE id='".$assignment_id."'";
     $result_update = $dbh->query($update);
 
     fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
