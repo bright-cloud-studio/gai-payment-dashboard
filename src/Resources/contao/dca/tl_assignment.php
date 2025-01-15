@@ -49,12 +49,12 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTABLE,
+            'mode'                    => DataContainer::MODE_UNSORTED,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('date_created'),
+            'fields'                  => array('date_created DESC'),
             'panelLayout'             => 'filter;sort,search,limit'
         ),
         'label' => array
@@ -167,8 +167,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(20) NOT NULL default ''",
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                      => "int(10) unsigned NOT NULL default 0",
             'default'                 => date("m/d/y"),
         ),
         'date_30_day' => array
