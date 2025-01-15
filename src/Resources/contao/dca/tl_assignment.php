@@ -456,7 +456,7 @@ class tl_assignment extends Backend
         $label = '';
 
         // Add our formatted date and a dash
-        $label .= date('m/d/Y', strtotime($row['date_created'])) . " - ";
+        $label .= date('m/d/Y', $row['date_created']) . " - ";
 
         // Add the Psy's name
         $district = District::findOneBy('id', $row['district']);
