@@ -157,7 +157,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                      => "int(10) unsigned NOT NULL default 0",
+            'sql'                      => "int(20) unsigned NOT NULL default 0",
             'default'                 => date("m/d/y"),
         ),
         'date_30_day' => array
