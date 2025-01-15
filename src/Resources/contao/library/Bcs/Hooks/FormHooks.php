@@ -451,7 +451,7 @@ class FormHooks
                             $label = '';
                             
                             // Get the formated 'Date Created'
-                            $t = strtotime($assignment->date_created);
+                            $t = $assignment->date_created;
                             
                             // Get label for District
                             $district = District::findOneBy('id', $assignment->district);
@@ -499,7 +499,7 @@ class FormHooks
                                 $label = '';
                                 
                                 // Get the formated 'Date Created'
-                                $t = strtotime($assignment->date_created);
+                                $t = $assignment->date_created;
                                 
                                 // Get label for District
                                 $district = District::findOneBy('id', $assignment->district);
