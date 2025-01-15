@@ -49,12 +49,12 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTED,
+            'mode'                    => DataContainer::MODE_SORTABLE,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
-            'flag'                    => 10,
-            'fields'                  => array('date_created DESC'),
+            'flag'                    => DataContainer::SORT_DESC,
+            'fields'                  => array('date_created'),
             'panelLayout'             => 'filter;sort,search,limit'
         ),
         'label' => array
