@@ -106,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     'palettes' => array
     (
         //'default'                     => '{assignment_legend}, date_created;'
-        'default'                     => '{assignment_legend}, date_created, date_30_day, date_45_day, psychologist, district, school, student, initial_reeval, type_of_testing, testing_date, meeting_required, meeting_date, contact_info_parent, contact_info_teacher, team_chair, email, report_submitted;{notes_legend},notes;{shared_legend},psychologists_shared;{internal_legend:hide}, lasid, sasid;{publish_legend},published;'
+        'default'                     => '{assignment_legend}, date_created_2, date_created, date_30_day, date_45_day, psychologist, district, school, student, initial_reeval, type_of_testing, testing_date, meeting_required, meeting_date, contact_info_parent, contact_info_teacher, team_chair, email, report_submitted;{notes_legend},notes;{shared_legend},psychologists_shared;{internal_legend:hide}, lasid, sasid;{publish_legend},published;'
     ),
  
     // Fields
@@ -150,6 +150,17 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 
         // Transaction Fields
         
+        'date_created_2' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_created_2'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "int(10) unsigned NOT NULL default 0",
+            'default'                 => date("m/d/y"),
+        ),
         'date_created' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_created'],
