@@ -154,7 +154,6 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_created_2'],
             'inputType'               => 'text',
-            'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
@@ -165,11 +164,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['date_created'],
             'inputType'               => 'text',
-            'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'sorting'                 => true,
-			'flag'                    => DataContainer::SORT_DESC,
             'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "int(10) unsigned NOT NULL default 0",
             'default'                 => date("m/d/y"),
