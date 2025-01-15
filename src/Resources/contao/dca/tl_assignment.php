@@ -53,8 +53,8 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
-            'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('date_created DESC'),
+            'flag'                    => DataContainer::SORT_ASC,
+            'fields'                  => array('date_created ASC'),
             'panelLayout'             => 'filter;sort,search,limit'
         ),
         'label' => array
