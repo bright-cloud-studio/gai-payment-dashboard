@@ -77,30 +77,42 @@ class TemplateHooks
                 $price = $service->{$psychologist->price_tier};
                 $add_to_total = 0.00;
                 
+                
+                // PSY CALCULATIONS
                 if($transactions->service == 1) {
-                    // PSY CALC
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
                     $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
-                    // PSY CALC
                     $final_price = $transactions->meeting_duration * 0.50;
                     $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total = number_format(floatval($final_price), 2, '.', ',');
                 } else {
-                    // PSY CALC
                     $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total = number_format(floatval($price), 2, '.', ',');
                 }
                 
                 
+                // DISTRICT CALCULATION
+                if($transactions->service == 1) {
+                    // MEETING
+                    
+                } else if($transaction->service == 12) {
+                    // MTG. LATE CANCEL
+                    
+                } else if($transaction->service == 13) {
+                    // TEST LATE CANCEL
+                    
+                } else if($transaction->service == 19) {
+                    // EDITING SERVICES
+                    
+                } else {
+                    // ALL OTHER SERVICES
+                    
+                }
                 
-                
-                
-                
-                //$total_price_districts += $price * 2;
-                
+
                 // Add this Misc. Transaction to our template so we can use it in our debug log    
                 $transactions_today[$transactions->id]['id'] = $transactions->id;
     		    $transactions_today[$transactions->id]['psychologist'] = $psychologist->firstname . ' ' . $psychologist->lastname;
@@ -132,25 +144,39 @@ class TemplateHooks
                 $price = $service->{$psychologist->price_tier};
                 $add_to_total = 0.00;
                 
-                if($transactions->service == 1) {
                 
-                    // Calculate Meeting
+                // PSY CALCULATIONS
+                if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
                     $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
-                    
                     $add_to_total = number_format(floatval($final_price), 2, '.', ',');
-                    
                 } else if($transactions->service == 19) {
-                    
-                    // Calculate Editing Services
                     $final_price = $transactions->meeting_duration * 0.50;
                     $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total = number_format(floatval($final_price), 2, '.', ',');
-                    
                 } else {
                     $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total = number_format(floatval($price), 2, '.', ',');
+                }
+                
+                
+                // DISTRICT CALCULATION
+                if($transactions->service == 1) {
+                    // MEETING
+                    
+                } else if($transaction->service == 12) {
+                    // MTG. LATE CANCEL
+                    
+                } else if($transaction->service == 13) {
+                    // TEST LATE CANCEL
+                    
+                } else if($transaction->service == 19) {
+                    // EDITING SERVICES
+                    
+                } else {
+                    // ALL OTHER SERVICES
+                    
                 }
 
             
