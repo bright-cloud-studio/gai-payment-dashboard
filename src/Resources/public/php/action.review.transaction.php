@@ -11,7 +11,6 @@
     }
 
     
-
     $transaction_id = $_POST['transaction_id'];
     
     if (str_contains($transaction_id, 'm_')) {
@@ -24,6 +23,4 @@
         $result_update = $dbh->query($update);
     }
     
-
     echo "fail";
-
