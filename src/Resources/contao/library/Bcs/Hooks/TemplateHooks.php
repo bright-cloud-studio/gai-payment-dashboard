@@ -75,7 +75,10 @@ class TemplateHooks
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
                 $price = $service->{$psychologist->price_tier};
+                $price_district = $service->school_tier_1_price;
+                
                 $add_to_total_psy = 0.00;
+                $add_to_total_district = 0.00;
                 
                 
                 // PSY CALCULATIONS
@@ -92,13 +95,49 @@ class TemplateHooks
                     $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                
+                // DIS CALCULATIONS
+                if($transactions->service == 1) {
+                    
+                    // Get our half and quarter rate
+                    $rate_half = $price_district / 2;
+                    $rate_quarter = $price_district / 4;
+                    $final_price = 0;
+                    
+                    // If duration is under 30 mins
+                    if($transactions->meeting_duration <= 30) {
+                        $final_price = $rate_half;
+                    } else {
+                        $dur = ceil(($transactions->meeting_duration-30) / 15);
+                        $final_price = $rate_half + ($dur * $rate_quarter);
+                    }
+                    
+                    $total_price_districts += number_format(floatval($final_price), 2, '.', ',');
+                    $add_to_total_district = number_format(floatval($final_price), 2, '.', ',');
+                    
+                } else if($transactions->service == 12) {
+                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
+                    
+                } else if($transactions->service == 13) {
+                    
+                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
+                    
+                } else if($transactions->service == 19) {
+                } else {
+                    $total_price_districts += $price_district;
+                    $add_to_total_district = $price_district;
+                }
 
                 
                 // Add this Misc. Transaction to our template so we can use it in our debug log    
                 $transactions_today[$transactions->id]['id'] = $transactions->id;
     		    $transactions_today[$transactions->id]['psychologist'] = $psychologist->firstname . ' ' . $psychologist->lastname;
-    		    $transactions_today[$transactions->id]['service'] = $service->name;
-    		    $transactions_today[$transactions->id]['price'] = $add_to_total_psy;
+    		    $transactions_today[$transactions->id]['service'] = $service->service_code . " - " .$service->name;
+    		    $transactions_today[$transactions->id]['price_psy'] = $add_to_total_psy;
+    		    $transactions_today[$transactions->id]['price_district'] = $add_to_total_district;
             }
 		}
 		
@@ -122,7 +161,10 @@ class TemplateHooks
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
                 $price = $service->{$psychologist->price_tier};
+                $price_district = $service->school_tier_1_price;
+                
                 $add_to_total_psy = 0.00;
+                $add_to_total_district = 0.00;
                 
                 // PSY CALCULATIONS
                 if($transactions->service == 1) {
@@ -138,17 +180,55 @@ class TemplateHooks
                     $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                // DIS CALCULATIONS
+                if($transactions->service == 1) {
+                    
+                    // Get our half and quarter rate
+                    $rate_half = $price_district / 2;
+                    $rate_quarter = $price_district / 4;
+                    $final_price = 0;
+                    
+                    // If duration is under 30 mins
+                    if($transactions->meeting_duration <= 30) {
+                        $final_price = $rate_half;
+                    } else {
+                        $dur = ceil(($transactions->meeting_duration-30) / 15);
+                        $final_price = $rate_half + ($dur * $rate_quarter);
+                    }
+                    
+                    $total_price_districts += number_format(floatval($final_price), 2, '.', ',');
+                    $add_to_total_district = number_format(floatval($final_price), 2, '.', ',');
+                    
+                } else if($transactions->service == 12) {
+                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
+                    
+                } else if($transactions->service == 13) {
+                    
+                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
+                    
+                } else if($transactions->service == 14) {
+                    
+                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
+                    
+                } else if($transactions->service == 19) {
+                } else {
+                    $total_price_districts += $price_district;
+                    $add_to_total_district = $price_district;
+                }
             
                 // Add this Misc. Transaction to our template so we can use it in our debug log    
                 $transactions_misc_today[$transactions->id]['id'] = $transactions->id;
     		    $transactions_misc_today[$transactions->id]['psychologist'] = $psychologist->firstname . ' ' . $psychologist->lastname;
     		    $transactions_misc_today[$transactions->id]['service'] = $service->name;
-    		    $transactions_misc_today[$transactions->id]['price'] = $add_to_total_psy;
+    		    $transactions_misc_today[$transactions->id]['price_psy'] = $add_to_total_psy;
+    		    $transactions_misc_today[$transactions->id]['price_district'] = $add_to_total_district;
             }
 		}
-		
-		
-		
+
 		
 		
         // Return our template values for 'total_day'
@@ -156,7 +236,7 @@ class TemplateHooks
             'transactions_today' => $transactions_today,
             'transactions_misc_today' => $transactions_misc_today,
             'total_psycholigists' => number_format($total_price_psychologists, 2, '.', ''),
-            'total_districts' => number_format($total_price_districts, 2, '.', ''),
+            'total_districts' => number_format(floatval($total_price_districts), 2, '.', ''),
             'transactions' => $total_transactions,
             'transactions_misc' => $total_transactions_misc
         );
