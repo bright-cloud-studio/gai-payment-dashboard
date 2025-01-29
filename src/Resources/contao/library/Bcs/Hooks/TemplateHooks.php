@@ -75,7 +75,7 @@ class TemplateHooks
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
                 $price = $service->{$psychologist->price_tier};
-                $add_to_total = 0.00;
+                $add_to_total_psy = 0.00;
                 
                 
                 // PSY CALCULATIONS
@@ -83,14 +83,14 @@ class TemplateHooks
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
                     $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
-                    $add_to_total = number_format(floatval($final_price), 2, '.', ',');
+                    $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
                     $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
-                    $add_to_total = number_format(floatval($final_price), 2, '.', ',');
+                    $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
                     $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
-                    $add_to_total = number_format(floatval($price), 2, '.', ',');
+                    $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
 
                 
@@ -98,12 +98,11 @@ class TemplateHooks
                 $transactions_today[$transactions->id]['id'] = $transactions->id;
     		    $transactions_today[$transactions->id]['psychologist'] = $psychologist->firstname . ' ' . $psychologist->lastname;
     		    $transactions_today[$transactions->id]['service'] = $service->name;
-    		    $transactions_today[$transactions->id]['price'] = $add_to_total;
+    		    $transactions_today[$transactions->id]['price'] = $add_to_total_psy;
             }
 		}
 		
-		
-		
+	
 		
 		
 		// Loop through Misc. Transactions
@@ -123,28 +122,28 @@ class TemplateHooks
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
                 $price = $service->{$psychologist->price_tier};
-                $add_to_total = 0.00;
+                $add_to_total_psy = 0.00;
                 
                 // PSY CALCULATIONS
                 if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
                     $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
-                    $add_to_total = number_format(floatval($final_price), 2, '.', ',');
+                    $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
                     $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
-                    $add_to_total = number_format(floatval($final_price), 2, '.', ',');
+                    $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
                     $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
-                    $add_to_total = number_format(floatval($price), 2, '.', ',');
+                    $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
             
                 // Add this Misc. Transaction to our template so we can use it in our debug log    
                 $transactions_misc_today[$transactions->id]['id'] = $transactions->id;
     		    $transactions_misc_today[$transactions->id]['psychologist'] = $psychologist->firstname . ' ' . $psychologist->lastname;
     		    $transactions_misc_today[$transactions->id]['service'] = $service->name;
-    		    $transactions_misc_today[$transactions->id]['price'] = $add_to_total;
+    		    $transactions_misc_today[$transactions->id]['price'] = $add_to_total_psy;
             }
 		}
 		
