@@ -10,7 +10,7 @@
         die("Connection failed: " . $dbh->connect_error);
     }
     
-    $myfile = fopen("logs/psy_work_form_save_colors_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
+    $myfile = fopen("logs/psy_work_form_save_colors_".date('m_d_Y_H:i:s').".txt", "w") or die("Unable to open file!");
     
     // Get data from ajax
     $psych_id = $_POST['psych_id'];
