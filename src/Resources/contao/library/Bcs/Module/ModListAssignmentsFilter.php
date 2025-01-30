@@ -75,6 +75,7 @@ class ModListAssignmentsFilter extends \Contao\Module
         // Get Transactions that have our selected Assignment as the parent and that belong to this Psychologist
         $assignments = Assignment::findBy('psychologist', $member->id, $opt);
         
+        if($assignments != null) {
         foreach($assignments as $assignment) {
             
             // Get the District name
@@ -94,6 +95,8 @@ class ModListAssignmentsFilter extends \Contao\Module
         asort($filter_districts);
         asort($filter_schools);
         asort($filter_students);
+        
+        }
         
         $this->Template->filter_districts = $filter_districts;
         $this->Template->filter_schools = $filter_schools;
