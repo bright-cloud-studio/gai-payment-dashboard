@@ -11,9 +11,8 @@
     }
     
     $myfile = fopen("logs/admin_review_save_student_log_".date('m_d_Y_H:i:s').".txt", "w") or die("Unable to open file!");
-    
-    
-    
+
+
     // Get data from ajax
     $assignment_id = $_POST['assignment_id'];
     $student = $_POST['student'];
