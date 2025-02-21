@@ -28,11 +28,11 @@ class TemplateHooks
             // Set 'Today' total
             $template->total_day = $this->calculateDay();
             
-            // Set 'Week' total
-            $template->total_week = $this->calculateWeek();
+            // Set 'This Month' total
+            $template->total_this_month = $this->calculateThisMonth();
             
-            // Set 'Month' total
-            $template->total_month = $this->calculateMonth();
+            // Set 'Last Month' total
+            $template->total_last_month = $this->calculateLastMonth();
             
             // Set 'Year' total
             $template->total_year = $this->calculateYear();
@@ -218,8 +218,9 @@ class TemplateHooks
     
     
     
-    // Returns totals for Transactions and Misc. Transactions from the last sunday until today
-    public function calculateWeek() {
+    
+    // Returns totals for Transactions and Misc. Transactions matching the current month
+    public function calculateThisMonth() {
         
         // Tracks the total price of the Transactions
         $total_price_psychologists = 0.00;
@@ -228,13 +229,8 @@ class TemplateHooks
         $total_transactions = 0;
         // Tracks the total number of Misc. Transactions
         $total_transactions_misc = 0;
-        // Get the Year
+        // Get the Month
         $month = date('m');
-        
-        // Get Today's date
-        $today = date('m/d/y');
-        // Get "Last Sundays" date
-        $last_sunday = date('m/d/y',strtotime('last sunday'));
     
         // Loop through Transactions
         $transactions_today = array();
@@ -242,8 +238,8 @@ class TemplateHooks
         while ($transactions->next())
 		{
 		    // If 'date_submitted' is today
-            $transaction_date = date('m/d/y', $transactions->date_submitted);
-            if($transaction_date >= $last_sunday && $transaction_date <= $today) {
+            $transaction_month = date('m', $transactions->date_submitted);
+            if($transaction_month == $month) {
                 
                 // Update our Total Tranactions
                 $total_transactions += 1;
@@ -314,8 +310,8 @@ class TemplateHooks
         $transactions = TransactionMisc::findAll();
         while ($transactions->next())
 		{
-            $transaction_date = date('m/d/y', $transactions->date_submitted);
-            if($transaction_date >= $last_sunday && $transaction_date <= $today) {
+            $transaction_month = date('m', $transactions->date_submitted);
+            if($transaction_month == $month) {
                 
                 // Update our Total Tranactions
                 $total_transactions_misc += 1;
@@ -386,8 +382,6 @@ class TemplateHooks
 
         // Return our template values for 'total_day'
         return array(
-            'week_start' => $last_sunday,
-            'week_end' => $today,
             'transactions_today' => $transactions_today,
             'transactions_misc_today' => $transactions_misc_today,
             'total_psycholigists' => number_format($total_price_psychologists, 2, '.', ','),
@@ -396,12 +390,13 @@ class TemplateHooks
             'transactions_misc' => $total_transactions_misc
         );
     }
+    
     
     
     
     
     // Returns totals for Transactions and Misc. Transactions matching the current month
-    public function calculateMonth() {
+    public function calculateLastMonth() {
         
         // Tracks the total price of the Transactions
         $total_price_psychologists = 0.00;
@@ -410,8 +405,10 @@ class TemplateHooks
         $total_transactions = 0;
         // Tracks the total number of Misc. Transactions
         $total_transactions_misc = 0;
-        // Get the Year
-        $month = date('m');
+        // Get the Last Month
+        $currentDate = new \DateTime();
+        $lastMonth = $currentDate->modify('first day of last month');
+        $last_month = $lastMonth->format('m/y');
     
         // Loop through Transactions
         $transactions_today = array();
@@ -419,8 +416,8 @@ class TemplateHooks
         while ($transactions->next())
 		{
 		    // If 'date_submitted' is today
-            $transaction_month = date('m', $transactions->date_submitted);
-            if($transaction_month == $month) {
+            $transaction_month = date('m/y', $transactions->date_submitted);
+            if($transaction_month == $last_month) {
                 
                 // Update our Total Tranactions
                 $total_transactions += 1;
@@ -491,8 +488,8 @@ class TemplateHooks
         $transactions = TransactionMisc::findAll();
         while ($transactions->next())
 		{
-            $transaction_month = date('m', $transactions->date_submitted);
-            if($transaction_month == $month) {
+            $transaction_month = date('m/y', $transactions->date_submitted);
+            if($transaction_month == $last_month) {
                 
                 // Update our Total Tranactions
                 $total_transactions_misc += 1;
@@ -571,6 +568,8 @@ class TemplateHooks
             'transactions_misc' => $total_transactions_misc
         );
     }
+    
+    
     
     
     
