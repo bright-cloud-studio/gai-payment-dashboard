@@ -149,6 +149,10 @@ class ModReviewTransactions extends \Contao\Module
                         $transactions_total += number_format(floatval($transaction->price), 2, '.', '');
                     }
                 }
+                
+                // Notes
+                $template_transactions[$transaction->id]['notes'] = $student->notes;
+                
             }
             
         }
@@ -227,6 +231,10 @@ class ModReviewTransactions extends \Contao\Module
                         $transactions_total += number_format(floatval($transaction->price), 2, '.', '');
                     }
                 }
+                
+                // Notes
+                $template_transactions_misc[$transaction->id]['notes'] = $transaction->notes;
+                
             }
             
         }
