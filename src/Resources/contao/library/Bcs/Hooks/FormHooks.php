@@ -786,7 +786,7 @@ class FormHooks
                     ];
                     
                     // Hold the psys
-                    $invoice_requests = InvoiceRequest::findBy('published', '');
+                    $invoice_requests = InvoiceRequest::findAll();
                     Invoice::findBy(['psychologist = ?'], [$member->id]);
                     
                     $options[] = array (
