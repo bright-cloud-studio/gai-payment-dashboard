@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<style>
+		
+		    /* These are necessary to remove the margin on the paper */
+		    @page { margin: 5px; }
+            body { margin: 5px; }
+
+            /* Images */
+			.logo {
+			    width: 263px;
+			    height: 68px;
+			}
+			.product_image {
+			    width: 400px;
+			    height: 350px;
+			}
+			
+			label {
+			    width: 10px;
+			    height: 10px;
+			    display: inline-block;
+			}
+			
+			input { display: none; }
+			
+			
+			legend { display: none; }
+			
+			
+			/* Colors */
+			fieldset { border: 0; }
+            fieldset label {
+                width: 48px;
+                height: 48px;
+                margin: 0;
+                padding: 0;
+                border-radius: 5px;
+                border: 1px solid black;
+                margin-bottom: 10px;
+            }
+			
+			
+			/* Table */
+			table {
+			    width: 100%;
+			    height: auto;
+			}
+			#invoice_wrapper {
+            	border: 1px solid #000;
+            	border-collapse: initial;
+            }
+            
+            table#invoice_wrapper {
+                border-top: 5px solid red;
+                border-collapse: initial;
+            }
+            
+            
+            #invoice_details,
+			#invoice_details td,
+			#invoice_details th {
+            	border: 0;
+            	text-align: right;
+            	font-size: 10px;
+            }
+            
+            #transactions_wrapper {
+            	border: 1px solid black;
+            	border-collapse: initial;
+            	border-spacing: 0;
+            }
+
+            
+            h1, h2, h3, h4, p { margin: 0; padding: 0; }
+            h2 { margin-bottom: 10px; }
+            
+            span.date_issued,
+            span.invoice_number { font-weight: 600; }
+            
+            span.bill_to { font-weight: 600; }
+            .bill_to_wrapper { font-size: 9px; }
+            
+            thead {
+                background-color: #bdbdbe;
+                font-weight: 600;
+            }
+            
+            td.total { text-align: right; }
+            
+            #transactions_wrapper td {
+                font-size: 11px;
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+                border-bottom: 1px solid black;
+                border-spacing: 0;
+            }
+            #transactions_wrapper { min-height: 910px; }
+            
+            #total_value { font-size: 26px; font-weight: 600; }
+            
+            
+            #header_details { font-size: 10px; }
+            .h_addr_1,
+            .bill_to { font-weight: 600; }
+            
+            .h_addr_4 { margin-bottom: 15px; }
+            .memo { width: 100%; text-align: center; }
+            
+
+		</style>
+	</head>
+	<body>
