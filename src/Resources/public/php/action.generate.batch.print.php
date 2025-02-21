@@ -25,6 +25,12 @@
 	/* END INITALIZE */
 	/*****************/
 
+    // Get our opening and closing wrappers
+    $invoice_psy_start = file_get_contents('bundles/bcspaymentdashboard/templates/batch_invoice_psy_start.html', true);
+    $invoice_psy_end = file_get_contents('bundles/bcspaymentdashboard/templates/batch_invoice_psy_end.html', true);
+    
+    $invoice_district_start = file_get_contents('bundles/bcspaymentdashboard/templates/batch_invoice_district_start.html', true);
+    $invoice_district_end = file_get_contents('bundles/bcspaymentdashboard/templates/batch_invoice_district_end.html', true);
 
     // Step One
     // Find our oldest unfinished Invoice Request
@@ -46,9 +52,11 @@
             $psy_result = $dbh->query($psy_query);
             if($psy_result) {
                 while($psy = $psy_result->fetch_assoc()) {
-                    $psy_html = $psy_html . $psy['invoice_html'];
+                    $psy_html = $psy_html . $invoice_psy_start . $psy['invoice_html'] . $invoice_psy_end;
                 }
             }
+
+            
             $dompdf_psychologist = new Dompdf($options);
         	$dompdf_psychologist->loadHtml($psy_html);
         	$dompdf_psychologist->setPaper('A4', 'portrait');
@@ -63,7 +71,7 @@
             $district_result = $dbh->query($district_query);
             if($district_result) {
                 while($district = $district_result->fetch_assoc()) {
-                    $district_html = $district_html . $district['invoice_html'];
+                    $district_html = $district_html . $invoice_district_start . $district['invoice_html'] . $invoice_district_end;
                 }
             }
             $dompdf_district = new Dompdf($options);
