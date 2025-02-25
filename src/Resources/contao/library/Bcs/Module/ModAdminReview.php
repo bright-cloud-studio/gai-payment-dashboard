@@ -317,8 +317,6 @@ class ModAdminReview extends \Contao\Module
         $this->Template->psychologists = $template_psychologists;
         //$this->Template->transactions_misc = $template_misc;
         $this->Template->psychologists_active = $template_active;
-        
     }
   
-
 }
