@@ -10,21 +10,16 @@
         die("Connection failed: " . $dbh->connect_error);
     }
     
-    $myfile = fopen("logs/admin_review_save_student_log_".date('m_d_Y_H:i:s').".txt", "w") or die("Unable to open file!");
-    
-    
-    
+    $myfile = fopen("logs/admin_review_save_lasid_log_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
     
     // Get data from ajax
     $assignment_id = $_POST['assignment_id'];
-    $student = $_POST['student'];
     $lasid = $_POST['lasid'];
     
     fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
-    fwrite($myfile, "SAVING: Student: " . $student . "\r\n");
     fwrite($myfile, "SAVING: LASID: " . $lasid . "\r\n");
 
-    $update =  "update tl_student set lasid='".$lasid."' WHERE id='".$student."'";
+    $update =  "update tl_assignment set lasid='".$lasid."' WHERE id='".$assignment_id."'";
     $result_update = $dbh->query($update);
 
     fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
