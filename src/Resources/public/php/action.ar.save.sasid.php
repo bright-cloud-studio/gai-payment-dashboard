@@ -13,13 +13,13 @@
     $myfile = fopen("logs/admin_review_save_sasid_log_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
     
     // Get data from ajax
-    $assignment_id = $_POST['assignment_id'];
+    $student_id = $_POST['student_id'];
     $sasid = $_POST['sasid'];
     
-    fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
+    fwrite($myfile, "SAVING: Student ID: " . $student_id . "\r\n");
     fwrite($myfile, "SAVING: SASID: " . $sasid . "\r\n");
 
-    $update =  "update tl_assignment set sasid='".$sasid."' WHERE id='".$assignment_id."'";
+    $update =  "update tl_student set sasid='".$sasid."' WHERE id='".$student_id."'";
     $result_update = $dbh->query($update);
 
     fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
