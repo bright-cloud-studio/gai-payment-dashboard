@@ -1,4 +1,4 @@
-<div class="mod_admin_review_nav marbot60">
+<div class="mod_admin_review_nav size100 marbot60">
 	<?php foreach ($this->psychologists as $id => $psychologist) { ?>
 
 		<a href='{{link_url::37}}?active=<?= $id ?>' class="select_psy <?= $this->psychologists_active[$id] ?>"><?= $this->psychologist_names[$id] ?></a>
