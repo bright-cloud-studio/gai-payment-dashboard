@@ -68,8 +68,8 @@
     $se_r = $dbh->query($se_q);
     if($se_r) {
         while($r = $se_r->fetch_assoc()) {
-            $services[$r['id']]['name'] = $r['name'];
-            $services[$r['id']]['price_school_1'] = $r['school_tier_1_price'];
+            $services[$r['service_code']]['name'] = $r['name'];
+            $services[$r['service_code']]['price_school_1'] = $r['school_tier_1_price'];
         }
     }
     
@@ -109,7 +109,7 @@
                     $misc_transaction_ids = $db_inv['misc_transaction_ids'];
                     
                     $invoice_folder = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/files/invoices/generation_' . $request . '/districts/' . cleanName($db_inv['district_name']) . '/';
-                    generateInvoice($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start);
+                    generateInvoiceDistrict($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start);
                 }
             }
             
@@ -120,7 +120,7 @@
     }
     
     // Generate the actual PDF file
-    function generateInvoice($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start) {
+    function generateInvoiceDistrict($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start) {
         
         // Get the District's data
         $district_query =  "SELECT * FROM tl_district WHERE id='$district_id'";
