@@ -34,6 +34,9 @@ $GLOBALS['TL_LANG']['tl_invoice_request']['exclude_districts']              = ar
 $GLOBALS['TL_LANG']['tl_invoice_request']['batch_legend']                   = 'Batch Print Information';
 $GLOBALS['TL_LANG']['tl_invoice_request']['batch_url']                      = array('Link to Batch Print ZIP', 'Once this Invoice Request is completed this field will be filled in with a link to the generated Batch Print ZIP file');
 
+$GLOBALS['TL_LANG']['tl_invoice_request']['configuration_legend']           = 'Configuration Options';
+$GLOBALS['TL_LANG']['tl_invoice_request']['use_all_transactions']           = array('Use ALL Transactions during Generation', 'Check this box to use ALL Transactions in the date range during Generation. This will grab ALL Transactions in the database, Reviewed or not. Use this to test the accuracy of the Transaction Totals section.');
+
 $GLOBALS['TL_LANG']['tl_invoice_request']['internal_legend']                = 'INTERNAL Information';
 $GLOBALS['TL_LANG']['tl_invoice_request']['created_invoice_dcas']           = array('Created Invoice DCAs', 'Tracks if this Invoice Request has created the placeholder Invoices for Psychologists and Districts');
 $GLOBALS['TL_LANG']['tl_invoice_request']['generated_psys']                 = array('Generated Psychologist Invoices', 'Tracks if the Psychologist Invoices have been generated');
