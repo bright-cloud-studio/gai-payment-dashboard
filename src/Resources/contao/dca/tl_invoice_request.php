@@ -99,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{batch_legend},batch_url;{internal_legend:hide},created_invoice_dcas,generated_psys,generated_districts;{publish_legend},published;'
+        'default'                     => '{invoice_request_legend}, date_start, date_end, exclude_psychologists, exclude_districts;{batch_legend},batch_url; {configuration_legend:hide}, use_all_transactions; {internal_legend:hide},created_invoice_dcas,generated_psys,generated_districts;{publish_legend},published;'
     ),
  
     // Fields
@@ -186,6 +186,16 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'eval'                    => array('tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''",
             'default'                 => "",
+        ),
+
+        // Configuration Options
+        'use_all_transactions' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_salsify_attribute']['use_all_transactions'],
+            'inputType'               => 'checkbox',
+            'default'				  => '',
+            'eval'                    => array('multiple'=>false, 'chosen'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "char(1) NOT NULL default ''"
         ),
 
         
