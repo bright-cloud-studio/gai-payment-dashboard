@@ -84,6 +84,7 @@ class ModAdminReview extends \Contao\Module
         //$currently_reviewing = date('F, Y');
         
         // Get all active Psychologists
+        $psy_name = '';
         $psy_id = 0;
         if (Input::get('psychologist') != '')
             $psy_id = Input::get('psychologist');
@@ -110,6 +111,7 @@ class ModAdminReview extends \Contao\Module
                     if($psy->id != $psy_id) {
                         $template_psychologist_names[$psy->id] = $psy->firstname . " " . $psy->lastname;
                     } else {
+                        $psy_name = $psy->firstname . " " . $psy->lastname;
                         $template_psychologist_names[$psy->id] = $psy->firstname . " " . $psy->lastname;
                         
         
@@ -188,7 +190,7 @@ class ModAdminReview extends \Contao\Module
                 		);
                 		$services = Service::findAll($aService);
                         foreach($services as $service) {
-                            if($assignment->type_of_testing == $service->id)
+                            if($transaction->service == $service->service_code)
                                 $template_psychologists[$psy->id][$transaction->id]['service'] .= "<option value='" . $service->id . "' selected>$service->name</option>";
                             else
                                 $template_psychologists[$psy->id][$transaction->id]['service'] .= "<option value='" . $service->id . "'>$service->name</option>";
@@ -249,7 +251,7 @@ class ModAdminReview extends \Contao\Module
                     if($psy->id != $psy_id) {
                         $template_psychologist_names[$psy->id] = $psy->firstname . " " . $psy->lastname;
                     } else {
-                    
+                        $psy_name = $psy->firstname . " " . $psy->lastname;
                         $template_psychologist_names[$psy->id] = $psy->firstname . " " . $psy->lastname;
                         
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['psychologist_name'] = $psy->firstname . " " . $psy->lastname;
@@ -319,6 +321,10 @@ class ModAdminReview extends \Contao\Module
 
         }
 
+        $this->Template->active_psy_name = $psy_name;
+        $this->Template->active_psy_id = $psy_id;
+        
+        
         $this->Template->currently_reviewing = $currently_reviewing;
         $this->Template->totals = $template_totals;
         $this->Template->psychologist_names = $template_psychologist_names;
