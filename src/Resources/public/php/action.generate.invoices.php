@@ -68,7 +68,7 @@
     $se_r = $dbh->query($se_q);
     if($se_r) {
         while($r = $se_r->fetch_assoc()) {
-            $services[$r['id']] = $r['name'];
+            $services[$r['service_code']] = $r['name'];
         }
     }
 
@@ -364,9 +364,7 @@
                     $transactions[$i]['student'] = $students[$a_student]['name'];
                     
                     $transactions[$i]['number'] = $students[$a_student]['number'];
-                    
-                    
-                    
+
                     if($row['service'] == 1) {
                         $transactions[$i]['service'] = $services[$row['service']] . ' ('.$row['meeting_duration'].' mins)';
                         
