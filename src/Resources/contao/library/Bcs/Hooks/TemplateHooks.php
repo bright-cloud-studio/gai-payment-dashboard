@@ -2,6 +2,10 @@
 
 namespace Bcs\Hooks;
 
+use Bcs\Model\Assignment;
+use Bcs\Model\District;
+use Bcs\Model\School;
+use Bcs\Model\Student;
 use Bcs\Model\Service;
 use Bcs\Model\Transaction;
 use Bcs\Model\TransactionMisc;
@@ -57,7 +61,10 @@ class TemplateHooks
     
         // Loop through Transactions
         $transactions_today = array();
-        $transactions = Transaction::findAll();
+        $options = [
+    		'order' => 'psychologist ASC'
+    	];
+        $transactions = Transaction::findAll($options);
         while ($transactions->next())
 		{
 		    // If 'date_submitted' is today
@@ -80,16 +87,19 @@ class TemplateHooks
                 if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
-                    $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                $clean_price = str_replace(',', '', $add_to_total_psy);
+			    $total_price_psychologists = $total_price_psychologists + $clean_price;
                 
                 // DIS CALCULATIONS
                 if($transactions->service == 1) {
@@ -143,7 +153,14 @@ class TemplateHooks
                 // Gather our data to make our calculations
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
-                $price = $service->{$psychologist->price_tier};
+                
+                $price = 0.00;
+    			if($transactions->price != '')
+    				$price = $transactions->price;
+    			else {
+    				$price = $service->{$psychologist->price_tier};
+    			}
+    			
                 $price_district = $service->school_tier_1_price;
                 
                 $add_to_total_psy = 0.00;
@@ -153,16 +170,19 @@ class TemplateHooks
                 if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
-                    $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                $clean_price = str_replace(',', '', $add_to_total_psy);
+			    $total_price_psychologists = $total_price_psychologists + $clean_price;
                 
                 // DIS CALCULATIONS
                 if($transactions->service == 1) {
@@ -234,6 +254,11 @@ class TemplateHooks
     
         // Loop through Transactions
         $transactions_today = array();
+        
+        $options = [
+    		'order' => 'psychologist ASC'
+    	];
+	
         $transactions = Transaction::findAll();
         while ($transactions->next())
 		{
@@ -247,6 +272,7 @@ class TemplateHooks
                 // Gather our data to make our calculations
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
+                
                 $price = $service->{$psychologist->price_tier};
                 $price_district = $service->school_tier_1_price;
                 
@@ -257,16 +283,19 @@ class TemplateHooks
                 if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
-                    $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                $clean_price = str_replace(',', '', $add_to_total_psy);
+			    $total_price_psychologists = $total_price_psychologists + $clean_price;
                 
                 // DIS CALCULATIONS
                 if($transactions->service == 1) {
@@ -307,7 +336,7 @@ class TemplateHooks
 
 		// Loop through Misc. Transactions
 		$transactions_misc_today = array();
-        $transactions = TransactionMisc::findAll();
+        $transactions = TransactionMisc::findAll($options);
         while ($transactions->next())
 		{
             $transaction_month = date('m', $transactions->date_submitted);
@@ -319,7 +348,15 @@ class TemplateHooks
                 // Gather our data to make our calculations
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
-                $price = $service->{$psychologist->price_tier};
+                
+                //$price = $service->{$psychologist->price_tier};
+                $price = 0.00;
+    			if($transactions->price != '')
+    				$price = $transactions->price;
+    			else {
+    				$price = $service->{$psychologist->price_tier};
+    			}
+                
                 $price_district = $service->school_tier_1_price;
                 
                 $add_to_total_psy = 0.00;
@@ -329,16 +366,19 @@ class TemplateHooks
                 if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
-                    $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                $clean_price = str_replace(',', '', $add_to_total_psy);
+			    $total_price_psychologists = $total_price_psychologists + $clean_price;
                 
                 // DIS CALCULATIONS
                 if($transactions->service == 1) {
@@ -390,6 +430,10 @@ class TemplateHooks
             'transactions_misc' => $total_transactions_misc
         );
     }
+    
+    
+    
+    
     
     
     
@@ -412,7 +456,12 @@ class TemplateHooks
     
         // Loop through Transactions
         $transactions_today = array();
-        $transactions = Transaction::findAll();
+        
+        $options = [
+            'order' => 'psychologist ASC'
+        ];
+        
+        $transactions = Transaction::findAll($options);
         while ($transactions->next())
 		{
 		    // If 'date_submitted' is today
@@ -425,6 +474,12 @@ class TemplateHooks
                 // Gather our data to make our calculations
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
+
+                $assignment = Assignment::findOneBy('id', $transactions->pid);
+                $district = District::findOneBy('id', $assignment->district);
+                $school = School::findOneBy('id', $assignment->school);
+                $student = Student::findOneBy('id', $assignment->student);
+                
                 $price = $service->{$psychologist->price_tier};
                 $price_district = $service->school_tier_1_price;
                 
@@ -435,16 +490,19 @@ class TemplateHooks
                 if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
-                    $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                $clean_price = str_replace(',', '', $add_to_total_psy);
+                $total_price_psychologists = $total_price_psychologists + $clean_price;
                 
                 // DIS CALCULATIONS
                 if($transactions->service == 1) {
@@ -478,14 +536,25 @@ class TemplateHooks
                 $transactions_today[$transactions->id]['id'] = $transactions->id;
     		    $transactions_today[$transactions->id]['psychologist'] = $psychologist->firstname . ' ' . $psychologist->lastname;
     		    $transactions_today[$transactions->id]['service'] = $service->service_code . " - " .$service->name;
+    		    
+    		    $transactions_today[$transactions->id]['district'] = $district->district_name;
+    		    $transactions_today[$transactions->id]['school'] = $school->school_name;
+    		    $transactions_today[$transactions->id]['student'] = $student->name;
+    		    $transactions_today[$transactions->id]['lasid'] = $student->lasid;
+    		    $transactions_today[$transactions->id]['sasid'] = $student->sasid;
+    		    
+    		    
     		    $transactions_today[$transactions->id]['price_psy'] = $add_to_total_psy;
     		    $transactions_today[$transactions->id]['price_district'] = $add_to_total_district;
+    		    
+    		    
+    		    
             }
 		}
 
 		// Loop through Misc. Transactions
 		$transactions_misc_today = array();
-        $transactions = TransactionMisc::findAll();
+        $transactions = TransactionMisc::findAll($options);
         while ($transactions->next())
 		{
             $transaction_month = date('m/y', $transactions->date_submitted);
@@ -497,7 +566,24 @@ class TemplateHooks
                 // Gather our data to make our calculations
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
-                $price = $service->{$psychologist->price_tier};
+                
+                $district = District::findBy('id', $transactions->district);
+                $school = School::findBy('id', $transactions->school);
+                
+                
+                $price = 0.00;
+                
+                if($transactions->price != '')
+                    $price = $transactions->price;
+                else {
+                    $price = $service->{$psychologist->price_tier};
+                }
+                
+                
+                //echo "Price: " . $price . "<br>";
+
+                
+                
                 $price_district = $service->school_tier_1_price;
                 
                 $add_to_total_psy = 0.00;
@@ -507,16 +593,22 @@ class TemplateHooks
                 if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
-                    $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                //echo "Total (m): " . $add_to_total_psy . "<br>";
+                $clean_price = str_replace(',', '', $add_to_total_psy);
+                $total_price_psychologists = $total_price_psychologists + $clean_price;
+                //echo "Calc: " . $total_price_psychologists . "<br>";
+                
                 
                 // DIS CALCULATIONS
                 if($transactions->service == 1) {
@@ -553,10 +645,18 @@ class TemplateHooks
                 $transactions_misc_today[$transactions->id]['id'] = $transactions->id;
     		    $transactions_misc_today[$transactions->id]['psychologist'] = $psychologist->firstname . ' ' . $psychologist->lastname;
     		    $transactions_misc_today[$transactions->id]['service'] = $service->name;
+    		    
+    		    $transactions_misc_today[$transactions->id]['district'] = $district->district_name;
+    		    $transactions_misc_today[$transactions->id]['school'] = $school->school_name;
+    		    $transactions_misc_today[$transactions->id]['student'] = $transactions->student_initials;
+    		    $transactions_misc_today[$transactions->id]['lasid'] = $transactions->lasid;
+    		    $transactions_misc_today[$transactions->id]['sasid'] = $transactions->sasid;
+    		    
     		    $transactions_misc_today[$transactions->id]['price_psy'] = $add_to_total_psy;
     		    $transactions_misc_today[$transactions->id]['price_district'] = $add_to_total_district;
             }
 		}
+
 
         // Return our template values for 'total_day'
         return array(
@@ -568,6 +668,12 @@ class TemplateHooks
             'transactions_misc' => $total_transactions_misc
         );
     }
+    
+    
+    
+    
+    
+    
     
     
     
@@ -589,7 +695,12 @@ class TemplateHooks
     
         // Loop through Transactions
         $transactions_today = array();
-        $transactions = Transaction::findAll();
+        
+        $options = [
+    		'order' => 'psychologist ASC'
+    	];
+        
+        $transactions = Transaction::findAll($options);
         while ($transactions->next())
 		{
 		    // If 'date_submitted' is today
@@ -602,6 +713,7 @@ class TemplateHooks
                 // Gather our data to make our calculations
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
+                
                 $price = $service->{$psychologist->price_tier};
                 $price_district = $service->school_tier_1_price;
                 
@@ -612,16 +724,19 @@ class TemplateHooks
                 if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
-                    $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                $clean_price = str_replace(',', '', $add_to_total_psy);
+			    $total_price_psychologists = $total_price_psychologists + $clean_price;
                 
                 // DIS CALCULATIONS
                 if($transactions->service == 1) {
@@ -662,7 +777,7 @@ class TemplateHooks
 
 		// Loop through Misc. Transactions
 		$transactions_misc_today = array();
-        $transactions = TransactionMisc::findAll();
+        $transactions = TransactionMisc::findAll($options);
         while ($transactions->next())
 		{
             $transaction_year = date('Y', $transactions->date_submitted);
@@ -674,7 +789,15 @@ class TemplateHooks
                 // Gather our data to make our calculations
                 $service = Service::findOneBy('service_code', $transactions->service);
                 $psychologist = MemberModel::findBy('id', $transactions->psychologist);
-                $price = $service->{$psychologist->price_tier};
+                
+                //$price = $service->{$psychologist->price_tier};
+                $price = 0.00;
+    			if($transactions->price != '')
+    				$price = $transactions->price;
+    			else {
+    				$price = $service->{$psychologist->price_tier};
+    			}
+                
                 $price_district = $service->school_tier_1_price;
                 
                 $add_to_total_psy = 0.00;
@@ -684,16 +807,19 @@ class TemplateHooks
                 if($transactions->service == 1) {
                     $dur = ceil(intval($transactions->meeting_duration) / 60);
                     $final_price = $dur * $price;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 19) {
                     $final_price = $transactions->meeting_duration * 0.50;
-                    $total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
                 } else {
-                    $total_price_psychologists += number_format(floatval($price), 2, '.', ',');
+                    //$total_price_psychologists += number_format(floatval($price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($price), 2, '.', ',');
                 }
+                
+                $clean_price = str_replace(',', '', $add_to_total_psy);
+			    $total_price_psychologists = $total_price_psychologists + $clean_price;
                 
                 // DIS CALCULATIONS
                 if($transactions->service == 1) {
