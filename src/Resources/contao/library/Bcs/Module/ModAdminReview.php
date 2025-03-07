@@ -40,6 +40,7 @@ class ModAdminReview extends \Contao\Module
     protected static $template_psychologist_names = array();
     protected static $template_totals = array();
     protected static $template_active = array();
+    protected static $template_last_reviewed = array();
 
     /* Construct function */
     public function __construct($objModule, $strColumn='main')
@@ -318,19 +319,19 @@ class ModAdminReview extends \Contao\Module
             }
    
             $template_totals[$psy->id] = number_format(floatval($transactions_total), 2, '.', ',');
-
+            $template_last_reviewed[$psy->id] = date('m/d/y', (int)$psy->last_reviewed);
         }
 
         $this->Template->active_psy_name = $psy_name;
         $this->Template->active_psy_id = $psy_id;
-        
-        
+
         $this->Template->currently_reviewing = $currently_reviewing;
         $this->Template->totals = $template_totals;
         $this->Template->psychologist_names = $template_psychologist_names;
         $this->Template->psychologists = $template_psychologists;
         //$this->Template->transactions_misc = $template_misc;
         $this->Template->psychologists_active = $template_active;
+        $this->Template->last_reviewed = $template_last_reviewed;
     }
   
 }
