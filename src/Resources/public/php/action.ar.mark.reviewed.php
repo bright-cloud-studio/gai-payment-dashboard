@@ -17,7 +17,7 @@
     
     fwrite($myfile, "SAVING: Psychologist ID: " . $psychologist . "\r\n");
     
-    $date = date("m/d/y");
+    $date = time();
 
     $update =  "update tl_member set last_reviewed='".$date."' WHERE id='".$psychologist."'";
     $result_update = $dbh->query($update);
