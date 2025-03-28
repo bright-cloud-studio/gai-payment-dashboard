@@ -517,20 +517,23 @@ class TemplateHooks
                         $dur = ceil(($transactions->meeting_duration-30) / 15);
                         $final_price = $rate_half + ($dur * $rate_quarter);
                     }
-                    $total_price_districts += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_districts += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_district = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 12) {
-                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    //$total_price_districts += number_format(floatval($price_district), 2, '.', ',');
                     $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
                 } else if($transactions->service == 13) {
-                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    //$total_price_districts += number_format(floatval($price_district), 2, '.', ',');
                     $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
                     
                 } else if($transactions->service == 19) {
                 } else {
-                    $total_price_districts += $price_district;
+                    //$total_price_districts += $price_district;
                     $add_to_total_district = $price_district;
                 }
+                
+                $clean_price_d = str_replace(',', '', $add_to_total_district);
+                $total_price_districts = $total_price_districts + $clean_price_d;
                 
                 // Add this Misc. Transaction to our template so we can use it in our debug log    
                 $transactions_today[$transactions->id]['id'] = $transactions->id;
@@ -579,8 +582,6 @@ class TemplateHooks
                     $price = $service->{$psychologist->price_tier};
                 }
                 
-                
-                //echo "Price: " . $price . "<br>";
 
                 
                 
@@ -623,23 +624,27 @@ class TemplateHooks
                         $dur = ceil(($transactions->meeting_duration-30) / 15);
                         $final_price = $rate_half + ($dur * $rate_quarter);
                     }
-                    $total_price_districts += number_format(floatval($final_price), 2, '.', ',');
+                    //$total_price_districts += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_district = number_format(floatval($final_price), 2, '.', ',');
                 } else if($transactions->service == 12) {
-                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    //$total_price_districts += number_format(floatval($price_district), 2, '.', ',');
                     $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
                 } else if($transactions->service == 13) {
-                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    //$total_price_districts += number_format(floatval($price_district), 2, '.', ',');
                     $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
                 } else if($transactions->service == 14) {
-                    $total_price_districts += number_format(floatval($price_district), 2, '.', ',');
-                    $add_to_total_district = number_format(floatval($price_district), 2, '.', ',');
+                    //$total_price_districts += number_format(floatval($price_district), 2, '.', ',');
+                    $add_to_total_district = number_format(floatval($transactions->price), 2, '.', ',');
                     
                 } else if($transactions->service == 19) {
                 } else {
-                    $total_price_districts += $price_district;
+                    //$total_price_districts += $price_district;
                     $add_to_total_district = $price_district;
                 }
+                
+                $clean_price_d = str_replace(',', '', $add_to_total_district);
+                $total_price_districts = $total_price_districts + $clean_price_d;
+                
             
                 // Add this Misc. Transaction to our template so we can use it in our debug log    
                 $transactions_misc_today[$transactions->id]['id'] = $transactions->id;
