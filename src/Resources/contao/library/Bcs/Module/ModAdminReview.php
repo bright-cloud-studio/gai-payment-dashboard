@@ -110,10 +110,29 @@ class ModAdminReview extends \Contao\Module
                 if($transaction_year == $current_year && $transaction_month == $last_month) {
                     
                     if($psy->id != $psy_id) {
-                        $template_psychologist_names[$psy->id] = $psy->firstname . " " . $psy->lastname;
+                        $template_psychologist_names[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
+                        
+                        $reviewed_month = date("m", (int)$psy->last_reviewed);
+                        $reviewed_year = date("y", (int)$psy->last_reviewed);
+                        $current_month  = date('m');
+                        $current_year = date('y');
+                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
+                            $template_psychologist_names[$psy->id]['class'] = "reviewed";
+                        } else
+                            $template_psychologist_names[$psy->id]['class'] = "";
+                        
                     } else {
                         $psy_name = $psy->firstname . " " . $psy->lastname;
-                        $template_psychologist_names[$psy->id] = $psy->firstname . " " . $psy->lastname;
+                        $template_psychologist_names[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
+                        
+                        $reviewed_month = date("m", (int)$psy->last_reviewed);
+                        $reviewed_year = date("y", (int)$psy->last_reviewed);
+                        $current_month  = date('m');
+                        $current_year = date('y');
+                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
+                            $template_psychologist_names[$psy->id]['class'] = "reviewed";
+                        } else
+                            $template_psychologist_names[$psy->id]['class'] = "";
                         
         
                         $assignment = Assignment::findOneBy('id', $transaction->pid);
@@ -250,10 +269,29 @@ class ModAdminReview extends \Contao\Module
                 if($transaction_year == $current_year && $transaction_month == $last_month) {
                     
                     if($psy->id != $psy_id) {
-                        $template_psychologist_names[$psy->id] = $psy->firstname . " " . $psy->lastname;
+                        $template_psychologist_names[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
+                        
+                        $reviewed_month = date("m", (int)$psy->last_reviewed);
+                        $reviewed_year = date("y", (int)$psy->last_reviewed);
+                        $current_month  = date('m');
+                        $current_year = date('y');
+                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
+                            $template_psychologist_names[$psy->id]['class'] = "reviewed";
+                        } else
+                            $template_psychologist_names[$psy->id]['class'] = "";
+                            
                     } else {
                         $psy_name = $psy->firstname . " " . $psy->lastname;
-                        $template_psychologist_names[$psy->id] = $psy->firstname . " " . $psy->lastname;
+                        $template_psychologist_names[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
+                        
+                        $reviewed_month = date("m", (int)$psy->last_reviewed);
+                        $reviewed_year = date("y", (int)$psy->last_reviewed);
+                        $current_month  = date('m');
+                        $current_year = date('y');
+                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
+                            $template_psychologist_names[$psy->id]['class'] = "reviewed";
+                        } else
+                            $template_psychologist_names[$psy->id]['class'] = "";
                         
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['psychologist_name'] = $psy->firstname . " " . $psy->lastname;
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['id'] = $transaction->id;
@@ -329,9 +367,13 @@ class ModAdminReview extends \Contao\Module
         $this->Template->totals = $template_totals;
         $this->Template->psychologist_names = $template_psychologist_names;
         $this->Template->psychologists = $template_psychologists;
-        //$this->Template->transactions_misc = $template_misc;
         $this->Template->psychologists_active = $template_active;
         $this->Template->last_reviewed = $template_last_reviewed;
+        
+        //echo "<pre>";
+        //print_r($template_psychologist_names);
+        //die();
+        
     }
   
 }
