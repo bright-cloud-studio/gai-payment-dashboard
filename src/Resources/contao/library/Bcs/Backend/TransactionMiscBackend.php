@@ -15,7 +15,7 @@ use Bcs\Model\TransactionMisc;
 class TransactionMiscBackend extends Backend
 {
     
-    public function createMiscTransaction(DataContainer $dc) {
+    public function createMiscTransactions(DataContainer $dc) {
         
         // do nothing if we have no record
         if(!$dc->activeRecord) {
