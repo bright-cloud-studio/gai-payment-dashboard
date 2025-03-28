@@ -34,8 +34,6 @@ class TransactionBackend extends Backend
         if($dc->activeRecord->pid != '') {
             
             // Convert date to a php timestamp here!
-            
-            
             $assignment = Assignment::findOneBy('id', $dc->activeRecord->pid);
             $student = Student::findOneBy('id', $assignment->student);
 
