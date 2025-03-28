@@ -14,6 +14,18 @@ use Bcs\Model\TransactionMisc;
 
 class TransactionMiscBackend extends Backend
 {
+    
+    public function createMiscTransaction(DataContainer $dc) {
+        
+        // do nothing if we have no record
+        if(!$dc->activeRecord) {
+            return;
+        }
+        
+        // Convert entered dates to PHP timestamps here
+        
+    }
+    
   
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
