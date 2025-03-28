@@ -14,6 +14,7 @@
     $psy_name = $_POST['psychologist'];
     $psy_id = -1;
     
+    // Create log of this action
     $myfile = fopen("logs/share_log_".date('m-d-Y_hia').".txt", "w") or die("Unable to open file!");
     fwrite($myfile, "Psy Name: " . $psy_name . "\r\n");
     
@@ -23,19 +24,14 @@
         while($row = $result_psy->fetch_assoc()) {
             
             $db_name = $row['firstname'] . " " . $row['lastname'];
-            //fwrite($myfile, "DB Name: " . $db_name . "\r\n");
             if($db_name == $psy_name)
                 $psy_id = $row['id'];
         }
     }
     
-    
     $assignments = json_decode($_POST['assignments']);
     
- 
-    
     fwrite($myfile, "Psy ID: " . $psy_id . "\r\n");
-
 
     if($psy_id != -1) {
         foreach($assignments as $assignment) {
@@ -44,13 +40,19 @@
             if($result) {
                 while($row = $result->fetch_assoc()) {
                     
-                    
                     fwrite($myfile, "Assignment: " . $assignment . "\r\n");
-                    //fwrite($myfile, $shared. "\r\n");
                     
-                    $shared = unserialize($row['psychologists_shared']);
+                    // Declare shared as an array
+                    $shared = array();
+                    
+                    // If we already have shared data, add it to our array
+                    if($row['psychologists_shared'] != null)
+                        $shared[] = unserialize($row['psychologists_shared']);
+                    
+                    // Add the psy's ID to our shared array
                     $shared[] = $psy_id;
                     
+                    // Save that bad boy into the DB so it sticks!
                     $update =  "update tl_assignment set psychologists_shared='".serialize($shared)."' WHERE id='".$assignment."'";
                     $result_update = $dbh->query($update);
                     
@@ -60,6 +62,7 @@
         }
     }
     
+    // Walk away, we've won
     fclose($myfile);
     echo "fail";
 
