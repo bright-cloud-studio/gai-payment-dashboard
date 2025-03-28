@@ -27,6 +27,10 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
         'switchToEdit'                => false,
 		'enableVersioning'            => true,
 		'markAsCopy'                  => 'title',
+        'onsubmit_callback' => array
+		(
+			array('Bcs\Backend\TransactionMiscBackend', 'createMiscTransactions')
+		),
         'sql' => array
         (
             'keys' => array
