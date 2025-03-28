@@ -29,12 +29,17 @@ class InvoiceRequestBackend extends Backend
 		{
 			return;
 		}
-		
-        
+
         // Build an array with Psy ID as the first key and Transaction IDs as the second
         $arrTransactions = array();
-		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE published='1' ORDER BY date_submitted ASC");
-		//$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp($dc->activeRecord->date_start)."' AND '".$this->convertDateToTimestamp($dc->activeRecord->date_end)."' and published='1' ORDER BY date_submitted ASC");
+		
+		$transactions;
+		if($dc->activeRecord->use_all_transactions == 1) {
+		    $transactions = $this->Database->query("SELECT * FROM tl_transaction ORDER BY date_submitted ASC");
+		} else {
+		    $transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE published='1' ORDER BY date_submitted ASC");
+		}
+		
 		while ($transactions->next())
 		{
 
@@ -48,8 +53,15 @@ class InvoiceRequestBackend extends Backend
 		
 		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
         $arrTransactionsMisc = array();
-		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE published='1' ORDER BY date_submitted ASC");
-		//$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp($dc->activeRecord->date_start)."' AND '".$this->convertDateToTimestamp($dc->activeRecord->date_end)."' and published='1' ORDER BY date_submitted ASC");
+		
+		
+		$transactions_misc;
+		if($dc->activeRecord->use_all_transactions == 1) {
+		    $transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc ORDER BY date_submitted ASC");
+		} else {
+		    $transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE published='1' ORDER BY date_submitted ASC");
+		}
+
 		while ($transactions_misc->next())
 		{
 		    $start_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_start));
@@ -139,8 +151,14 @@ class InvoiceRequestBackend extends Backend
 
         // Build an array with Psy ID as the first key and Transaction IDs as the second
         $arrTransactions = array();
-		$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE published='1' ORDER BY date_submitted ASC");
-		//$transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp($dc->activeRecord->date_start)."' AND '".$this->convertDateToTimestamp($dc->activeRecord->date_end)."' and published='1' ORDER BY date_submitted ASC");
+		
+		$transactions;
+		if($dc->activeRecord->use_all_transactions == 1) {
+		    $transactions = $this->Database->query("SELECT * FROM tl_transaction ORDER BY date_submitted ASC");
+		} else {
+		    $transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE published='1' ORDER BY date_submitted ASC");
+		}
+		
 		while ($transactions->next())
 		{
 		    $start_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_start));
@@ -158,8 +176,14 @@ class InvoiceRequestBackend extends Backend
 		
 		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
         $arrTransactionsMisc = array();
-		$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE district!='' and published='1' ORDER BY date_submitted ASC");
-		//$transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE date_submitted BETWEEN '".$this->convertDateToTimestamp($dc->activeRecord->date_start)."' AND '".$this->convertDateToTimestamp($dc->activeRecord->date_end)."' and district!='' and published='1' ORDER BY date_submitted ASC");
+		
+		$transactions_misc;
+		if($dc->activeRecord->use_all_transactions == 1) {
+		    $transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE district!='' ORDER BY date_submitted ASC");
+		} else {
+		    $transactions_misc = $this->Database->query("SELECT * FROM tl_transaction_misc WHERE district!='' and published='1' ORDER BY date_submitted ASC");
+		}
+		
 		while ($transactions_misc->next())
 		{
 		    $start_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_start));
