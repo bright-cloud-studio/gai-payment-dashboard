@@ -1,45 +1,57 @@
 <div class="mod_admin_review_nav size100 marbot60">
-	<?php foreach ($this->psychologists as $id => $psychologist) { ?>
-
-		<a href='{{link_url::37}}?active=<?= $id ?>' class="select_psy <?= $this->psychologists_active[$id] ?>"><?= $this->psychologist_names[$id] ?></a>
+	<?php $first = true; ?>
+	<?php foreach ($this->psychologist_names as $id => $psychologist) { ?>
+		<?php if($first) { ?>
+			<?php $first = false; ?>
+			<a href='{{link_url::37}}?psychologist=<?= $id ?>' class="select_psy <?= $psychologist['class'] ?>"><?= $psychologist['name'] ?></a>
+		<?php } else { ?>
+			<span class="divider">|</span> <a href='{{link_url::37}}?psychologist=<?= $id ?>' class="select_psy <?= $psychologist['class'] ?>"><?= $psychologist['name'] ?></a>
+		<?php } ?>
 	<? } ?>
 </div>
 
+<?php foreach ($this->psychologists as $id => $psychologist) { ?>
 
-<!-- Include DataTables for better formatting -->
-<div class="mod_admin_review size100 marbot60 no-pad">
+	<?php $type = 'transaction'; ?>
+	<?php if(str_contains($id, 'm_')) { $type = 'transaction_misc'; } ?>
 	
-	<h2>Currently Reviewing: <?=$this->currently_reviewing ?></h2>
-	
-	<?php foreach ($this->psychologists as $id => $psychologist) { ?>
-	
-		<?php $type = 'transaction'; ?>
-		<?php if(str_contains($id, 'm_')) { $type = 'transaction_misc'; } ?>
-		
-		<?php $clean_id = 0; ?>
-		<?php if($type == 'transaction') { $clean_id = $id; } else { $clean_id = str_replace("m_","",$id); } ?>
-		
-		<div class="psy_wrapper <?= $this->psychologists_active[$clean_id] ?>" id="psy_<?= $clean_id ?>">
-			<h2>Psychologist: <?= $this->psychologist_names[$clean_id] ?></h2>
-		
-			<table id="admin_review" class="admin_review display compact cell-border hover order-column row-borders stripe" style="width:100%">
-				<thead>
-					<tr>
-						<th></th>
-						<th>District</th>
-						<th>School</th>
-						<th>Student</th>
-						<th>LASID</th>
-						<th>SASID</th>
-						<th>Service</th>
-						<th>Rate</th>
-						<th>Price</th>
-		
-					</tr>
-				</thead>
-				<tbody>
+	<?php $clean_id = 0; ?>
+	<?php if($type == 'transaction') { $clean_id = $id; } else { $clean_id = str_replace("m_","",$id); } ?>
 
-					<?php
+	<div id="resize_wrapper">
+		<table id="admin_review" class="table display nowrap" cellspacing="0" width="100%">
+			
+			<thead>
+				<tr>
+					<th></th>
+					<th>District</th>
+					<th>School</th>
+					<th>Student</th>
+					<th>LASID</th>
+					<th>SASID</th>
+					<th>Service</th>
+					<th>Rate</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+	
+			<tfoot>
+				<tr>
+					<th></th>
+					<th>District</th>
+					<th>School</th>
+					<th>Student</th>
+					<th>LASID</th>
+					<th>SASID</th>
+					<th>Service</th>
+					<th>Rate</th>
+					<th>Price</th>
+				</tr>
+			</tfoot>
+			
+			<tbody>
+				
+				<?php
 					foreach ($psychologist as $transaction) {
 						
 						if($type == 'transaction') {
@@ -72,15 +84,14 @@
 							echo $buffer;
 						}
 					}
-					?>
-					
-				</tbody>
-			</table>
-			
-			<div class="total center_element">Total: $<?= $this->totals[$id] ?></div>
-			
-		</div>
+				?>
+				
+			</tbody>
+		</table>
+		<div class="total">$<?= $this->totals[$id] ?></div>
+		<div class="active_psy_id"><?= $this->active_psy_id ?></div>
+		<div class="active_psy_name"><b>Psychologist: </b><?= $this->active_psy_name ?></div>
+		<div class="last_reviewed"><b>Last Reviewed: </b><?= $this->last_reviewed[$this->active_psy_id] ?></div>
+	</div>
 	
-	<?php } ?>
-
-</div>
+<?php } ?>
