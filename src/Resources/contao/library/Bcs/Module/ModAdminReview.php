@@ -341,8 +341,8 @@ class ModAdminReview extends \Contao\Module
                                 $final_price = $dur * $transaction->price;
                                 $template_psychologists[$psy->id]['m_'.$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
                                 $transactions_total += number_format(floatval($final_price), 2, '.', '');
-                            } else if($transaction->service == 19) {
-                                $final_price = $transaction->meeting_duration * 0.50;
+                            } else if($transaction->service == 19 && $transaction->meeting_duration != '') {
+                                $final_price = (int)$transaction->meeting_duration * 0.50;
                                 $template_psychologists[$psy->id]['m_'.$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
                                 $transactions_total += number_format(floatval($final_price), 2, '.', '');
                             } else {
