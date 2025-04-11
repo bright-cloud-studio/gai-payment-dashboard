@@ -596,7 +596,7 @@ class TemplateHooks
                     $final_price = $dur * $price;
                     //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
-                } else if($transactions->service == 19) {
+                } else if($transactions->service == 19 && $transactions->meeting_duration != '') {
                     $final_price = $transactions->meeting_duration * 0.50;
                     //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
@@ -814,7 +814,7 @@ class TemplateHooks
                     $final_price = $dur * $price;
                     //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
-                } else if($transactions->service == 19) {
+                } else if($transactions->service == 19 && $transactions->meeting_duration != '') {
                     $final_price = $transactions->meeting_duration * 0.50;
                     //$total_price_psychologists += number_format(floatval($final_price), 2, '.', ',');
                     $add_to_total_psy = number_format(floatval($final_price), 2, '.', ',');
