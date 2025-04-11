@@ -22,8 +22,6 @@ class TransactionMiscBackend extends Backend
             return;
         }
         
-        // Convert entered dates to PHP timestamps here
-        
     }
     
   
