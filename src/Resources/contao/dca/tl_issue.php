@@ -33,7 +33,9 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTED,
+            // Attempt to list as collapsable view
+            //'mode'                  => DataContainer::MODE_SORTED,
+            'mode'                    => DataContainer::MODE_TREE,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
