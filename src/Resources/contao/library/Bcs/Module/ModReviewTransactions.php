@@ -242,6 +242,7 @@ class ModReviewTransactions extends \Contao\Module
         $this->Template->transactions = $template_transactions;
         $this->Template->transactions_misc = $template_transactions_misc;
         $this->Template->transactions_total = number_format($transactions_total, 2, '.', ',');
+        $this->Template->psy_id = $member->id;
         
     }
   
