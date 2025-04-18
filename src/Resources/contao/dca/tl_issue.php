@@ -160,6 +160,7 @@ class tl_issue extends Backend
 {
 	public function setRootType(DataContainer $dc)
 	{
+        /*
 		if (Input::get('act') != 'create')
 		{
 			return;
@@ -180,6 +181,7 @@ class tl_issue extends Backend
 				$GLOBALS['TL_DCA']['tl_issue']['fields']['type']['default'] = 'root';
 			}
 		}
+        */
 	}
 
     public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
