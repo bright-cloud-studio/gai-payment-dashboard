@@ -43,6 +43,8 @@ class TemplateHooks
             
             $template->transactions_today = $transactions_today;
             
+            $template->last_review_and_submit = $this->getLastReviewedAndSubmitted();
+            
         }
     }
     
@@ -876,6 +878,27 @@ class TemplateHooks
             'transactions_misc' => $total_transactions_misc
         );
     }
+    
+    
+    
+    
+    
+    public function getLastReviewedAndSubmitted() {
+        
+        // Get all Psychologists who are still active
+        $psychologists = MemberModel::findBy('disable', 0);
+        
+        $last_reviewed = array();
+        
+        foreach($psychologists as $psy) {
+            $last_reviewed[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
+            $last_reviewed[$psy->id]['last_review_and_submit'] = $psy->last_review_and_submit;
+        }
+        
+        return $last_reviewed;
+        
+    }
+    
 
   
 }
