@@ -885,8 +885,12 @@ class TemplateHooks
     
     public function getLastReviewedAndSubmitted() {
         
+        $opt = [
+            'order' => 'firstname ASC'
+        ];
+        
         // Get all Psychologists who are still active
-        $psychologists = MemberModel::findBy('disable', 0);
+        $psychologists = MemberModel::findBy('disable', 0, $opt);
         
         $last_reviewed = array();
         
