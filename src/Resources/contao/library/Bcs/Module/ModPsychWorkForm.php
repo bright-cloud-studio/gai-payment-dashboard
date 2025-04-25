@@ -106,6 +106,7 @@ class ModPsychWorkForm extends \Contao\Module
             }
             
             // Date 30 Day
+            $template_assignments[$assignment->id]['data_30_day'] = 'data-30-day="'.$assignment->date_30_day.'"';
             if($is_admin) {
                 $template_assignments[$assignment->id]['date_30_day'] = "<input value='$assignment->date_30_day' name='date_30_day_$assignment->id' class='date_30_day' id='date_30_day_$assignment->id' autocomplete='off'>";
             } else {
@@ -113,6 +114,7 @@ class ModPsychWorkForm extends \Contao\Module
             }
             
             // Date 45 Day
+            $template_assignments[$assignment->id]['data_45_day'] = 'data-45-day="'.$assignment->date_45_day.'"';
             if($is_admin) {
                 $template_assignments[$assignment->id]['date_45_day'] = "<input value='$assignment->date_45_day' name='date_45_day_$assignment->id' class='date_45_day' id='date_45_day_$assignment->id' autocomplete='off'>";
             } else {
@@ -175,7 +177,6 @@ class ModPsychWorkForm extends \Contao\Module
             
             
             // Student
-            
             if($is_admin) {
                 $template_assignments[$assignment->id]['student'] .= "<select name='student_$assignment->id' class='student' id='student_$assignment->id'>";
                 $template_assignments[$assignment->id]['student'] .= "<option value='' selected disabled>Select a Student</option>";
@@ -199,42 +200,38 @@ class ModPsychWorkForm extends \Contao\Module
             }
             
             
+            // Get our Student
+            $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
+            $template_assignments[$assignment->id]['data_student_id'] = 'data-student-id="'.$student->id.'"';
             
             // Student - D.O.B.
+            $template_assignments[$assignment->id]['data_date_of_birth'] = 'data-date-of-birth="'.$student->date_of_birth.'"';
             if($is_admin) {
-                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
                 $template_assignments[$assignment->id]['date_of_birth'] = "<input value='$student->date_of_birth' name='date_of_birth_$assignment->student'class='date_of_birth' id='date_of_birth_$assignment->student' autocomplete='off'>";
             } else {
-                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
                 $template_assignments[$assignment->id]['date_of_birth'] = $student->date_of_birth;
             }
-            
-            
-            
+
+
             // Student - Grade.
+            $template_assignments[$assignment->id]['data_grade'] = 'data-grade="'.$student->grade.'"';
             if($is_admin) {
-                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
                 $template_assignments[$assignment->id]['grade'] = "<input value='$student->grade' name='grade_$assignment->student'class='grade' id='grade_$assignment->student' autocomplete='off'>";
             } else {
-                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
                 $template_assignments[$assignment->id]['grade'] = $student->grade;
             }
             
             // Student - LASID.
             if($is_admin) {
-                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
                 $template_assignments[$assignment->id]['lasid'] = "<input value='$student->lasid' name='lasid_$assignment->student'class='lasid' id='lasid_$assignment->student' autocomplete='off'>";
             } else {
-                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
                 $template_assignments[$assignment->id]['lasid'] = $student->lasid;
             }
             
             // Student - SASID.
             if($is_admin) {
-                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
                 $template_assignments[$assignment->id]['sasid'] = "<input value='$student->sasid' name='sasid_$assignment->student'class='sasid' id='sasid_$assignment->student' autocomplete='off'>";
             } else {
-                $student = Student::findOneBy(['id = ?', 'district = ?'], [$assignment->student, $assignment->district]);
                 $template_assignments[$assignment->id]['sasid'] = $student->sasid;
             }
 
@@ -335,6 +332,7 @@ class ModPsychWorkForm extends \Contao\Module
             
             
             // Contact Info - Parent
+            $template_assignments[$assignment->id]['data_contact_parent'] = 'data-contact-parent="'.$assignment->contact_info_parent.'"';
             if(1 == 1) {
                 $template_assignments[$assignment->id]['contact_info_parent'] = "<input value='$assignment->contact_info_parent' name='contact_info_parent_$assignment->id' class='contact_info_parent' id='contact_info_parent_$assignment->id' autocomplete='off'>";
             } else {
@@ -344,6 +342,7 @@ class ModPsychWorkForm extends \Contao\Module
             
             
             // Contact Info - Teacher
+            $template_assignments[$assignment->id]['data_contact_teacher'] = 'data-contact-teacher="'.$assignment->contact_info_teacher.'"';
             if(1 == 1) {
                 $template_assignments[$assignment->id]['contact_info_teacher'] = "<input value='$assignment->contact_info_teacher' name='contact_info_teacher_$assignment->id' class='contact_info_teacher' id='contact_info_teacher_$assignment->id' autocomplete='off'>";
             } else {
@@ -353,6 +352,7 @@ class ModPsychWorkForm extends \Contao\Module
             
             
             // Team Chair
+            $template_assignments[$assignment->id]['data_team_chair'] = 'data-team-chair="'.$assignment->team_chair.'"';
             if(1 == 1) {
                 $template_assignments[$assignment->id]['team_chair'] = "<input value='$assignment->team_chair' name='team_chair_$assignment->id' class='team_chair' id='team_chair_$assignment->id' autocomplete='off'>";
             } else {
@@ -362,6 +362,7 @@ class ModPsychWorkForm extends \Contao\Module
             
             
             // Email
+            $template_assignments[$assignment->id]['data_email'] = 'data-email="'.$assignment->email.'"';
             if(1 == 1) {
                 $template_assignments[$assignment->id]['email'] = "<input value='$assignment->email' name='email_$assignment->id' class='email' id='email_$assignment->id' autocomplete='off'>";
             } else {
