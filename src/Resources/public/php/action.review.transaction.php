@@ -18,12 +18,12 @@
         $clean_id = $onlyconsonants = str_replace("m_", "", $transaction_id);
         
         // Set this Misc. Transaction as Published and Reviewed
-        $update =  "update tl_transaction_misc set published='1' WHERE id='".$clean_id."'";
+        $update =  "update tl_transaction_misc set published='1', status='reviewed' WHERE id='".$clean_id."'";
         $result_update = $dbh->query($update);
     
     } else {
         // Set this Transaction as Published and Reviewed
-        $update =  "update tl_transaction set published='1' WHERE id='".$transaction_id."'";
+        $update =  "update tl_transaction set published='1', status='reviewed' WHERE id='".$transaction_id."'";
         $result_update = $dbh->query($update);
     }
 
