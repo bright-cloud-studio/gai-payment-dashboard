@@ -63,6 +63,7 @@ class FormHooks
             $transaction->meeting_end = $submittedData['end_time'];
             $transaction->meeting_duration = $this->timeDifferenceInMinutes($submittedData['start_time'],$submittedData['end_time']);
             $transaction->notes = $submittedData['notes'];
+            $transaction->status = 'created';
 
             // Get LASID / SASID
             $assignment = Assignment::findBy('id', $transaction->pid);
@@ -104,6 +105,7 @@ class FormHooks
             $transaction->meeting_end = $submittedData['end_time'];
             $transaction->meeting_duration = $this->timeDifferenceInMinutes($submittedData['start_time'],$submittedData['end_time']);
             $transaction->notes = $submittedData['notes'];
+            $transaction->status = 'created';
             
             // Save our new Transaction
             $transaction->save();  
@@ -131,6 +133,7 @@ class FormHooks
             
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
             $transaction->notes = $submittedData['notes'];
+            $transaction->status = 'created';
             
             // Save our new Transaction
             $transaction->save();
@@ -159,6 +162,7 @@ class FormHooks
             
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
             $transaction->notes = $submittedData['notes'];
+            $transaction->status = 'created';
             
             // Save our new Transaction
             $transaction->save();
@@ -189,6 +193,7 @@ class FormHooks
             
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
             $transaction->notes = $submittedData['notes'];
+            $transaction->status = 'created';
             
             // Save our new Transaction
             $transaction->save();
@@ -217,6 +222,7 @@ class FormHooks
             
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
             $transaction->notes = $submittedData['notes'];
+            $transaction->status = 'created';
             
             // Save our new Transaction
             $transaction->save();
@@ -247,6 +253,7 @@ class FormHooks
             
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
             $transaction->notes = $submittedData['notes'];
+            $transaction->status = 'created';
             
             // Save our new Transaction
             $transaction->save();
@@ -283,6 +290,7 @@ class FormHooks
 
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
             $transaction->notes = $submittedData['notes'];
+            $transaction->status = 'created';
             
             // Save our new Transaction
             $transaction->save();
@@ -319,6 +327,7 @@ class FormHooks
 
             $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
             $transaction->notes = $submittedData['notes'];
+            $transaction->status = 'created';
             
             // Save our new Transaction
             $transaction->save();
