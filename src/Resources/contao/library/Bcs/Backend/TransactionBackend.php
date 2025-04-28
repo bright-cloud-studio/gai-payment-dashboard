@@ -45,6 +45,75 @@ class TransactionBackend extends Backend
         }
 
     }
+
+    
+    public function addIcon($row, $label)
+	{
+        // Clear out our current label
+        $label = '';
+
+        // Add our formatted date and a dash
+        $label .= date('m/d/Y', $row['date_submitted']) . " - ";
+
+        // Add the Psy's name
+        $psy = MemberModel::findBy('id', $row['psychologist']);
+        $label .= $psy->firstname . " " . $psy->lastname . " - ";
+
+        // Add Assignments District
+        $assignment = Assignment::findBy('id', $row['pid']);
+        $district = District::findBy('id', $assignment->district);
+        $label .= $district->district_name . " - ";
+
+        // Add Service
+        $service = Service::findBy('service_code', $row['service']);
+        $label .= $service->name . " - ";
+
+        // Add LASID / SASID
+        $student = Student::findBy('id', $assignment->student);
+        
+        $label .= $student->name . " - ";
+        
+        if($student->lasid != '' && $student->sasid != '') {
+            $label .= $student->lasid . " / " . $student->sasid;
+        } else {
+            if($student->lasid != '')
+                $label .= $student->lasid;
+            if($student->sasid != '')
+                $label .= $student->sasid;
+        }
+        
+        
+		$sub = 0;
+		$unpublished = ($row['start'] && $row['start'] > time()) || ($row['stop'] && $row['stop'] <= time());
+
+		if ($unpublished || !$row['published'])
+		{
+			++$sub;
+		}
+
+		if ($row['protected'])
+		{
+			$sub += 2;
+		}
+
+		$image = 'articles.svg';
+
+		if ($sub > 0)
+		{
+			$image = 'articles_' . $sub . '.svg';
+		}
+
+		$attributes = sprintf(
+			'data-icon="%s" data-icon-disabled="%s"',
+			$row['protected'] ? 'articles_2.svg' : 'articles.svg',
+			$row['protected'] ? 'articles_3.svg' : 'articles_1.svg',
+		);
+
+		$href = System::getContainer()->get('router')->generate('contao_backend_preview', array('page'=>$row['pid'], 'article'=>($row['alias'] ?: $row['id'])));
+
+		return '<a href="' . StringUtil::specialcharsUrl($href) . '" title="' . StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['view']) . '" target="_blank">' . Image::getHtml($image, '', $attributes) . '</a> ' . $label;
+	}
+    
   
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
