@@ -112,8 +112,11 @@ class TransactionBackend extends Backend
 		);
 
 		$href = System::getContainer()->get('router')->generate('contao_backend_preview', array('page'=>$row['pid'], 'article'=>($row['alias'] ?: $row['id'])));
-
-		return '<a href="' . StringUtil::specialcharsUrl($href) . '" title="' . StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['view']) . '" target="_blank">' . Image::getHtml($image, '', $attributes) . '</a> ' . $label;
+        
+        $status_wrapper_open = '<span class="status status_'.$row['status'].'">['.$row['status'].']</span> ';
+        $status_wrapper_close = '</span>';
+        
+		return $status_wrapper_open . $label;
 	}
     
   
