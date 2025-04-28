@@ -139,8 +139,8 @@
         // Get our Transaction and Misc. Transaction data as arrays
         $transactions = array();
         $transactions_misc = array();
-        $transactions_normal = generateTransactions($dbh, $districts, $schools, $students, $services, $transaction_ids);
-        $transactions_misc = generateMiscTransactions($dbh, $districts, $schools, $students, $services, $misc_transaction_ids);
+        $transactions_normal = generateTransactionsDistrict($dbh, $districts, $schools, $students, $services, $transaction_ids);
+        $transactions_misc = generateMiscTransactionsDistrict($dbh, $districts, $schools, $students, $services, $misc_transaction_ids);
         
         if($transactions_normal != null)
             $transactions = array_merge($transactions, $transactions_normal);
@@ -328,7 +328,7 @@
     
     
     // Assemble our Trnasaction data into a PHP array
-    function generateTransactions($dbh, $districts, $schools, $students, $services, $transaction_ids) {
+    function generateTransactionsDistrict($dbh, $districts, $schools, $students, $services, $transaction_ids) {
         global $price_total;
         
         if($transaction_ids != '') {
@@ -414,7 +414,7 @@
     }
     
     // Assemble our Misc. Transaction data into a PHP array
-    function generateMiscTransactions($dbh, $districts, $schools, $students, $services, $misc_transaction_ids) {
+    function generateMiscTransactionsDistrict($dbh, $districts, $schools, $students, $services, $misc_transaction_ids) {
         global $price_total;
     
         if($misc_transaction_ids != '') {
