@@ -278,6 +278,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'label'                     => &$GLOBALS['TL_LANG']['tl_transaction']['status'],
             'inputType'                 => 'select',
             'default'                   => 'created',
+            'filter'                    => true,
             'options'                   => array('created' => 'Created', 'reviewed' => 'Reviewed', 'invoiced' => 'Invoiced'),
             'eval'                      => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                       => "varchar(32) NOT NULL default 'created'"
