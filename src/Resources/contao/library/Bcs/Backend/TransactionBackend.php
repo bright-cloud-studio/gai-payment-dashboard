@@ -10,6 +10,8 @@ use Contao\DataContainer;
 use Contao\StringUtil;
 use Contao\System;
 
+use Contao\MemberModel;
+
 use Bcs\Model\Transaction;
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
