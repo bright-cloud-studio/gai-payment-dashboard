@@ -109,7 +109,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{assignment_details_legend}, assignment_details;{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published;{internal_legend:hide}, lasid, sasid, originally_submitted, status;'
+        'default'                     => '{assignment_details_legend}, assignment_details;{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published; {status_legend},status; {internal_legend:hide}, lasid, sasid, originally_submitted;'
     ),
  
     // Fields
@@ -272,6 +272,18 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
         ),
 
 
+        // Status
+        'status' => array
+        (
+            'label'                     => &$GLOBALS['TL_LANG']['tl_transaction']['status'],
+            'inputType'                 => 'select',
+            'default'                   => 'created',
+            'options'                   => array('created' => 'Created', 'reviewed' => 'Reviewed', 'invoiced' => 'Invoiced'),
+            'eval'                      => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                       => "varchar(32) NOT NULL default 'created'"
+        ),
+
+
 
         // Hidden fields for search purposes
         'lasid' => array
@@ -304,17 +316,6 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) default ''",
             'default'                 => ''
-        ),
-        
-        // Status
-        'status' => array
-        (
-            'label'                     => &$GLOBALS['TL_LANG']['tl_transaction']['status'],
-            'inputType'                 => 'radio',
-            'default'                   => 'created',
-            'options'                   => array('created' => 'Created', 'reviewed' => 'Reviewed', 'invoiced' => 'Invoiced'),
-            'eval'                      => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                       => "varchar(32) NOT NULL default 'created'"
         ),
         
     )
