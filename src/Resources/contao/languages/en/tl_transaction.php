@@ -36,8 +36,11 @@ $GLOBALS['TL_LANG']['tl_transaction']['meeting_start']              = array('Mee
 $GLOBALS['TL_LANG']['tl_transaction']['meeting_end']                = array('Meeting End', 'If a Meeting type Service, the End Time of the meeting');
 $GLOBALS['TL_LANG']['tl_transaction']['meeting_duration']           = array('Meeting Duration', 'Calculated duration, in minutes, of the length of the meeting. Used when calculating the final price during generation');
 
-$GLOBALS['TL_LANG']['tl_transaction']['notes_legend']              = 'Notes';
+$GLOBALS['TL_LANG']['tl_transaction']['notes_legend']               = 'Notes';
 $GLOBALS['TL_LANG']['tl_transaction']['notes']                      = array('Notes', 'Manually entered notes relating to this Assignment and Transaction, entered by the Psychologist');
+
+$GLOBALS['TL_LANG']['tl_transaction']['status_legend']              = 'Status Details';
+$GLOBALS['TL_LANG']['tl_transaction']['stuatus']                    = array('Status', 'Tracks the current Status of this Transaction. Status is updated throughout the generation process at each step of the process');
 
 $GLOBALS['TL_LANG']['tl_transaction']['publish_legend']             = 'Reviewed Information';
 $GLOBALS['TL_LANG']['tl_transaction']['published']                  = array('Reviewed', 'Indicates if this Transaction has been Reviewed by the submitting Psychologist');
