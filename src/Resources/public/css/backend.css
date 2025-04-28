@@ -53,5 +53,5 @@ span.bold { font-weight: 600; font-size: 1.5em; margin-right: 5px; }
 
 
 .status { font-weight: 600; text-transform: capitalize; }
-.status_created { background-color: #ced4df; }
-.status_reviewed { background-color: #83b44c; }
+.status_created { background-color: #fbe83a; }
+.status_reviewed { background-color: #ffb302; }
