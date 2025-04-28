@@ -40,6 +40,9 @@ $GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_duration']           = array
 $GLOBALS['TL_LANG']['tl_transaction_misc']['notes_legend']               = 'Notes';
 $GLOBALS['TL_LANG']['tl_transaction_misc']['notes']                      = array('Notes', 'Custom notes entered by the Psychologist who created this Misc. Transaction');
 
+$GLOBALS['TL_LANG']['tl_transaction_misc']['status_legend']              = 'Status Details';
+$GLOBALS['TL_LANG']['tl_transaction_misc']['stuatus']                    = array('Status', 'Tracks the current Status of this Transaction. Status is updated throughout the generation process at each step of the process');
+
 $GLOBALS['TL_LANG']['tl_transaction_misc']['publish_legend']             = 'Reviewed Information';
 $GLOBALS['TL_LANG']['tl_transaction_misc']['reviewed']                   = array('Reviewed', 'Indicates if this Misc. Transaction has been Reviewed by the submitting Psychologist');
 
