@@ -23,16 +23,33 @@
     
     // Determine if Misc. Transaction or not
     if (str_contains($transaction_id, 'm_')) {
-        $clean_id = $onlyconsonants = str_replace("m_", "", $transaction_id);
         
-        // Set this Misc. Transaction as Published and Reviewed
-        $update =  "update tl_transaction_misc set published='1', status='reviewed' WHERE id='".$clean_id."'";
-        $result_update = $dbh->query($update);
-    
+        $clean_id = str_replace("m_", "", $transaction_id);
+        
+        // Only update 'created' status, we don't want the status to go backwards
+        if($status == 'created') {
+            // Set this Misc. Transaction as Published and Reviewed
+            $update =  "update tl_transaction_misc set published='1', status='reviewed' WHERE id='".$clean_id."'";
+            $result_update = $dbh->query($update);
+        } else {
+            // Set this Misc. Transaction as Published and Reviewed
+            $update =  "update tl_transaction_misc set published='1' WHERE id='".$clean_id."'";
+            $result_update = $dbh->query($update);
+        }
+
     } else {
-        // Set this Transaction as Published and Reviewed
-        $update =  "update tl_transaction set published='1', status='reviewed' WHERE id='".$transaction_id."'";
-        $result_update = $dbh->query($update);
+        
+        // Only update 'created' status, we don't want the status to go backwards
+        if($status == 'created') {
+            // Set this Transaction as Published and Reviewed
+            $update =  "update tl_transaction set published='1', status='reviewed' WHERE id='".$transaction_id."'";
+            $result_update = $dbh->query($update);
+        } else {
+            // Set this Transaction as Published and Reviewed
+            $update =  "update tl_transaction set published='1' WHERE id='".$transaction_id."'";
+            $result_update = $dbh->query($update);
+        }
+        
     }
 
     // Close our log file
