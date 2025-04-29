@@ -9,9 +9,17 @@
     if ($dbh->connect_error) {
         die("Connection failed: " . $dbh->connect_error);
     }
+    
+    // Create log file for debugging purposes
+    $myfile = fopen("logs/review_transaction_".date('m_d_Y_H:i:s').".txt", "w") or die("Unable to open file!");
 
     // Get our passed in Transaction ID
     $transaction_id = $_POST['transaction_id'];
+    $status = $_POST['status'];
+    
+    // Save our POST values to confirm they came in successfully
+    fwrite($myfile, "SAVING: Transaction ID: " . $transaction_id . "\r\n");
+    fwrite($myfile, "SAVING: Status: " . $status . "\r\n");
     
     // Determine if Misc. Transaction or not
     if (str_contains($transaction_id, 'm_')) {
@@ -26,5 +34,8 @@
         $update =  "update tl_transaction set published='1', status='reviewed' WHERE id='".$transaction_id."'";
         $result_update = $dbh->query($update);
     }
+
+    // Close our log file
+    fclose($myfile);
 
     echo "fail";
