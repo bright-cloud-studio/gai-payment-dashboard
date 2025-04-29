@@ -99,6 +99,7 @@ class ModReviewTransactions extends \Contao\Module
                 $assignment = Assignment::findOneBy('id', $transaction->pid);
                 
                 $template_transactions[$transaction->id]['id'] = $transaction->id;
+                $template_transactions[$transaction->id]['status'] = $transaction->status;
                 $template_transactions[$transaction->id]['transaction_type'] = "transaction";
                 $template_transactions[$transaction->id]['date_submitted'] = date('m_d_y', $transaction->date_submitted);
     
@@ -175,6 +176,7 @@ class ModReviewTransactions extends \Contao\Module
             if($transaction_year == $current_year && $transaction_month == $last_month) {
                 
                 $template_transactions_misc[$transaction->id]['id'] = $transaction->id;
+                $template_transactions_misc[$transaction->id]['status'] = $transaction->status;
                 $template_transactions_misc[$transaction->id]['transaction_type'] = "transaction_misc";
                 $template_transactions_misc[$transaction->id]['date_submitted'] = date('m_d_y', $transaction->date_submitted);
     
