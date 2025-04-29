@@ -339,6 +339,10 @@
                 $i = 0;
                 while($row = $transactions_results->fetch_assoc()) {
                     
+                    // Update the status of this transaction
+                    $update =  "update tl_transaction set status='invoiced' WHERE id='".$row['id']."'";
+                    $result_update = $dbh->query($update);
+                    
                     // Get the Assignment for this Transaction
                     $a_district = '';
                     $a_school = '';
@@ -424,6 +428,10 @@
             if($transactions_results) {
                 $i = 0;
                 while($row = $transactions_results->fetch_assoc()) {
+                    
+                    // Update the status of this transaction
+                    $update =  "update tl_transaction_misc set status='invoiced' WHERE id='".$row['id']."'";
+                    $result_update = $dbh->query($update);
                     
                     $transactions[$i]['service'] = $services[$row['service']]['name'];
                     $transactions[$i]['rate'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
