@@ -178,11 +178,6 @@
         
         // Holds the HTML we will push into the PDF
         $render_html = '';
-        
-
-
-
-
 
         // First, setup everything but Transactions
         for($x = 0; $x < $total_pages; $x++) {
@@ -344,6 +339,10 @@
                 $i = 0;
                 while($row = $transactions_results->fetch_assoc()) {
                     
+                    // Update the status of this transaction
+                    $update =  "update tl_transaction set status='invoiced' WHERE id='".$row['id']."'";
+                    $result_update = $dbh->query($update);
+                    
                     // Get the Assignment for this Transaction
                     $a_district = '';
                     $a_school = '';
@@ -383,7 +382,6 @@
                         $price_total =  number_format(floatval($price_total), 2, '.', '') + number_format(floatval($row['price']), 2, '.', '');
                     }
                     
-                    
                     $i++;
                 }
             }
@@ -405,6 +403,10 @@
             if($transactions_results) {
                 $i = 0;
                 while($row = $transactions_results->fetch_assoc()) {
+                    
+                    // Update the status of this transaction
+                    $update =  "update tl_transaction_misc set status='invoiced' WHERE id='".$row['id']."'";
+                    $result_update = $dbh->query($update);
                     
                     $transactions[$i]['student'] = $row['student_initials'];
                     
