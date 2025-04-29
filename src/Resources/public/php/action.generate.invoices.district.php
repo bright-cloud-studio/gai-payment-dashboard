@@ -97,7 +97,7 @@
                     
                     // Step Three
                     // Generate a folder for this Psy if it doesn't exist already
-                    $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/generation_' . $request . '/districts/' . cleanName($db_inv['district_name']);
+                    $addr_folder = $_SERVER['DOCUMENT_ROOT'] . '/../files/invoices/generation_' . $request . '/districts/' . cleanNameDistrict($db_inv['district_name']);
                     $filename = "invoice_" . date('y_m', strtotime($date_start));
                     if (!file_exists($addr_folder)) {
                         mkdir($addr_folder, 0777, true);
@@ -108,7 +108,7 @@
                     $transaction_ids = $db_inv['transaction_ids'];
                     $misc_transaction_ids = $db_inv['misc_transaction_ids'];
                     
-                    $invoice_folder = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/files/invoices/generation_' . $request . '/districts/' . cleanName($db_inv['district_name']) . '/';
+                    $invoice_folder = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/files/invoices/generation_' . $request . '/districts/' . cleanNameDistrict($db_inv['district_name']) . '/';
                     generateInvoiceDistrict($dbh, $invoice_id, $district_id, $invoice_folder, $addr_folder, $filename, $transaction_ids, $misc_transaction_ids, $districts, $schools, $students, $services, $date_start);
                 }
             }
@@ -497,7 +497,7 @@
     }
 
     // Generates our "clean name" which is 'first_last' format
-    function cleanName($name) {
+    function cleanNameDistrict($name) {
         // Remove special characters using regular expression
         $name = preg_replace('/[^a-zA-Z0-9 ]/', '', $name);
     
