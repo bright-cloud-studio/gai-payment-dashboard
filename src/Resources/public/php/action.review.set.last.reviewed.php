@@ -10,11 +10,14 @@
         die("Connection failed: " . $dbh->connect_error);
     }
 
-    $psy_id = $_POST['psy_id'];
+    // If our psy_id was actually passed to us
+    if(isset($_POST['psy_id'])) {
     
-    $update =  "update tl_member set last_review_and_submit='".time()."' WHERE id='".$psy_id."'";
-    $result_update = $dbh->query($update);
-    
-
-    echo "pass";
-
+        $psy_id = $_POST['psy_id'];
+        
+        $update =  "update tl_member set last_review_and_submit='".time()."' WHERE id='".$psy_id."'";
+        $result_update = $dbh->query($update);
+        
+        echo "pass";
+        
+    }
