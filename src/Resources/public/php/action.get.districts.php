@@ -10,17 +10,24 @@
         die("Connection failed: " . $dbh->connect_error);
     }
     
-    $query =  "select * from tl_school WHERE published='1' AND pid='".$_POST['selected_district']."'";
-    $result = $dbh->query($query);
-    if($result) {
-        while($row = $result->fetch_assoc()) {
-            
-             $options[] = array (
-                'value' => $row['id'],
-                'label' => $row['school_name']
-            );
+    // If a selected_district value was passed to us
+    if(isset($_POST['selected_district'])) {
+        
+        $options = array();
+        
+        $query =  "select * from tl_school WHERE published='1' AND pid='".$_POST['selected_district']."'";
+        $result = $dbh->query($query);
+        if($result) {
+            while($row = $result->fetch_assoc()) {
+                
+                 $options[] = array (
+                    'value' => $row['id'],
+                    'label' => $row['school_name']
+                );
+            }
         }
+        
+        // encode our PHP array into a JSON format and send that puppy back to the AJAX call
+        echo json_encode($options);
+        
     }
-    
-    // encode our PHP array into a JSON format and send that puppy back to the AJAX call
-    echo json_encode($options);
