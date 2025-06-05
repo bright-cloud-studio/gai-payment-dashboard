@@ -9,8 +9,10 @@ use Contao\DataContainer;
 use Contao\StringUtil;
 use Contao\System;
 
-use Bcs\Model\TransactionMisc;
+use Contao\MemberModel;
 
+use Bcs\Model\TransactionMisc;
+use Bcs\Model\Service;
 
 class TransactionMiscBackend extends Backend
 {
