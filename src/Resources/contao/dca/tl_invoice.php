@@ -38,7 +38,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
             'rootPaste'               => false,
             'icon'                    => 'pagemounts.svg',
             'defaultSearchField'      => 'psychologist',
-            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'flag'                    => DataContainer::SORT_INITIAL_LETTER_DESC,
             'fields'                  => array('psychologist DESC'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
