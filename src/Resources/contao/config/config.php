@@ -16,6 +16,9 @@ use Bcs\SelectMenuDynamic;
 * @see	       https://github.com/bright-cloud-studio/gai-payment-d
 */
 
+$GLOBALS['TL_LANG']['MOD']['gai_alerts'][0] = "Automated Emails";
+$GLOBALS['BE_MOD']['gai_alerts']['alert_email'] = array( 'tables' => array('tl_alert_email') );
+
 /* Back end modules - Data DCAs */
 $GLOBALS['TL_LANG']['MOD']['gai_data'][0] = "Invoices - Data";
 $GLOBALS['BE_MOD']['gai_data']['district'] = array( 'tables' => array('tl_district') );
