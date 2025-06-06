@@ -34,13 +34,13 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE_EXTENDED,
+            'mode'                    => DataContainer::MODE_SORTABLE,
+            'fields'                  => array('pid DESC'),
+            'flag'                    => DataContainer::SORT_DESC,
+            'panelLayout'             => 'sort,filter;search,limit',
             'rootPaste'               => false,
             'icon'                    => 'pagemounts.svg',
-            'defaultSearchField'      => 'psychologist',
-            'flag'                    => DataContainer::SORT_INITIAL_LETTER_DESC,
-            'fields'                  => array('psychologist DESC'),
-            'panelLayout'             => 'sort,filter;search,limit'
+            'defaultSearchField'      => 'psychologist'
         ),
         'label' => array
         (
@@ -103,7 +103,7 @@ $GLOBALS['TL_DCA']['tl_invoice'] = array
         ),
         'pid' => array
         (
-		    'foreignKey'              => 'tl_invoice_request.id',
+		    'foreignKey'              => 'tl_invoice_request.CONCAT("Invoice Request ", id, ": ", date_start," - ", date_end)',
 			'sql'                     => "int(10) unsigned NOT NULL default 0",
 			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
         ),
