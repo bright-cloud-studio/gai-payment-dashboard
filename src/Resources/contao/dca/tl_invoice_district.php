@@ -103,7 +103,7 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
         ),
         'pid' => array
         (
-            'foreignKey'              => 'tl_invoice_request.id',
+            'foreignKey'              => 'tl_invoice_request.CONCAT(date_start," - ", date_end)',
             'sql'                     => "int(10) unsigned NOT NULL default 0",
             'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
         ),
