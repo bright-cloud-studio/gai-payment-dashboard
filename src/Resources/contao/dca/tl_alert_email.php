@@ -152,6 +152,16 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
             'sql'                     => "text NOT NULL default ''"
+        ),
+        
+        'published' => array
+        (
+            'exclude'                 => true,
+            'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['published'],
+            'inputType'               => 'checkbox',
+            'default'                 => '1',
+            'eval'                    => array('submitOnChange'=>false, 'doNotCopy'=>true),
+            'sql'                     => "char(1) NOT NULL default '1'"
         )
       
     )
