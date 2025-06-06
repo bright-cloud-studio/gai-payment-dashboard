@@ -767,7 +767,8 @@ class FormHooks
                     $field->options = serialize($opt_dis);
                     
                     $invoice_request = InvoiceRequest::findBy(['id = ?'], [$gen_id]);
-                    $field->label .= ": " . $invoice_request->date_start . " - " . $invoice_request->date_end;
+                    //$field->label .= ": " . $invoice_request->date_start . " - " . $invoice_request->date_end;
+                    $field->label = "Districts for Invoice Request " . $invoice_request->id . ": " . $invoice_request->date_start . " - " . $invoice_request->date_end;
                     
                     
                 }
