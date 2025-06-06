@@ -34,13 +34,13 @@ $GLOBALS['TL_DCA']['tl_invoice_district'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_TREE_EXTENDED,
+            'mode'                    => DataContainer::MODE_SORTABLE,
+            'fields'                  => array('pid DESC'),
+            'flag'                    => DataContainer::SORT_DESC,
+            'panelLayout'             => 'sort,filter;search,limit',
             'rootPaste'               => false,
             'icon'                    => 'pagemounts.svg',
-            'defaultSearchField'      => 'district',
-            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
-            'fields'                  => array('district DESC'),
-            'panelLayout'             => 'sort,filter;search,limit'
+            'defaultSearchField'      => 'district'
         ),
         'label' => array
         (
