@@ -53,7 +53,7 @@
     $st_r = $dbh->query($st_q);
     if($st_r) {
         while($r = $st_r->fetch_assoc()) {
-            $students[$r['id']]['name'] = getInitialsDistrictInvoice($r['name']);
+            $students[$r['id']]['name'] = getInitialsDistrict($r['name']);
             
             if($r['lasid'] != '')
                 $students[$r['id']]['number'] = $r['lasid'];
@@ -519,7 +519,7 @@
     }
     
     // Generates initials from names
-    function getInitialsDistrictInvoice($name) {
+    function getInitialsDistrict($name) {
         $words = explode(" ", $name);
         $initials = "";
     
