@@ -86,6 +86,7 @@ class ModReviewTransactions extends \Contao\Module
             
             // Get the current month and current year as two digit numbers
             $last_month = date('m');
+            //$last_month = date("m", strtotime("-1 months"));
             $current_year = date('y');
             $transaction_month = date('m', $transaction->date_submitted);
             $transaction_year = date('y', $transaction->date_submitted);
