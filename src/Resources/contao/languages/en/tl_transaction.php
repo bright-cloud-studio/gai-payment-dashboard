@@ -47,7 +47,7 @@ $GLOBALS['TL_LANG']['tl_transaction']['published']                  = array('Rev
 
 /* Internal */
 $GLOBALS['TL_LANG']['tl_transaction']['internal_legend']           = 'Internal Information';
-$GLOBALS['TL_LANG']['tl_transaction']['district']                  = array('LASID', 'Parent Assignment\'s selected District value, copied here to enable Search and Filter');
+$GLOBALS['TL_LANG']['tl_transaction']['district']                  = array('District', 'Parent Assignment\'s selected District value, copied here to enable Search and Filter');
 $GLOBALS['TL_LANG']['tl_transaction']['lasid']                     = array('LASID', 'Parent Assignment\'s selected Student\'s LASID value, copied here to enable Search and Filter');
 $GLOBALS['TL_LANG']['tl_transaction']['sasid']                     = array('SASID', 'Parent Assignment\'s selected Student\'s SASID value, copied here to enable Search and Filter');
 $GLOBALS['TL_LANG']['tl_transaction']['originally_submitted']      = array('Original Date Submitted', 'If this Transaction is not Reviewed and is carried forward, this will track the original Date Submitted before manually updating to the first of the current month');
