@@ -296,6 +296,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
+            'foreignKey'              => 'tl_district.district_name',
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
