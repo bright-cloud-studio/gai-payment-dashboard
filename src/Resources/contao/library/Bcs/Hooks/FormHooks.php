@@ -70,6 +70,7 @@ class FormHooks
             $student = Student::findBy('id', $assignment->student);
             $transaction->lasid = $student->lasid;
             $transaction->sasid = $student->sasid;
+            $transaction->district = $assignment->district;
             
             // Save our new Transaction
             $transaction->save();   
