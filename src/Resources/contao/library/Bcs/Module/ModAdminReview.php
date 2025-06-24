@@ -79,7 +79,16 @@ class ModAdminReview extends \Contao\Module
         
         // Get the current month and current year as two digit numbers
         $current_year = date('y');
-        $last_month = date('m', strtotime('-1 month'));
+        
+        $last_month = '';
+        // If the month is June and we are at the 15th day or greater into the month, review this month as it's the end of the year
+        // otherwise, review the last month
+        if(date('n') == 6 && date('j') >= 15)
+            $last_month = date('m');
+        else
+            $last_month = date('m', strtotime('-1 month'));
+        
+        
         $currently_reviewing = date('F, Y', strtotime('-1 month'));
         //$last_month = date('m');
         //$currently_reviewing = date('F, Y');
@@ -151,6 +160,7 @@ class ModAdminReview extends \Contao\Module
                         
                         
                         // District
+                        /*
                         $template_psychologists[$psy->id][$transaction->id]['district'] .= "<select name='district_$assignment->id' class='district' id='district_$assignment->id'>";
                         $template_psychologists[$psy->id][$transaction->id]['district'] .= "<option value='' selected disabled>Select a District</option>";
                         $districts = District::findAll();
@@ -161,10 +171,13 @@ class ModAdminReview extends \Contao\Module
                                 $template_psychologists[$psy->id][$transaction->id]['district'] .= "<option value='" . $district->id . "'>$district->district_name</option>";
                         }
                         $template_psychologists[$psy->id][$transaction->id]['district'] .= "</select>";
-    
+                        */
+                        $district = District::findOneBy('id', $transaction->district);
+                        $template_psychologists[$psy->id][$transaction->id]['district'] = $district->district_name;
     
                         
                         // School
+                        /*
                         $template_psychologists[$psy->id][$transaction->id]['school'] .= "<select name='school_$assignment->id' class='school' id='school_$assignment->id'>";
                         $template_psychologists[$psy->id][$transaction->id]['school'] .= "<option value='' selected disabled>First, select a District</option>";
                         $schools = School::findAll();
@@ -177,10 +190,14 @@ class ModAdminReview extends \Contao\Module
                             }
                         }
                         $template_psychologists[$psy->id][$transaction->id]['school'] .= "</select>";
+                        */
+                        $school = School::findOneBy('id', $assignment->school);
+                        $template_psychologists[$psy->id][$transaction->id]['school'] = $school->school_name;
     
     
                         
                         // Student
+                        /*
                         $template_psychologists[$psy->id][$transaction->id]['student'] .= "<select name='student_$assignment->id' class='student' id='student_$assignment->id'>";
                         $template_psychologists[$psy->id][$transaction->id]['student'] .= "<option value='' selected disabled>Select a Student</option>";
                         $students = Student::findAll();
@@ -198,9 +215,15 @@ class ModAdminReview extends \Contao\Module
                             }
                         }
                         $template_psychologists[$psy->id][$transaction->id]['student'] .= "</select>";
-    
+                        */
+                        $student = Student::findOneBy('id', $assignment->student);
+                        $template_psychologists[$psy->id][$transaction->id]['student'] = $student->name;
+                        $template_psychologists[$psy->id][$transaction->id]['lasid'] = $student->lasid;
+                        $template_psychologists[$psy->id][$transaction->id]['sasid'] = $student->sasid;
+                        
     
                         // Service
+                        /*
                         $template_psychologists[$psy->id][$transaction->id]['service'] .= "<select name='service_$assignment->id' class='service' id='service_$assignment->id'>";
                         $template_psychologists[$psy->id][$transaction->id]['service'] .= "<option value='' selected disabled>Select Service</option>";
                         $aService = array(
@@ -216,6 +239,9 @@ class ModAdminReview extends \Contao\Module
                                 $template_psychologists[$psy->id][$transaction->id]['service'] .= "<option value='" . $service->id . "'>$service->name</option>";
                         }
                         $template_psychologists[$psy->id][$transaction->id]['service'] .= "</select>";
+                        */
+                        $service = Service::findOneBy('service_code', $transaction->service);
+                        $template_psychologists[$psy->id][$transaction->id]['service'] = $service->name;
     
     
                         
