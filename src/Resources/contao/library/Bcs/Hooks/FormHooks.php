@@ -32,8 +32,36 @@ class FormHooks
     public function onFormSubmit($submittedData, $formData, $files, $labels, $form)
     {
         
+        // BOOTSTRAP - For triggering one off scripts when the need arises
+        if($formData['formID'] == 'bootstrap') {
+            
+            // Get all Transactions
+             $transactions = Transaction::findAll();
+             
+             echo "Finding all Transactions <br>";
+             
+             foreach($transactions as $transaction) {
+                 
+                 echo "Transaction ID: ". $transaction->id ."<br>";
+                 
+                 $assignment = Assignment::findBy(['id = ?'], [$transaction->pid]);
+                 
+                 echo "Assignment ID: ". $assignment->id ."<br>";
+                 echo "District ID: ". $assignment->district ."<br>";
+                 echo "Transaction Saved <br><hr><br>";
+                 
+                 $transaction->district = $assignment->district;
+                 $transaction->save();
+                 
+             }
+
+        }
+        
+        
+        
+        
         // Assignment Selection Form
-        if($formData['formID'] == 'assignment_selection') {
+        else if($formData['formID'] == 'assignment_selection') {
             // Create transaction using submitted data
             $_SESSION['assignment_uuid'] = $submittedData['assignment_uuid'];
         }
@@ -48,291 +76,489 @@ class FormHooks
         // Assignment Generate Transaction Form
         else if($formData['formID'] == 'assignment_generate_transaction') {
             
-            // Create a new Transaction
-            $transaction = new Transaction();
+            // First, try to find Transaction with these values
+            $duplicate_check = Transaction::findOneBy(
+            [
+                'tl_transaction.pid=?',
+                'tl_transaction.psychologist=?',
+                'tl_transaction.service=?',
+                'tl_transaction.price=?',
+                'tl_transaction.meeting_date=?',
+                'tl_transaction.meeting_start=?',
+                'tl_transaction.meeting_end=?'
+            ],[
+                $submittedData['assignment_uuid'], // pid
+                $submittedData['psychologist'], // psychologist
+                $submittedData['service_provided'], // service
+                $submittedData['hourly_rate'], // price
+                strtotime($submittedData['meeting_date']), // meeting_date
+                $submittedData['start_time'], // meeting_start
+                $submittedData['end_time'], // meeting_end
+            ]);
             
-            // Apply values
-            $transaction->pid = $submittedData['assignment_uuid'];
-            $transaction->tstamp = time();
-            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-            $transaction->psychologist = $submittedData['psychologist'];
-            $transaction->service = $submittedData['service_provided'];
-            $transaction->price = $submittedData['hourly_rate'];
-            $transaction->meeting_date = strtotime($submittedData['meeting_date']);
-            $transaction->meeting_start = $submittedData['start_time'];
-            $transaction->meeting_end = $submittedData['end_time'];
-            $transaction->meeting_duration = $this->timeDifferenceInMinutes($submittedData['start_time'],$submittedData['end_time']);
-            $transaction->notes = $submittedData['notes'];
-            $transaction->status = 'created';
+            if($duplicate_check) {
+                header("Location: https://ga.inc/payments/dashboard/assignments/assignments-duplicate-detected.html");
+                die();
+            } else {
+                
+                // Create a new Transaction
+                $transaction = new Transaction();
+                
+                // Apply values
+                $transaction->pid = $submittedData['assignment_uuid'];
+                $transaction->tstamp = time();
+                $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+                $transaction->psychologist = $submittedData['psychologist'];
+                $transaction->service = $submittedData['service_provided'];
+                $transaction->price = $submittedData['hourly_rate'];
+                $transaction->meeting_date = strtotime($submittedData['meeting_date']);
+                $transaction->meeting_start = $submittedData['start_time'];
+                $transaction->meeting_end = $submittedData['end_time'];
+                $transaction->meeting_duration = $this->timeDifferenceInMinutes($submittedData['start_time'],$submittedData['end_time']);
+                $transaction->notes = $submittedData['notes'];
+                $transaction->status = 'created';
+    
+                // Get LASID / SASID
+                $assignment = Assignment::findBy('id', $transaction->pid);
+                $student = Student::findBy('id', $assignment->student);
+                $transaction->lasid = $student->lasid;
+                $transaction->sasid = $student->sasid;
+                $transaction->district = $assignment->district;
+                
+                // Save our new Transaction
+                $transaction->save();
+            }
 
-            // Get LASID / SASID
-            $assignment = Assignment::findBy('id', $transaction->pid);
-            $student = Student::findBy('id', $assignment->student);
-            $transaction->lasid = $student->lasid;
-            $transaction->sasid = $student->sasid;
-            $transaction->district = $assignment->district;
-            
-            // Save our new Transaction
-            $transaction->save();   
         }
         
         // Assignment Add Meeting as a Covering Psychologist form
         else if($formData['formID'] == 'assignment_add_meeting') {
             
-            // Create a new Transaction
-            $transaction = new TransactionMisc();
+            // First, try to find Transaction with these values
+            $duplicate_check = TransactionMisc::findOneBy(
+            [
+                'tl_transaction_misc.psychologist=?',
+                'tl_transaction_misc.district=?',
+                'tl_transaction_misc.school=?',
+                'tl_transaction_misc.student_initials=?',
+                
+                'tl_transaction_misc.service=?',
+                'tl_transaction_misc.price=?',
+                'tl_transaction_misc.meeting_date=?',
+                'tl_transaction_misc.meeting_start=?',
+                'tl_transaction_misc.meeting_end=?'
+            ],[
+                FrontendUser::getInstance()->id, // psychologist
+                $submittedData['district'], // district
+                $submittedData['school'], // school
+                $submittedData['student_initials'], // student_initials
+                $submittedData['service'], // service
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'], // price
+                strtotime($submittedData['meeting_date']), // meeting_date
+                $submittedData['start_time'], // meeting_start
+                $submittedData['end_time'] // meeting_end
+            ]);
             
-            // Apply values
-            $transaction->pid = 0;
-            $transaction->tstamp = time();
-            $member = FrontendUser::getInstance();
-            $transaction->psychologist = $member->id;
+            if($duplicate_check) {
+                header("Location: https://ga.inc/payments/dashboard/add-meetings/add-meetings-duplicate-detected.html");
+                die();
+            } else {
+                // Create a new Transaction
+                $transaction = new TransactionMisc();
+                
+                // Apply values
+                $transaction->pid = 0;
+                $transaction->tstamp = time();
+                $transaction->psychologist = FrontendUser::getInstance()->id;
+                
+                $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+                
+                $transaction->district = $submittedData['district'];
+                $transaction->school = $submittedData['school'];
+                $transaction->student_initials = $submittedData['student_initials'];
+                $transaction->lasid = $submittedData['lasid'];
+                $transaction->sasid = $submittedData['sasid'];
+    
+                
+                $transaction->service = $submittedData['service'];
+                $service = Service::findBy('id', $transaction->service);
+                $transaction->service_label = "Covering - " . $service->name;
+                $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+                $transaction->meeting_date = strtotime($submittedData['meeting_date']);
+                $transaction->meeting_start = $submittedData['start_time'];
+                $transaction->meeting_end = $submittedData['end_time'];
+                $transaction->meeting_duration = $this->timeDifferenceInMinutes($submittedData['start_time'],$submittedData['end_time']);
+                $transaction->notes = $submittedData['notes'];
+                $transaction->status = 'created';
+                
+                // Save our new Transaction
+                $transaction->save();
+            }
             
-            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-            
-            $transaction->district = $submittedData['district'];
-            $transaction->school = $submittedData['school'];
-            $transaction->student_initials = $submittedData['student_initials'];
-            $transaction->lasid = $submittedData['lasid'];
-            $transaction->sasid = $submittedData['sasid'];
-
-            
-            $transaction->service = $submittedData['service'];
-            $service = Service::findBy('id', $transaction->service);
-            $transaction->service_label = "Covering - " . $service->name;
-            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
-            $transaction->meeting_date = strtotime($submittedData['meeting_date']);
-            $transaction->meeting_start = $submittedData['start_time'];
-            $transaction->meeting_end = $submittedData['end_time'];
-            $transaction->meeting_duration = $this->timeDifferenceInMinutes($submittedData['start_time'],$submittedData['end_time']);
-            $transaction->notes = $submittedData['notes'];
-            $transaction->status = 'created';
-            
-            // Save our new Transaction
-            $transaction->save();  
         }
 
         // Assignment Misc. Billing Form
         else if($formData['formID'] == 'assignment_misc_billing') {
             
-            // Create a new Transaction
-            $transaction = new TransactionMisc();
-            
-            // Apply values
-            $transaction->pid = 0;
-            $transaction->tstamp = time();
-            
-            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-
-            $member = FrontendUser::getInstance();
-            $transaction->psychologist = $submittedData['psychologist'];
-
             $service = Service::findBy('name', 'Misc. Billing');
-            $transaction->service = $service->service_code;
-
-            $transaction->service_label = $submittedData['service_label'];
             
-            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
-            $transaction->notes = $submittedData['notes'];
-            $transaction->status = 'created';
+            // First, try to find Transaction with these values
+            $duplicate_check = TransactionMisc::findOneBy(
+            [
+                'tl_transaction_misc.psychologist=?',
+                'tl_transaction_misc.service=?',
+                'tl_transaction_misc.price=?'
+            ],[
+                $submittedData['psychologist'], // psychologist
+                $service->service_code, // service
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+            ]);
             
-            // Save our new Transaction
-            $transaction->save();
+            if($duplicate_check) {
+                header("Location: https://ga.inc/payments/dashboard/misc-billing/misc-billing-duplicate-detected.html");
+                die();
+            } else {
+                 // Create a new Transaction
+                $transaction = new TransactionMisc();
+                
+                // Apply values
+                $transaction->pid = 0;
+                $transaction->tstamp = time();
+                
+                $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+    
+                $transaction->psychologist = $submittedData['psychologist'];
+    
+                $transaction->service = $service->service_code;
+    
+                $transaction->service_label = $submittedData['service_label'];
+                
+                $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+                $transaction->notes = $submittedData['notes'];
+                $transaction->status = 'created';
+                
+                // Save our new Transaction
+                $transaction->save();   
+            }
             
         }
             
         // Assignment Misc. Travel Expenses Form
         else if($formData['formID'] == 'assignment_misc_travel_expenses') {
-
-            // Create a new Transaction
-            $transaction = new TransactionMisc();
             
-            // Apply values
-            $transaction->pid = 0;
-            $transaction->tstamp = time();
-            
-            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-
-            $member = FrontendUser::getInstance();
-            $transaction->psychologist = $member->id;
-
             $service = Service::findBy('name', 'Misc. Travel Expenses');
-            $transaction->service = $service->service_code;
+            
+            // First, try to find Transaction with these values
+            $duplicate_check = TransactionMisc::findOneBy(
+            [
+                'tl_transaction_misc.psychologist=?',
+                'tl_transaction_misc.service=?',
+                'tl_transaction_misc.price=?'
+            ],[
+                FrontendUser::getInstance()->id, // psychologist
+                $service->service_code, // service
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+            ]);
+            
+            if($duplicate_check) {
+                header("Location: https://ga.inc/payments/dashboard/misc-travel-expenses/misc-travel-expenses-duplicate-detected.html");
+                die();
+            } else {
+                // Create a new Transaction
+                $transaction = new TransactionMisc();
+                
+                // Apply values
+                $transaction->pid = 0;
+                $transaction->tstamp = time();
+                
+                $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+    
+                $transaction->psychologist = FrontendUser::getInstance()->id;
+    
+                $transaction->service = $service->service_code;
+    
+                $transaction->service_label = $submittedData['service_label'];
+                
+                $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+                $transaction->notes = $submittedData['notes'];
+                $transaction->status = 'created';
+                
+                // Save our new Transaction
+                $transaction->save();
+            }
 
-            $transaction->service_label = $submittedData['service_label'];
-            
-            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
-            $transaction->notes = $submittedData['notes'];
-            $transaction->status = 'created';
-            
-            // Save our new Transaction
-            $transaction->save();
-            
         }
 
         // Assignment Parking form
         else if($formData['formID'] == 'assignment_parking') {
-
-            // Create a new Transaction
-            $transaction = new TransactionMisc();
             
-            // Apply values
-            $transaction->pid = 0;
-            $transaction->tstamp = time();
-            
-            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-
-            $member = FrontendUser::getInstance();
-            $transaction->psychologist = $member->id;
-
             $service = Service::findBy('name', 'Parking');
-            $transaction->service = $service->service_code;
-
-            $transaction->district = $submittedData['district'];
             
-            $transaction->service_label = $submittedData['service_label'];
+            // First, try to find Transaction with these values
+            $duplicate_check = TransactionMisc::findOneBy(
+            [
+                'tl_transaction_misc.psychologist=?',
+                'tl_transaction_misc.district=?',
+                'tl_transaction_misc.service=?',
+                'tl_transaction_misc.price=?'
+            ],[
+                FrontendUser::getInstance()->id, // psychologist
+                $submittedData['district'], // district
+                $service->service_code, // service
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+            ]);
             
-            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
-            $transaction->notes = $submittedData['notes'];
-            $transaction->status = 'created';
-            
-            // Save our new Transaction
-            $transaction->save();
+            if($duplicate_check) {
+                header("Location: https://ga.inc/payments/dashboard/parking/parking-duplicate-detected.html");
+                die();
+            } else {
+                
+                // Create a new Transaction
+                $transaction = new TransactionMisc();
+                
+                // Apply values
+                $transaction->pid = 0;
+                $transaction->tstamp = time();
+                
+                $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+    
+                $transaction->psychologist = FrontendUser::getInstance()->id;
+    
+                $transaction->service = $service->service_code;
+    
+                $transaction->district = $submittedData['district'];
+                
+                $transaction->service_label = $submittedData['service_label'];
+                
+                $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+                $transaction->notes = $submittedData['notes'];
+                $transaction->status = 'created';
+                
+                // Save our new Transaction
+                $transaction->save();
+                
+            }
             
         }
 
         // Assignment Manager form
         else if($formData['formID'] == 'assignment_manager') {
-
-            // Create a new Transaction
-            $transaction = new TransactionMisc();
             
-            // Apply values
-            $transaction->pid = 0;
-            $transaction->tstamp = time();
-            
-            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-
-            $member = FrontendUser::getInstance();
-            $transaction->psychologist = $member->id;
-
             $service = Service::findBy('name', 'Manager');
-            $transaction->service = $service->service_code;
+            
+            // First, try to find Transaction with these values
+            $duplicate_check = TransactionMisc::findOneBy(
+            [
+                'tl_transaction_misc.psychologist=?',
+                'tl_transaction_misc.service=?',
+                'tl_transaction_misc.price=?'
+            ],[
+                FrontendUser::getInstance()->id, // psychologist
+                $service->service_code, // service
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+            ]);
+            
+            if($duplicate_check) {
+                header("Location: https://ga.inc/payments/dashboard/manager/manager-duplicate-detected.html");
+                die();
+            } else {
+                // Create a new Transaction
+                $transaction = new TransactionMisc();
+                
+                // Apply values
+                $transaction->pid = 0;
+                $transaction->tstamp = time();
+                
+                $transaction->date_submitted = strtotime($submittedData['date_submitted']);
 
-            $transaction->service_label = $submittedData['service_label'];
+                $transaction->psychologist = FrontendUser::getInstance()->id;
+    
+                $transaction->service = $service->service_code;
+    
+                $transaction->service_label = $submittedData['service_label'];
+                
+                $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+                $transaction->notes = $submittedData['notes'];
+                $transaction->status = 'created';
+                
+                // Save our new Transaction
+                $transaction->save();
+            }
             
-            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
-            $transaction->notes = $submittedData['notes'];
-            $transaction->status = 'created';
-            
-            // Save our new Transaction
-            $transaction->save();
             
         }
 
         // Assignment Editing Services form
         else if($formData['formID'] == 'assignment_editing_services') {
             
-            // Create a new Transaction
-            $transaction = new TransactionMisc();
-            
-            // Apply values
-            $transaction->pid = 0;
-            $transaction->tstamp = time();
-            
-            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-
-            $member = FrontendUser::getInstance();
-            $transaction->psychologist = $member->id;
-
             $service = Service::findBy('name', 'Editing Services');
-            $transaction->service = $service->service_code;
-
-            $transaction->service_label = "Editing Services";
-
-            $transaction->meeting_duration = $submittedData['meeting_duration'];
             
-            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
-            $transaction->notes = $submittedData['notes'];
-            $transaction->status = 'created';
+            // First, try to find Transaction with these values
+            $duplicate_check = TransactionMisc::findOneBy(
+            [
+                'tl_transaction_misc.psychologist=?',
+                'tl_transaction_misc.service=?',
+                'tl_transaction_misc.meeting_duration=?',
+                'tl_transaction_misc.price=?'
+            ],[
+                FrontendUser::getInstance()->id, // psychologist
+                $service->service_code, // service
+                $submittedData['meeting_duration'], // Meeting Duration
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+            ]);
             
-            // Save our new Transaction
-            $transaction->save();
+            if($duplicate_check) {
+                header("Location: https://ga.inc/payments/dashboard/editing-services/editing-services-duplicate-detected.html");
+                die();
+            } else {
+                // Create a new Transaction
+                $transaction = new TransactionMisc();
+                
+                // Apply values
+                $transaction->pid = 0;
+                $transaction->tstamp = time();
+                
+                $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+    
+                $transaction->psychologist = FrontendUser::getInstance()->id;
+    
+                $transaction->service = $service->service_code;
+    
+                $transaction->service_label = "Editing Services";
+    
+                $transaction->meeting_duration = $submittedData['meeting_duration'];
+                
+                $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+                $transaction->notes = $submittedData['notes'];
+                $transaction->status = 'created';
+                
+                // Save our new Transaction
+                $transaction->save();
+            }
             
         }
 
         // Assignment Test Late Cancel - First form
         else if($formData['formID'] == 'assignment_test_late_cancel_first') {
-
-            // Create a new Transaction
-            $transaction = new TransactionMisc();
             
-            // Apply values
-            $transaction->pid = 0;
-            $transaction->tstamp = time();
+            $service = Service::findBy('service_code', '32');
             
-            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-
-            $member = FrontendUser::getInstance();
-            $transaction->psychologist = $member->id;
-
-            $service = Service::findBy('name', 'First Test Late Cancel');
-            $transaction->service = $service->service_code;
-            $transaction->service_label = $service->name;
-
-            $transaction->district = $submittedData['district'];
-            $transaction->school = $submittedData['school'];
-
-            $transaction->student_initials = $submittedData['student_initials'];
-            $transaction->lasid = $submittedData['lasid'];
-            $transaction->sasid = $submittedData['sasid'];
-
-            $transaction->meeting_date = strtotime($submittedData['meeting_date']);
-
-            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
-            $transaction->notes = $submittedData['notes'];
-            $transaction->status = 'created';
+            // First, try to find Transaction with these values
+            $duplicate_check = TransactionMisc::findOneBy(
+            [
+                'tl_transaction_misc.psychologist=?',
+                'tl_transaction_misc.service=?',
+                'tl_transaction_misc.district=?',
+                'tl_transaction_misc.school=?',
+                'tl_transaction_misc.student_initials=?',
+                'tl_transaction_misc.meeting_date=?',
+                'tl_transaction_misc.price=?',
+            ],[
+                FrontendUser::getInstance()->id, // psychologist
+                $service->service_code, // service
+                $submittedData['district'], // district
+                $submittedData['school'], // school
+                $submittedData['student_initials'], // student initials
+                strtotime($submittedData['meeting_date']), // meeting date
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+            ]);
             
-            // Save our new Transaction
-            $transaction->save();
-            
+            if($duplicate_check) {
+                header("Location: https://ga.inc/payments/dashboard/test-late-cancel-first/test-late-cancel-first-duplicate-detected.html");
+                die();
+            } else {
+                // Create a new Transaction
+                $transaction = new TransactionMisc();
+                
+                // Apply values
+                $transaction->pid = 0;
+                $transaction->tstamp = time();
+                
+                $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+
+                $transaction->psychologist = FrontendUser::getInstance()->id;
+    
+                $transaction->service = $service->service_code;
+                $transaction->service_label = $service->name;
+    
+                $transaction->district = $submittedData['district'];
+                $transaction->school = $submittedData['school'];
+    
+                $transaction->student_initials = $submittedData['student_initials'];
+                $transaction->lasid = $submittedData['lasid'];
+                $transaction->sasid = $submittedData['sasid'];
+    
+                $transaction->meeting_date = strtotime($submittedData['meeting_date']);
+    
+                $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+                $transaction->notes = $submittedData['notes'];
+                $transaction->status = 'created';
+                
+                // Save our new Transaction
+                $transaction->save();
+            }
+
         }
 
         // Assignment Test Late Cancel - First form
         else if($formData['formID'] == 'assignment_test_late_cancel_additional') {
-
-            // Create a new Transaction
-            $transaction = new TransactionMisc();
             
-            // Apply values
-            $transaction->pid = 0;
-            $transaction->tstamp = time();
+            $service = Service::findBy('service_code', '33');
             
-            $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-
-            $member = FrontendUser::getInstance();
-            $transaction->psychologist = $member->id;
-
-            $service = Service::findBy('name', 'Additional Test Late Cancel');
-            $transaction->service = $service->service_code;
-            $transaction->service_label = $service->name;
-
-            $transaction->district = $submittedData['district'];
-            $transaction->school = $submittedData['school'];
-
-            $transaction->student_initials = $submittedData['student_initials'];
-            $transaction->lasid = $submittedData['lasid'];
-            $transaction->sasid = $submittedData['sasid'];
-
-            $transaction->meeting_date = strtotime($submittedData['meeting_date']);
-
-            $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
-            $transaction->notes = $submittedData['notes'];
-            $transaction->status = 'created';
+            // First, try to find Transaction with these values
+            $duplicate_check = TransactionMisc::findOneBy(
+            [
+                'tl_transaction_misc.psychologist=?',
+                'tl_transaction_misc.service=?',
+                'tl_transaction_misc.district=?',
+                'tl_transaction_misc.school=?',
+                'tl_transaction_misc.student_initials=?',
+                'tl_transaction_misc.meeting_date=?',
+                'tl_transaction_misc.price=?',
+            ],[
+                FrontendUser::getInstance()->id, // psychologist
+                $service->service_code, // service
+                $submittedData['district'], // district
+                $submittedData['school'], // school
+                $submittedData['student_initials'], // student initials
+                strtotime($submittedData['meeting_date']), // meeting date
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+            ]);
             
-            // Save our new Transaction
-            $transaction->save();
-            
+            if($duplicate_check) {
+                header("Location: https://ga.inc/payments/dashboard/test-late-cancel-additional/test-late-cancel-additional-duplicate-detected.html");
+                die();
+            } else {
+                // Create a new Transaction
+                $transaction = new TransactionMisc();
+                
+                // Apply values
+                $transaction->pid = 0;
+                $transaction->tstamp = time();
+                
+                $transaction->date_submitted = strtotime($submittedData['date_submitted']);
+    
+                $transaction->psychologist = FrontendUser::getInstance()->id;
+    
+                $transaction->service = $service->service_code;
+                $transaction->service_label = $service->name;
+    
+                $transaction->district = $submittedData['district'];
+                $transaction->school = $submittedData['school'];
+    
+                $transaction->student_initials = $submittedData['student_initials'];
+                $transaction->lasid = $submittedData['lasid'];
+                $transaction->sasid = $submittedData['sasid'];
+    
+                $transaction->meeting_date = strtotime($submittedData['meeting_date']);
+    
+                $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
+                $transaction->notes = $submittedData['notes'];
+                $transaction->status = 'created';
+                
+                // Save our new Transaction
+                $transaction->save();
+            }
         }
        
         // Assignment Generate Transaction Form
