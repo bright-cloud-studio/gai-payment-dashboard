@@ -9,16 +9,7 @@ use Contao\DC_Table;
 /* Attempt to override the 'su' function in operations */
 //$GLOBALS['TL_DCA']['tl_member']['list']['operations']['su'] = array('Bcs\Backend\MemberBackend', 'switchUserCustomized');
 
-//$GLOBALS['TL_DCA']['tl_member']['list']['operations']['su']['button_callback'] = array('Bcs\Backend\MemberBackend', 'switchUserCustomized');
-
-$GLOBALS['TL_DCA']['tl_member']['list']['operations']['su'] => array
-(
-    'href'                => 'key=su',
-    'icon'                => 'su.svg',
-    'primary'             => true,
-    'button_callback'     => array('Bcs\Backend\MemberBackend', 'switchUserCustomized')
-);
-
+$GLOBALS['TL_DCA']['tl_member']['list']['operations']['su']['button_callback'] = array('Bcs\Backend\MemberBackend', 'switchUserCustomized');
 
  /* Extend the tl_user palettes */
 foreach ($GLOBALS['TL_DCA']['tl_member']['palettes'] as $k => $v) {
