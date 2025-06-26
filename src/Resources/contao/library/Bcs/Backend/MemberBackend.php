@@ -3,10 +3,12 @@
 namespace Bcs\Backend;
 
 use Contao\Backend;
+use Contao\BackendUser;
 use Contao\Image;
 use Contao\Input;
 use Contao\DataContainer;
 use Contao\StringUtil;
+use Contao\System;
 
 use Bcs\Model\Transaction;
 use Bcs\Model\Assignment;
@@ -29,7 +31,7 @@ class MemberBackend extends Backend
 			return Image::getHtml(str_replace('.svg', '--disabled.svg', $icon)) . ' ';
 		}
 
-		$url = System::getContainer()->get('router')->generate('contao_backend_preview', array('user'=>$row['username']));
+		$url = System::getContainer()->get('router')->generate('contao_backend_preview', array('page'=>'19', 'user'=>$row['username']));
 
 		return '<a href="' . StringUtil::specialcharsUrl($url) . '" target="_blank" data-turbo-prefetch="false">' . Image::getHtml($icon, $title) . '</a> ';
 	}
