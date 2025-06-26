@@ -4,11 +4,7 @@ use Bcs\Model\Service;
 use Contao\DataContainer;
 use Contao\DC_Table;
 
-/* Psychologist - Custom Fields */
-
-/* Attempt to override the 'su' function in operations */
-//$GLOBALS['TL_DCA']['tl_member']['list']['operations']['su'] = array('Bcs\Backend\MemberBackend', 'switchUserCustomized');
-
+/* Override the switch user function with our custom one that routes the user to the Dashboard instead of the homepage */
 $GLOBALS['TL_DCA']['tl_member']['list']['operations']['su']['button_callback'] = array('Bcs\Backend\MemberBackend', 'switchUserCustomized');
 
  /* Extend the tl_user palettes */
