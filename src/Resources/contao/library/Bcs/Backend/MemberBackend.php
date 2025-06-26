@@ -14,7 +14,7 @@ use Bcs\Model\Student;
 
 class MemberBackend extends Backend
 {
-  public function switchUser($row, $href, $label, $title, $icon)
+  public function switchUserCustomized($row, $href, $label, $title, $icon)
 	{
 		$user = BackendUser::getInstance();
 		$blnCanSwitchUser = $user->isAdmin || (!empty($user->amg) && is_array($user->amg));
