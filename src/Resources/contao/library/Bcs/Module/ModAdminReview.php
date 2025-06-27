@@ -241,7 +241,12 @@ class ModAdminReview extends \Contao\Module
                         $template_psychologists[$psy->id][$transaction->id]['service'] .= "</select>";
                         */
                         $service = Service::findOneBy('service_code', $transaction->service);
-                        $template_psychologists[$psy->id][$transaction->id]['service'] = $service->name;
+                        
+                        if($transaction->meeting_duration > 0) {
+                            $template_psychologists[$psy->id][$transaction->id]['service'] = $service->name . " (" . $transaction->meeting_duration . " minutes)";
+                        } else {
+                            $template_psychologists[$psy->id][$transaction->id]['service'] = $service->name;
+                        }
     
     
                         
