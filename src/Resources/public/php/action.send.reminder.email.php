@@ -15,10 +15,9 @@
 
     // Trigger when X days before the end of the month
     
-    $weekly_reminder = 13;
-    //$weekly_reminder = 7;
+    $weekly_reminder = 7;
     
-    $final_reminder = 7;
+    $final_reminder = 0;
     // Calculates remaining days until the next month
     $how_many_days = date('t') - date('j');
     // Gets the current Hour in 24 hour format
@@ -52,6 +51,7 @@
         			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
         			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
         			
+        			/*
         			$sub = "Final submissions due by June 23th at Midnight, make sure to Submit and Review your Transactions";
         			$message = "
         				<html>
@@ -65,8 +65,9 @@
         				</body>
         				</html>
         				";
+        				*/
         			
-        			/*
+        			
         			$sub = "The end of the month is here, make sure to Submit and Review your Transactions";
         			$message = "
         				<html>
@@ -80,7 +81,7 @@
         				</body>
         				</html>
         				";
-        			*/
+        			
         			
         			mail($addr, $sub, $message, $headers);
                 }
