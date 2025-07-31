@@ -87,7 +87,7 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{alert_email_legend}, month; {warning_legend}, warning_date, warning_copy; {final_legend}, final_date, final_copy; {publish_legend},published;'
+        'default'                     => '{alert_email_legend}, month; {warning_legend}, warning_date, warning_subject, warning_body; {final_legend}, final_date, final_subject, final_body; {publish_legend},published;'
     ),
  
     // Fields
@@ -105,6 +105,8 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
         (
             'sql'                   => "int(10) unsigned NOT NULL default '0'"
         ),
+
+        
         'month' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['month'],
@@ -115,6 +117,9 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
+
+
+        
         'warning_date' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['warning_date'],
@@ -125,15 +130,27 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'warning_copy' => array
+        'warning_subject' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['warning_copu'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['warning_subject'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
             'sql'                     => "text NOT NULL default ''"
         ),
+        'warning_body' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['warning_body'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
+            'sql'                     => "text NOT NULL default ''"
+        ),
+
+
+        
         'final_date' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['final_date'],
@@ -144,15 +161,26 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'final_copy' => array
+        'final_subject' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['final_copy'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['final_subject'],
             'inputType'               => 'text',
             'default'                 => '',
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
             'sql'                     => "text NOT NULL default ''"
         ),
+        'final_body' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['final_body'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'search'                  => true,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
+            'sql'                     => "text NOT NULL default ''"
+        ),
+
+        
         
         'published' => array
         (
