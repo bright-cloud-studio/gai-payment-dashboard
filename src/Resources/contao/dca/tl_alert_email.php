@@ -145,7 +145,7 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'default'                 => '',
             'search'                  => false,
             'filter'                  => false,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100'),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100', 'rte'=>'tinyMCE', 'allowHtml' => true),
             'sql'                     => "text NOT NULL default ''"
         ),
 
@@ -177,7 +177,7 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'default'                 => '',
             'search'                  => false,
             'filter'                  => false,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100'),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100', 'rte'=>'tinyMCE', 'allowHtml' => true),
             'sql'                     => "text NOT NULL default ''"
         ),
 
