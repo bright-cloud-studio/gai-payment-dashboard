@@ -117,18 +117,17 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-
-
+        
         
         'warning_date' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['warning_date'],
             'inputType'               => 'text',
             'default'                 => '',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'filter'                  => false,
+            'search'                  => false,
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(20) default ''"
         ),
         'warning_subject' => array
         (
@@ -142,10 +141,11 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
         'warning_body' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['warning_body'],
-            'inputType'               => 'text',
+            'inputType'               => 'textarea',
             'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
+            'search'                  => false,
+            'filter'                  => false,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100'),
             'sql'                     => "text NOT NULL default ''"
         ),
 
@@ -156,10 +156,10 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['final_date'],
             'inputType'               => 'text',
             'default'                 => '',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'filter'                  => false,
+            'search'                  => false,
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(20) default ''"
         ),
         'final_subject' => array
         (
@@ -173,10 +173,11 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
         'final_body' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['final_body'],
-            'inputType'               => 'text',
+            'inputType'               => 'textarea',
             'default'                 => '',
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr', 'allowHtml'=>false),
+            'search'                  => false,
+            'filter'                  => false,
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100'),
             'sql'                     => "text NOT NULL default ''"
         ),
 
