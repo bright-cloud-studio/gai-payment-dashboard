@@ -47,37 +47,17 @@
 
 
                         // Loop through all Members then email them
+                        fwrite($log, "Looping through Psychologists\r\n");
                         $psychologists = MemberModel::findBy('disable', '0');
                         if($psychologists) {
                             foreach ($psychologists as $psychologist) {
 
                                 fwrite($log, "PSY ID: ". $psychologist->id ." \r\n");
-                                // Send the email
-                                /*
-                                $addr = 'mark@brightcloudstudio.com';
-                    			$headers = "MIME-Version: 1.0" . "\r\n";
-                    			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
-                    			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
-                    			$sub = $alert_email->warning_subject;
-                    			$message = "
-                    				<html>
-                    				<head>
-                    				<title>Global Assessments, Inc. - FINAL DAY Reminder</title>
-                    				</head>
-                    				<body>".
-                                        $alert_email->warning_body
-                                    ."</body>
-                    				</html>
-                    				";
-                    			mail($addr, $sub, $message, $headers);
-                                */
-            
-                                
                                 
                             }
                         }
 
+                        fwrite($log, "Saving Last Sent for Warning! \r\n");
                         $alert_email->warning_last_sent = time();
                         $alert_email->save();
                         
