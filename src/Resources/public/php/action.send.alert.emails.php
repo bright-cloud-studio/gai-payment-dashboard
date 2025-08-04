@@ -27,13 +27,15 @@
             // Get the Warning email date and Today's date
             $warning_date = date('m_d_y', $alert_email->warning_date);
             $warning_last_sent = date('m_d_y', $alert_email->warning_last_sent);
-            $final_date = date('m_d_y', $alert_email->final_date);
             $today = date('m_d_y', time());
+
+            fwrite($log, "Warning Date: " . $warning_date . "\r\n");
+            fwrite($log, "Warning Last Sent: " . $warning_last_sent . "\r\n");
+            fwrite($log, "Today: " . $today . "\r\n");
+
             // Get the current hour, as we only want to send out at noon
             $hour = date("H");
             $hour = 12;
-
-
             
             // WARNING EMAIL
             if($warning_date == $today) {
