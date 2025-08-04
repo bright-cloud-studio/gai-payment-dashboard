@@ -1,5 +1,7 @@
 <?php
 
+    use Bcs\Model\AlertEmail;
+
     // Initialize Session, include Composer
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
@@ -19,6 +21,16 @@
 
 
     // Loop through all Alert emails
+
+    fwrite($log, "Looping through Alert Emails \r\n");
+
+    $alert_emails = AlertEmail::findAll();
+    if($alert_emails) {
+        foreach ($alert_emails as $alert_email) {
+            fwrite($log, "ID: " . $alert_email->id . "\r\n");
+            fwrite($log, "MONTH: " . $alert_email->month . "\r\n");
+        }
+    }
 
         // If it is "SEND DATE", and it is within the noon hour, send the email
 
