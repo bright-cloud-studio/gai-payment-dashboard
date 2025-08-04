@@ -223,11 +223,14 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
 
 class tl_alert_email extends Backend
 {
-    $new_label .= $row['month'];
-    $new_label .= ' | ';
-    $new_label .= 'Warning: ' . date('m/d/y', $row['warning_date']);
-    $new_label .= ' | ';
-    $new_label .= 'Final: ' . date('m/d/y', $row['final_date']);
+    public function generateLabel($row, $label)
+	{      
+        $new_label .= $row['month'];
+        $new_label .= ' | ';
+        $new_label .= 'Warning: ' . date('m/d/y', $row['warning_date']);
+        $new_label .= ' | ';
+        $new_label .= 'Final: ' . date('m/d/y', $row['final_date']);
+    }
 
     
 }
