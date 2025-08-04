@@ -17,8 +17,10 @@ $GLOBALS['TL_LANG']['tl_alert_email']['warning_legend']         = 'Week Remainin
 $GLOBALS['TL_LANG']['tl_alert_email']['warning_date']           = array('Send Date', 'Enter in a Month label to identify which timeframe this covers');
 $GLOBALS['TL_LANG']['tl_alert_email']['warning_subject']        = array('Subject', 'Enter in a Month label to identify which timeframe this covers');
 $GLOBALS['TL_LANG']['tl_alert_email']['warning_body']           = array('Body', 'Enter in a Month label to identify which timeframe this covers');
+$GLOBALS['TL_LANG']['tl_alert_email']['warning_last_sent']      = array('Last Sent Date', 'Tracks when this was last sent, preventing duplicate emails');
 
 $GLOBALS['TL_LANG']['tl_alert_email']['final_legend']         = 'Final Day Details';
 $GLOBALS['TL_LANG']['tl_alert_email']['final_date']           = array('Send Date', 'Enter in a Month label to identify which timeframe this covers');
 $GLOBALS['TL_LANG']['tl_alert_email']['final_subject']        = array('Subject', 'Enter in a Month label to identify which timeframe this covers');
 $GLOBALS['TL_LANG']['tl_alert_email']['final_body']           = array('Body', 'Enter in a Month label to identify which timeframe this covers');
+$GLOBALS['TL_LANG']['tl_alert_email']['final_last_sent']      = array('Last Sent Date', 'Tracks when this was last sent, preventing duplicate emails');
