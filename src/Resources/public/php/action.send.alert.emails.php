@@ -22,13 +22,45 @@
     if($alert_emails) {
         foreach ($alert_emails as $alert_email) {
 
+            // Get the Warning email date and Today's date
             $warning_date = date('m_d_y', $alert_email->warning_date);
             $today = date('m_d_y', time());
+            // Get the current hour, as we only want to send out at noon
+            $hour = date("H");
+            $hour = 12;
 
+            // If today is the day listed in the Alert Email
             if($warning_date == $today) {
                 fwrite($log, "Today is the SEND day! \r\n");
-            } else {
-                fwrite($log, "Today IS NOT the SEND day!: \r\n");
+
+                if($hour == 12) {
+                    fwrite($log, "IT IS the sending hour! \r\n");
+
+                    // Send the email
+                    $addr = 'mark@brightcloudstudio.com';
+        			$headers = "MIME-Version: 1.0" . "\r\n";
+        			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+        			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+        			$sub = $alert_email->warning_subject;
+        			$message = "
+        				<html>
+        				<head>
+        				<title>Global Assessments, Inc. - FINAL DAY Reminder</title>
+        				</head>
+        				<body>".
+                            $alert_email->warning_body
+                        ."</body>
+        				</html>
+        				";
+        			mail($addr, $sub, $message, $headers);
+
+                    // Stamp as sent so we dont do this again today
+                    
+                    
+                } else {
+                    fwrite($log, "NOT YET the sending hour! \r\n");
+                
             }
 
 
