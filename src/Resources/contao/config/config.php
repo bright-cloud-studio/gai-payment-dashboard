@@ -67,6 +67,8 @@ $GLOBALS['TL_MODELS']['tl_price_tier']         = 'Bcs\Model\PriceTier';
 $GLOBALS['TL_MODELS']['tl_transaction']        = 'Bcs\Model\Transaction';
 $GLOBALS['TL_MODELS']['tl_transaction_misc']   = 'Bcs\Model\TransactionMisc';
 
+$GLOBALS['TL_MODELS']['tl_alert_email']   = 'Bcs\Model\AlertEmail';
+
 /* Custom Form Fields */
 $GLOBALS['BE_FFL']['select_dynamic'] = SelectMenuDynamic::class;
 $GLOBALS['TL_FFL']['select_dynamic'] = FormSelectDynamic::class;
