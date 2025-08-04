@@ -41,7 +41,8 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
         'label' => array
         (
             'fields'                  => array('month', 'warning_date', 'final_date'),
-            'format'                  => '%s - %s - %s'
+            'format'                  => '%s - %s - %s',
+            'label_callback'          => array('tl_alert_email', 'generateLabel')
         ),
         'global_operations' => array
         (
@@ -218,3 +219,18 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
       
     )
 );
+
+
+class tl_alert_email extends Backend
+{
+    $new_label .= $row['month'];
+    $new_label .= ' | ';
+    $new_label .= 'Warning: ' . date('m/d/y', $row['warning_date']);
+    $new_label .= ' | ';
+    $new_label .= 'Final: ' . date('m/d/y', $row['final_date']);
+
+    
+}
+
+
+
