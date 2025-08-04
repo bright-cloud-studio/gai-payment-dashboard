@@ -16,19 +16,22 @@
     $log = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/alert_emails_'.date('m_d_y').'.txt', "a+") or die("Unable to open file!");
 
 
-
-
-
-
     // Loop through all Alert emails
-
     fwrite($log, "Looping through Alert Emails \r\n");
-
     $alert_emails = AlertEmail::findAll();
     if($alert_emails) {
         foreach ($alert_emails as $alert_email) {
-            fwrite($log, "ID: " . $alert_email->id . "\r\n");
-            fwrite($log, "MONTH: " . $alert_email->month . "\r\n");
+
+            $warning_date = date('m_d_y', $alert_email->warning_date);
+            $today = date('m_d_y', time());
+
+            if($warning_date == $today) {
+                fwrite($log, "Today is the SEND day! \r\n");
+            } else {
+                fwrite($log, "Today IS NOT the SEND day!: \r\n");
+            }
+
+
         }
     }
 
