@@ -87,7 +87,7 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{alert_email_legend}, month; {warning_legend}, warning_date, warning_subject, warning_body; {final_legend}, final_date, final_subject, final_body; {publish_legend},published;'
+        'default'                     => '{alert_email_legend}, month; {warning_legend}, warning_date, warning_subject, warning_body, warning_last_sent;{final_legend}, final_date, final_subject, final_body, final_last_sent;{publish_legend},published;'
     ),
  
     // Fields
@@ -119,6 +119,8 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
         ),
         
         
+
+        
         'warning_date' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['warning_date'],
@@ -148,8 +150,19 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100', 'rte'=>'tinyMCE', 'allowHtml' => true),
             'sql'                     => "text NOT NULL default ''"
         ),
-
-
+        'warning_last_sent' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['warning_last_sent'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => false,
+            'search'                  => false,
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(20) default ''"
+        ),
+        
+        
+        
         
         'final_date' => array
         (
@@ -179,6 +192,16 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'filter'                  => false,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'clr w100', 'rte'=>'tinyMCE', 'allowHtml' => true),
             'sql'                     => "text NOT NULL default ''"
+        ),
+        'final_last_sent' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_alert_email']['final_last_sent'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => false,
+            'search'                  => false,
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(20) default ''"
         ),
 
         
