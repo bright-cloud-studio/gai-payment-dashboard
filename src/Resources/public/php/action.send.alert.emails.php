@@ -58,7 +58,7 @@
                         }
 
                         fwrite($log, "Saving Last Sent for Warning! \r\n");
-                        $alert_email->warning_last_sent = time();
+                        $alert_email->warning_last_sent = date("m_d_y", time());
                         $alert_email->save();
                         
                     } else
