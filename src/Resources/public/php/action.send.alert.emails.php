@@ -61,14 +61,40 @@
                         $psychologists = MemberModel::findBy('disable', '0');
                         if($psychologists) {
                             foreach ($psychologists as $psychologist) {
+                                fwrite($log, "PSY: ". $psychologist->firstname . " " . $psychologist->lastname ." \r\n");
 
-                                fwrite($log, "PSY ID: ". $psychologist->id ." \r\n");
+                                // Only sending to myself for dev purposes
+                                if($psychologist->id == 7) {
+                                    fwrite($log, "SENDING EMAIL TO PSY: " . $psychologist->id . "\r\n");
+                                    $addr = $psychologist->email;
+                        			$headers = "MIME-Version: 1.0" . "\r\n";
+                        			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                        			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+                        			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+                        			$sub = $alert_email->warning_subject;
+                        			$message = "
+                        				<html>
+                        				<head>
+                        				<title>Global Assessments, Inc. - FINAL DAY Reminder</title>
+                        				</head>
+                        				<body>".
+                                            $alert_email->warning_body
+                                        ."</body>
+                        				</html>
+                        				";
+    
+                                    // TEMPLATE TAGS
+                                    $message = str_replace('$firstname', $psychologist->firstname, $message);
+                                    $message = str_replace('$lastname', $psychologist->lastname, $message);
+                                    
+                        			mail($addr, $sub, $message, $headers);
+                                }
                                 
                             }
                         }
 
                         fwrite($log, "Saving Last Sent for Warning! \r\n");
-                        $alert_email->warning_last_sent = date("m_d_y", time());
+                        $alert_email->warning_last_sent = time();
                         $alert_email->save();
                         
                     } else
