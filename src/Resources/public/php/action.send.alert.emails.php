@@ -1,7 +1,6 @@
 <?php
 
     use Bcs\Model\AlertEmail;
-
     use Contao\MemberModel;
 
     // Initialize Session, include Composer
@@ -17,55 +16,51 @@
     // Create a log file so we can track this is working accurately
     $log = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/alert_emails_'.date('m_d_y').'.txt', "a+") or die("Unable to open file!");
 
-
     // Loop through all Alert emails
-    fwrite($log, "Looping through Alert Emails \r\n");
     $alert_emails = AlertEmail::findAll();
     if($alert_emails) {
         foreach ($alert_emails as $alert_email) {
 
             // Get the Warning email date and Today's date
             $warning_date = date('m_d_y', $alert_email->warning_date);
+            $final_date = date('m_d_y', $alert_email->final_date);
+            $today = date('m_d_y', time());
 
-            fwrite($log, "Warning Last Sent: " .  $alert_email->warning_last_sent . "\r\n");
-            
+            // Warning Last Sent will either be empty or have a value
             $warning_last_sent;
             if($alert_email->warning_last_sent == '')
                 $warning_last_sent = 0;
             else
                 $warning_last_sent = date('m_d_y', $alert_email->warning_last_sent);
-            $today = date('m_d_y', time());
 
-            fwrite($log, "Warning Date: " . $warning_date . "\r\n");
-            fwrite($log, "Warning Last Sent: " . $warning_last_sent . "\r\n");
-            fwrite($log, "Today: " . $today . "\r\n");
-            fwrite($log, "------------------------------------------\r\n");
+            // Final Last Sent will either be empty or have a value
+            $final_last_sent;
+            if($alert_email->final_last_sent == '')
+                $final_last_sent = 0;
+            else
+                $final_last_sent = date('m_d_y', $alert_email->final_last_sent);
 
             // Get the current hour, as we only want to send out at noon
             $hour = date("H");
-            $hour = 12;
-            
+            $hour = 12; // fixed as noon for development purposes
+
+
             // WARNING EMAIL
             if($warning_date == $today) {
-                fwrite($log, "Today is the SEND day! \r\n");
-
+                fwrite($log, "WARNING: Send Day \r\n");
 
                 if($warning_last_sent != $today) {
-                    fwrite($log, "HAVENT sent yet today! \r\n");
+                    fwrite($log, "WARNING: Unset yet today \r\n");
                     if($hour == 12) {
-                        fwrite($log, "IT IS the sending hour! \r\n");
+                        fwrite($log, "WARNING: Correct Hour \r\n");
 
-
-                        // Loop through all Members then email them
-                        fwrite($log, "Looping through Psychologists\r\n");
                         $psychologists = MemberModel::findBy('disable', '0');
                         if($psychologists) {
                             foreach ($psychologists as $psychologist) {
-                                fwrite($log, "PSY: ". $psychologist->firstname . " " . $psychologist->lastname ." \r\n");
-
+                                
                                 // Only sending to myself for dev purposes
                                 if($psychologist->id == 7) {
-                                    fwrite($log, "SENDING EMAIL TO PSY: " . $psychologist->id . "\r\n");
+                                    fwrite($log, "WARNING: Emailing ". $psychologist->firstname . " " . $psychologist->lastname . "\r\n");
                                     $addr = $psychologist->email;
                         			$headers = "MIME-Version: 1.0" . "\r\n";
                         			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -92,15 +87,60 @@
                                 
                             }
                         }
-
-                        fwrite($log, "Saving Last Sent for Warning! \r\n");
                         $alert_email->warning_last_sent = time();
                         $alert_email->save();
-                        
-                    } else
-                        fwrite($log, "NOT YET the sending hour! \r\n");
-                } else
-                     fwrite($log, "ALREADY sent today! \r\n");
+                    }
+                }
+            }
+
+
+
+            // FINAL DAY EMAIL
+            if($final_date == $today) {
+                fwrite($log, "FINAL: Send Day \r\n");
+
+                if($final_last_sent != $today) {
+                    fwrite($log, "FINAL: Unset yet today \r\n");
+                    if($hour == 12) {
+                        fwrite($log, "FINAL: Correct Hour \r\n");
+
+                        $psychologists = MemberModel::findBy('disable', '0');
+                        if($psychologists) {
+                            foreach ($psychologists as $psychologist) {
+                                
+                                // Only sending to myself for dev purposes
+                                if($psychologist->id == 7) {
+                                    fwrite($log, "FINAL: Emailing ". $psychologist->firstname . " " . $psychologist->lastname . "\r\n");
+                                    $addr = $psychologist->email;
+                        			$headers = "MIME-Version: 1.0" . "\r\n";
+                        			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                        			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+                        			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+                        			$sub = $alert_email->warning_subject;
+                        			$message = "
+                        				<html>
+                        				<head>
+                        				<title>Global Assessments, Inc. - FINAL DAY Reminder</title>
+                        				</head>
+                        				<body>".
+                                            $alert_email->warning_body
+                                        ."</body>
+                        				</html>
+                        				";
+    
+                                    // TEMPLATE TAGS
+                                    $message = str_replace('$firstname', $psychologist->firstname, $message);
+                                    $message = str_replace('$lastname', $psychologist->lastname, $message);
+                                    
+                        			mail($addr, $sub, $message, $headers);
+                                }
+                                
+                            }
+                        }
+                        $alert_email->final_last_sent = time();
+                        $alert_email->save();
+                    }
+                }
             }
 
 
