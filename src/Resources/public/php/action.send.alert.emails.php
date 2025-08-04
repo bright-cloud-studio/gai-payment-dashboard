@@ -149,13 +149,5 @@
         }
     }
 
-        // If it is "SEND DATE", and it is within the noon hour, send the email
-
-            // mark 'last_sent' as today to prevent duplicate mailings
-
-
-
-    
-
     // Close our log file
     fclose($log);
