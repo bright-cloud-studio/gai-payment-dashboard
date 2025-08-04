@@ -30,7 +30,7 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
         'sorting' => array
         (
             // Attempt to list as collapsable view
-            'mode'                    => DataContainer::MODE_SORTED,
+            'mode'                    => DataContainer::MODE_UNSORTED,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
