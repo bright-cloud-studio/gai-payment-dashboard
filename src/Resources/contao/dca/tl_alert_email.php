@@ -230,6 +230,8 @@ class tl_alert_email extends Backend
         $new_label .= 'Warning: ' . date('m/d/y', $row['warning_date']);
         $new_label .= ' | ';
         $new_label .= 'Final: ' . date('m/d/y', $row['final_date']);
+
+        return $new_label;
     }
 
     
