@@ -39,6 +39,7 @@
 
 
                 if($warning_last_sent != $today) {
+                    fwrite($log, "HAVENT sent yet today! \r\n");
                     if($hour == 12) {
                         fwrite($log, "IT IS the sending hour! \r\n");
     
@@ -62,12 +63,12 @@
             			mail($addr, $sub, $message, $headers);
     
                         $alert_email->warning_last_sent = time();
-                        $alert->email->save();
+                        $alert_email->save();
                         
                     } else
                         fwrite($log, "NOT YET the sending hour! \r\n");
                 } else
-                     fwrite($log, "ALREADY SENT TODAY! \r\n");
+                     fwrite($log, "ALREADY sent today! \r\n");
             }
 
 
