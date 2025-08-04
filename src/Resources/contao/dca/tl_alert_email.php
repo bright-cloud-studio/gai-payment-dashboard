@@ -35,7 +35,7 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('month'),
+            'fields'                  => array('id'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
@@ -68,6 +68,12 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
                 'icon'                => 'visible.gif',
                 'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
                 'button_callback'     => array('Bcs\Backend\AlertEmailBackend', 'toggleIcon')
+            ),
+            'copy' => array
+            (
+                'label'               => &$GLOBALS['TL_LANG']['tl_alert_email']['copy'],
+                'href'                => 'act=copy',
+                'icon'                => 'copy.gif'
             ),
             'delete' => array
             (
