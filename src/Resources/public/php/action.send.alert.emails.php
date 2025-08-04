@@ -58,7 +58,7 @@
                     // Stamp as sent so we dont do this again today
                     
                     
-                } else {
+                } else
                     fwrite($log, "NOT YET the sending hour! \r\n");
                 
             }
