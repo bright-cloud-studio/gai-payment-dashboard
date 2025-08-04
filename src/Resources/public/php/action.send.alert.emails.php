@@ -2,6 +2,8 @@
 
     use Bcs\Model\AlertEmail;
 
+    use Contao\MemberModel;
+
     // Initialize Session, include Composer
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
@@ -42,26 +44,40 @@
                     fwrite($log, "HAVENT sent yet today! \r\n");
                     if($hour == 12) {
                         fwrite($log, "IT IS the sending hour! \r\n");
-    
-                        // Send the email
-                        $addr = 'mark@brightcloudstudio.com';
-            			$headers = "MIME-Version: 1.0" . "\r\n";
-            			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
-            			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
-            			$sub = $alert_email->warning_subject;
-            			$message = "
-            				<html>
-            				<head>
-            				<title>Global Assessments, Inc. - FINAL DAY Reminder</title>
-            				</head>
-            				<body>".
-                                $alert_email->warning_body
-                            ."</body>
-            				</html>
-            				";
-            			mail($addr, $sub, $message, $headers);
-    
+
+
+                        // Loop through all Members then email them
+                        $psychologists = MemberModel::findBy('disable', '0');
+                        if($psychologists) {
+                            foreach ($psychologists as $psychologist) {
+
+                                fwrite($log, "PSY ID: ". $psychologist->id ." \r\n");
+                                // Send the email
+                                /*
+                                $addr = 'mark@brightcloudstudio.com';
+                    			$headers = "MIME-Version: 1.0" . "\r\n";
+                    			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+                    			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+                    			$sub = $alert_email->warning_subject;
+                    			$message = "
+                    				<html>
+                    				<head>
+                    				<title>Global Assessments, Inc. - FINAL DAY Reminder</title>
+                    				</head>
+                    				<body>".
+                                        $alert_email->warning_body
+                                    ."</body>
+                    				</html>
+                    				";
+                    			mail($addr, $sub, $message, $headers);
+                                */
+            
+                                
+                                
+                            }
+                        }
+
                         $alert_email->warning_last_sent = time();
                         $alert_email->save();
                         
