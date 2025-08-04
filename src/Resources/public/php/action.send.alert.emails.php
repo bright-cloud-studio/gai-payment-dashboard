@@ -13,7 +13,7 @@
     }
 
     // Create a log file so we can track this is working accurately
-    $log = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/'.date('m_d_y').'_reminder_emails.txt', "a+") or die("Unable to open file!");
+    $log = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/alert_emails_'.date('m_d_y').'.txt', "a+") or die("Unable to open file!");
 
 
 
