@@ -585,13 +585,7 @@ class FormHooks
                 $headers .= 'Cc: ed@globalassessmentsinc.com, ' . $d->contact_cc_email . "\r\n";
                 
                 $name = $d->district_name;
-
-                // To get the month, first get the Invoice Request
-                $invoice_request = InvoiceRequest::findBy(['id = ?'], [$i->pid]);
-                // Use the date string to get an actual date format
-                $dateObject = DateTime::createFromFormat('m/d/y', $invoice_request->date_start);
-                // Convert date into Month string
-                $month = $dateObject->format('F');
+                $month = 'October';
                 
                 $sub = "$name, your $month invoice is ready for you";
                 
