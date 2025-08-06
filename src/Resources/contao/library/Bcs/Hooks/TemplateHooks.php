@@ -53,6 +53,7 @@ class TemplateHooks
     }
     
     
+    // Calculates Transaction totals for "Today"
     public function calculateDay() {
         
         // Tracks the total price of the Transactions
@@ -241,6 +242,7 @@ class TemplateHooks
         );
     }
     
+    // Calculates Transaction Totals for "today" but last year
     public function calculateDayLastYear() {
         
         // Tracks the total price of the Transactions
