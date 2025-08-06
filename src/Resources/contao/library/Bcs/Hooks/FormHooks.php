@@ -207,7 +207,8 @@ class FormHooks
             [
                 'tl_transaction_misc.psychologist=?',
                 'tl_transaction_misc.service=?',
-                'tl_transaction_misc.price=?'
+                'tl_transaction_misc.price=?',
+                'tl_transaction_misc.date_submitted=?'
             ],[
                 $submittedData['psychologist'], // psychologist
                 $service->service_code, // service
@@ -253,7 +254,8 @@ class FormHooks
             [
                 'tl_transaction_misc.psychologist=?',
                 'tl_transaction_misc.service=?',
-                'tl_transaction_misc.price=?'
+                'tl_transaction_misc.price=?',
+                'tl_transaction_misc.date_submitted=?'
             ],[
                 FrontendUser::getInstance()->id, // psychologist
                 $service->service_code, // service
@@ -300,7 +302,8 @@ class FormHooks
                 'tl_transaction_misc.psychologist=?',
                 'tl_transaction_misc.district=?',
                 'tl_transaction_misc.service=?',
-                'tl_transaction_misc.price=?'
+                'tl_transaction_misc.price=?',
+                'tl_transaction_misc.date_submitted=?'
             ],[
                 FrontendUser::getInstance()->id, // psychologist
                 $submittedData['district'], // district
@@ -351,7 +354,8 @@ class FormHooks
             [
                 'tl_transaction_misc.psychologist=?',
                 'tl_transaction_misc.service=?',
-                'tl_transaction_misc.price=?'
+                'tl_transaction_misc.price=?',
+                'tl_transaction_misc.date_submitted=?'
             ],[
                 FrontendUser::getInstance()->id, // psychologist
                 $service->service_code, // service
@@ -399,7 +403,8 @@ class FormHooks
                 'tl_transaction_misc.psychologist=?',
                 'tl_transaction_misc.service=?',
                 'tl_transaction_misc.meeting_duration=?',
-                'tl_transaction_misc.price=?'
+                'tl_transaction_misc.price=?',
+                'tl_transaction_misc.date_submitted=?'
             ],[
                 FrontendUser::getInstance()->id, // psychologist
                 $service->service_code, // service
