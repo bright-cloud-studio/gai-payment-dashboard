@@ -87,7 +87,7 @@ class ModAdminReview extends \Contao\Module
             $last_month = date('m');
         else
             $last_month = date('m', strtotime('-1 month'));
-        
+
         
         $currently_reviewing = date('F, Y', strtotime('-1 month'));
         //$last_month = date('m');
