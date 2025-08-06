@@ -30,6 +30,10 @@ html[data-color-scheme=light] #tl_gai div.size25 .inside{
 #tl_gai .psychologists_wrapper .total { color: red; }
 #tl_gai .districts_wrapper .total { color: green; }
 
+#tl_gai .inside.last_year { font-size: 0.65em; }
+#tl_gai .inside.last_year h3 { font-size: 1.3em; }
+#tl_gai .inside.last_year hr { margin: 10px 0; }
+
 #tl_gai .transactions, #tl_gai .transactions_misc {
     font-size: 0.8em;
     margin-bottom: 2px;
