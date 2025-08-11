@@ -290,7 +290,19 @@ class ModPsychWorkForm extends \Contao\Module
             
             
             
+            
+            
+            
+            // Student - Grade.
+            $template_assignments[$assignment->id]['data_grade'] = 'data-grade="'.$student->grade.'"';
+            if($is_admin) {
+                $template_assignments[$assignment->id]['grade'] = "<input value='$student->grade' name='grade_$assignment->student'class='grade' id='grade_$assignment->student' autocomplete='off'>";
+            } else {
+                $template_assignments[$assignment->id]['grade'] = $student->grade;
+            }
+            
             // Meeting Required
+            $template_assignments[$assignment->id]['data_meeting_required'] = 'data-meeting-required="'.$assignment->meeting_required.'"';
             if($is_admin) {
                 
                 $template_assignments[$assignment->id]['meeting_required'] .= "<select name='meeting_required_$assignment->id' class='meeting_required' id='meeting_required_$assignment->id'>";
