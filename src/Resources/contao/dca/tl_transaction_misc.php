@@ -105,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
     'palettes' => array
     (
         '__selector__' => ['service'],
-        'default'      => '{transaction_legend},date_submitted, psychologist, service, district, school, service_label, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{student_legend}, student_initials, lasid, sasid;{notes_legend},notes;{publish_legend},published; {status_legend}, status; {internal_legend:hide}, originally_submitted;',
+        'default'      => '{transaction_legend},date_submitted, psychologist, service, district, school, service_label, price;{meeting_legend}, meeting_date, meeting_time, meeting_start, meeting_end, meeting_duration;{student_legend}, student_initials, lasid, sasid;{notes_legend},notes;{publish_legend},published; {status_legend}, status; {internal_legend:hide}, originally_submitted;',
         // Parking = 14
         '14'           => '{transaction_legend},date_submitted ,psychologist, district, service, service_label, price;{notes_legend},notes;{publish_legend},published; {status_legend}, status; {internal_legend:hide}, originally_submitted;',
         // Misc. Travel Expenses = 18
@@ -115,9 +115,9 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
         // Manager = 20
         '20'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published; {status_legend}, status; {internal_legend:hide}, originally_submitted;',
         // Test Late Cancel - First = 32
-        '32'           => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, lasid, sasid; {meeting_legend}, meeting_date, service, service_label, price;{notes_legend},notes;{publish_legend},published; {status_legend}, status; {internal_legend:hide}, originally_submitted;',
+        '32'           => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, lasid, sasid; {meeting_legend}, meeting_date, meeting_time, service, service_label, price;{notes_legend},notes;{publish_legend},published; {status_legend}, status; {internal_legend:hide}, originally_submitted;',
         // Test Late Cancel - Additional = 33
-        '33'           => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, lasid, sasid; {meeting_legend}, meeting_date, service, service_label, price;{notes_legend},notes;{publish_legend},published; {status_legend}, status; {internal_legend:hide}, originally_submitted;',
+        '33'           => '{transaction_legend},date_submitted, psychologist, district, school, student_initials, lasid, sasid; {meeting_legend}, meeting_date, meeting_time, service, service_label, price;{notes_legend},notes;{publish_legend},published; {status_legend}, status; {internal_legend:hide}, originally_submitted;',
         // Misc. Billing = 99
         '99'           => '{transaction_legend},date_submitted, psychologist, service, service_label, price;{notes_legend},notes;{publish_legend},published; {status_legend}, status; {internal_legend:hide}, originally_submitted;',
     ),
@@ -289,6 +289,15 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => time()
         ),
+        'meeting_time' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_time'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "text NULL default ''"
+        ),
+        
         'meeting_start' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['meeting_start'],
