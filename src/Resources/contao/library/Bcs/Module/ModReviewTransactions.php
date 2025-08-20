@@ -106,7 +106,7 @@ class ModReviewTransactions extends \Contao\Module
     
                 // Reviewed
                 if($transaction->published == '1')
-                    $template_transactions[$transaction->id]['reviewed'] = 'Reviewed';
+                    $template_transactions[$transaction->id]['reviewed'] = 'Invoiced';
                 else
                     $template_transactions[$transaction->id]['reviewed'] = 'Unreviewed';
                 
@@ -183,7 +183,7 @@ class ModReviewTransactions extends \Contao\Module
     
                 // Reviewed
                 if($transaction->published == '1')
-                    $template_transactions_misc[$transaction->id]['reviewed'] = 'Reviewed';
+                    $template_transactions_misc[$transaction->id]['reviewed'] = 'Invoiced';
                 else
                     $template_transactions_misc[$transaction->id]['reviewed'] = 'Unreviewed';
                 
