@@ -340,6 +340,13 @@ class ModPsychWorkForm extends \Contao\Module
             } else {
                 $template_assignments[$assignment->id]['meeting_date'] = $assignment->meeting_date;
             }
+
+            // Meeting Time
+            if(1 == 1) {
+                $template_assignments[$assignment->id]['meeting_time'] = "<input value='$assignment->meeting_time' name='meeting_time_$assignment->id' class='meeting_time' id='meeting_time_$assignment->id' autocomplete='off'>";
+            } else {
+                $template_assignments[$assignment->id]['meeting_time'] = $assignment->meeting_time;
+            }
             
             
             
