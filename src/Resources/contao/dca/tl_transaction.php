@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{assignment_details_legend}, assignment_details;{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published; {status_legend},status; {internal_legend:hide}, district, lasid, sasid, originally_submitted;'
+        'default'                     => '{assignment_details_legend}, assignment_details;{transaction_legend},date_submitted, psychologist, service, price;{meeting_legend}, meeting_date, meeting_time, meeting_start, meeting_end, meeting_duration;{notes_legend},notes;{publish_legend},published; {status_legend},status; {internal_legend:hide}, district, lasid, sasid, originally_submitted;'
     ),
  
     // Fields
@@ -232,6 +232,15 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                 => time()
         ),
+        'meeting_time' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_time'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'sql'                     => "text NULL default ''"
+        ),
+        
         'meeting_start' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transactions']['meeting_start'],
