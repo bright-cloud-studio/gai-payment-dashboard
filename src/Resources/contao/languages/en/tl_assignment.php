@@ -37,6 +37,7 @@ $GLOBALS['TL_LANG']['tl_assignment']['type_of_testing']           = array('Type 
 $GLOBALS['TL_LANG']['tl_assignment']['testing_date']              = array('Testing Date', 'Select the Testing Date for this Assignment');
 $GLOBALS['TL_LANG']['tl_assignment']['meeting_required']          = array('Meeting Required', 'Select if a Meeting is required or not');
 $GLOBALS['TL_LANG']['tl_assignment']['meeting_date']              = array('Meeting Date', 'Select the date the meeting will take place on');
+$GLOBALS['TL_LANG']['tl_assignment']['meeting_time']              = array('Meeting Time', 'Enter the Time the meeting will take place on');
 $GLOBALS['TL_LANG']['tl_assignment']['contact_info_parent']       = array('Contact Info - Parent', 'Enter the contact information for the Parent of this Assignment\'s Student');
 $GLOBALS['TL_LANG']['tl_assignment']['contact_info_teacher']      = array('Contact Info - Teacher', 'Enter the contact information for the Teach of this Assignment\'s Student');
 $GLOBALS['TL_LANG']['tl_assignment']['team_chair']                = array('Team Chair', 'Enter the Team Chair for this Assignment');
