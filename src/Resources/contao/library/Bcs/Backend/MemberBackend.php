@@ -4,12 +4,14 @@ namespace Bcs\Backend;
 
 use Contao\Backend;
 use Contao\BackendUser;
+use Contao\FrontendUser;
 use Contao\Image;
 use Contao\Input;
 use Contao\DataContainer;
 use Contao\StringUtil;
 use Contao\System;
 
+use Bcs\Model\District;
 use Bcs\Model\Transaction;
 use Bcs\Model\Assignment;
 use Bcs\Model\Student;
@@ -17,14 +19,25 @@ use Bcs\Model\Student;
 class MemberBackend extends Backend
 {
     
-    // Get Members as options for a Select DCA field
+    // Displays this Psychologist's Assignments and tracks which ones to hide from the Psych Work Form
     public function getHiddenAssignments(DataContainer $dc) {
+        
+        $hidden_assignments;
+        if($dc->activeRecord) {
+            
+            $hidden_assignments = unserialize($dc->activeRecord->pwf_hidden_assignments);
+        }
+        
         $assignments = array();
         $this->import('Database');
-        $result = $this->Database->prepare("SELECT * FROM tl_assignment ORDER BY id ASC")->execute();
+        $result = $this->Database->prepare("SELECT * FROM tl_assignment ORDER BY date_created DESC")->execute();
         while($result->next())
         {
-            $assignments = $assignments + array($result->id => $result->id);   
+            $member = FrontendUser::getInstance();
+            if($result->psychologist == $member->id) {
+                $d = District::findBy('id', $result->district);
+                $assignments = $assignments + array($result->id => '[ID: '.$result->id.'] ' . date('m/d/y', $result->date_created) . ' - ' . $d->district_name);
+            }
         }
         return $assignments;
     }
