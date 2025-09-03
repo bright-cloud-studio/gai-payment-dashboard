@@ -66,3 +66,13 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['last_review_and_submit'] = array
     'sql'                     => "varchar(20) NOT NULL default ''",
     'default'                => date('m/d/y'),
 );
+
+/* MEMBER GROUP SELECTION */
+$GLOBALS['TL_DCA']['tl_member']['fields']['pwf_hidden_assignments'] = array(
+    'label'            => &$GLOBALS['TL_LANG']['tl_member_group']['pwf_hidden_assignments'],
+    'inputType'        => 'checkboxWizard',
+    'eval'             => array('multiple'=> true, 'mandatory'=>false, 'tl_class'=>'long'),
+    'flag'             => DataContainer::SORT_ASC,
+    'options_callback' => array('Bcs\Backend\MemberBackend', 'getHiddenAssignments'),
+    'sql'              => "blob NULL"
+);
