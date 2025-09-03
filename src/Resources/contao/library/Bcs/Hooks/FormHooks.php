@@ -141,7 +141,6 @@ class FormHooks
                 'tl_transaction_misc.district=?',
                 'tl_transaction_misc.school=?',
                 'tl_transaction_misc.student_initials=?',
-                
                 'tl_transaction_misc.service=?',
                 'tl_transaction_misc.price=?',
                 'tl_transaction_misc.meeting_date=?',
@@ -212,7 +211,8 @@ class FormHooks
             ],[
                 $submittedData['psychologist'], // psychologist
                 $service->service_code, // service
-                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'], // price
+                $submittedData['date_submitted'] // date submitted
             ]);
             
             if($duplicate_check) {
@@ -259,7 +259,8 @@ class FormHooks
             ],[
                 FrontendUser::getInstance()->id, // psychologist
                 $service->service_code, // service
-                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'], // price
+                $submittedData['date_submitted'] // date submitted
             ]);
             
             if($duplicate_check) {
@@ -272,20 +273,13 @@ class FormHooks
                 // Apply values
                 $transaction->pid = 0;
                 $transaction->tstamp = time();
-                
                 $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-    
                 $transaction->psychologist = FrontendUser::getInstance()->id;
-    
                 $transaction->service = $service->service_code;
-    
                 $transaction->service_label = $submittedData['service_label'];
-                
                 $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
                 $transaction->notes = $submittedData['notes'];
                 $transaction->status = 'created';
-                
-                // Save our new Transaction
                 $transaction->save();
             }
 
@@ -308,7 +302,8 @@ class FormHooks
                 FrontendUser::getInstance()->id, // psychologist
                 $submittedData['district'], // district
                 $service->service_code, // service
-                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'], // price
+                $submittedData['date_submitted'] // date submitted
             ]);
             
             if($duplicate_check) {
@@ -318,28 +313,17 @@ class FormHooks
                 
                 // Create a new Transaction
                 $transaction = new TransactionMisc();
-                
-                // Apply values
                 $transaction->pid = 0;
                 $transaction->tstamp = time();
-                
                 $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-    
                 $transaction->psychologist = FrontendUser::getInstance()->id;
-    
                 $transaction->service = $service->service_code;
-    
                 $transaction->district = $submittedData['district'];
-                
                 $transaction->service_label = $submittedData['service_label'];
-                
                 $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
                 $transaction->notes = $submittedData['notes'];
                 $transaction->status = 'created';
-                
-                // Save our new Transaction
                 $transaction->save();
-                
             }
             
         }
@@ -359,7 +343,8 @@ class FormHooks
             ],[
                 FrontendUser::getInstance()->id, // psychologist
                 $service->service_code, // service
-                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'], // price
+                $submittedData['date_submitted'] // date submitted
             ]);
             
             if($duplicate_check) {
@@ -368,24 +353,15 @@ class FormHooks
             } else {
                 // Create a new Transaction
                 $transaction = new TransactionMisc();
-                
-                // Apply values
                 $transaction->pid = 0;
                 $transaction->tstamp = time();
-                
                 $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-
                 $transaction->psychologist = FrontendUser::getInstance()->id;
-    
                 $transaction->service = $service->service_code;
-    
                 $transaction->service_label = $submittedData['service_label'];
-                
                 $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
                 $transaction->notes = $submittedData['notes'];
                 $transaction->status = 'created';
-                
-                // Save our new Transaction
                 $transaction->save();
             }
             
@@ -409,7 +385,8 @@ class FormHooks
                 FrontendUser::getInstance()->id, // psychologist
                 $service->service_code, // service
                 $submittedData['meeting_duration'], // Meeting Duration
-                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
+                $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'], // price
+                $submittedData['date_submitted'] // date submitted
             ]);
             
             if($duplicate_check) {
@@ -418,26 +395,16 @@ class FormHooks
             } else {
                 // Create a new Transaction
                 $transaction = new TransactionMisc();
-                
-                // Apply values
                 $transaction->pid = 0;
                 $transaction->tstamp = time();
-                
                 $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-    
                 $transaction->psychologist = FrontendUser::getInstance()->id;
-    
                 $transaction->service = $service->service_code;
-    
                 $transaction->service_label = "Editing Services";
-    
                 $transaction->meeting_duration = $submittedData['meeting_duration'];
-                
                 $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
                 $transaction->notes = $submittedData['notes'];
                 $transaction->status = 'created';
-                
-                // Save our new Transaction
                 $transaction->save();
             }
             
@@ -478,28 +445,19 @@ class FormHooks
                 // Apply values
                 $transaction->pid = 0;
                 $transaction->tstamp = time();
-                
                 $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-
                 $transaction->psychologist = FrontendUser::getInstance()->id;
-    
                 $transaction->service = $service->service_code;
                 $transaction->service_label = $service->name;
-    
                 $transaction->district = $submittedData['district'];
                 $transaction->school = $submittedData['school'];
-    
                 $transaction->student_initials = $submittedData['student_initials'];
                 $transaction->lasid = $submittedData['lasid'];
                 $transaction->sasid = $submittedData['sasid'];
-    
                 $transaction->meeting_date = strtotime($submittedData['meeting_date']);
-    
                 $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
                 $transaction->notes = $submittedData['notes'];
                 $transaction->status = 'created';
-                
-                // Save our new Transaction
                 $transaction->save();
             }
 
@@ -536,32 +494,21 @@ class FormHooks
             } else {
                 // Create a new Transaction
                 $transaction = new TransactionMisc();
-                
-                // Apply values
                 $transaction->pid = 0;
                 $transaction->tstamp = time();
-                
                 $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-    
                 $transaction->psychologist = FrontendUser::getInstance()->id;
-    
                 $transaction->service = $service->service_code;
                 $transaction->service_label = $service->name;
-    
                 $transaction->district = $submittedData['district'];
                 $transaction->school = $submittedData['school'];
-    
                 $transaction->student_initials = $submittedData['student_initials'];
                 $transaction->lasid = $submittedData['lasid'];
                 $transaction->sasid = $submittedData['sasid'];
-    
                 $transaction->meeting_date = strtotime($submittedData['meeting_date']);
-    
                 $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
                 $transaction->notes = $submittedData['notes'];
                 $transaction->status = 'created';
-                
-                // Save our new Transaction
                 $transaction->save();
             }
         }
@@ -629,14 +576,6 @@ class FormHooks
         }
         
     }
-
-
-
-
-
-
-
-
 
 
 
