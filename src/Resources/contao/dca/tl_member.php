@@ -9,7 +9,7 @@ $GLOBALS['TL_DCA']['tl_member']['list']['operations']['su']['button_callback'] =
 
  /* Extend the tl_user palettes */
 foreach ($GLOBALS['TL_DCA']['tl_member']['palettes'] as $k => $v) {
-    $GLOBALS['TL_DCA']['tl_member']['palettes'][$k] = str_replace('groups;', 'groups;{price_tier_legend}, price_tier, price_tier_display;{admin_review_legend}, last_reviewed; {last_review_and_submit_legend}, last_review_and_submit;', $v);
+    $GLOBALS['TL_DCA']['tl_member']['palettes'][$k] = str_replace('groups;', 'groups;{price_tier_legend}, price_tier, price_tier_display;{admin_review_legend}, last_reviewed; {last_review_and_submit_legend}, last_review_and_submit; {pwf_hidden_assignments_legend}, pwf_hidden_assignments;', $v);
 }
 
 /* Add fields to tl_user */
