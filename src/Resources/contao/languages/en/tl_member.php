@@ -20,3 +20,6 @@ $GLOBALS['TL_LANG']['tl_member']['last_reviewed']              = array('Last Rev
 
 $GLOBALS['TL_LANG']['tl_member']['last_review_and_submit_legend']    = 'Last Reviewed and Submitted Details';
 $GLOBALS['TL_LANG']['tl_member']['last_review_and_submit']           = array('Last Review and Submit', 'The date the last time this Psychologist used the Review Transaction feature');
+
+$GLOBALS['TL_LANG']['tl_member']['pwf_hidden_assignments_legend']    = 'Psych Work Form - Hidden Assignment Details';
+$GLOBALS['TL_LANG']['tl_member']['pwf_hidden_assignments']           = array('Hidden Assignments for Psych Work Form', 'Tracks the IDs of the Assignments this Psychologist have hidden from their Psych Work Form');
