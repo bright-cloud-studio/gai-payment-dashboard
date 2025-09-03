@@ -16,6 +16,23 @@ use Bcs\Model\Student;
 
 class MemberBackend extends Backend
 {
+    
+    // Get Members as options for a Select DCA field
+    public function getHiddenAssignments(DataContainer $dc) {
+        $assignments = array();
+        $this->import('Database');
+        $result = $this->Database->prepare("SELECT * FROM tl_assignment ORDER BY id ASC")->execute();
+        while($result->next())
+        {
+            $assignments = $assignments + array($result->id => $result->id);   
+        }
+        return $assignments;
+    }
+
+    
+
+
+    
   public function switchUserCustomized($row, $href, $label, $title, $icon)
 	{
 		$user = BackendUser::getInstance();
