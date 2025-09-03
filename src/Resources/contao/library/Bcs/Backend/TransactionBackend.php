@@ -355,7 +355,10 @@ class TransactionBackend extends Backend
     public function getInitialReeval($value) {
         switch ($value)
 		{
-			case 'initial':
+			case 'additional_assessment':
+                return 'Additional Assessment';
+				break;
+            case 'initial':
                 return 'Initial';
 				break;
 			case 'initial_504':
