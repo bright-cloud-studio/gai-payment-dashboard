@@ -291,6 +291,8 @@ class AssignmentBackend extends Backend
         
         $students = $students + array('0' => 'Select type of Eval');
 
+        $students = $students + array('additional_assessment' => 'Additional Assessment');
+        
         $students = $students + array('initial' => 'Initial');
         $students = $students + array('initial_504' => 'Initial 504');
 
