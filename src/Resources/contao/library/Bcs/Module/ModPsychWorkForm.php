@@ -243,6 +243,7 @@ class ModPsychWorkForm extends \Contao\Module
                 $template_assignments[$assignment->id]['initial_reeval'] .= "<select name='initial_reeval_$assignment->id' class='initial_reeval' id='initial_reeval_$assignment->id'>";
                 $template_assignments[$assignment->id]['initial_reeval'] .= "<option value='' selected disabled>Select Initial/Re-Eval</option>";
                 $initial_options = array();
+                $initial_options = $initial_options + array('additional_assessment' => 'Additional Assessment');
                 $initial_options = $initial_options + array('extended' => 'Extended Eval');
                 $initial_options = $initial_options + array('independent' => 'Independent Eval');
                 $initial_options = $initial_options + array('initial' => 'Initial');
