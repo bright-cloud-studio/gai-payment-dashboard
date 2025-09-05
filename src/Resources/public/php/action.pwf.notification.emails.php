@@ -22,24 +22,29 @@
         foreach ($assignments as $assignment) {
             
             if($assignment->date_30_day) {
-                
-                fwrite($log, "Assignment: ID ". $assignment->id ."\r\n");
-                fwrite($log, "Psychologist: ID ". $assignment->psychologist ."\r\n");
-                
+
+                // Get Today's, 30-day's and five days before 30-day's dates
                 $today = date('m/d/y');
                 $date_30_day = $assignment->date_30_day;
                 $date_notice_day = date('m/d/y', strtotime('-5 days', strtotime($date_30_day)));
                 
-                fwrite($log, "Today: ". $today ."\r\n");
-                fwrite($log, "30 Day: ". $date_30_day ."\r\n");
-                fwrite($log, "Notice Day: ". $date_notice_day ."\r\n");
-                
-                
+                // If today is the same as five days before 30 day
                 if($today == $date_notice_day) {
+                    
+                    // Write in our log, it is Notification Day for this Assignment
+                    fwrite($log, "Assignment: ID ". $assignment->id ."\r\n");
+                    fwrite($log, "Psychologist: ID ". $assignment->psychologist ."\r\n");
+                    fwrite($log, "Today: ". $today ."\r\n");
+                    fwrite($log, "30 Day: ". $date_30_day ."\r\n");
+                    fwrite($log, "Notice Day: ". $date_notice_day ."\r\n");
                     fwrite($log, "TODAY is 5 days before 30 day! \r\n");
                     
+                    // If we have no 'Meeting Date'
                     if(!$assignment->meeting_date) {
+                        
                         fwrite($log, "NO MEETING DATE - SEND NOTIFICATION! \r\n");
+                        
+                        $psychologist = MemberModel::findOneBy('id', $assignment->psychologist);
                         
                         //$addr = $psychologist->email;
                         $addr = 'mark@brightcloudstudio.com';
@@ -59,11 +64,12 @@
             				
             				"<p>You have an Assignment on your Psych Work Form that has no 'Meeting Date' filled in. Here are the details:<p>".
             				
-            				"<p>Assignment ID: $assignment->id</p>".
-            				"<p>District: $assignment->district</p>".
-            				"<p>School: $assignment->school</p>".
-            				"<p>Date Created: $assignment->date_created</p>".
-            				"<p>Date 30 Day: $assignment->date_30_day</p>"
+            				"<p>Assignment ID: $assignment->id<br>".
+            				"[DEV] Psychologist Email: $psychologist->email".
+            				"District: $assignment->district<br>".
+            				"School: $assignment->school<br>".
+            				"Date Created: $assignment->date_created<br>".
+            				"Date 30 Day: $assignment->date_30_day</p>"
             				
                             ."</body>
             				</html>
