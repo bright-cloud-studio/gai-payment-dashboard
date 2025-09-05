@@ -1,6 +1,9 @@
 <?php
 
     use Bcs\Model\Assignment;
+    use Bcs\Model\District;
+    use Bcs\Model\School;
+    use Contao\Config;
     use Contao\MemberModel;
 
     // Initialize Session, include Composer
@@ -45,6 +48,8 @@
                         fwrite($log, "NO MEETING DATE - SEND NOTIFICATION! \r\n");
                         
                         $psychologist = MemberModel::findOneBy('id', $assignment->psychologist);
+                        $district = District::findOneBy('id', $assignment->district);
+                        $school = School::findOneBy('id', $assignment->school);
                         
                         //$addr = $psychologist->email;
                         $addr = 'mark@brightcloudstudio.com';
@@ -52,32 +57,28 @@
             			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
             			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
-            			$sub = "[GA INC. Dashboard] Empty 'Meeting Date' for an Assignment notification";
+            			$sub = Config::get('pwf_notice_30_day_subject'); 
             			$message = "
             				<html>
             				<head>
-            				<title>Global Assessments, Inc. - Psych Work Form Notification</title>
+            				<title>Global Assessments, Inc. - Psych Work Form - Notice - 30 Day</title>
             				</head>
             				<body>".
-            				
-            				"<p>USERNAME,</p>".
-            				
-            				"<p>You have an Assignment on your Psych Work Form that has no 'Meeting Date' filled in. Here are the details:<p>".
-            				
-            				"<p>Assignment ID: $assignment->id<br>".
-            				"[DEV] Psychologist Email: $psychologist->email".
-            				"District: $assignment->district<br>".
-            				"School: $assignment->school<br>".
-            				"Date Created: $assignment->date_created<br>".
-            				"Date 30 Day: $assignment->date_30_day</p>"
-            				
+                                Config::get('pwf_notice_30_day_body')
                             ."</body>
             				</html>
             				";
 
-                        // TEMPLATE TAGS
+                        // TEMPLATE TAGS - Psychologist
                         $message = str_replace('$firstname', $psychologist->firstname, $message);
                         $message = str_replace('$lastname', $psychologist->lastname, $message);
+                        // TEMPLATE TAGS - Assignment
+                        $message = str_replace('$date_created', $assignment->date_created, $message);
+                        $message = str_replace('$date_30_day', $assignment->date_30_day, $message);
+                        // TEMPLATE TAGS - District
+                        $message = str_replace('$district', $distruct->district_name, $message);
+                        // TEMPLATE TAGS - School
+                        $message = str_replace('$district', $school->school_name, $message);
                         
             			mail($addr, $sub, $message, $headers);
                         
