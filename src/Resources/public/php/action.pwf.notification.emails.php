@@ -20,8 +20,11 @@
     $assignments = Assignment::findAll();
     if($assignments) {
         foreach ($assignments as $assignment) {
-            fwrite($log, "FINAL: Correct Hour \r\n");
-          
+            fwrite($log, "Assignment: ID ". $assignment->id ."\r\n");
+            fwrite($log, "Psychologist: ID ". $assignment->psychologist ."\r\n");
+            fwrite($log, "30 Day: ". $assignment->date_30_day ."\r\n");
+            fwrite($log, "Meeting Date: ". $assignment->meeting_date ."\r\n");
+            fwrite($log, "----------------------------------------------------\r\n\r\n");
         }
     }
 
