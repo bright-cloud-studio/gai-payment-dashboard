@@ -3,6 +3,7 @@
     use Bcs\Model\Assignment;
     use Bcs\Model\District;
     use Bcs\Model\School;
+    use Bcs\Model\Student;
     use Contao\Config;
     use Contao\MemberModel;
 
@@ -50,6 +51,7 @@
                         $psychologist = MemberModel::findOneBy('id', $assignment->psychologist);
                         $district = District::findOneBy('id', $assignment->district);
                         $school = School::findOneBy('id', $assignment->school);
+                        $student = Student::findOneBy('id', $assignment->student);
                         
                         //$addr = $psychologist->email;
                         $addr = 'mark@brightcloudstudio.com';
@@ -81,6 +83,9 @@
                         $message = str_replace('$school', $school->school_name, $message);
                         // TEMPLATE TAGS - DEV
                         $message = str_replace('$psy_email', $psychologist->email, $message);
+                        // TEMPLATE TAGS - Student Initials
+                        $message = str_replace('$student_initials', getInitials($student->name), $message);
+                        
                         
             			mail($addr, $sub, $message, $headers);
                         
@@ -98,3 +103,16 @@
 
     // Close our log file
     fclose($log);
+
+
+
+function getInitials($name) {
+    $words = explode(" ", $name);
+    $initials = "";
+
+    foreach ($words as $word) {
+        $initials .= strtoupper(substr($word, 0, 1));
+    }
+
+    return $initials;
+}
