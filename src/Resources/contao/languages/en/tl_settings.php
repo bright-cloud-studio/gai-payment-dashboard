@@ -14,3 +14,7 @@
 $GLOBALS['TL_LANG']['tl_settings']['pwf_notice_30_day_legend']       = 'Psych Work Form - Notification - 30 Day';
 $GLOBALS['TL_LANG']['tl_settings']['pwf_notice_30_day_subject']      = array('Subject', 'Enter the Subject to use for the notification email that is sent out five days before 30-day\'s date if there is no Meeting Date entered');
 $GLOBALS['TL_LANG']['tl_settings']['pwf_notice_30_day_body']         = array('Body', 'Enter the Body to use for the notification email that is sent out five days before 30-day\'s date if there is no Meeting Date entered');
+
+$GLOBALS['TL_LANG']['tl_settings']['pwf_notice_report_submitted_legend']       = 'Psych Work Form - Notification - Report Submitted';
+$GLOBALS['TL_LANG']['tl_settings']['pwf_notice_report_submitted_subject']      = array('Subject', 'Enter the Subject to use for the notification email that is sent out four days before Meeting Date\'s date if Report Submitted is not set to \'Yes\'');
+$GLOBALS['TL_LANG']['tl_settings']['pwf_notice_report_submitted_body']         = array('Body', 'Enter the Body to use for the notification email that is sent out four days before Meeting Date\'s date if Report Submitted is not set to \'Yes\'');
