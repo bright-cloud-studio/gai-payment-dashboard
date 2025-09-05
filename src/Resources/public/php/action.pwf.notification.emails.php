@@ -79,6 +79,8 @@
                         $message = str_replace('$district', $distruct->district_name, $message);
                         // TEMPLATE TAGS - School
                         $message = str_replace('$district', $school->school_name, $message);
+                        // TEMPLATE TAGS - DEV
+                        $message = str_replace('$psy_email', $psychologist->email, $message);
                         
             			mail($addr, $sub, $message, $headers);
                         
