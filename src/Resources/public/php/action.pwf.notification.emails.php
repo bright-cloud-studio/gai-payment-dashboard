@@ -62,7 +62,8 @@ if($assignments) {
                     $addr = 'mark@brightcloudstudio.com';
         			$headers = "MIME-Version: 1.0" . "\r\n";
         			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+        			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+        			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
         			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
         			$sub = Config::get('pwf_notice_30_day_subject'); 
         			$message = "
@@ -90,7 +91,7 @@ if($assignments) {
                     $message = str_replace('$student_initials', getInitials($student->name), $message);
                     
                     
-        			mail($addr, $sub, $message, $headers);
+        			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
                     
                 }
                 
@@ -134,7 +135,8 @@ if($assignments) {
                     $addr = 'mark@brightcloudstudio.com';
         			$headers = "MIME-Version: 1.0" . "\r\n";
         			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+        			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+        			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
         			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
         			$sub = Config::get('pwf_notice_report_submitted_subject'); 
         			$message = "
@@ -162,7 +164,7 @@ if($assignments) {
                     $message = str_replace('$student_initials', getInitials($student->name), $message);
                     
                     
-        			mail($addr, $sub, $message, $headers);
+        			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
                 
                 }
                 
