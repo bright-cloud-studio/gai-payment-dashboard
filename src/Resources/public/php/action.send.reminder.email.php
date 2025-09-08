@@ -48,7 +48,8 @@
         			$addr = $row['email'];
         			$headers = "MIME-Version: 1.0" . "\r\n";
         			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+                    $headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+        			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
         			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
         			
         			/*
@@ -83,7 +84,7 @@
         				";
         			
         			
-        			mail($addr, $sub, $message, $headers);
+        			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
                 }
             }
 
@@ -110,7 +111,8 @@
         			$addr = $row['email'];
         			$headers = "MIME-Version: 1.0" . "\r\n";
         			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+        			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+        			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
         			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
         			$sub = "Today is the FINAL DAY to Submit and Review Transactions for this month";
         			$message = "
@@ -125,7 +127,7 @@
         				</body>
         				</html>
         				";
-        			mail($addr, $sub, $message, $headers);
+        			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
                 }
             }
 
