@@ -64,7 +64,8 @@
                                     $addr = $psychologist->email;
                         			$headers = "MIME-Version: 1.0" . "\r\n";
                         			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                        			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+                        			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+                                    $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
                         			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
                         			$sub = $alert_email->warning_subject;
                         			$message = "
@@ -82,7 +83,7 @@
                                     $message = str_replace('$firstname', $psychologist->firstname, $message);
                                     $message = str_replace('$lastname', $psychologist->lastname, $message);
                                     
-                        			mail($addr, $sub, $message, $headers);
+                        			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
                                 }
                                 
                             }
@@ -114,7 +115,8 @@
                                     $addr = $psychologist->email;
                         			$headers = "MIME-Version: 1.0" . "\r\n";
                         			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                        			$headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+                        			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+                                    $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
                         			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
                         			$sub = $alert_email->warning_subject;
                         			$message = "
@@ -132,7 +134,7 @@
                                     $message = str_replace('$firstname', $psychologist->firstname, $message);
                                     $message = str_replace('$lastname', $psychologist->lastname, $message);
                                     
-                        			mail($addr, $sub, $message, $headers);
+                        			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
                                 }
                                 
                             }
