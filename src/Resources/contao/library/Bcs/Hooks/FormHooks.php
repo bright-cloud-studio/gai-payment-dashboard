@@ -533,7 +533,8 @@ class FormHooks
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 
                 // More headers
-                $headers .= 'From: <billing@globalassessmentsinc.com>' . "\r\n";
+                $headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+                $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
                 $headers .= 'Cc: ed@globalassessmentsinc.com, ' . $d->contact_cc_email . "\r\n";
                 
                 $name = $d->district_name;
@@ -561,7 +562,7 @@ class FormHooks
                 
                 if($first) {
                     //$first = false;
-                    mail($addr, $sub, $message, $headers);
+                    mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
                 }
                 
                 //echo $message . "<br><br>";
