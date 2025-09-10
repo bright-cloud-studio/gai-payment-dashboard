@@ -179,6 +179,7 @@ if($assignments) {
 // Close our log file
 fclose($log);
 
+
 // Simple custom function to take in a $name as a string and return back the capital letters.
 // Explode will split the $name string into separate words using space as a divider
 // strtoupper will strip out all characters for each word extept the first character
