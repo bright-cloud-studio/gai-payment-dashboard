@@ -341,12 +341,28 @@ class ModPsychWorkForm extends \Contao\Module
                 
                 
                 
+                
+                
                 // Meeting Date
                 if(1 == 1) {
-                    $template_assignments[$assignment->id]['meeting_date'] = "<input value='$assignment->meeting_date' name='meeting_date_$assignment->id' class='meeting_date' id='meeting_date_$assignment->id' autocomplete='off'>";
+                    $class = '';
+                    $today = date('m/d/y');
+                    $date_30_day = $assignment->date_30_day;
+                    $date_notice_day = date('m/d/y', strtotime('-5 days', strtotime($date_30_day)));
+                    if($today == $date_notice_day) {
+                        if(!$assignment->meeting_date) {
+                            $class = 'highlight';
+                        }
+                    }
+                    $template_assignments[$assignment->id]['meeting_date'] = "<input value='$assignment->meeting_date' name='meeting_date_$assignment->id' class='meeting_date $class' id='meeting_date_$assignment->id' autocomplete='off'>";
                 } else {
                     $template_assignments[$assignment->id]['meeting_date'] = $assignment->meeting_date;
                 }
+                
+                
+                
+                
+                
     
                 // Meeting Time
                 if(1 == 1) {
@@ -401,7 +417,17 @@ class ModPsychWorkForm extends \Contao\Module
                 // Report Submitted
                 if($is_admin) {
                     
-                    $template_assignments[$assignment->id]['report_submitted'] .= "<select name='report_submitted_$assignment->id' class='report_submitted' id='report_submitted_$assignment->id'>";
+                    $class = '';
+                    $today = date('m/d/y');
+                    $meeting_date = $assignment->meeting_date;
+                    $date_notice_day = date('m/d/y', strtotime('-4 days', strtotime($meeting_date)));
+                    if($today == $date_notice_day) {
+                        if($assignment->report_submitted != 'yes') {
+                            $class = 'highlight';
+                        }
+                    }
+                    
+                    $template_assignments[$assignment->id]['report_submitted'] .= "<select name='report_submitted_$assignment->id' class='report_submitted $class' id='report_submitted_$assignment->id'>";
                     $template_assignments[$assignment->id]['report_submitted'] .= "<option value='' disabled selected>Select Yes/No</option>";
                     $resu_options = array();
                     $resu_options = $resu_options + array('yes' => 'Yes');
@@ -416,7 +442,16 @@ class ModPsychWorkForm extends \Contao\Module
                     $template_assignments[$assignment->id]['report_submitted'] .= "</select>";
                     
                 } else {
-                    $template_assignments[$assignment->id]['report_submitted'] = $assignment->report_submitted;
+                    $class = '';
+                    $today = date('m/d/y');
+                    $meeting_date = $assignment->meeting_date;
+                    $date_notice_day = date('m/d/y', strtotime('-4 days', strtotime($meeting_date)));
+                    if($today == $date_notice_day) {
+                        if($assignment->report_submitted != 'yes') {
+                            $class = 'highlight';
+                        }
+                    }
+                    $template_assignments[$assignment->id]['report_submitted'] = "<span style='width: 100%;' class='$class'>" . $assignment->report_submitted . "</span>";
                 }
                 
                 
