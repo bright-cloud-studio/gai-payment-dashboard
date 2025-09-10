@@ -133,7 +133,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
                 'pwf_report_submitted' => 'Psych Work Form - Report Submitted'
             ),
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(15) NOT NULL default ''"
+            'sql'                     => "varchar(25) NOT NULL default ''"
         ),
 
         'email_recipient' => array
