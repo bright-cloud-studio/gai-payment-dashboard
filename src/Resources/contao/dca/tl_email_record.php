@@ -113,8 +113,8 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
             'filter'                  => true,
             'search'                  => true,
             'options'                 => array(
-                'alert_weekly' => 'Alert Email - Week Remaining Reminder',
-                'alert_final' => 'Alert Email - Final Day Reminder',
+                'alert_week_remaining' => 'Alert Email - Week Remaining',
+                'alert_final' => 'Alert Email - Final Day',
                 'pwf_30_day' => 'Psych Work Form - 30 Day',
                 'pwf_report_submitted' => 'Psych Work Form - Report Submitted'
             ),
