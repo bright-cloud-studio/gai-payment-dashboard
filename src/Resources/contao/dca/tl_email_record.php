@@ -30,19 +30,19 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
         'sorting' => array
         (
             // Attempt to list as collapsable view
-            'mode'                  => DataContainer::MODE_SORTED,
+            'mode'                    => DataContainer::MODE_SORTED,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('status'),
+            'fields'                  => array('date_created'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
-            'fields'                  => array('status', 'title'),
+            'fields'                  => array('date_created', 'email_type'),
             'format'                  => '%s - %s',
-            'label_callback'          => array('tl_issue', 'addIcon')
+            'label_callback'          => array('tl_email_record', 'generateLabel')
         ),
         'global_operations' => array
         (
@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{issues_legend}, status, title, description;{publish_legend},published;'
+        'default'                     => '{email_record_legend}, date_created, email_type, email_recipient, email_subject, email_body;'
     ),
  
     // Fields
@@ -106,46 +106,68 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
         (
             'sql'                   => "int(10) unsigned NOT NULL default '0'"
         ),
-        'status' => array
+
+        'date_created' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['status'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['date_created'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => true,
+            'search'                  => true,
+            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(20) NOT NULL default ''",
+            'default'                => date('m/d/y g:i a')
+        ),
+
+        'email_type' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['email_type'],
             'inputType'               => 'select',
             'default'                 => 'outstanding',
             'filter'                  => true,
             'search'                  => true,
-            'options'                  => array('prioritize' => 'Priority', 'outstanding' => 'Outstanding', 'completed' => 'Completed'),
-            'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                      => "varchar(15) NOT NULL default ''"
+            'options'                 => array(
+                'alert_weekly' => 'Alert Email - Week Remaining Reminder',
+                'alert_final' => 'Alert Email - Final Day Reminder',
+                'pwf_30_day' => 'Psych Work Form - 30 Day',
+                'pwf_report_submitted' => 'Psych Work Form - Report Submitted'
+            ),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(15) NOT NULL default ''"
         ),
-        'title' => array
+
+        'email_recipient' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['title'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['email_recipient'],
+            'inputType'               => 'select',
+            'filter'                  => true,
+            'search'                  => false,
+            'foreignKey'              => 'tl_member.CONCAT(firstname," ",lastname)',
+            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
+            'options_callback'	      => array('Bcs\Backend\EmailRecordBackend', 'getPsychologists'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+
+        'email_subject' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['email_subject'],
             'inputType'               => 'text',
             'default'                 => '',
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'description' => array
+
+        'email_body' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['description'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['email_body'],
             'inputType'               => 'text',
             'default'                 => '',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
-            'sql'                     => "text NOT NULL default ''"
-        ),
-
-
-        'published' => array
-        (
-            'exclude'                 => true,
-            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['published'],
-            'inputType'               => 'checkbox',
-            'default'                 => '1',
-            'eval'                    => array('submitOnChange'=>false, 'doNotCopy'=>true),
-            'sql'                     => "char(1) NOT NULL default '1'"
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
         )
+
+        
     )
 );
 
@@ -153,9 +175,8 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
 
 class tl_email_record extends Backend
 {
-    public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
+    public function generateLabel($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
     {
-        $label = "<span>" . $label . "</span>";
         return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
     }
 }
