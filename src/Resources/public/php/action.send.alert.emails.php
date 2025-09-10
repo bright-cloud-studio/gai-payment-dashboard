@@ -1,6 +1,7 @@
 <?php
 
     use Bcs\Model\AlertEmail;
+    use Bcs\Model\EmailRecord;
     use Contao\MemberModel;
 
     // Initialize Session, include Composer
@@ -71,7 +72,7 @@
                         			$message = "
                         				<html>
                         				<head>
-                        				<title>Global Assessments, Inc. - FINAL DAY Reminder</title>
+                        				<title>Global Assessments, Inc. - Week Remaining Reminder</title>
                         				</head>
                         				<body>".
                                             $alert_email->warning_body
@@ -84,6 +85,16 @@
                                     $message = str_replace('$lastname', $psychologist->lastname, $message);
                                     
                         			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
+
+                                    // Create Email Record of this email
+                                    $record = new EmailRecord();
+                                    $record->tstamp = time();
+                                    $record->email_type = 'alert_week_remaining';
+                                    $record->email_recipient = $psychologist->id;
+                                    $record->email_subject = $sub;
+                                    $record->email_body = $message;
+                                    $record->save();
+                                    
                                 }
                                 
                             }
@@ -135,6 +146,16 @@
                                     $message = str_replace('$lastname', $psychologist->lastname, $message);
                                     
                         			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
+
+                                    // Create Email Record of this email
+                                    $record = new EmailRecord();
+                                    $record->tstamp = time();
+                                    $record->email_type = 'alert_final';
+                                    $record->email_recipient = $psychologist->id;
+                                    $record->email_subject = $sub;
+                                    $record->email_body = $message;
+                                    $record->save();
+                                    
                                 }
                                 
                             }
