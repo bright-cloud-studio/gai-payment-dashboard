@@ -2,6 +2,7 @@
 
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
+use Bcs\Model\EmailRecord;
 use Bcs\Model\School;
 use Bcs\Model\Student;
 use Contao\Config;
@@ -90,8 +91,15 @@ if($assignments) {
                     // TEMPLATE TAGS - Student Initials
                     $message = str_replace('$student_initials', getInitials($student->name), $message);
                     
-                    
         			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
+
+                    // Create Email Record of this email
+                    $record = new EmailRecord();
+                    $record->email_type = 'pwf_30_day';
+                    $record->email_recipient = $psychologist->id;
+                    $record->email_subject = $sub;
+                    $record->email_body = $message;
+                    $record->save();
                     
                 }
                 
@@ -102,9 +110,9 @@ if($assignments) {
             fwrite($log, "----------------------------------------------------\r\n\r\n");
         }
 
-        ///////////////////////////
-        // NOTIFICATION - 30 DAY //
-        ///////////////////////////
+        /////////////////////////////////////
+        // NOTIFICATION - Report Submitted //
+        /////////////////////////////////////
         if($assignment->meeting_date) {
 
             // Get Today's, 30-day's and five days before 30-day's dates
@@ -163,8 +171,15 @@ if($assignments) {
                     // TEMPLATE TAGS - Student Initials
                     $message = str_replace('$student_initials', getInitials($student->name), $message);
                     
-                    
         			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
+
+                    // Create Email Record of this email
+                    $record = new EmailRecord();
+                    $record->email_type = 'pwf_report_submitted';
+                    $record->email_recipient = $psychologist->id;
+                    $record->email_subject = $sub;
+                    $record->email_body = $message;
+                    $record->save();
                 
                 }
                 
