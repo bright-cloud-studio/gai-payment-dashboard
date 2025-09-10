@@ -30,7 +30,7 @@ if($assignments) {
         // NOTIFICATION - 30 DAY //
         ///////////////////////////
         
-        if($assignment->date_30_day && 1==2) {
+        if($assignment->date_30_day) {
 
             // Get Today's, 30-day's and five days before 30-day's dates
             $today = date('m/d/y');
@@ -95,6 +95,7 @@ if($assignments) {
 
                     // Create Email Record of this email
                     $record = new EmailRecord();
+                    $record->tstamp = time();
                     $record->email_type = 'pwf_30_day';
                     $record->email_recipient = $psychologist->id;
                     $record->email_subject = $sub;
@@ -175,6 +176,7 @@ if($assignments) {
 
                     // Create Email Record of this email
                     $record = new EmailRecord();
+                    $record->tstamp = time();
                     $record->email_type = 'pwf_report_submitted';
                     $record->email_recipient = $psychologist->id;
                     $record->email_subject = $sub;
