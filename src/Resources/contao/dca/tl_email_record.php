@@ -163,6 +163,7 @@ class tl_email_record extends Backend
 {
     public function generateLabel($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
     {
+        // Prepend the label with the date, formatted correctly
         $label = date('m/d/y g:i a', $row['date_created']) . " - " . $label;
         return $label;
     }
