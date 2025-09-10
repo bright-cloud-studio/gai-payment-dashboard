@@ -62,20 +62,6 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
-            'toggle' => array
-            (
-                'label'               => &$GLOBALS['TL_LANG']['tl_issue']['toggle'],
-                'icon'                => 'visible.gif',
-                'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-                'button_callback'     => array('Bcs\Backend\EmailRecordBackend', 'toggleIcon')
-            ),
-            'delete' => array
-            (
-                'label'               => &$GLOBALS['TL_LANG']['tl_issue']['delete'],
-                'href'                => 'act=delete',
-                'icon'                => 'delete.svg',
-                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
-            ),
             'show' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_issue']['show'],
@@ -178,6 +164,6 @@ class tl_email_record extends Backend
     public function generateLabel($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
     {
         $label = date('m/d/y g:i a', $row['date_created']) . " - " . $label;
-        return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
+        return $label;
     }
 }
