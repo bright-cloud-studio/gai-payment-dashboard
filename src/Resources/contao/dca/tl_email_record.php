@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['email_type'],
             'inputType'               => 'select',
-            'default'                 => 'outstanding',
+            'default'                 => 'alert_weekly',
             'filter'                  => true,
             'search'                  => true,
             'options'                 => array(
@@ -163,8 +163,8 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['email_body'],
             'inputType'               => 'text',
             'default'                 => '',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
+            'sql'                     => "text NOT NULL default ''"
         )
 
         
