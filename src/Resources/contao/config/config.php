@@ -18,6 +18,7 @@ use Bcs\SelectMenuDynamic;
 
 $GLOBALS['TL_LANG']['MOD']['gai_alerts'][0] = "Automated Emails";
 $GLOBALS['BE_MOD']['gai_alerts']['alert_email'] = array( 'tables' => array('tl_alert_email') );
+$GLOBALS['BE_MOD']['gai_email_record']['email_record'] = array( 'tables' => array('tl_email_record') );
 
 /* Back end modules - Data DCAs */
 $GLOBALS['TL_LANG']['MOD']['gai_data'][0] = "Invoices - Data";
