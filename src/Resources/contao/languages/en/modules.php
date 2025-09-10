@@ -21,6 +21,7 @@ $GLOBALS['TL_LANG']['MOD']['price_tier']               = array('Price Tier', 'Ma
 $GLOBALS['TL_LANG']['MOD']['student']                  = array('Student', 'Master List of all Students');
 $GLOBALS['TL_LANG']['MOD']['issue']                    = array('View Issues', 'Master List of all Issues');
 $GLOBALS['TL_LANG']['MOD']['alert_email']              = array('Alert Emails', 'List of configured Alert Emails');
+$GLOBALS['TL_LANG']['MOD']['email_record']             = array('Email Records', 'Records of Alert and Notification emails sent in the past');
 
 $GLOBALS['TL_LANG']['MOD']['invoice_request']          = array('Generate Invoices', 'Create an Invoice Request to generate invoices for a certain date range');
 $GLOBALS['TL_LANG']['MOD']['invoice']                  = array('Psy Invoices', 'Lists Invoices generated for Psychologists');
