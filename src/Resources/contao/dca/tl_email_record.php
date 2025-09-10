@@ -29,14 +29,14 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
     (
         'sorting' => array
         (
-            // Attempt to list as collapsable view
             'mode'                    => DataContainer::MODE_UNSORTED,
             'rootPaste'               => false,
-            'showRootTrails'          => false,
-            'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('id'),
-            'panelLayout'             => 'sort,filter;search,limit'
+            'fields'                  => array('date_created DESC'),
+            'icon'                    => 'pagemounts.svg',
+            'defaultSearchField'      => 'date_created',
+            'panelLayout'             => 'filter;sort,search,limit'
+            
         ),
         'label' => array
         (
