@@ -15,10 +15,6 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
     (
         'dataContainer'               => DC_Table::class,
         'switchToEdit'                => false,
-        'onload_callback' => array
-        (
-              array('tl_email_record', 'setRootType')
-        ),
         'sql' => array
         (
             'keys' => array
@@ -35,7 +31,6 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
         (
             // Attempt to list as collapsable view
             'mode'                  => DataContainer::MODE_SORTED,
-            //'mode'                    => DataContainer::MODE_TREE,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
@@ -72,7 +67,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
                 'label'               => &$GLOBALS['TL_LANG']['tl_issue']['toggle'],
                 'icon'                => 'visible.gif',
                 'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-                'button_callback'     => array('Bcs\Backend\IssueBackend', 'toggleIcon')
+                'button_callback'     => array('Bcs\Backend\EmailRecordBackend', 'toggleIcon')
             ),
             'delete' => array
             (
@@ -156,11 +151,11 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
 
 
 
-class tl_issue extends Backend
+class tl_email_record extends Backend
 {
     public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
-	{
-            $label = "<span class='".$row['status']."'>" . $label . "</span>";
-		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
-	}
+    {
+        $label = "<span>" . $label . "</span>";
+        return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
+    }
 }
