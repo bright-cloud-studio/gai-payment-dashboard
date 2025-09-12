@@ -43,7 +43,7 @@
 
             // Get the current hour, as we only want to send out at noon
             $hour = date("H");
-            $hour = 12; // fixed as noon for development purposes
+            //$hour = 12; // fixed as noon for development purposes
 
 
             // WARNING EMAIL
