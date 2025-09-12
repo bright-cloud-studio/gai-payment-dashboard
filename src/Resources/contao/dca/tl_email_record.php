@@ -40,8 +40,8 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
         ),
         'label' => array
         (
-            'fields'                  => array('email_type'),
-            'format'                  => '%s',
+            'fields'                  => array('email_type', 'email_recipient'),
+            'format'                  => '%s - %s',
             'label_callback'          => array('tl_email_record', 'generateLabel')
         ),
         'global_operations' => array
