@@ -127,13 +127,13 @@ if($assignments) {
                 
                 if($assignment->report_submitted != 'yes') {
                     
-                    fwrite($log, "NOTICE DAY FOR REPORT SUBMITTED \r\n");
+                    fwrite($log, "NOTICE DAY FOR NO MEETING DATE \r\n");
                     fwrite($log, "Assignment: ID ". $assignment->id ."\r\n");
                     fwrite($log, "Psychologist: ID ". $assignment->psychologist ."\r\n");
                     fwrite($log, "Today: ". $today ."\r\n");
                     fwrite($log, "Meeting Date: ". $meeting_date ."\r\n");
                     fwrite($log, "Notice Day: ". $date_notice_day ."\r\n");
-                    fwrite($log, "NO REPORT SUBMITTED - SEND NOTIFICATION! \r\n");
+                    fwrite($log, "NO MEETING DATE - SEND NOTIFICATION! \r\n");
                     
                     $psychologist = MemberModel::findOneBy('id', $assignment->psychologist);
                     $district = District::findOneBy('id', $assignment->district);
@@ -177,7 +177,7 @@ if($assignments) {
                     // Create Email Record of this email
                     $record = new EmailRecord();
                     $record->tstamp = time();
-                    $record->email_type = 'pwf_report_submitted';
+                    $record->email_type = 'pwf_no_meeting_date';
                     $record->email_recipient = $psychologist->id;
                     $record->email_subject = $sub;
                     $record->email_body = $message;
