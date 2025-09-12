@@ -51,57 +51,62 @@ if($assignments) {
                 
                 // If we have no 'Meeting Date'
                 if(!$assignment->meeting_date) {
-                    
-                    fwrite($log, "NO MEETING DATE - SEND NOTIFICATION! \r\n");
-                    
-                    $psychologist = MemberModel::findOneBy('id', $assignment->psychologist);
-                    $district = District::findOneBy('id', $assignment->district);
-                    $school = School::findOneBy('id', $assignment->school);
-                    $student = Student::findOneBy('id', $assignment->student);
-                    
-                    //$addr = $psychologist->email;
-                    $addr = 'mark@brightcloudstudio.com';
-        			$headers = "MIME-Version: 1.0" . "\r\n";
-        			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
-        			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-        			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
-        			$sub = Config::get('pwf_notice_30_day_subject'); 
-        			$message = "
-        				<html>
-        				<head>
-        				<title>Global Assessments, Inc. - Psych Work Form - Notice - 30 Day</title>
-        				</head>
-        				<body>".
-                            Config::get('pwf_notice_30_day_body')
-                        ."</body>
-        				</html>
-        				";
 
-                    // TEMPLATE TAGS - Psychologist
-                    $message = str_replace('$firstname', $psychologist->firstname, $message);
-                    $message = str_replace('$lastname', $psychologist->lastname, $message);
-                    // TEMPLATE TAGS - Assignment
-                    $message = str_replace('$date_created', date('m/d/y', $assignment->date_created), $message);
-                    $message = str_replace('$date_30_day', $assignment->date_30_day, $message);
-                    // TEMPLATE TAGS - District
-                    $message = str_replace('$district', $district->district_name, $message);
-                    // TEMPLATE TAGS - School
-                    $message = str_replace('$school', $school->school_name, $message);
-                    // TEMPLATE TAGS - Student Initials
-                    $message = str_replace('$student_initials', getInitials($student->name), $message);
-                    
-        			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
-
-                    // Create Email Record of this email
-                    $record = new EmailRecord();
-                    $record->tstamp = time();
-                    $record->email_type = 'pwf_30_day';
-                    $record->email_recipient = $psychologist->id;
-                    $record->email_subject = $sub;
-                    $record->email_body = $message;
-                    $record->save();
-                    
+                    // if it is 7am
+                    $hour = date("H");
+                    if($hour == 7) {
+                        
+                        fwrite($log, "NO MEETING DATE - SEND NOTIFICATION! \r\n");
+                        
+                        $psychologist = MemberModel::findOneBy('id', $assignment->psychologist);
+                        $district = District::findOneBy('id', $assignment->district);
+                        $school = School::findOneBy('id', $assignment->school);
+                        $student = Student::findOneBy('id', $assignment->student);
+                        
+                        //$addr = $psychologist->email;
+                        $addr = 'mark@brightcloudstudio.com';
+            			$headers = "MIME-Version: 1.0" . "\r\n";
+            			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+            			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
+            			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+            			$sub = Config::get('pwf_notice_30_day_subject'); 
+            			$message = "
+            				<html>
+            				<head>
+            				<title>Global Assessments, Inc. - Psych Work Form - Notice - 30 Day</title>
+            				</head>
+            				<body>".
+                                Config::get('pwf_notice_30_day_body')
+                            ."</body>
+            				</html>
+            				";
+    
+                        // TEMPLATE TAGS - Psychologist
+                        $message = str_replace('$firstname', $psychologist->firstname, $message);
+                        $message = str_replace('$lastname', $psychologist->lastname, $message);
+                        // TEMPLATE TAGS - Assignment
+                        $message = str_replace('$date_created', date('m/d/y', $assignment->date_created), $message);
+                        $message = str_replace('$date_30_day', $assignment->date_30_day, $message);
+                        // TEMPLATE TAGS - District
+                        $message = str_replace('$district', $district->district_name, $message);
+                        // TEMPLATE TAGS - School
+                        $message = str_replace('$school', $school->school_name, $message);
+                        // TEMPLATE TAGS - Student Initials
+                        $message = str_replace('$student_initials', getInitials($student->name), $message);
+                        
+            			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
+    
+                        // Create Email Record of this email
+                        $record = new EmailRecord();
+                        $record->tstamp = time();
+                        $record->email_type = 'pwf_30_day';
+                        $record->email_recipient = $psychologist->id;
+                        $record->email_subject = $sub;
+                        $record->email_body = $message;
+                        $record->save();
+                        
+                    }
                 }
                 
             }
@@ -126,63 +131,68 @@ if($assignments) {
                 fwrite($log, "TODAY is 4 days before Meeting Date! \r\n");
                 
                 if($assignment->report_submitted != 'yes') {
-                    
-                    fwrite($log, "NOTICE DAY FOR NO MEETING DATE \r\n");
-                    fwrite($log, "Assignment: ID ". $assignment->id ."\r\n");
-                    fwrite($log, "Psychologist: ID ". $assignment->psychologist ."\r\n");
-                    fwrite($log, "Today: ". $today ."\r\n");
-                    fwrite($log, "Meeting Date: ". $meeting_date ."\r\n");
-                    fwrite($log, "Notice Day: ". $date_notice_day ."\r\n");
-                    fwrite($log, "NO MEETING DATE - SEND NOTIFICATION! \r\n");
-                    
-                    $psychologist = MemberModel::findOneBy('id', $assignment->psychologist);
-                    $district = District::findOneBy('id', $assignment->district);
-                    $school = School::findOneBy('id', $assignment->school);
-                    $student = Student::findOneBy('id', $assignment->student);
-                    
-                    //$addr = $psychologist->email;
-                    $addr = 'mark@brightcloudstudio.com';
-        			$headers = "MIME-Version: 1.0" . "\r\n";
-        			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
-        			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-        			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
-        			$sub = Config::get('pwf_notice_report_submitted_subject'); 
-        			$message = "
-        				<html>
-        				<head>
-        				<title>Global Assessments, Inc. - Psych Work Form - Notice - Report Submitted</title>
-        				</head>
-        				<body>".
-                            Config::get('pwf_notice_report_submitted_body')
-                        ."</body>
-        				</html>
-        				";
 
-                    // TEMPLATE TAGS - Psychologist
-                    $message = str_replace('$firstname', $psychologist->firstname, $message);
-                    $message = str_replace('$lastname', $psychologist->lastname, $message);
-                    // TEMPLATE TAGS - Assignment
-                    $message = str_replace('$date_created', date('m/d/y', $assignment->date_created), $message);
-                    $message = str_replace('$meeting_date', $assignment->meeting_date, $message);
-                    // TEMPLATE TAGS - District
-                    $message = str_replace('$district', $district->district_name, $message);
-                    // TEMPLATE TAGS - School
-                    $message = str_replace('$school', $school->school_name, $message);
-                    // TEMPLATE TAGS - Student Initials
-                    $message = str_replace('$student_initials', getInitials($student->name), $message);
+                     // if it is 7am
+                    $hour = date("H");
+                    if($hour == 7) {
                     
-        			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
-
-                    // Create Email Record of this email
-                    $record = new EmailRecord();
-                    $record->tstamp = time();
-                    $record->email_type = 'pwf_no_meeting_date';
-                    $record->email_recipient = $psychologist->id;
-                    $record->email_subject = $sub;
-                    $record->email_body = $message;
-                    $record->save();
-                
+                        fwrite($log, "NOTICE DAY FOR NO MEETING DATE \r\n");
+                        fwrite($log, "Assignment: ID ". $assignment->id ."\r\n");
+                        fwrite($log, "Psychologist: ID ". $assignment->psychologist ."\r\n");
+                        fwrite($log, "Today: ". $today ."\r\n");
+                        fwrite($log, "Meeting Date: ". $meeting_date ."\r\n");
+                        fwrite($log, "Notice Day: ". $date_notice_day ."\r\n");
+                        fwrite($log, "NO MEETING DATE - SEND NOTIFICATION! \r\n");
+                        
+                        $psychologist = MemberModel::findOneBy('id', $assignment->psychologist);
+                        $district = District::findOneBy('id', $assignment->district);
+                        $school = School::findOneBy('id', $assignment->school);
+                        $student = Student::findOneBy('id', $assignment->student);
+                        
+                        //$addr = $psychologist->email;
+                        $addr = 'mark@brightcloudstudio.com';
+            			$headers = "MIME-Version: 1.0" . "\r\n";
+            			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+            			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
+            			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+            			$sub = Config::get('pwf_notice_report_submitted_subject'); 
+            			$message = "
+            				<html>
+            				<head>
+            				<title>Global Assessments, Inc. - Psych Work Form - Notice - Report Submitted</title>
+            				</head>
+            				<body>".
+                                Config::get('pwf_notice_report_submitted_body')
+                            ."</body>
+            				</html>
+            				";
+    
+                        // TEMPLATE TAGS - Psychologist
+                        $message = str_replace('$firstname', $psychologist->firstname, $message);
+                        $message = str_replace('$lastname', $psychologist->lastname, $message);
+                        // TEMPLATE TAGS - Assignment
+                        $message = str_replace('$date_created', date('m/d/y', $assignment->date_created), $message);
+                        $message = str_replace('$meeting_date', $assignment->meeting_date, $message);
+                        // TEMPLATE TAGS - District
+                        $message = str_replace('$district', $district->district_name, $message);
+                        // TEMPLATE TAGS - School
+                        $message = str_replace('$school', $school->school_name, $message);
+                        // TEMPLATE TAGS - Student Initials
+                        $message = str_replace('$student_initials', getInitials($student->name), $message);
+                        
+            			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
+    
+                        // Create Email Record of this email
+                        $record = new EmailRecord();
+                        $record->tstamp = time();
+                        $record->email_type = 'pwf_no_meeting_date';
+                        $record->email_recipient = $psychologist->id;
+                        $record->email_subject = $sub;
+                        $record->email_body = $message;
+                        $record->save();
+                    
+                    }
                 }
                 
                 fwrite($log, "----------------------------------------------------\r\n\r\n");
