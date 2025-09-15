@@ -8,7 +8,7 @@ use Contao\DC_Table;
 $GLOBALS['TL_DCA']['tl_member']['list']['operations']['su']['button_callback'] = array('Bcs\Backend\MemberBackend', 'switchUserCustomized');
 
 /* Remove the 'show' action so users can see the full details */
-$GLOBALS['TL_DCA']['tl_member']['list']['operations']['show'] = false;
+//$GLOBALS['TL_DCA']['tl_member']['list']['operations']['show'] = false;
 
  /* Extend the tl_user palettes */
 foreach ($GLOBALS['TL_DCA']['tl_member']['palettes'] as $k => $v) {
