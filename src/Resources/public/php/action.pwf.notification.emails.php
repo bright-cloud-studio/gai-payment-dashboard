@@ -62,9 +62,10 @@ if($assignments) {
                         $district = District::findOneBy('id', $assignment->district);
                         $school = School::findOneBy('id', $assignment->school);
                         $student = Student::findOneBy('id', $assignment->student);
-                        
-                        $addr = $psychologist->email;
+
+                        // For development purposes, the recipient email can be overridden with my email
                         //$addr = 'mark@brightcloudstudio.com';
+                        $addr = $psychologist->email;
             			$headers = "MIME-Version: 1.0" . "\r\n";
             			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
@@ -149,9 +150,10 @@ if($assignments) {
                         $district = District::findOneBy('id', $assignment->district);
                         $school = School::findOneBy('id', $assignment->school);
                         $student = Student::findOneBy('id', $assignment->student);
-                        
-                        $addr = $psychologist->email;
+
+                        // For development purposes, the recipient email can be overridden with my email
                         //$addr = 'mark@brightcloudstudio.com';
+                        $addr = $psychologist->email;
             			$headers = "MIME-Version: 1.0" . "\r\n";
             			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
