@@ -15,6 +15,11 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
     (
         'dataContainer'               => DC_Table::class,
         'switchToEdit'                => false,
+        'closed'                      => true,
+		'notEditable'                 => true,
+		'notCopyable'                 => true,
+		'notDeletable'                => true,
+		'backendSearchIgnore'         => true,
         'sql' => array
         (
             'keys' => array
