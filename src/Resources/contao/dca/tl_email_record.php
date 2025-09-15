@@ -109,7 +109,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['email_type'],
             'inputType'               => 'select',
-            'default'                 => 'alert_weekly',
+            'default'                 => 'alert_week_remaining',
             'filter'                  => true,
             'search'                  => true,
             'options'                 => array(
