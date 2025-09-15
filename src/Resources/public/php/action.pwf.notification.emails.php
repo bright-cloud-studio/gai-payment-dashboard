@@ -63,8 +63,8 @@ if($assignments) {
                         $school = School::findOneBy('id', $assignment->school);
                         $student = Student::findOneBy('id', $assignment->student);
                         
-                        //$addr = $psychologist->email;
-                        $addr = 'mark@brightcloudstudio.com';
+                        $addr = $psychologist->email;
+                        //$addr = 'mark@brightcloudstudio.com';
             			$headers = "MIME-Version: 1.0" . "\r\n";
             			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
@@ -149,8 +149,8 @@ if($assignments) {
                         $school = School::findOneBy('id', $assignment->school);
                         $student = Student::findOneBy('id', $assignment->student);
                         
-                        //$addr = $psychologist->email;
-                        $addr = 'mark@brightcloudstudio.com';
+                        $addr = $psychologist->email;
+                        //$addr = 'mark@brightcloudstudio.com';
             			$headers = "MIME-Version: 1.0" . "\r\n";
             			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
