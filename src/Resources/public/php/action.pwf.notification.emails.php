@@ -70,7 +70,7 @@ if($assignments) {
             			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
             			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-            			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+            			$headers .= 'Cc: ed@globalassessmentsinc.com, susan@globalassessmentsinc.com, anna@globalassessmentsinc.com' . "\r\n";
             			$sub = Config::get('pwf_notice_30_day_subject'); 
             			$message = "
             				<html>
@@ -158,7 +158,7 @@ if($assignments) {
             			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
             			$headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-            			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+            			$headers .= 'Cc: ed@globalassessmentsinc.com, susan@globalassessmentsinc.com, anna@globalassessmentsinc.com' . "\r\n";
             			$sub = Config::get('pwf_notice_report_submitted_subject'); 
             			$message = "
             				<html>
