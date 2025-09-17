@@ -280,7 +280,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => false,
             'filter'                  => false,
             'default'                 => ' ',
-            'options'                  => array(' ' => 'Select an Assignment', 'yes' => 'Yes', 'no' => 'No'),
+            'options'                  => array(' ' => 'Select Yes/No', 'yes' => 'Yes', 'no' => 'No'),
     		'eval'                     => array('mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Yes/No'),
     		'sql'                      => "varchar(10) default ' '"
         ),
