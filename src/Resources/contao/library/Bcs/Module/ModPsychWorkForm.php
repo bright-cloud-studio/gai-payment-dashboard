@@ -315,6 +315,7 @@ class ModPsychWorkForm extends \Contao\Module
                     $template_assignments[$assignment->id]['meeting_required'] .= "<select name='meeting_required_$assignment->id' class='meeting_required' id='meeting_required_$assignment->id'>";
                     $template_assignments[$assignment->id]['meeting_required'] .= "<option value='' disabled selected>Select Yes/No</option>";
                     $merq_options = array();
+                    $merq_options = $merq_options + array(' ' => 'Select Yes/No');
                     $merq_options = $merq_options + array('yes' => 'Yes');
                     $merq_options = $merq_options + array('no' => 'No');
                     foreach($merq_options as $value => $title) {
