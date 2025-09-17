@@ -388,7 +388,10 @@ class TransactionBackend extends Backend
     public function getYesNo($value) {
         switch ($value)
 		{
-			case 'yes':
+			case ' ':
+                return 'Select Yes/No';
+				break;
+            case 'yes':
                 return 'Yes';
 				break;
 			case 'no':
