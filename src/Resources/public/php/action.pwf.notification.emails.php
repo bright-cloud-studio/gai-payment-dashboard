@@ -106,7 +106,7 @@ if($assignments) {
                         $record = new EmailRecord();
                         $record->tstamp = time();
                         $record->date_created = time();
-                        $record->email_type = 'pwf_30_day';
+                        $record->email_type = 'pwf_no_meeting_date_entered';
                         $record->email_recipient = $psychologist->id;
                         $record->email_subject = $sub;
                         $record->email_body = $message;
@@ -198,7 +198,7 @@ if($assignments) {
                         $record = new EmailRecord();
                         $record->tstamp = time();
                         $record->date_created = time();
-                        $record->email_type = 'pwf_no_meeting_date';
+                        $record->email_type = 'pwf_no_report_submitted';
                         $record->email_recipient = $psychologist->id;
                         $record->email_subject = $sub;
                         $record->email_body = $message;
