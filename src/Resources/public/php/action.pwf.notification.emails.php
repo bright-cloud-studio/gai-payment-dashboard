@@ -95,6 +95,10 @@ if($assignments) {
                         $message = str_replace('$school', $school->school_name, $message);
                         // TEMPLATE TAGS - Student Initials
                         $message = str_replace('$student_initials', getInitials($student->name), $message);
+                        // TEMPLATE TAGS - LASID
+                        $message = str_replace('$lasid', $student->lasid, $message);
+                        // TEMPLATE TAGS - SASID
+                        $message = str_replace('$sasid', $student->sasid, $message);
                         
             			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
     
@@ -183,6 +187,10 @@ if($assignments) {
                         $message = str_replace('$school', $school->school_name, $message);
                         // TEMPLATE TAGS - Student Initials
                         $message = str_replace('$student_initials', getInitials($student->name), $message);
+                        // TEMPLATE TAGS - LASID
+                        $message = str_replace('$lasid', $student->lasid, $message);
+                        // TEMPLATE TAGS - SASID
+                        $message = str_replace('$sasid', $student->sasid, $message);
                         
             			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
     
