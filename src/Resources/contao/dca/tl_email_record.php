@@ -119,8 +119,8 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
             'options'                 => array(
                 'alert_week_remaining' => 'Alert Email - Week Remaining',
                 'alert_final' => 'Alert Email - Final Day',
-                'pwf_30_day' => 'Psych Work Form - 30 Day',
-                'pwf_no_meeting_date' => 'Psych Work Form - No Meeting Date'
+                'pwf_30_day' => 'Psych Work Form – No Meeting Date Entered',
+                'pwf_no_meeting_date' => 'Psych Work Form – No Report Submitted'
             ),
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(25) NOT NULL default ''"
