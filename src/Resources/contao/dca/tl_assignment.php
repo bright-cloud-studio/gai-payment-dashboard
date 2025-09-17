@@ -279,10 +279,10 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'inputType'               => 'select',
             'search'                  => false,
             'filter'                  => false,
-            'default'                 => '',
-            'options'                  => array('yes' => 'Yes', 'no' => 'No'),
+            'default'                 => ' ',
+            'options'                  => array(' ' => 'Select an Assignment', 'yes' => 'Yes', 'no' => 'No'),
     		'eval'                     => array('mandatory'=>false, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Yes/No'),
-    		'sql'                      => "varchar(10) NOT NULL default ''"
+    		'sql'                      => "varchar(10) default ' '"
         ),
         'meeting_date' => array
         (
