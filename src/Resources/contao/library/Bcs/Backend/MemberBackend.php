@@ -36,7 +36,7 @@ class MemberBackend extends Backend
             $member = FrontendUser::getInstance();
             if($result->psychologist == $member->id) {
                 $d = District::findBy('id', $result->district);
-                $assignments = $assignments + array($result->id => '[ID: '.$result->id.'] ' . date('m/d/y', $result->date_created) . ' - ' . $d->district_name);
+                $assignments = $assignments + array($result->id => '[ID: '.$result->id.'] ' . date('m/d/y', strtotime($result->date_created)) . ' - ' . $d->district_name);
             }
         }
         return $assignments;
