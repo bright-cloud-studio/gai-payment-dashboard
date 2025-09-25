@@ -21,6 +21,7 @@ use Bcs\Model\Student;
 use Bcs\Model\Transaction;
 
 use Contao\BackendTemplate;
+use Contao\Config;
 use Contao\System;
 use Contao\FrontendUser;
 
@@ -471,6 +472,9 @@ class ModPsychWorkForm extends \Contao\Module
         
         //$this->Template->colors = $colors;
         $this->Template->assignments = $template_assignments;
+        
+        $this->Template->hide_cutoff_date = date('m/d/y', Config::get('pwf_hide_cutoff'));
+        $this->Template->hide_cutoff_date_php = Config::get('pwf_hide_cutoff');
         
     }
   
