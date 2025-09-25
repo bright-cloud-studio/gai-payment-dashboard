@@ -1,4 +1,6 @@
 <?php
+
+    use Contao\Config;
     
     // Start PHP session and include Composer, which also brings in our Google Sheets PHP stuffs
     session_start();
@@ -25,13 +27,13 @@
     $result_assignment = $dbh->query($query_assignment);
     if($result_assignment) {
         while($db_assignment = $result_assignment->fetch_assoc()) {
-            $assignment_year = date('y', $db_assignment['date_created']);
-            $current_year = date('y');
+            $assignment_date = date('m/d/y', $db_assignment['date_created']);
+            $cutoff_date = date('m/d/y/', Config::get('pwf_hide_cutoff'));
             
-            fwrite($myfile, "Assignment Year: " . $assignment_year . "\r\n");
-            fwrite($myfile, "Current Year: " . $current_year . "\r\n");
+            fwrite($myfile, "Assignment Date: " . $assignment_date . "\r\n");
+            fwrite($myfile, "Cutoff Date: " . $cutoff_date . "\r\n");
             
-            if($assignment_year < $current_year) {
+            if($assignment_date < $cutoff_date) {
                 $valid_year = true;
                 fwrite($myfile, "Is valid year! \r\n");
             }
