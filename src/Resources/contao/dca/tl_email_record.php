@@ -109,7 +109,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
                 'resolved' => 'Resolved'
             ),
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                     => "varchar(15) NOT NULL default ''"
+            'sql'                     => "varchar(15) NOT NULL default 'pending'"
         ),
 
         
