@@ -16,6 +16,8 @@
 
     $assignment_id = str_replace("assignment_", "", $_POST['assignment_id']);
     $psy_id = $_POST['psy_id'];
+    $cutoff_date = date('m/d/y', $_POST['cutoff_date']);
+    
 
     fwrite($myfile, "Assignment ID: " . $assignment_id . "\r\n");
     fwrite($myfile, "Psy ID: " . $psy_id . "\r\n");
@@ -28,14 +30,15 @@
     if($result_assignment) {
         while($db_assignment = $result_assignment->fetch_assoc()) {
             $assignment_date = date('m/d/y', $db_assignment['date_created']);
-            $cutoff_date = date('m/d/y/', Config::get('pwf_hide_cutoff'));
+
+            fwrite($myfile, "Assignment Date: " . $db_assignment['date_created'] . "\r\n");
+            fwrite($myfile, "Cutoff Date: " . $_POST['cutoff_date'] . "\r\n");
             
-            fwrite($myfile, "Assignment Date: " . $assignment_date . "\r\n");
-            fwrite($myfile, "Cutoff Date: " . $cutoff_date . "\r\n");
+            $date_1 = \DateTime::createFromFormat('m/d/y', $assignment_date);
+            $date_2 = \DateTime::createFromFormat('m/d/y', $cutoff_date);
             
-            if($assignment_date < $cutoff_date) {
+            if($date_1 < $date_2) {
                 $valid_year = true;
-                fwrite($myfile, "Is valid year! \r\n");
             }
         }
     }
@@ -57,7 +60,10 @@
         fwrite($myfile, "Member Name: " . $member['firstname'] . " " . $member['lastname'] . "\r\n");
         
         // add our ID to the list
-        $hidden_assignments = unserialize($member['pwf_hidden_assignments']);
+        $hidden_assignments = [];
+        if($member['pwf_hidden_assignments']) {
+            $hidden_assignments = unserialize($member['pwf_hidden_assignments']);
+        }
         $hidden_assignments[] = $assignment_id;
         
         fwrite($myfile, "Adding ID to list of hidden Assignments... \r\n");
