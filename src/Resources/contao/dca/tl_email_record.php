@@ -78,7 +78,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{email_record_legend}, date_created, email_type, email_recipient, email_subject, email_body;'
+        'default'                     => '{status_legend}, status;{email_record_legend}, date_created, email_type, email_recipient, email_subject, email_body;'
     ),
  
     // Fields
@@ -97,6 +97,22 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
             'sql'                   => "int(10) unsigned NOT NULL default '0'"
         ),
 
+        'status' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['status'],
+            'inputType'               => 'select',
+            'default'                 => 'pending',
+            'filter'                  => true,
+            'search'                  => true,
+            'options'                 => array(
+                'pending' => 'Pending',
+                'resolved' => 'Resolved'
+            ),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(15) NOT NULL default ''"
+        ),
+
+        
         'date_created' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['date_created'],
