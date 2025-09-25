@@ -47,8 +47,8 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'rootPaste'               => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('date_start DESC'),
-            'defaultSearchField'      => 'date_start',
+            'fields'                  => array('tstamp DESC'),
+            'defaultSearchField'      => 'tstamp',
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
