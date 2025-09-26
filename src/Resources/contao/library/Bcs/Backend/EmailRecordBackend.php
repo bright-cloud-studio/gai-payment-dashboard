@@ -11,6 +11,14 @@ use Contao\StringUtil;
 
 class EmailRecordBackend extends Backend
 {
+
+    public function addStatusToLabel($row, $label)
+	{
+        $status_wrapper_open = '<span class="status status_'.$row['status'].'">['.$row['status'].']</span> ';
+        $status_wrapper_close = '</span>';
+        
+		return $status_wrapper_open . $label . $status_wrapper_close;
+	}
   
     public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
     {
