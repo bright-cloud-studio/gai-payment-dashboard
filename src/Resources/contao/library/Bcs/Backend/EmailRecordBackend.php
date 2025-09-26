@@ -2,6 +2,9 @@
 
 namespace Bcs\Backend;
 
+use Bcs\Model\District;
+use Bcs\Model\Student;
+
 use Contao\Backend;
 use Contao\Image;
 use Contao\Input;
@@ -35,7 +38,8 @@ class EmailRecordBackend extends Backend
 		$result = $this->Database->prepare("SELECT * FROM tl_assignment WHERE published=1 ORDER BY date_created DESC")->execute();
 		while($result->next())
 		{
-            $assignments = $assignments + array($result->id => ($result->date_created . " - " . $result->district));   
+            $d = District::findBy('id', $result->district);
+            $assignments = $assignments + array($result->id => (date("m/d/y", $result->date_created) . " - " . $d->district_name));   
 		}
 
 		return $assignments;
