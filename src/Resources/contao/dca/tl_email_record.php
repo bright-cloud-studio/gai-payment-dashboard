@@ -78,7 +78,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{status_legend}, status;{email_record_legend}, date_created, email_type, email_recipient, email_subject, email_body;'
+        'default'                     => '{status_legend}, status;{assignment_legend}, assignment;{email_record_legend}, date_created, email_type, email_recipient, email_subject, email_body;'
     ),
  
     // Fields
