@@ -26,6 +26,23 @@ class EmailRecordBackend extends Backend
         return '<a href="'.$this->addToUrl($href).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
     }
 
+
+    public function getAssignments(DataContainer $dc) { 
+
+        $assignments = array();
+
+		$this->import('Database');
+		$result = $this->Database->prepare("SELECT * FROM tl_assignment WHERE published==1 ORDER BY date_created DESC")->execute();
+		while($result->next())
+		{
+            $assignments = $assignments + array($result->id => ($result->date_created . " - " . $result->district));   
+		}
+
+		return $assignments;
+	}
+    
+    
+    
     public function getPsychologists(DataContainer $dc) { 
 
         $psychologists = array();
