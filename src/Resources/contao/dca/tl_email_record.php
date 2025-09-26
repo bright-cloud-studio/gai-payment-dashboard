@@ -112,6 +112,19 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
             'sql'                     => "varchar(15) NOT NULL default 'pending'"
         ),
 
+
+        'assignment' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_email_record']['assignment'],
+            'inputType'               => 'select',
+            'filter'                  => false,
+            'search'                  => false,
+            'flag'                    => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true),
+            'options_callback'	      => array('Bcs\Backend\EmailRecordBackend', 'getAssignments'),
+            'sql'                     => "int(10) unsigned NOT NULL default '0'"
+        ),
+
         
         'date_created' => array
         (
