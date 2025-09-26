@@ -39,7 +39,17 @@ class EmailRecordBackend extends Backend
 		while($result->next())
 		{
             $d = District::findBy('id', $result->district);
-            $assignments = $assignments + array($result->id => (date("m/d/y", $result->date_created) . " - " . $d->district_name));   
+            $s = Student::findBy('id', $result->student);
+            $lasid_sasid = '';
+            if($s->lasid != '' && $s->sasid != '') {
+                $lasid_sasid = $s->lasid . " / " . $s->sasid;
+            } else {
+                if($s->lasid != '')
+                    $lasid_sasid = $s->lasid;
+                if($s->sasid != '')
+                    $lasid_sasid = $s->sasid;
+        }
+            $assignments = $assignments + array($result->id => (date("m/d/y", $result->date_created) . " - " . $d->district_name . " - " . $lasid_sasid));   
 		}
 
 		return $assignments;
