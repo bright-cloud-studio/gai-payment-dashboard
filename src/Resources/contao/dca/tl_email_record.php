@@ -19,10 +19,6 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
 		'notCopyable'                 => true,
 		'notDeletable'                => true,
 		'backendSearchIgnore'         => true,
-        'onsubmit_callback' => array
-		(
-			array('Bcs\Backend\EmailRecordBackend', 'addStatusToLabel')
-		),
         'sql' => array
         (
             'keys' => array
@@ -188,7 +184,7 @@ class tl_email_record extends Backend
     public function generateLabel($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
     {
         // Prepend the label with the date, formatted correctly
-        $label = date('m/d/y g:i a', $row['date_created']) . " - " . $label;
+        $label = '<span clas=="status status_'.$row['status'].'">[' . $row['status'] . ']</span> ' . date('m/d/y g:i a', $row['date_created']) . " - " . $label;
         return $label;
     }
 }
