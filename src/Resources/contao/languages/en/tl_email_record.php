@@ -12,6 +12,9 @@ $GLOBALS['TL_LANG']['tl_email_record']['toggle']                     = array('To
 $GLOBALS['TL_LANG']['tl_email_record']['status_legend']      = 'Status Details';
 $GLOBALS['TL_LANG']['tl_email_record']['status']             = array('Current Status', 'Shows the current Status of this Email Record.');
 
+$GLOBALS['TL_LANG']['tl_email_record']['assignment_legend']      = 'Assignment Details';
+$GLOBALS['TL_LANG']['tl_email_record']['assignment']             = array('Assignment', 'The Assignment that initiated this Email Record');
+
 $GLOBALS['TL_LANG']['tl_email_record']['email_record_legend']      = 'Email Record Information';
 $GLOBALS['TL_LANG']['tl_email_record']['date_created']             = array('Date Created', 'The date and time this email and record were created');
 $GLOBALS['TL_LANG']['tl_email_record']['email_type']               = array('Email Type', 'The specific type of email that was sent out');
