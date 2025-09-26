@@ -32,7 +32,7 @@ class EmailRecordBackend extends Backend
         $assignments = array();
 
 		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_assignment WHERE published==1 ORDER BY date_created DESC")->execute();
+		$result = $this->Database->prepare("SELECT * FROM tl_assignment WHERE published=1 ORDER BY date_created DESC")->execute();
 		while($result->next())
 		{
             $assignments = $assignments + array($result->id => ($result->date_created . " - " . $result->district));   
