@@ -19,6 +19,10 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
 		'notCopyable'                 => true,
 		'notDeletable'                => true,
 		'backendSearchIgnore'         => true,
+        'onsubmit_callback' => array
+		(
+			array('Bcs\Backend\EmailRecordBackend', 'addStatusToLabel')
+		),
         'sql' => array
         (
             'keys' => array
