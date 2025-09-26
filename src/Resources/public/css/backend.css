@@ -60,5 +60,8 @@ span.bold { font-weight: 600; font-size: 1.5em; margin-right: 5px; }
 .status_created { background-color: #fbe83a; }
 .status_reviewed { background-color: #ffb302; }
 
+.status_pending { background-color: green; }
+.status_resolved { background-color: purple; }
+
 
 a.show { display: none; }
