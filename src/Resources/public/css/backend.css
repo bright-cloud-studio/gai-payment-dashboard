@@ -55,13 +55,8 @@ html[data-color-scheme=light] #tl_gai div.size25 .inside{
 
 span.bold { font-weight: 600; font-size: 1.5em; margin-right: 5px; }
 
-
 .status { font-weight: 600; text-transform: capitalize; }
-.status_created { background-color: #fbe83a; }
-.status_reviewed { background-color: #ffb302; }
-
-.status_pending { background-color: green; }
-.status_resolved { background-color: purple; }
-
+.status_created, .status_pending { background-color: #fbe83a; }
+.status_reviewed, .status_resolved { background-color: #ffb302; }
 
 a.show { display: none; }
