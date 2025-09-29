@@ -14,6 +14,7 @@ namespace Bcs\Module;
 
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
+use Bcs\Model\EmailRecord;
 use Bcs\Model\PriceTier;
 use Bcs\Model\School;
 use Bcs\Model\Service;
@@ -354,7 +355,11 @@ class ModPsychWorkForm extends \Contao\Module
                     $date_notice_day = date('m/d/y', strtotime('-5 days', strtotime($date_30_day)));
                     if($today == $date_notice_day) {
                         if(!$assignment->meeting_date) {
-                            $class = 'highlight';
+                            $email_record = EmailRecord::findOneBy(['assignment=?', 'email_recipient=?', 'email_type=?'],[$assignment->id, $member->id, 'pwf_no_meeting_date_entered']);
+                            if($email_record) {
+                                if($email_record->status != 'resolved')
+                                    $class = 'highlight';
+                            }
                         }
                     }
                     $template_assignments[$assignment->id]['meeting_date'] = "<input value='$assignment->meeting_date' name='meeting_date_$assignment->id' class='meeting_date $class' id='meeting_date_$assignment->id' autocomplete='off'>";
