@@ -58,6 +58,7 @@ $GLOBALS['FE_MOD']['gai']['mod_admin_review']            = 'Bcs\Module\ModAdminR
 /* Models */
 $GLOBALS['TL_MODELS']['tl_assignment']         = 'Bcs\Model\Assignment';
 $GLOBALS['TL_MODELS']['tl_district']           = 'Bcs\Model\District';
+$GLOBALS['TL_MODELS']['tl_email_record']       = 'Bcs\Model\EmailRecord';
 $GLOBALS['TL_MODELS']['tl_invoice']            = 'Bcs\Model\Invoice';
 $GLOBALS['TL_MODELS']['tl_invoice_district']   = 'Bcs\Model\InvoiceDistrict';
 $GLOBALS['TL_MODELS']['tl_invoice_request']    = 'Bcs\Model\InvoiceRequest';
