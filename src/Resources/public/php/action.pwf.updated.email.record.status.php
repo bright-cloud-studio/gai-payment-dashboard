@@ -1,4 +1,6 @@
 <?php
+
+    use Bcs\Model\EmailRecordModel;
     
     // Start PHP session and include Composer, which also brings in our Google Sheets PHP stuffs
     session_start();
@@ -18,11 +20,16 @@
     $email_type = $_POST['email_type'];
     
     fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
+    fwrite($myfile, "SAVING: Psychologist ID: " . $psychologist_id . "\r\n");
+    fwrite($myfile, "SAVING: Email Type: " . $email_type . "\r\n");
 
-    $update =  "update tl_assignment set school='".$school."' WHERE id='".$assignment_id."'";
-    $result_update = $dbh->query($update);
+    $email_record = EmailRecord::findOneBy(['psychologist', 'assignment', 'email_type'], [$assignment_id, $psychologist_id, $email_type]);
+    if($email_record) {
+        fwrite($myfile, "FOUND EMAIL RECORD: " . $email_record->id . "\r\n");
+    } else {
+        fwrite($myfile, "NOT FOUND EMAIL RECORD: " . $email_record->id . "\r\n");
+    }
 
-    fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
     
     fclose($myfile);
     echo "success";
