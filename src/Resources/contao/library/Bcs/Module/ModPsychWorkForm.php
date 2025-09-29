@@ -431,7 +431,11 @@ class ModPsychWorkForm extends \Contao\Module
                     $date_notice_day = date('m/d/y', strtotime('-4 days', strtotime($meeting_date)));
                     if($today == $date_notice_day) {
                         if($assignment->report_submitted != 'yes') {
-                            $class = 'highlight';
+                            $email_record = EmailRecord::findOneBy(['assignment=?', 'email_recipient=?', 'email_type=?'],[$assignment->id, $member->id, 'pwf_no_report_submitted']);
+                            if($email_record) {
+                                if($email_record->status != 'resolved')
+                                    $class = 'highlight';
+                            }
                         }
                     }
                     
