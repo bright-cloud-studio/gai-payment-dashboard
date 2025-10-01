@@ -550,7 +550,8 @@ class InvoiceRequestBackend extends Backend
     
         return $name;
     }
-    
+
+    // UPDATED October 1, 2025. Previous version was not properly filtering by year. Provided by Gemini.
     public function isDateWithinRange($start_date, $end_date, $transaction_date) {
         // Define the expected input format
         $format = 'm/d/y';
