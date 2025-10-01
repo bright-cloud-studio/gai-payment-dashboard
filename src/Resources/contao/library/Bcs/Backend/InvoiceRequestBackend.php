@@ -40,7 +40,7 @@ class InvoiceRequestBackend extends Backend
 		    $transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE published='1' ORDER BY date_submitted ASC");
 		}
 		
-		$myfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/invoice_request_debug_'.date('m_d_y').'.txt', "a+") or die("Unable to open file!");
+		//$myfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/invoice_request_debug_'.date('m_d_y').'.txt', "a+") or die("Unable to open file!");
 
 		while ($transactions->next())
 		{
@@ -48,18 +48,18 @@ class InvoiceRequestBackend extends Backend
             $start_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_start));
             $end_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_end));
             $transaction_date = date('m/d/y', $transactions->date_submitted);
-            
-            
-            
+
             if($this->isDateWithinRange($start_date, $end_date, $transaction_date)) {
 		        $arrTransactions[$transactions->psychologist][] = $transactions->id;
 		        
-		        fwrite($myfile, "START DATE: " . $start_date . "\r\n");
-                fwrite($myfile, "END   DATE: " . $end_date . "\r\n");
-                fwrite($myfile, "TRANS DATE: " . $transaction_date . "\r\n");
-                fwrite($myfile, "Is Within Range: " . $this->isDateWithinRange($start_date, $end_date, $transaction_date) . "\r\n\r\n");
+		        //fwrite($myfile, "START DATE: " . $start_date . "\r\n");
+                //fwrite($myfile, "END   DATE: " . $end_date . "\r\n");
+                //fwrite($myfile, "TRANS DATE: " . $transaction_date . "\r\n");
+                //fwrite($myfile, "Is Within Range: " . $this->isDateWithinRange($start_date, $end_date, $transaction_date) . "\r\n\r\n");
             }
 		}
+
+        //fclose($myfile);
 		
 		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
         $arrTransactionsMisc = array();
