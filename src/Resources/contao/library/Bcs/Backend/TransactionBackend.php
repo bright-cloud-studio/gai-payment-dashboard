@@ -30,7 +30,6 @@ class TransactionBackend extends Backend
 		{
 			return;
 		}
-		
 
         // If we have not yet created the Invoices for this request
         if($dc->activeRecord->pid != '') {
@@ -108,7 +107,7 @@ class TransactionBackend extends Backend
 		$attributes = sprintf(
 			'data-icon="%s" data-icon-disabled="%s"',
 			$row['protected'] ? 'articles_2.svg' : 'articles.svg',
-			$row['protected'] ? 'articles_3.svg' : 'articles_1.svg',
+			$row['protected'] ? 'articles_3.svg' : 'articles_1.svg'
 		);
 
 		$href = System::getContainer()->get('router')->generate('contao_backend_preview', array('page'=>$row['pid'], 'article'=>($row['alias'] ?: $row['id'])));
