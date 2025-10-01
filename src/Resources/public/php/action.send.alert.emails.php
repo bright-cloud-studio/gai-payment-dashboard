@@ -63,8 +63,7 @@
                     			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
                                 $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-                    			//$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
-                                $headers .= 'Cc: ed@globalassessmentsinc.com, susan@globalassessmentsinc.com, anna@globalassessmentsinc.com' . "\r\n";
+                    			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
                     			$sub = $alert_email->warning_subject;
                     			$message = "
                     				<html>
@@ -107,8 +106,7 @@
                 fwrite($log, "SEND DATE: " . $warning_date. "\r\n");
                 fwrite($log, "TODAY DATE: " . $today. "\r\n");
             }
-
-
+            
 
             // FINAL DAY EMAIL
             if($final_date == $today) {
@@ -129,8 +127,7 @@
                     			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
                                 $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-                    			//$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
-                                $headers .= 'Cc: ed@globalassessmentsinc.com, susan@globalassessmentsinc.com, anna@globalassessmentsinc.com' . "\r\n";
+                    			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
                     			$sub = $alert_email->warning_subject;
                     			$message = "
                     				<html>
