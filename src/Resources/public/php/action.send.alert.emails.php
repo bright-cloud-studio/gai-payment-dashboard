@@ -83,6 +83,7 @@
                     			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
 
                                 // Create Email Record of this email
+                                /*
                                 $record = new EmailRecord();
                                 $record->tstamp = time();
                                 $record->date_created = time();
@@ -92,6 +93,7 @@
                                 $record->email_subject = $sub;
                                 $record->email_body = $message;
                                 $record->save();
+                                */
 
                             }
                         }
@@ -147,6 +149,7 @@
                     			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
 
                                 // Create Email Record of this email
+                                /*
                                 $record = new EmailRecord();
                                 $record->tstamp = time();
                                 $record->status = 'resolved';
@@ -156,6 +159,7 @@
                                 $record->email_subject = $sub;
                                 $record->email_body = $message;
                                 $record->save();
+                                */
                                 
                             }
                         }
