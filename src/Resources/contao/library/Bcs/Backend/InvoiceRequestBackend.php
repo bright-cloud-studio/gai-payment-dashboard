@@ -40,15 +40,25 @@ class InvoiceRequestBackend extends Backend
 		    $transactions = $this->Database->query("SELECT * FROM tl_transaction WHERE published='1' ORDER BY date_submitted ASC");
 		}
 		
+		$myfile = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/invoice_request_debug_'.date('m_d_y').'.txt', "a+") or die("Unable to open file!");
+
 		while ($transactions->next())
 		{
 
             $start_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_start));
             $end_date = date('m/d/y', $this->convertDateToTimestamp($dc->activeRecord->date_end));
             $transaction_date = date('m/d/y', $transactions->date_submitted);
-
-            if($this->isDateWithinRange($start_date, $end_date, $transaction_date))
+            
+            
+            
+            if($this->isDateWithinRange($start_date, $end_date, $transaction_date)) {
 		        $arrTransactions[$transactions->psychologist][] = $transactions->id;
+		        
+		        fwrite($myfile, "START DATE: " . $start_date . "\r\n");
+                fwrite($myfile, "END   DATE: " . $end_date . "\r\n");
+                fwrite($myfile, "TRANS DATE: " . $transaction_date . "\r\n");
+                fwrite($myfile, "Is Within Range: " . $this->isDateWithinRange($start_date, $end_date, $transaction_date) . "\r\n\r\n");
+            }
 		}
 		
 		// Build an array with Psy ID as the first key and Misc Transaction IDs as the second
@@ -542,14 +552,30 @@ class InvoiceRequestBackend extends Backend
     }
     
     public function isDateWithinRange($start_date, $end_date, $transaction_date) {
-
-        // Check if the test date is equal to either the start or end date
-        if ($transaction_date === $start_date || $transaction_date === $end_date) {
-            return true;
+        // Define the expected input format
+        $format = 'm/d/y';
+    
+        // Convert string dates to DateTime objects for reliable comparison
+        // The createFromFormat function is crucial for parsing the specific 'mm/dd/yy' format.
+        $start = DateTime::createFromFormat($format, $start_date);
+        $end = DateTime::createFromFormat($format, $end_date);
+        $transaction = DateTime::createFromFormat($format, $transaction_date);
+    
+        // Basic validation: make sure all dates were parsed successfully
+        if (!$start || !$end || !$transaction) {
+            // Handle error: one of the dates was in an invalid format
+            // Depending on your application, you might throw an exception or return false/null
+            return false; 
         }
     
-        // Check if the test date is between the start and end dates
-        return ($transaction_date > $start_date && $transaction_date < $end_date);
+        // The comparison works as follows:
+        // start <= transaction <= end
+        // Use the less-than-or-equal-to (<=) and greater-than-or-equal-to (>=) operators 
+        // on DateTime objects, which implicitly compare the underlying timestamps.
+    
+        // Check if the transaction date is on or after the start date 
+        // AND on or before the end date.
+        return ($transaction >= $start && $transaction <= $end);
     }
     
 
