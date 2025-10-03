@@ -63,7 +63,7 @@
                     			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
                                 $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-                    			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+                    			$headers .= 'Cc: ed@globalassessmentsinc.com, susan@globalassessmentsinc.com, anna@globalassessmentsinc.com' . "\r\n";
                     			$sub = $alert_email->warning_subject;
                     			$message = "
                     				<html>
@@ -83,7 +83,6 @@
                     			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
 
                                 // Create Email Record of this email
-                                /*
                                 $record = new EmailRecord();
                                 $record->tstamp = time();
                                 $record->date_created = time();
@@ -93,7 +92,6 @@
                                 $record->email_subject = $sub;
                                 $record->email_body = $message;
                                 $record->save();
-                                */
 
                             }
                         }
@@ -129,7 +127,7 @@
                     			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
                                 $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-                    			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+                    			$headers .= 'Cc: ed@globalassessmentsinc.com, susan@globalassessmentsinc.com, anna@globalassessmentsinc.com' . "\r\n";
                     			$sub = $alert_email->warning_subject;
                     			$message = "
                     				<html>
@@ -149,7 +147,6 @@
                     			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
 
                                 // Create Email Record of this email
-                                /*
                                 $record = new EmailRecord();
                                 $record->tstamp = time();
                                 $record->status = 'resolved';
@@ -159,7 +156,6 @@
                                 $record->email_subject = $sub;
                                 $record->email_body = $message;
                                 $record->save();
-                                */
                                 
                             }
                         }
