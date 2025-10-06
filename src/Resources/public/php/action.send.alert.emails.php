@@ -63,7 +63,7 @@
                     			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
                                 $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-                    			$headers .= 'Cc: ed@globalassessmentsinc.com, susan@globalassessmentsinc.com, anna@globalassessmentsinc.com' . "\r\n";
+                    			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
                     			$sub = $alert_email->warning_subject;
                     			$message = "
                     				<html>
@@ -127,7 +127,7 @@
                     			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
                                 $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-                    			$headers .= 'Cc: ed@globalassessmentsinc.com, susan@globalassessmentsinc.com, anna@globalassessmentsinc.com' . "\r\n";
+                    			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
                     			$sub = $alert_email->warning_subject;
                     			$message = "
                     				<html>
