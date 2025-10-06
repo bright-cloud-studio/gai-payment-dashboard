@@ -522,11 +522,12 @@ class FormHooks
             foreach($submittedData['districts'] as $district) {
                
                 $i = InvoiceDistrict::findBy('id', $district);
+                $ir = InvoiceRequest::findBy(['id = ?'], [$i->pid]);
                 $d = District::findBy('id', $i->district);
                 
+                $addr = $d->contact_email;
                 //$addr = 'mark@brightcloudstudio.com, ed@globalassessmentsinc.com';
                 //$addr = 'mark@brightcloudstudio.com';
-                $addr = $d->contact_email;
                 
                 // Always set content-type when sending HTML email
                 $headers = "MIME-Version: 1.0" . "\r\n";
@@ -538,7 +539,11 @@ class FormHooks
                 $headers .= 'Cc: ed@globalassessmentsinc.com, ' . $d->contact_cc_email . "\r\n";
                 
                 $name = $d->district_name;
-                $month = 'October';
+                
+                // Format our "Date Start" field into a proper DateTime
+                $ir_start_date = DateTime::createFromFormat('m/d/y', $ir->date_start);
+                // Convert our proper date into the month name as a string
+                $month = $ir_start_date->format('F');
                 
                 $sub = "$name, your $month invoice is ready for you";
                 
