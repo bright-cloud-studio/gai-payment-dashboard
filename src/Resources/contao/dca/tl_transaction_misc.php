@@ -277,6 +277,16 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default '0'"
         ),
+        'price_2' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['price_2'],
+            'inputType'               => 'text',
+            'default'                 => '0',
+            'filter'                  => false,
+            'search'                  => false,
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(255) NOT NULL default '0'"
+        ),
         
         'meeting_date' => array
         (
