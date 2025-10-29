@@ -108,8 +108,9 @@ $GLOBALS['TL_DCA']['tl_student'] = array
             'exclude'                 => true,
             'label'                   => &$GLOBALS['TL_LANG']['tl_student']['published'],
             'inputType'               => 'checkbox',
+            'default'                 => '1',
             'eval'                    => array('submitOnChange'=>false, 'doNotCopy'=>true),
-            'sql'                     => "char(1) NOT NULL default ''"
+            'sql'                     => "char(1) NOT NULL default '1'"
         ),
 
 
