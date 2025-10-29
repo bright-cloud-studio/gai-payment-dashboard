@@ -97,7 +97,7 @@ if($assignments) {
                             // TEMPLATE TAGS - School
                             $message = str_replace('$school', $school->school_name, $message);
                             // TEMPLATE TAGS - Student Initials
-                            $message = str_replace('$student_initials', getInitials($student->name), $message);
+                            $message = str_replace('$student_initials', getPWFInitials($student->name), $message);
                             // TEMPLATE TAGS - LASID
                             $message = str_replace('$lasid', $student->lasid, $message);
                             // TEMPLATE TAGS - SASID
@@ -190,7 +190,7 @@ if($assignments) {
                             // TEMPLATE TAGS - School
                             $message = str_replace('$school', $school->school_name, $message);
                             // TEMPLATE TAGS - Student Initials
-                            $message = str_replace('$student_initials', getInitials($student->name), $message);
+                            $message = str_replace('$student_initials', getPWFInitials($student->name), $message);
                             // TEMPLATE TAGS - LASID
                             $message = str_replace('$lasid', $student->lasid, $message);
                             // TEMPLATE TAGS - SASID
@@ -229,7 +229,7 @@ fclose($log);
 // Explode will split the $name string into separate words using space as a divider
 // strtoupper will strip out all characters for each word extept the first character
 // leaving us with only the initials
-function getInitials($name) {
+function getPWFInitials($name) {
     $words = explode(" ", $name);
     $initials = "";
 
