@@ -21,7 +21,7 @@ class MemberBackend extends Backend
     
     // Displays this Psychologist's Assignments and tracks which ones to hide from the Psych Work Form
     public function getHiddenAssignments(DataContainer $dc) {
-        
+
         $hidden_assignments;
         if($dc->activeRecord) {
             
@@ -33,8 +33,7 @@ class MemberBackend extends Backend
         $result = $this->Database->prepare("SELECT * FROM tl_assignment ORDER BY date_created DESC")->execute();
         while($result->next())
         {
-            $member = FrontendUser::getInstance();
-            if($result->psychologist == $member->id) {
+            if($result->psychologist == $dc->activeRecord->id) {
                 $d = District::findBy('id', $result->district);
                 $assignments = $assignments + array($result->id => '[ID: '.$result->id.'] ' . date('m/d/y', strtotime($result->date_created)) . ' - ' . $d->district_name);
             }
@@ -46,7 +45,7 @@ class MemberBackend extends Backend
 
 
     
-  public function switchUserCustomized($row, $href, $label, $title, $icon)
+    public function switchUserCustomized($row, $href, $label, $title, $icon)
 	{
 		$user = BackendUser::getInstance();
 		$blnCanSwitchUser = $user->isAdmin || (!empty($user->amg) && is_array($user->amg));
