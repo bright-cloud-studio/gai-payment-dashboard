@@ -126,8 +126,9 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
             'exclude'                 => true,
             'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_request']['published'],
             'inputType'               => 'checkbox',
+            'default'                 => '1',
             'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
-            'sql'                     => "char(1) NOT NULL default ''"
+            'sql'                     => "char(1) NOT NULL default '1'"
         ),
 
 
