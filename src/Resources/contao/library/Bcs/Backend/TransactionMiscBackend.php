@@ -24,6 +24,21 @@ class TransactionMiscBackend extends Backend
             return;
         }
         
+        // If we have no Price
+        if($dc->activeRecord->price == "0") {
+
+            // If we have a Psychologist
+            if($dc->activeRecord->psychologist) {
+                
+                // If we have a Service
+                if($dc->activeRecord->service) {
+                
+                    // Get the price for that Psychologist's Price Tier for that service, fill in, save
+                }
+            }
+                    
+        }
+
     }
     
     
