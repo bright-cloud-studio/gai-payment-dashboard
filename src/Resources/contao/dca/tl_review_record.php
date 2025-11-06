@@ -104,6 +104,18 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'sql'                   => "int(10) unsigned NOT NULL default '0'"
         ),
 
+        'date_reviewed' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['date_submitted'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => false,
+            'search'                  => false,
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(20) NOT NULL default ''",
+            'default'                 => time()
+        ),
+
         'psychologist' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['psychologist'],
@@ -116,20 +128,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
 
-
-      
-        'status' => array
-        (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['status'],
-            'inputType'               => 'select',
-            'default'                 => 'outstanding',
-            'filter'                  => true,
-            'search'                  => true,
-            'options'                  => array('prioritize' => 'Priority', 'outstanding' => 'Outstanding', 'completed' => 'Completed'),
-            'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50'),
-            'sql'                      => "varchar(15) NOT NULL default ''"
-        ),
-        'title' => array
+        'total_assignments' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['title'],
             'inputType'               => 'text',
@@ -137,16 +136,22 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'description' => array
+        'total_transactions' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['description'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['title'],
             'inputType'               => 'text',
             'default'                 => '',
-            'filter'                  => true,
-            'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
-            'sql'                     => "text NOT NULL default ''"
-        )
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'total_reviewed' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['title'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
 
       
     )
