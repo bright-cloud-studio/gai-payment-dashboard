@@ -1,3 +1,6 @@
+
+#ctrl_price_tier_display .tl_checkbox { display: none; }
+
 html[data-color-scheme=dark] #tl_gai div.size25 .inside{
     border: 1px solid var(--border);
     background-color: #232529;
