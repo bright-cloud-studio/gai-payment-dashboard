@@ -41,6 +41,9 @@ $GLOBALS['BE_MOD']['gai']['transaction_misc'] = array( 'tables' => array('tl_tra
 $GLOBALS['TL_LANG']['MOD']['gai_issue'][0] = "Issues";
 $GLOBALS['BE_MOD']['gai_issue']['issue'] = array( 'tables' => array('tl_issue') );
 
+// TEMPORARY
+$GLOBALS['BE_MOD']['gai_issue']['review_record'] = array( 'tables' => array('tl_review_record') );
+
 /* Hooks */
 $GLOBALS['TL_HOOKS']['processFormData'][]        = array('Bcs\Hooks\FormHooks', 'onFormSubmit');
 $GLOBALS['TL_HOOKS']['compileFormFields'][]      = array('Bcs\Hooks\FormHooks', 'onPrepareForm');
