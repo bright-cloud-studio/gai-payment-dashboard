@@ -7,7 +7,7 @@ use Contao\DC_Table;
 use Contao\Input;
  
 /* Table tl_services */
-$GLOBALS['TL_DCA']['tl_issue'] = array
+$GLOBALS['TL_DCA']['tl_review_record'] = array
 (
  
     // Config
@@ -15,10 +15,6 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
     (
         'dataContainer'               => DC_Table::class,
         'switchToEdit'                => false,
-        'onload_callback' => array
-        (
-              array('tl_issue', 'setRootType')
-        ),
         'sql' => array
         (
             'keys' => array
@@ -34,19 +30,18 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
         'sorting' => array
         (
             // Attempt to list as collapsable view
-            'mode'                  => DataContainer::MODE_SORTED,
+            'mode'                    => DataContainer::MODE_SORTED,
             'rootPaste'               => false,
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('status'),
+            'fields'                  => array('date_reviewed'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
-            'fields'                  => array('status', 'title'),
-            'format'                  => '%s - %s',
-            'label_callback'          => array('tl_issue', 'addIcon')
+            'fields'                  => array('date_reviewed', 'psychologist'),
+            'format'                  => '%s - %s'
         ),
         'global_operations' => array
         (
@@ -62,20 +57,20 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
         (
             'edit' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_issue']['edit'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_review_record']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
             'delete' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_issue']['delete'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_review_record']['delete'],
                 'href'                => 'act=delete',
                 'icon'                => 'delete.svg',
                 'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null) . '\'))return false;Backend.getScrollOffset()"'
             ),
             'show' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['tl_issue']['show'],
+                'label'               => &$GLOBALS['TL_LANG']['tl_review_record']['show'],
                 'href'                => 'act=show',
                 'icon'                => 'show.gif'
             )
@@ -85,7 +80,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{issues_legend}, status, title, description;{publish_legend},published;'
+        'default'                     => '{review_record_legend}, date_reviewed, psychologist, total_assignments, total_transactions, total_reviewed, percentage_reviewed;'
     ),
  
     // Fields
@@ -106,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
 
         'date_reviewed' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['date_submitted'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['date_reviewed'],
             'inputType'               => 'text',
             'default'                 => '',
             'filter'                  => false,
@@ -118,7 +113,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
 
         'psychologist' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_transaction_misc']['psychologist'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['psychologist'],
             'inputType'               => 'select',
             'filter'                  => true,
             'search'                  => true,
@@ -130,7 +125,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
 
         'total_assignments' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['title'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['total_assignments'],
             'inputType'               => 'text',
             'default'                 => '',
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
@@ -138,7 +133,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
         ),
         'total_transactions' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['title'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['total_transactions'],
             'inputType'               => 'text',
             'default'                 => '',
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
@@ -146,7 +141,15 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
         ),
         'total_reviewed' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['title'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['total_reviewed'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'percentage_reviewed' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['percentage_reviewed'],
             'inputType'               => 'text',
             'default'                 => '',
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
