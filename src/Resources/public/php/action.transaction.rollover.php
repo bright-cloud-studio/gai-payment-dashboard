@@ -46,7 +46,7 @@
                         echo "Time: " . $time . "<br>";
                         
                         // Update the 'originally_submitted' date to our current date_submitted
-                        $update =  "update tl_transaction set originally_submitted='".$date_submitted."', date_submitted='".$time."' WHERE id='".$t_id."'";
+                        $update = "update tl_transaction set originally_submitted='".$date_submitted."', date_submitted='".$time."' WHERE id='".$t_id."'";
                         $result_update = $dbh->query($update);
                     }
                     
@@ -79,7 +79,7 @@
                         echo "Time: " . $time . "<br>";
                         
                         // Update the 'originally_submitted' date to our current date_submitted
-                        $update =  "update tl_transaction_misc set originally_submitted='".$date_submitted."', date_submitted='".$time."' WHERE id='".$t_id."'";
+                        $update = "update tl_transaction_misc set originally_submitted='".$date_submitted."', date_submitted='".$time."' WHERE id='".$t_id."'";
                         $result_update = $dbh->query($update);
                     }
                     
