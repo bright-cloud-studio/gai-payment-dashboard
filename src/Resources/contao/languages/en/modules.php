@@ -34,3 +34,5 @@ $GLOBALS['TL_LANG']['FMD']['mod_list_assignments_filter'] = array('List Assignme
 $GLOBALS['TL_LANG']['FMD']['mod_psych_work_form']         = array('Psych Work Form', 'Lists a Psychologist\'s Transactions in a spreadsheet format');
 
 $GLOBALS['TL_LANG']['FMD']['mod_review_transactions']     = array('Review Transactions', 'End of Month review by Psychologists');
+
+$GLOBALS['TL_LANG']['MOD']['review_record']               = array('Review and Submit Records', 'Temporary display of records, for debugging');
