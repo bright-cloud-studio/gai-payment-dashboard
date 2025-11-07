@@ -14,10 +14,12 @@ $GLOBALS['TL_LANG']['tl_review_record']['date_reviewed']              = array('D
 $GLOBALS['TL_LANG']['tl_review_record']['psychologist']               = array('Psychologist', 'The Psycholohist this record is for');
 $GLOBALS['TL_LANG']['tl_review_record']['total_assignments']          = array('Total Assignments', 'Total number of Assignments this Psychologist had at the time of this Review\'s submission');
 
+$GLOBALS['TL_LANG']['tl_review_record']['transactions_legend']                     = 'Transaction Details';
 $GLOBALS['TL_LANG']['tl_review_record']['transactions_total']                      = array('Total Transactions', 'Total number of Transactions this Psycholohist has at the time of this Review\'s submission');
 $GLOBALS['TL_LANG']['tl_review_record']['transactions_total_reviewed']             = array('Total Transactions Reviewed', 'Total number of Reviewed Transactions this Psychologist has at the time of this Review\'s submission');
 $GLOBALS['TL_LANG']['tl_review_record']['transactions_percentage_reviewed']        = array('Percentage Transactions Reviewed', 'Percentage of Reviewed Transactions against the total number of Transactions');
 
+$GLOBALS['TL_LANG']['tl_review_record']['misc_transactions_legend']                     = 'Misc. Transaction Details';
 $GLOBALS['TL_LANG']['tl_review_record']['misc_transactions_total']                      = array('Total Misc. Transactions', 'Total number of Transactions this Psycholohist has at the time of this Review\'s submission');
 $GLOBALS['TL_LANG']['tl_review_record']['misc_transactions_total_reviewed']             = array('Total Misc. Transactions Reviewed', 'Total number of Reviewed Transactions this Psychologist has at the time of this Review\'s submission');
 $GLOBALS['TL_LANG']['tl_review_record']['misc_transactions_percentage_reviewed']        = array('Percentage Misc. Transactions Reviewed', 'Percentage of Reviewed Transactions against the total number of Transactions');
