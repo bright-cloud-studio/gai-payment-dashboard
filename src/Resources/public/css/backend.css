@@ -1,4 +1,10 @@
 
+
+.reviewed_full { background-color: ##008000; }
+.reviewed_partial { background-color: #fbe83a; }
+    
+
+
 #ctrl_price_tier_display .tl_checkbox { display: none; }
 
 html[data-color-scheme=dark] #tl_gai div.size25 .inside{
