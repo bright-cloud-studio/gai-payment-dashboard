@@ -35,13 +35,13 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('date_reviewed'),
+            'fields'                  => array('date_year', 'date_month'),
             'panelLayout'             => 'sort,filter;search,limit'
         ),
         'label' => array
         (
-            'fields'                  => array('date_reviewed', 'psychologist'),
-            'format'                  => '%s - %s',
+            'fields'                  => array('date_year', 'date_month', 'psychologist'),
+            'format'                  => '%s - %s - %s',
             'label_callback'          => array('tl_review_record', 'addIcon')
         ),
         'global_operations' => array
