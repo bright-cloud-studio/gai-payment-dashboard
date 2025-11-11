@@ -11,6 +11,8 @@ $GLOBALS['TL_LANG']['tl_review_record']['toggle']                     = array('T
 /* Fields */
 $GLOBALS['TL_LANG']['tl_review_record']['review_record_legend']       = 'Review Record Details';
 $GLOBALS['TL_LANG']['tl_review_record']['date_reviewed']              = array('Date Reviewed', 'The date this record was created and the date the Psychologist submitted a Review');
+$GLOBALS['TL_LANG']['tl_review_record']['date_month']                 = array('Date - Month', 'The Month from the Date Reviewed');
+$GLOBALS['TL_LANG']['tl_review_record']['date_year']                  = array('Date - Year', 'The Year from the Date Reviewed');
 $GLOBALS['TL_LANG']['tl_review_record']['psychologist']               = array('Psychologist', 'The Psycholohist this record is for');
 $GLOBALS['TL_LANG']['tl_review_record']['total_assignments']          = array('Total Assignments', 'Total number of Assignments this Psychologist had at the time of this Review\'s submission');
 
