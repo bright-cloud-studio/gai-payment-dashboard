@@ -187,7 +187,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['transactions_total'],
             'inputType'               => 'text',
             'default'                 => '',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'transactions_total_reviewed' => array
@@ -195,7 +195,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['transactions_total_reviewed'],
             'inputType'               => 'text',
             'default'                 => '',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'transactions_percentage_reviewed' => array
@@ -203,7 +203,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['transactions_percentage_reviewed'],
             'inputType'               => 'text',
             'default'                 => '',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr w100'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
 
@@ -214,7 +214,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['misc_transactions_total'],
             'inputType'               => 'text',
             'default'                 => '',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'misc_transactions_total_reviewed' => array
@@ -222,7 +222,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['misc_transactions_total_reviewed'],
             'inputType'               => 'text',
             'default'                 => '',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'misc_transactions_percentage_reviewed' => array
@@ -230,7 +230,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['misc_transactions_percentage_reviewed'],
             'inputType'               => 'text',
             'default'                 => '',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr w100'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         )
     )
