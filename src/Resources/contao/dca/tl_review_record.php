@@ -229,28 +229,18 @@ class tl_review_record extends Backend
 {
     public function addIcon($row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false)
 	{
+        // YEAR | MONTH | PSY | Reviewed Transactions: 100% | Reviewed Misc. Transactions: 100% //
         $label = '';
 
-        // Add our formatted date and a dash
-        $label .= date('m/d/y', $row['date_created']) . " - ";
+        $label .= $row['date_year']) . " | ";
 
-        // Add the Psy's name
-        $district = District::findOneBy('id', $row['district']);
-        $label .= $district->district_name . " - ";
+        $label .= $row['date_month']) . " | ";
 
-        $psy = MemberModel::findBy('id', $row['psychologist']);
-        $label .= $psy->firstname . " " . $psy->lastname . " - ";
+        $label .= $row['psychologist']) . " | ";
 
-        
-        $student = Student::findBy('id', $row['student']);
-        if($student->lasid != '' && $student->sasid != '') {
-            $label .= $student->lasid . " / " . $student->sasid;
-        } else {
-            if($student->lasid != '')
-                $label .= $student->lasid;
-            if($student->sasid != '')
-                $label .= $student->sasid;
-        }
+        $label .= "Reviewed Transactions: " . $row['transactions_percentage_reviewed'] . " | ";
+
+        $label .= "Reviewed Misc. Transactions: " . $row['misc_transactions_percentage_reviewed'] . " | ";
 
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
