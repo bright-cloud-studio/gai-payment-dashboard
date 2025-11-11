@@ -15,7 +15,8 @@
     
         // Get our variables
         $tstamp = time();
-        $date_reviewed = time();
+        $date_month = strtolower(date('M'));
+        $date_year = date('Y');
         $psy_id = $_POST['psy_id'];
         
         // Get number of Assignments for this Psy
@@ -74,8 +75,8 @@
         // Get the percentage of reviewed Misc. Transactions
         $misc_transactions_percentage_reviewed = ($misc_transactions_total_reviewed / $misc_transactions_total) * 100;
 
-        $query = "INSERT INTO tl_review_record (tstamp, date_reviewed, psychologist, total_assignments, transactions_total, transactions_total_reviewed, transactions_percentage_reviewed, misc_transactions_total, misc_transactions_total_reviewed, misc_transactions_percentage_reviewed)
-                    VALUES ($tstamp, $date_reviewed, $psy_id, $total_assignments, $transactions_total, $transactions_total_reviewed, $transactions_percentage_reviewed, $misc_transactions_total, $misc_transactions_total_reviewed, $misc_transactions_percentage_reviewed)";
+        $query = "INSERT INTO tl_review_record (tstamp, date_year, date_month, psychologist, total_assignments, transactions_total, transactions_total_reviewed, transactions_percentage_reviewed, misc_transactions_total, misc_transactions_total_reviewed, misc_transactions_percentage_reviewed)
+                    VALUES ($tstamp, $date_year, $date_month, $psy_id, $total_assignments, $transactions_total, $transactions_total_reviewed, $transactions_percentage_reviewed, $misc_transactions_total, $misc_transactions_total_reviewed, $misc_transactions_percentage_reviewed)";
         $result = $dbh->query($query);
         
         echo "pass";
