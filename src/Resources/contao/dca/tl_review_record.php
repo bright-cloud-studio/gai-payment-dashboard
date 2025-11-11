@@ -238,15 +238,16 @@ class tl_review_record extends Backend
         } else {
             $label .= '<span class="reviewed_partial">';
         }
-        
-        $label .= ucfirst($row['date_month']) . " " . $row['date_year'] . " | ";
+
+
+        $label .= date("m/d/y", $row['tstamp']) . " | ";
 
         $psy = MemberModel::findBy('id', $row['psychologist']);
         $label .= $psy->firstname . " " . $psy->lastname . " | ";
 
-        $label .= "Reviewed Transactions: " . $row['transactions_percentage_reviewed'] . " | ";
+        $label .= "Reviewed Transactions: " . $row['transactions_percentage_reviewed'] . "% | ";
 
-        $label .= "Reviewed Misc. Transactions: " . $row['misc_transactions_percentage_reviewed'] . " | ";
+        $label .= "Reviewed Misc. Transactions: " . $row['misc_transactions_percentage_reviewed'] . "% | ";
 
         $label .= '</span>';
 
