@@ -232,15 +232,22 @@ class tl_review_record extends Backend
         // YEAR | MONTH | PSY | Reviewed Transactions: 100% | Reviewed Misc. Transactions: 100% //
         $label = '';
 
-        $label .= $row['date_year'] . " | ";
+        if($row['transactions_percentage_reviewed'] == '100' && $row['misc_transactions_percentage_reviewed'] == '100') {
+            $label .= '<span class="reviewed_full">';
+        } else {
+            $label .= '<span class="reviewed_partial">';
+        }
+        
+        $label .= ucfirst($row['date_month']) . " " . $row['date_year'] . " | ";
 
-        $label .= $row['date_month'] . " | ";
-
-        $label .= $row['psychologist'] . " | ";
+        $psy = MemberModel::findBy('id', $row['psychologist']);
+        $label .= $psy->firstname . " " . $psy->lastname . " | ";
 
         $label .= "Reviewed Transactions: " . $row['transactions_percentage_reviewed'] . " | ";
 
         $label .= "Reviewed Misc. Transactions: " . $row['misc_transactions_percentage_reviewed'] . " | ";
+
+        $label .= '</span>';
 
 		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
 	}
