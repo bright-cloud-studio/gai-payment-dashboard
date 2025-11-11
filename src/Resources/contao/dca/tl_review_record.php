@@ -232,11 +232,11 @@ class tl_review_record extends Backend
         // YEAR | MONTH | PSY | Reviewed Transactions: 100% | Reviewed Misc. Transactions: 100% //
         $label = '';
 
-        $label .= $row['date_year']) . " | ";
+        $label .= $row['date_year'] . " | ";
 
-        $label .= $row['date_month']) . " | ";
+        $label .= $row['date_month'] . " | ";
 
-        $label .= $row['psychologist']) . " | ";
+        $label .= $row['psychologist'] . " | ";
 
         $label .= "Reviewed Transactions: " . $row['transactions_percentage_reviewed'] . " | ";
 
