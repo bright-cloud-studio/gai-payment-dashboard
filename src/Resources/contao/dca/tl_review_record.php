@@ -5,6 +5,7 @@ use Contao\Database;
 use Contao\DataContainer;
 use Contao\DC_Table;
 use Contao\Input;
+use Contao\MemberModel;
  
 /* Table tl_services */
 $GLOBALS['TL_DCA']['tl_review_record'] = array
