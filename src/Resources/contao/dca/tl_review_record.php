@@ -176,7 +176,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['total_assignments'],
             'inputType'               => 'text',
             'default'                 => '',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
 
