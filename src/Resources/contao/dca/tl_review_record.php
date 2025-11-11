@@ -82,7 +82,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{review_record_legend}, date_month, date_year, psychologist, total_assignments; {transactions_legend}, transactions_total, transactions_total_reviewed, transactions_percentage_reviewed; {misc_transactions_legend}, misc_transactions_total, misc_transactions_total_reviewed, misc_transactions_percentage_reviewed;'
+        'default'                     => '{review_record_legend}, date_reviewed, date_month, date_year, psychologist, total_assignments; {transactions_legend}, transactions_total, transactions_total_reviewed, transactions_percentage_reviewed; {misc_transactions_legend}, misc_transactions_total, misc_transactions_total_reviewed, misc_transactions_percentage_reviewed;'
     ),
  
     // Fields
@@ -100,7 +100,17 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
         (
             'sql'                   => "int(10) unsigned NOT NULL default '0'"
         ),
-
+        'date_reviewed' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['date_reviewed'],
+            'inputType'               => 'text',
+            'default'                 => '',
+            'filter'                  => false,
+            'search'                  => false,
+            'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w33'),
+            'sql'                     => "varchar(20) NOT NULL default ''",
+            'default'                 => time()
+        ),
         'date_month' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_review_record']['date_month'],
@@ -121,7 +131,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             ),
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Month'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w33', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Month'),
             'sql'                     => "varchar(10) NOT NULL default 'january'",
             'default'                 => 'january'
         ),
@@ -144,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_review_record'] = array
             ),
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Month'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w33', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Month'),
             'sql'                     => "varchar(10) NOT NULL default '2025'",
             'default'                 => '2025'
         ),
@@ -240,7 +250,7 @@ class tl_review_record extends Backend
         }
 
 
-        $label .= date("m/d/y", $row['tstamp']) . " | ";
+        $label .= date("m/d/y", $row['date_reviewed']) . " | ";
 
         $psy = MemberModel::findBy('id', $row['psychologist']);
         $label .= $psy->firstname . " " . $psy->lastname . " | ";
