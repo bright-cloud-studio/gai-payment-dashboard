@@ -10,6 +10,7 @@
         die("Connection failed: " . $dbh->connect_error);
     }
 
+    
     // If our psy_id was actually passed to us
     if(isset($_POST['psy_id'])) {
     
