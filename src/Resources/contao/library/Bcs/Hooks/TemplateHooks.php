@@ -1719,6 +1719,12 @@ class TemplateHooks
         $last_reviewed = array();
         
         foreach($psychologists as $psy) {
+
+            // Get their Review Records for the last month
+
+            // Check if we have at least one with 100% reviewed for both Transactions and Misc. Transactions
+                
+            
             $last_reviewed[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
             $last_reviewed[$psy->id]['last_review_and_submit'] = $psy->last_review_and_submit;
         }
