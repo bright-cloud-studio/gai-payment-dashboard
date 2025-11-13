@@ -1708,18 +1708,18 @@ class TemplateHooks
     
     public function getReviewStatuses($which_month) {
         
-        $opt = ['order' => 'firstname ASC'];
+        // Loop through all Psychologists
+        $opt = [
+            'order' => 'firstname ASC'
+        ];
         $psychologists = MemberModel::findBy('disable', 0, $opt);
+        
         
         $review_status = array();
         foreach($psychologists as $psy) {
             
             $percent_transactions = 50;
-            
-            
             $percent_misc_transactions = 50;
-            
-            
             $review_status[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
             $review_status[$psy->id]['percent_transactions'] = $percent_transactions;
             $review_status[$psy->id]['percent_misc_transactions'] = $percent_misc_transactions;
