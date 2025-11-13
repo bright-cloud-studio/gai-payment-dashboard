@@ -1,6 +1,7 @@
 .reviewed_full { background-color: #0eff0e99; }
 .reviewed_partial { background-color: #fbe83a; }
-    
+.reviewed_none { background-color: #ff000085; }
+
 #ctrl_price_tier_display .tl_checkbox { display: none; }
 
 html[data-color-scheme=dark] #tl_gai div.size25 .inside{
