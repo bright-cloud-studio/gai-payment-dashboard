@@ -4,6 +4,7 @@ namespace Bcs\Hooks;
 
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
+use Bcs\Model\ReviewRecord;
 use Bcs\Model\School;
 use Bcs\Model\Student;
 use Bcs\Model\Service;
@@ -49,6 +50,7 @@ class TemplateHooks
             
             $template->last_review_and_submit = $this->getLastReviewedAndSubmitted();
             $template->review_status_this_month =  $this->getReviewStatuses("this_month");
+            $template->review_status_last_month =  $this->getReviewStatuses("last_month");
             
         }
     }
@@ -1714,23 +1716,46 @@ class TemplateHooks
         ];
         $psychologists = MemberModel::findBy('disable', 0, $opt);
         
-        
         $review_status = array();
         foreach($psychologists as $psy) {
             
-            $percent_transactions = 50;
-            $percent_misc_transactions = 50;
-            $review_status[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
-            $review_status[$psy->id]['percent_transactions'] = $percent_transactions;
-            $review_status[$psy->id]['percent_misc_transactions'] = $percent_misc_transactions;
+            $percent_transactions = 0;
+            $percent_misc_transactions = 0;
+            $month = '';
+            $year = 0;
             
-            if($percent_transactions == 100 && $percent_misc_transactions == 100) {
-                $review_status[$psy->id]['class'] = "reviewed_full";
+            if($which_month == 'this_month') {
+                $month = $this->stringLowercaseAndUnderscore(date('F'));
+                $year = date('Y');
             } else {
-                $review_status[$psy->id]['class'] = "reviewed_partial";
+                $month = strtolower(date("F", strtotime("last month")));
+                $year = date("Y", strtotime("last month"));
+            }
+                
+            $opt = [
+                'order' => 'date_reviewed DESC'
+            ];
+            $review_record = ReviewRecord::findOneBy(['psychologist = ?', 'date_month = ?', 'date_year = ?'], [$psy->id, $month, $year], $opt);
+            if($review_record) {
+                //$review_status[$psy->id]['name'] = $review_record->id;
+                $percent_transactions = $review_record->transactions_percentage_reviewed;
+                $percent_misc_transactions = $review_record->misc_transactions_percentage_reviewed;
+                
+                $review_status[$psy->id]['name'] .= $psy->firstname . " " . $psy->lastname;
+                $review_status[$psy->id]['percent_transactions'] = $percent_transactions;
+                $review_status[$psy->id]['percent_misc_transactions'] = $percent_misc_transactions;
+                
+                if($percent_transactions == 100 && $percent_misc_transactions == 100) {
+                    $review_status[$psy->id]['class'] = "reviewed_full";
+                } else {
+                    if($percent_transactions == 0 && $percent_misc_transactions == 0) {
+                        $review_status[$psy->id]['class'] = "reviewed_none";
+                    } else {
+                        $review_status[$psy->id]['class'] = "reviewed_partial";
+                    }
+                }
             }
             
-
         }
         return $review_status;
     }
@@ -1752,6 +1777,12 @@ class TemplateHooks
         return $last_reviewed;
     }
     
-
+    private function stringLowercaseAndUnderscore(string $inputString): string {
+        // 1. Convert the entire string to lowercase.
+        $lowercaseString = strtolower($inputString);
+        // 2. Replace all instances of a single space (' ') with an underscore ('_').
+        $processedString = str_replace(' ', '_', $lowercaseString);
+        return $processedString;
+    }
   
 }
