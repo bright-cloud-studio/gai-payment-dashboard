@@ -25,6 +25,23 @@ html[data-color-scheme=light] #tl_gai div.size25 .inside{
     flex-flow: row wrap;
 }
 
+.review_statuses h2 { margin-bottom: 10px; }
+.review_statuses table {
+    width: 95%;
+}
+
+.review_statuses table td:first-of-type {
+    border-left: 1px solid black;
+}
+.review_statuses table td:last-of-type {
+    border-right: 1px solid black;
+}
+.review_statuses thead tr { border-bottom: 1px solid black; }
+.review_statuses table .center {
+    text-align: center;
+}
+
+
 #tl_gai div.size25 h3 { margin-bottom: 5px; }
 
 #tl_gai .total { font-size: 2.5em; margin-bottom: 5px; }
