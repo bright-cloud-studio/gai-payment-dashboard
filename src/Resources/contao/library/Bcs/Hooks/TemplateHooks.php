@@ -48,6 +48,7 @@ class TemplateHooks
             $template->transactions_today = $transactions_today;
             
             $template->last_review_and_submit = $this->getLastReviewedAndSubmitted();
+            $template->review_status_this_month =  $this->getReviewStatuses("this_month");
             
         }
     }
@@ -1705,32 +1706,50 @@ class TemplateHooks
     
     
     
+    public function getReviewStatuses($which_month) {
+        
+        $opt = ['order' => 'firstname ASC'];
+        $psychologists = MemberModel::findBy('disable', 0, $opt);
+        
+        $review_status = array();
+        foreach($psychologists as $psy) {
+            
+            $percent_transactions = 50;
+            
+            
+            $percent_misc_transactions = 50;
+            
+            
+            $review_status[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
+            $review_status[$psy->id]['percent_transactions'] = $percent_transactions;
+            $review_status[$psy->id]['percent_misc_transactions'] = $percent_misc_transactions;
+            
+            if($percent_transactions == 100 && $percent_misc_transactions == 100) {
+                $review_status[$psy->id]['class'] = "reviewed_full";
+            } else {
+                $review_status[$psy->id]['class'] = "reviewed_partial";
+            }
+            
+
+        }
+        return $review_status;
+    }
+    
+    
+    
     
     
     public function getLastReviewedAndSubmitted() {
-        
         $opt = [
             'order' => 'firstname ASC'
         ];
-        
-        // Get all Psychologists who are still active
         $psychologists = MemberModel::findBy('disable', 0, $opt);
-        
         $last_reviewed = array();
-        
         foreach($psychologists as $psy) {
-
-            // Get their Review Records for the last month
-
-            // Check if we have at least one with 100% reviewed for both Transactions and Misc. Transactions
-                
-            
             $last_reviewed[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
             $last_reviewed[$psy->id]['last_review_and_submit'] = $psy->last_review_and_submit;
         }
-        
         return $last_reviewed;
-        
     }
     
 
