@@ -65,6 +65,7 @@ $GLOBALS['TL_MODELS']['tl_email_record']       = 'Bcs\Model\EmailRecord';
 $GLOBALS['TL_MODELS']['tl_invoice']            = 'Bcs\Model\Invoice';
 $GLOBALS['TL_MODELS']['tl_invoice_district']   = 'Bcs\Model\InvoiceDistrict';
 $GLOBALS['TL_MODELS']['tl_invoice_request']    = 'Bcs\Model\InvoiceRequest';
+$GLOBALS['TL_MODELS']['tl_review_record']      = 'Bcs\Model\ReviewRecord';
 $GLOBALS['TL_MODELS']['tl_school']             = 'Bcs\Model\School';
 $GLOBALS['TL_MODELS']['tl_service']            = 'Bcs\Model\Service';
 $GLOBALS['TL_MODELS']['tl_student']            = 'Bcs\Model\Student';
