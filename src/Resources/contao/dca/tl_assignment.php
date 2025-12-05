@@ -453,28 +453,41 @@ class tl_assignment extends Backend
         $label = '';
 
         // Add our formatted date and a dash
-        $label .= date('m/d/y', $row['date_created']) . " - ";
-
-        // Add the Psy's name
-        $district = District::findOneBy('id', $row['district']);
-        $label .= $district->district_name . " - ";
-
-        $psy = MemberModel::findBy('id', $row['psychologist']);
-        $label .= $psy->firstname . " " . $psy->lastname . " - ";
-
-        
-        $student = Student::findBy('id', $row['student']);
-        if($student->lasid != '' && $student->sasid != '') {
-            $label .= $student->lasid . " / " . $student->sasid;
-        } else {
-            if($student->lasid != '')
-                $label .= $student->lasid;
-            if($student->sasid != '')
-                $label .= $student->sasid;
+        if($row['date_created']) {
+            if (str_contains($row['date_created'], '/')) {
+                $timestamp = strtotime($row['date_created']);
+                
+                $label .= date('m/d/y', $timestamp) . " - ";
+                
+            } else
+                $label .= date('m/d/y', $row['date_created']) . " - ";
         }
 
+        // Add the Psy's name
+        if($row['district']) {
+            $district = District::findOneBy('id', $row['district']);
+            $label .= $district->district_name . " - ";
+        }
+
+        if($row['psychologist']) {
+            $psy = MemberModel::findBy('id', $row['psychologist']);
+            $label .= $psy->firstname . " " . $psy->lastname . " - ";
+        }
         
-		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected, $isVisibleRootTrailPage);
+        if($row['student']) {
+            $student = Student::findBy('id', $row['student']);
+            if($student->lasid != '' && $student->sasid != '') {
+                $label .= $student->lasid . " / " . $student->sasid;
+            } else {
+                if($student->lasid != '')
+                    $label .= $student->lasid;
+                if($student->sasid != '')
+                    $label .= $student->sasid;
+            }
+        }
+
+
+		return $label;
 	}
     
 }
