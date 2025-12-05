@@ -210,20 +210,22 @@ class AssignmentBackend extends Backend
     
         $schools = array();
         
-        if($dc->activeRecord->district != '') {
-            
-            $schools = $schools + array('0' => 'Select a District');
-            
-            // Use the DB to grab all of our enabled members, aka our psychologists
-    		$this->import('Database');
-    		
-    		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=" . $dc->activeRecord->district . "  ORDER BY school_name ASC")->execute();
-    		while($result->next())
-    		{
-                // Add ti array with ID as the value and firstname lastname as the label
-                $schools = $schools + array($result->id => $result->school_name);
-    		}
-    		return $schools;
+        if($dc->activeRecord) {
+            if($dc->activeRecord->district != '') {
+                
+                $schools = $schools + array('0' => 'Select a District');
+                
+                // Use the DB to grab all of our enabled members, aka our psychologists
+        		$this->import('Database');
+        		
+        		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=" . $dc->activeRecord->district . "  ORDER BY school_name ASC")->execute();
+        		while($result->next())
+        		{
+                    // Add ti array with ID as the value and firstname lastname as the label
+                    $schools = $schools + array($result->id => $result->school_name);
+        		}
+        		return $schools;
+            }
         }
         $schools = $schools + array('0' => 'First, Select a District');
         return $schools;
@@ -255,21 +257,22 @@ class AssignmentBackend extends Backend
     
         // Hold the psys
         $students = array();
-
-        if($dc->activeRecord->district != '') {
-            
-            $students = $students + array('0' => 'Select a Student');
-            
-            // Use the DB to grab all of our enabled members, aka our psychologists
-    		$this->import('Database');
-    		$result = $this->Database->prepare("SELECT * FROM tl_student WHERE district=".$dc->activeRecord->district . " ORDER BY name ASC")->execute();
-    		while($result->next())
-    		{
-                // Add ti array with ID as the value and firstname lastname as the label
-                $students = $students + array($result->id => $result->name);   
-    		}
-    
-    		return $students;
+        if($dc->activeRecord) {
+            if($dc->activeRecord->district != '') {
+                
+                $students = $students + array('0' => 'Select a Student');
+                
+                // Use the DB to grab all of our enabled members, aka our psychologists
+        		$this->import('Database');
+        		$result = $this->Database->prepare("SELECT * FROM tl_student WHERE district=".$dc->activeRecord->district . " ORDER BY name ASC")->execute();
+        		while($result->next())
+        		{
+                    // Add ti array with ID as the value and firstname lastname as the label
+                    $students = $students + array($result->id => $result->name);   
+        		}
+        
+        		return $students;
+            }
         }
         $students = $students + array('0' => 'First, Select a District');
         return $students;
