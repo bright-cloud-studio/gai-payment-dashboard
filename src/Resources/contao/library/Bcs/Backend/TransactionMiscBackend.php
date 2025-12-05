@@ -24,19 +24,24 @@ class TransactionMiscBackend extends Backend
             return;
         }
         
-        // If we have no Price
-        if($dc->activeRecord->price == "0") {
-
-            // If we have a Psychologist
-            if($dc->activeRecord->psychologist) {
+        // If we have a Psychologist
+        if($dc->activeRecord->psychologist) {
+            
+            // If we have a Service
+            if($dc->activeRecord->service) {
                 
-                // If we have a Service
-                if($dc->activeRecord->service) {
+                // Get the Psy
+                $psy = MemberModel::findBy('id', $dc->activeRecord->psychologist);
+                // Get the Service
+                $service = Service::findBy('service_code', $dc->activeRecord->service);
+                // Get the Price for the Tier
+                $price = $service->{$psy->price_tier};
                 
-                    // Get the price for that Psychologist's Price Tier for that service, fill in, save
-                }
+                // Get this Misc. Transaction
+                $transaction_misc = TransactionMisc::findOneBy('id', $dc->activeRecord->id);
+                $transaction_misc->price = $price;
+                $transaction_misc->save();
             }
-                    
         }
 
     }
