@@ -270,7 +270,13 @@ class ModPsychWorkForm extends \Contao\Module
                     $template_assignments[$assignment->id]['initial_reeval'] .= "</select>";
                     
                 } else {
-                    $template_assignments[$assignment->id]['initial_reeval'] = $assignment->initial_reeval;
+                    
+                    
+                    
+                    // Convert programatic value to readable text
+                    $template_assignments[$assignment->id]['initial_reeval'] = $this->processInitialReeval($assignment->initial_reeval);
+                    
+                    
                 }
     
     
@@ -489,5 +495,14 @@ class ModPsychWorkForm extends \Contao\Module
         
     }
   
-
+    public function processInitialReeval($field_value) {
+        switch ($field_value) {
+            case "initial":
+                return "Initial";
+                break;
+            case "re_eval":
+                return "Re-Eval";
+                break;
+        }
+    }
 }
