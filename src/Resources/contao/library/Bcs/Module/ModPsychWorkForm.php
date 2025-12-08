@@ -485,6 +485,8 @@ class ModPsychWorkForm extends \Contao\Module
         $this->Template->hide_cutoff_date = date('m/d/y', Config::get('pwf_hide_cutoff'));
         $this->Template->hide_cutoff_date_php = Config::get('pwf_hide_cutoff');
         
+        $this->Template->is_admin = $is_admin;
+        
     }
   
 
