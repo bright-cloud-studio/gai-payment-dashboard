@@ -1,17 +1,37 @@
+#main .content {
+    border: 0;
+}
+
+#tl_soverview .section_wrapper {
+    border-bottom: 10px solid #eaeaec;
+    padding: 0;
+}
+#tl_soverview #tl_gai {
+    border: 1px solid var(--content-border);
+    padding: 10px;
+}
+#tl_soverview>div:last-child {
+    border: 1px solid var(--content-border);
+}
+
+
+
 .reviewed_full { background-color: #0eff0e99; }
 .reviewed_partial { background-color: #fbe83a; }
 .reviewed_none { background-color: #ff000085; }
 
 #ctrl_price_tier_display .tl_checkbox { display: none; }
 
-html[data-color-scheme=dark] #tl_gai div.size25 .inside{
+html[data-color-scheme=dark] #tl_gai div.size25 .inside,
+html[data-color-scheme=dark] #tl_gai div.size50 .inside {
     border: 1px solid var(--border);
     background-color: #232529;
     margin: 0 10px;
     padding: 10px;
 }
 
-html[data-color-scheme=light] #tl_gai div.size25 .inside{
+html[data-color-scheme=light] #tl_gai div.size25 .inside,
+html[data-color-scheme=light] #tl_gai div.size50 .inside {
     border: 1px solid var(--border);
     background-color: #f7f7f;
     margin: 0 10px;
@@ -19,7 +39,9 @@ html[data-color-scheme=light] #tl_gai div.size25 .inside{
 }
 
 #tl_soverview #tl_gai,
-#tl_soverview #tl_gai .psychologists_wrapper, 
+#tl_soverview #tl_gai .psychologists_wrapper,
+#tl_soverview #tl_gai .month_wrapper,
+#tl_soverview #tl_gai .year_wrapper,
 #tl_soverview #tl_gai .districts_wrapper {
     display: flex;
     flex-flow: row wrap;
@@ -42,14 +64,27 @@ html[data-color-scheme=light] #tl_gai div.size25 .inside{
 }
 
 
+
+
+#tl_gai h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
 #tl_gai div.size25 h3 { margin-bottom: 5px; }
 
-#tl_gai .total { font-size: 2.5em; margin-bottom: 5px; }
+#tl_gai .psychologists_wrapper .total { font-size: 2.5em; margin-bottom: 5px; }
+#tl_gai .month_wrapper .total, 
+#tl_gai .year_wrapper .total { font-size: 2.0em; margin-bottom: 5px; }
 
 #tl_gai .psychologists_wrapper,
-#tl_gai .districts_wrapper{ width: 100%; margin-bottom: 30px; }
+#tl_gai .districts_wrapper,
+#tl_gai .month_wrapper,
+#tl_gai .year_wrapper { width: 100%; }
 
 
+#tl_gai .month_wrapper .total,
+#tl_gai .year_wrapper .total { color: #0075CE; }
 #tl_gai .psychologists_wrapper .total { color: red; }
 #tl_gai .districts_wrapper .total { color: green; }
 
