@@ -14,8 +14,6 @@
     border: 1px solid var(--content-border);
 }
 
-
-
 .reviewed_full { background-color: #0eff0e99; }
 .reviewed_partial { background-color: #fbe83a; }
 .reviewed_none { background-color: #ff000085; }
@@ -62,9 +60,6 @@ html[data-color-scheme=light] #tl_gai div.size50 .inside {
 .review_statuses table .center {
     text-align: center;
 }
-
-
-
 
 #tl_gai h1 {
     font-size: 1.5rem;
