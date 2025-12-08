@@ -1318,16 +1318,6 @@ class TemplateHooks
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     // Returns totals for Transactions and Misc. Transactions matching the current year
     public function calculateYear() {
         
