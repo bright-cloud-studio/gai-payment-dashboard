@@ -12,6 +12,7 @@ use Bcs\Model\Transaction;
 use Bcs\Model\TransactionMisc;
 
 use Contao\Controller;
+use Contao\Database;
 use Contao\Environment;
 use Contao\FrontendUser;
 use Contao\Input;
@@ -52,10 +53,10 @@ class TemplateHooks
             $template->review_status_this_month =  $this->getReviewStatuses("this_month");
             $template->review_status_last_month =  $this->getReviewStatuses("last_month");
             
-            $template->assignments_this_month = 1;
-            $template->assignments_last_month = 2;
-            $template->assignments_this_year = 3;
-            $template->assignments_last_year = 4;
+            $template->assignments_this_month = $this->calculateAssignmentsMonth("this_month");
+            $template->assignments_last_month = $this->calculateAssignmentsMonth("last_month");
+            $template->assignments_this_year = $this->calculateAssignmentsYear("this_year");
+            $template->assignments_last_year = $this->calculateAssignmentsYear("last_year");
             
         }
     }
@@ -1764,11 +1765,33 @@ class TemplateHooks
         }
         return $review_status;
     }
+
+
+
+    // Assignment Totals - Month
+    public function calculateAssignmentsMonth($which_month) {
+        if($which_month == 'this_month') {
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE FROM_UNIXTIME(date_created) >= DATE_FORMAT(NOW(), '%Y-%m-01') AND FROM_UNIXTIME(date_created) < DATE_FORMAT(NOW() + INTERVAL 1 MONTH, '%Y-%m-01')")->execute();
+            return $assignments->count();
+        } else if($which_month == 'last_month') {
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE FROM_UNIXTIME(date_created) >= DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') AND FROM_UNIXTIME(date_created) < DATE_FORMAT(NOW(), '%Y-%m-01');")->execute();
+            return $assignments->count();
+        }
+    }
     
-    
-    
-    
-    
+    // Assignment Totals - Year
+    public function calculateAssignmentsYear($which_year) {
+        if($which_year == 'this_year') {
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(FROM_UNIXTIME(date_created)) = YEAR(NOW())")->execute();
+            return $assignments->count();
+        } else if($which_year == 'last_year') {
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(FROM_UNIXTIME(date_created)) = YEAR(NOW()) - 1")->execute();
+            return $assignments->count();
+        }
+    }
+
+
+
     public function getLastReviewedAndSubmitted() {
         $opt = [
             'order' => 'firstname ASC'
