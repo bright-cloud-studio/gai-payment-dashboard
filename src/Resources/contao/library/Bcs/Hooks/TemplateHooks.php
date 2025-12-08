@@ -1765,8 +1765,7 @@ class TemplateHooks
         }
         return $review_status;
     }
-
-
+    
 
     // Assignment Totals - Month
     public function calculateAssignmentsMonth($which_month) {
@@ -1789,7 +1788,6 @@ class TemplateHooks
             return $assignments->count();
         }
     }
-
 
 
     public function getLastReviewedAndSubmitted() {
