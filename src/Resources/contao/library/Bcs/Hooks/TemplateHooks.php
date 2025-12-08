@@ -52,6 +52,11 @@ class TemplateHooks
             $template->review_status_this_month =  $this->getReviewStatuses("this_month");
             $template->review_status_last_month =  $this->getReviewStatuses("last_month");
             
+            $template->assignments_this_month = 1;
+            $template->assignments_last_month = 2;
+            $template->assignments_this_year = 3;
+            $template->assignments_last_year = 4;
+            
         }
     }
     
