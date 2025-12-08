@@ -73,7 +73,7 @@ html[data-color-scheme=light] #tl_gai div.size50 .inside {
 
 #tl_gai div.size25 h3 { margin-bottom: 5px; }
 
-#tl_gai .psychologists_wrapper .total { font-size: 2.5em; margin-bottom: 5px; }
+#tl_gai .psychologists_wrapper .total, #tl_gai .districts_wrapper .total { font-size: 1.8rem; margin-bottom: 5px; }
 #tl_gai .month_wrapper .total, 
 #tl_gai .year_wrapper .total { font-size: 2.0em; margin-bottom: 5px; }
 
@@ -93,7 +93,7 @@ html[data-color-scheme=light] #tl_gai div.size50 .inside {
 #tl_gai .inside.last_year hr { margin: 10px 0; }
 
 #tl_gai .transactions, #tl_gai .transactions_misc {
-    font-size: 0.8em;
+    font-size: 0.6rem;
     margin-bottom: 2px;
     display: flex;
     align-items: center;
