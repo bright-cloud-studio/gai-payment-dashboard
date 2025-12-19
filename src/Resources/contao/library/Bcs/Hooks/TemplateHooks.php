@@ -26,6 +26,37 @@ class TemplateHooks
     
     public $transactions_today = array();
 
+    /*
+    public function generateGraphData() {
+        
+        // Example of "complex" data for Chartjs
+        
+        $data = [
+            "labels" => $months,
+            "datasets" => [
+                [
+                    "label" => "Revenue (USD)",
+                    "data" => [12000, 15000, 11000, 19000, 22000, 24000],
+                    "borderColor" => "rgba(54, 162, 235, 1)",
+                    "backgroundColor" => "rgba(54, 162, 235, 0.2)",
+                    "yAxisID" => "y-revenue", // Links to a specific axis
+                    "type" => "line",         // Mixed chart: this part is a line
+                    "fill" => true
+                ],
+                [
+                    "label" => "Units Sold",
+                    "data" => [450, 520, 380, 610, 700, 750],
+                    "backgroundColor" => "rgba(255, 99, 132, 0.5)",
+                    "yAxisID" => "y-units",   // Links to a second axis
+                    "type" => "bar"           // Mixed chart: this part is a bar
+                ]
+            ]
+        ];
+        
+    }
+    */
+
+
     // When a form is submitted
     public function onParseTemplate($template)
     {
