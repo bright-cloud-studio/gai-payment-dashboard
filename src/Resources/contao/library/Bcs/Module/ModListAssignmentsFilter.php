@@ -66,7 +66,7 @@ class ModListAssignmentsFilter extends \Contao\Module
         //$GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/datatables.min.css';
         
         $member = FrontendUser::getInstance();
-
+        
         // get all of the Assignments for this Member
         $opt = [
             'order' => 'date_created ASC'
@@ -80,15 +80,15 @@ class ModListAssignmentsFilter extends \Contao\Module
             
             // Get the District name
             $district = District::findOneBy('id', $assignment->district);
-            $filter_districts[] = $district->district_name;
+            $filter_districts[$district->district_name] = $district->district_name;
             
             // Get the School name
             $school = School::findOneBy('id', $assignment->school);
-            $filter_schools[] = $school->school_name;
+            $filter_schools[$school->school_name] = $school->school_name;
             
             // Get the Student name
             $student = Student::findOneBy('id', $assignment->student);
-            $filter_students[] = $student->name;
+            $filter_students[$student->name] = $student->name;
         }
         
         // Sort arrays alphabetically
@@ -98,9 +98,22 @@ class ModListAssignmentsFilter extends \Contao\Module
         
         }
         
-        $this->Template->filter_districts = $filter_districts;
-        $this->Template->filter_schools = $filter_schools;
-        $this->Template->filter_students = $filter_students;
+        // Debugging purposes
+        /*
+        if($member->id == '7') {
+            echo "<pre>";
+            print_r($filter_districts);
+            echo "</pre><br><pre>";
+            print_r($filter_schools);
+            echo "</pre><br><pre>";
+            print_r($filter_students);
+            die();
+        }
+        */
+        
+        $this->Template->filter_districts = array_values($filter_districts);
+        $this->Template->filter_schools = array_values($filter_schools);
+        $this->Template->filter_students = array_values($filter_students);
         
     }
   
