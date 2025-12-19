@@ -78,6 +78,8 @@ class ModListAssignmentsFilter extends \Contao\Module
         if($assignments != null) {
         foreach($assignments as $assignment) {
             
+            // Enter values into a 2D array, using the same Value as the Key
+            
             // Get the District name
             $district = District::findOneBy('id', $assignment->district);
             $filter_districts[$district->district_name] = $district->district_name;
@@ -98,19 +100,7 @@ class ModListAssignmentsFilter extends \Contao\Module
         
         }
         
-        // Debugging purposes
-        /*
-        if($member->id == '7') {
-            echo "<pre>";
-            print_r($filter_districts);
-            echo "</pre><br><pre>";
-            print_r($filter_schools);
-            echo "</pre><br><pre>";
-            print_r($filter_students);
-            die();
-        }
-        */
-        
+        // The function array_values will only take the Keys, giving us unique entries
         $this->Template->filter_districts = array_values($filter_districts);
         $this->Template->filter_schools = array_values($filter_schools);
         $this->Template->filter_students = array_values($filter_students);
