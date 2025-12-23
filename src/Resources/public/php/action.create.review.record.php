@@ -52,7 +52,14 @@
         }
         
         // Get the percentage of reviewed Transactions
-        $transactions_percentage_reviewed = ($transactions_total_reviewed / $transactions_total) * 100;
+        //$transactions_percentage_reviewed = ($transactions_total_reviewed / $transactions_total) * 100;
+        
+        // Prevent division by zero errors
+        if ($transactions_total > 0) {
+            $transactions_percentage_reviewed = ($transactions_total_reviewed / $transactions_total) * 100;
+        } else {
+            $transactions_percentage_reviewed = 0;
+        }
         
         // Get the total number of Misc. Transactions for this Psy
         $misc_transactions_total = 0;
