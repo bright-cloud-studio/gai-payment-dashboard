@@ -99,7 +99,6 @@ class TransactionMiscBackend extends Backend
 		return $status_wrapper_open . $label;
 	}
 	
-  
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
       if (strlen(Input::get('tid')))
@@ -118,7 +117,6 @@ class TransactionMiscBackend extends Backend
 		return '<a href="'.$this->addToUrl($href).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}	
 	
-
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
 		// Trigger the save_callback
@@ -204,7 +202,6 @@ class TransactionMiscBackend extends Backend
 		return $varValue;
 	}
 
-
     // Get Districts as select menu
     public function getDistricts(DataContainer $dc) { 
 
@@ -250,23 +247,23 @@ class TransactionMiscBackend extends Backend
     
     // Get Psychologists as select menu
     public function getPsychologists(DataContainer $dc) { 
-
-      // Hold the psys
-      $psychologists = array();
-
-      // Use the DB to grab all of our enabled members, aka our psychologists
-  		$this->import('Database');
-  		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0 ORDER BY firstname ASC")->execute();
-  		while($result->next())
-  		{
-              // Add ti array with ID as the value and firstname lastname as the label
-              $psychologists = $psychologists + array($result->id => ($result->firstname . " " . $result->lastname));   
-  		}
-  
-  		return $psychologists;
-	}
+        
+        // Hold the psys
+        $psychologists = array();
+        
+        // Use the DB to grab all of our enabled members, aka our psychologists
+        $this->import('Database');
+        $result = $this->Database->prepare("SELECT * FROM tl_member ORDER BY firstname ASC")->execute();
+        //$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0 ORDER BY firstname ASC")->execute();
+        while($result->next())
+        {
+            // Add ti array with ID as the value and firstname lastname as the label
+            $psychologists = $psychologists + array($result->id => ($result->firstname . " " . $result->lastname));   
+        }
+        
+        return $psychologists;
+    }
     
-
     // Get Services as select menu
     public function getServices(DataContainer $dc) { 
         
@@ -285,10 +282,5 @@ class TransactionMiscBackend extends Backend
         return $services;
         
     }
-
-
-
-
-    
 
 }
