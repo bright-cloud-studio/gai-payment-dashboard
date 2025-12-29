@@ -279,53 +279,25 @@ class AssignmentBackend extends Backend
     
 	}
 
-
-
-
-
-
-
-
-     // Get Initial - Re-eval as select menu
+    // Get Initial - Re-eval as select menu
     public function getInitialReeval(DataContainer $dc) { 
     
-        // Hold the psys
         $students = array();
-        
+
+        // This "default" option needs to be removed
         $students = $students + array('0' => 'Select type of Eval');
 
         $students = $students + array('additional_assessment' => 'Additional Assessment');
-        
         $students = $students + array('initial' => 'Initial');
         $students = $students + array('initial_504' => 'Initial 504');
-
         $students = $students + array('re_eval' => 'Re-eval');
         $students = $students + array('re_eval_504' => 'Re-eval 504');
-
         $students = $students + array('extended' => 'Extended Eval');
         $students = $students + array('independent' => 'Independent Eval');
-
         $students = $students + array('other' => 'Other');
         
         return $students;
     
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
 }
