@@ -16,6 +16,7 @@ use Bcs\Model\Student;
 
 class AssignmentBackend extends Backend
 {
+    
     // Create 'Invoice' DCAs for Psychologists
     public function createAssignment(DataContainer $dc) {
         
@@ -24,7 +25,6 @@ class AssignmentBackend extends Backend
 		{
 			return;
 		}
-		
 
         // If we have not yet created the Invoices for this request
         if($dc->activeRecord->student != '') {
@@ -39,9 +39,6 @@ class AssignmentBackend extends Backend
         }
 
     }
-
-
-
     
   
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -157,13 +154,19 @@ class AssignmentBackend extends Backend
 
         // Use the DB to grab all of our enabled members, aka our psychologists
 		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0 ORDER BY firstname ASC")->execute();
+		$result = $this->Database->prepare("SELECT * FROM tl_member ORDER BY firstname ASC")->execute();
+		//$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0 ORDER BY firstname ASC")->execute();
 		while($result->next())
 		{
             // Add ti array with ID as the value and firstname lastname as the label
             $psychologists = $psychologists + array($result->id => ($result->firstname . " " . $result->lastname));   
 		}
-
+        
+        //echo "<pre>";
+        //print_r($psychologists);
+        //echo "</pre>";
+        //die();
+        
 		return $psychologists;
 	}
 
@@ -279,25 +282,53 @@ class AssignmentBackend extends Backend
     
 	}
 
-    // Get Initial - Re-eval as select menu
+
+
+
+
+
+
+
+     // Get Initial - Re-eval as select menu
     public function getInitialReeval(DataContainer $dc) { 
     
+        // Hold the psys
         $students = array();
-
-        // This "default" option needs to be removed
+        
         $students = $students + array('0' => 'Select type of Eval');
 
         $students = $students + array('additional_assessment' => 'Additional Assessment');
+        
         $students = $students + array('initial' => 'Initial');
         $students = $students + array('initial_504' => 'Initial 504');
+
         $students = $students + array('re_eval' => 'Re-eval');
         $students = $students + array('re_eval_504' => 'Re-eval 504');
+
         $students = $students + array('extended' => 'Extended Eval');
         $students = $students + array('independent' => 'Independent Eval');
+
         $students = $students + array('other' => 'Other');
         
         return $students;
     
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
 }
