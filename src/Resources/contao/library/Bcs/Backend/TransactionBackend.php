@@ -30,7 +30,6 @@ class TransactionBackend extends Backend
 		{
 			return;
 		}
-		
 
         // If we have not yet created the Invoices for this request
         if($dc->activeRecord->pid != '') {
@@ -225,7 +224,6 @@ class TransactionBackend extends Backend
 	}
 
 
-
     // Get Psychologists as select menu
     public function getPsychologists(DataContainer $dc) { 
 
@@ -234,7 +232,8 @@ class TransactionBackend extends Backend
 
         // Use the DB to grab all of our enabled members, aka our psychologists
 		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0 ORDER BY firstname ASC")->execute();
+		$result = $this->Database->prepare("SELECT * FROM tl_member ORDER BY firstname ASC")->execute();
+		//$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0 ORDER BY firstname ASC")->execute();
 		while($result->next())
 		{
             // Add ti array with ID as the value and firstname lastname as the label
@@ -262,10 +261,6 @@ class TransactionBackend extends Backend
 
 		return $services;
 	}
-
-
-
-
 
 
     public function getAssignmentDetails(DataContainer $dc)
