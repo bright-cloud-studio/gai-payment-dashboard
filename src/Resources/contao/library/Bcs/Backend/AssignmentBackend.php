@@ -282,13 +282,6 @@ class AssignmentBackend extends Backend
     
 	}
 
-
-
-
-
-
-
-
      // Get Initial - Re-eval as select menu
     public function getInitialReeval(DataContainer $dc) { 
     
@@ -313,22 +306,5 @@ class AssignmentBackend extends Backend
         return $students;
     
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
+ 
 }
