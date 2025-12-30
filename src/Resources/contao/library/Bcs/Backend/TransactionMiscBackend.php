@@ -205,21 +205,17 @@ class TransactionMiscBackend extends Backend
     // Get Districts as select menu
     public function getDistricts(DataContainer $dc) { 
 
-        // Hold the psys
         $districts = array();
 
-        $districts = $districts + array('' => ''); 
-
-        // Use the DB to grab all of our enabled members, aka our psychologists
-		$this->import('Database');
 		$result = $this->Database->prepare("SELECT * FROM tl_district ORDER BY district_name ASC")->execute();
 		while($result->next())
 		{
-            // Add ti array with ID as the value and firstname lastname as the label
             $districts = $districts + array($result->id => $result->district_name);   
 		}
 		
+		// Add label for blank fields, prepend a space to bump this to the top on the frontend
 		$districts[''] = '&nbsp;No District Selected';
+		
 		return $districts;
 	}
 
@@ -228,22 +224,22 @@ class TransactionMiscBackend extends Backend
     
         $schools = array();
         
+        // We can only get Schools when we have a District selected
         if($dc->activeRecord->district != '') {
     
-            // Use the DB to grab all of our enabled members, aka our psychologists
-    		$this->import('Database');
-    		
     		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=".$dc->activeRecord->district . " ORDER BY school_name ASC")->execute();
     		while($result->next())
     		{
-                // Add ti array with ID as the value and firstname lastname as the label
                 $schools = $schools + array($result->id => $result->school_name);
     		}
+
     		return $schools;
         }
-        $schools = $schools + array('0' => 'First, Select a District');
+            
+        // Add label for blank fields, prepend a space to bump this to the top on the frontend
+        $schools[''] = '&nbsp;No School Selected';
+        
         return $schools;
-		
 	}
     
     // Get Psychologists as select menu
