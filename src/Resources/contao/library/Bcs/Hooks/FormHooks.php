@@ -655,7 +655,7 @@ class FormHooks
                             if(in_array('2', $member->groups))
                                 $label .= "<span id='transactions'>(" . $transactions_total . ")</span> ";
                             
-                            $label .= "<span id='date'>" . date('m/d/y',$t) . "</span> - ";
+                            $label .= "<span id='date'>" . $t . "</span> - ";
                             $label .= "<span id='district'>" . $district->district_name. "</span> - ";
                             $label .= "<span id='school'>" . $school->school_name . "</span> - ";
                             $label .= "<span id='student'>" . $student->name . "</span>";
