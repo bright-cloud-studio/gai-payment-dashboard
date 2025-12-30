@@ -29,7 +29,7 @@
     $result_assignment = $dbh->query($query_assignment);
     if($result_assignment) {
         while($db_assignment = $result_assignment->fetch_assoc()) {
-            $assignment_date = date('m/d/y', $db_assignment['date_created']);
+            $assignment_date = date('m/d/y', strtotime($db_assignment['date_created']));
 
             fwrite($myfile, "Assignment Date: " . $db_assignment['date_created'] . "\r\n");
             fwrite($myfile, "Cutoff Date: " . $_POST['cutoff_date'] . "\r\n");
