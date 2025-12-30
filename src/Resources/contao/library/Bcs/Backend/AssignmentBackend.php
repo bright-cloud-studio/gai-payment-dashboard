@@ -149,24 +149,15 @@ class AssignmentBackend extends Backend
     // Get Psychologists as select menu
     public function getPsychologists(DataContainer $dc) { 
 
-        // Hold the psys
         $psychologists = array();
-
-        // Use the DB to grab all of our enabled members, aka our psychologists
-		$this->import('Database');
 		$result = $this->Database->prepare("SELECT * FROM tl_member ORDER BY firstname ASC")->execute();
-		//$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0 ORDER BY firstname ASC")->execute();
 		while($result->next())
 		{
-            // Add ti array with ID as the value and firstname lastname as the label
             $psychologists = $psychologists + array($result->id => ($result->firstname . " " . $result->lastname));   
 		}
-        
-        //echo "<pre>";
-        //print_r($psychologists);
-        //echo "</pre>";
-        //die();
-        
+
+        // Add label for blank fields, prepend a space to bump this to the top on the frontend
+        $psychologists[''] = '&nbsp;No Psychologist Selected';
 		return $psychologists;
 	}
 
