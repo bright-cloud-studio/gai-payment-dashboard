@@ -280,4 +280,12 @@ class TransactionMiscBackend extends Backend
         
     }
 
+    // Set blank option for filter
+    public function getStudentInitials(DataContainer $dc) { 
+    
+        $student_initials = array();
+        $student_initials[''] = '&nbsp;No Selection';
+        return $student_initials;
+	}
+
 }
