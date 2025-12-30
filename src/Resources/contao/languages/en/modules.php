@@ -36,3 +36,6 @@ $GLOBALS['TL_LANG']['FMD']['mod_psych_work_form']         = array('Psych Work Fo
 $GLOBALS['TL_LANG']['FMD']['mod_review_transactions']     = array('Review Transactions', 'End of Month review by Psychologists');
 
 $GLOBALS['TL_LANG']['MOD']['review_record']               = array('Review and Submit Records', 'Temporary display of records, for debugging');
+
+
+$GLOBALS['TL_LANG']['MSC']['filterFree'] = 'No selection';
