@@ -196,25 +196,22 @@ class AssignmentBackend extends Backend
     public function getSchools(DataContainer $dc) { 
     
         $schools = array();
-        
+
+        // If we have an active record, and we have a District selected
         if($dc->activeRecord) {
             if($dc->activeRecord->district != '') {
                 
                 $schools = $schools + array('0' => 'Select a District');
-                
-                // Use the DB to grab all of our enabled members, aka our psychologists
-        		$this->import('Database');
-        		
         		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=" . $dc->activeRecord->district . "  ORDER BY school_name ASC")->execute();
         		while($result->next())
         		{
-                    // Add ti array with ID as the value and firstname lastname as the label
                     $schools = $schools + array($result->id => $result->school_name);
         		}
         		return $schools;
             }
         }
         $schools = $schools + array('0' => 'First, Select a District');
+        $schools[''] = '&nbsp;No School Selected';
         return $schools;
 		
 	}
