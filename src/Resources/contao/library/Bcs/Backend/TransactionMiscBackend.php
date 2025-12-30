@@ -212,13 +212,14 @@ class TransactionMiscBackend extends Backend
 
         // Use the DB to grab all of our enabled members, aka our psychologists
 		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1 ORDER BY district_name ASC")->execute();
+		$result = $this->Database->prepare("SELECT * FROM tl_district ORDER BY district_name ASC")->execute();
 		while($result->next())
 		{
             // Add ti array with ID as the value and firstname lastname as the label
             $districts = $districts + array($result->id => $result->district_name);   
 		}
-
+		
+		$districts[''] = '&nbsp;No District Selected';
 		return $districts;
 	}
 
