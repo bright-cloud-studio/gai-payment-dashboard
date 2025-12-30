@@ -204,8 +204,8 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['created_invoice_dcas'],
             'inputType'               => 'select',
-            'filter'                  => true,
-            'search'                  => true,
+            'filter'                  => false,
+            'search'                  => false,
             'default'                 => 'no',
             'options'                  => array('yes' => 'Yes', 'no' => 'No'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Yes/No'),
@@ -215,8 +215,8 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['generated_psys'],
             'inputType'               => 'select',
-            'filter'                  => true,
-            'search'                  => true,
+            'filter'                  => false,
+            'search'                  => false,
             'default'                 => 'no',
             'options'                  => array('yes' => 'Yes', 'no' => 'No'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Yes/No'),
@@ -226,8 +226,8 @@ $GLOBALS['TL_DCA']['tl_invoice_request'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['generated_districts'],
             'inputType'               => 'select',
-            'filter'                  => true,
-            'search'                  => true,
+            'filter'                  => false,
+            'search'                  => false,
             'default'                 => 'no',
             'options'                  => array('yes' => 'Yes', 'no' => 'No'),
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'chosen'=>true, 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select Yes/No'),
