@@ -107,11 +107,11 @@ class ModPsychWorkForm extends \Contao\Module
                 
                 
                 // Date Created
-                $template_assignments[$assignment->id]['data_date_created'] = 'data-date-created="'.date('m/d/y', $assignment->date_created).'"';
+                $template_assignments[$assignment->id]['data_date_created'] = 'data-date-created="'.$assignment->date_created.'"';
                 if($is_admin) {
-                    $template_assignments[$assignment->id]['date_created'] = "<input value='".date('m/d/y', $assignment->date_created)."' name='date_created_$assignment->id'class='date_created' id='date_created_$assignment->id' autocomplete='off'>";
+                    $template_assignments[$assignment->id]['date_created'] = "<input value='".$assignment->date_created."' name='date_created_$assignment->id'class='date_created' id='date_created_$assignment->id' autocomplete='off'>";
                 } else {
-                    $template_assignments[$assignment->id]['date_created'] = date('m/d/y', $assignment->date_created);
+                    $template_assignments[$assignment->id]['date_created'] = $assignment->date_created;
                 }
                 
                 // Date 30 Day
