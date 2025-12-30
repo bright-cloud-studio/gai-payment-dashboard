@@ -195,7 +195,7 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50', 'includeBlankOption' => true, 'blankOptionLabel' => 'No Selection'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'lasid' => array
