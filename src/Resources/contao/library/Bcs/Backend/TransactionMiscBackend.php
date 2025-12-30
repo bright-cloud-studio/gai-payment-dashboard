@@ -225,7 +225,7 @@ class TransactionMiscBackend extends Backend
         $schools = array();
         
         // We can only get Schools when we have a District selected
-        if($dc->activeRecord->district != '') {
+        if($dc->activeRecord->district != '' && $dc->activeRecord->district != '0') {
     
     		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=".$dc->activeRecord->district . " ORDER BY school_name ASC")->execute();
     		while($result->next())
