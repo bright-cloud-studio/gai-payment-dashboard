@@ -135,7 +135,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_issue']['description'],
             'inputType'               => 'text',
             'default'                 => '',
-            'filter'                  => true,
+            'filter'                  => false,
             'search'                  => true,
             'eval'                    => array('mandatory'=>true, 'tl_class'=>'clr', 'rte'=>'tinyMCE'),
             'sql'                     => "text NOT NULL default ''"
