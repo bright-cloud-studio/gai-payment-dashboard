@@ -195,7 +195,8 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50', 'includeBlankOption' => true, 'blankOptionLabel' => 'No Selection'),
+            'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\TransactionMiscBackend', 'getStudentInitials'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'lasid' => array
