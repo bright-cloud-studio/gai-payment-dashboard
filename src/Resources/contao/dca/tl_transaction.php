@@ -241,6 +241,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'setBlankFilterLabel'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'meeting_end' => array
@@ -251,6 +252,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'setBlankFilterLabel'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'meeting_duration' => array
@@ -309,6 +311,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'setBlankFilterLabel'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'sasid' => array
@@ -319,6 +322,7 @@ $GLOBALS['TL_DCA']['tl_transaction'] = array
             'filter'                  => true,
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
+            'options_callback'	      => array('Bcs\Backend\TransactionBackend', 'setBlankFilterLabel'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'originally_submitted' => array
