@@ -285,21 +285,11 @@ class AssignmentBackend extends Backend
     
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+    // Set blank option for filter
+    public function setBlankFilterLabel(DataContainer $dc) { 
+        $options = array();
+        $options[''] = '&nbsp;No Selection';
+        return $options;
+	}
     
 }
