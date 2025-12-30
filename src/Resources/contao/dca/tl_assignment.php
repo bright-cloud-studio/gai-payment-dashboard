@@ -159,9 +159,6 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "int(10) unsigned NOT NULL default 0",
             'default'                => time(),
-            'load_callback' => [
-                ['Bcs\Backend\AssignmentBackend', 'formatTimestap']
-            ],
         ),
         'date_30_day' => array
         (
