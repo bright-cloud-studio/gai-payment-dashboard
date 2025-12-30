@@ -285,17 +285,6 @@ class AssignmentBackend extends Backend
     
 	}
 
-    public function formatTimestamp($value, DataContainer $dc): string
-    {
-        if (!$value) {
-            return '';
-        }
-
-        // Convert the integer timestamp to a formatted date string
-        // 'Config::get('dateFormat')' uses the format defined in Contao settings
-        return Date::parse(\Contao\Config::get('dateFormat'), $value);
-    }
-
     // Set blank option for filter
     public function setBlankFilterLabel(DataContainer $dc) { 
         $options = array();
