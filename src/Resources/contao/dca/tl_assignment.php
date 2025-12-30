@@ -54,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'showRootTrails'          => false,
             'icon'                    => 'pagemounts.svg',
             'flag'                    => 6,
-            'fields'                  => array('date_created DESC'),
+            'fields'                  => array("STR_TO_DATE(date_created, '%m/%d/%Y') DESC"),
             'panelLayout'             => 'filter;sort,search,limit'
         ),
         'label' => array
