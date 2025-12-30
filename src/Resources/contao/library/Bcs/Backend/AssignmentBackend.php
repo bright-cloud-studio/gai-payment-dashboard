@@ -199,7 +199,7 @@ class AssignmentBackend extends Backend
 
         // If we have an active record, and we have a District selected
         if($dc->activeRecord) {
-            if($dc->activeRecord->district != '') {
+            if($dc->activeRecord->district != '0') {
                 
                 $schools = $schools + array('0' => 'Select a District');
         		$result = $this->Database->prepare("SELECT * FROM tl_school WHERE pid=" . $dc->activeRecord->district . "  ORDER BY school_name ASC")->execute();
@@ -213,7 +213,6 @@ class AssignmentBackend extends Backend
         $schools = $schools + array('0' => 'First, Select a District');
         $schools[''] = '&nbsp;No School Selected';
         return $schools;
-		
 	}
 
     // Get Services as select menu
