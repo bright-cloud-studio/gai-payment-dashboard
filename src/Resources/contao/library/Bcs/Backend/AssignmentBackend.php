@@ -215,6 +215,30 @@ class AssignmentBackend extends Backend
         return $schools;
 	}
 
+    
+    // Get Students as select menu
+    public function getStudents(DataContainer $dc) { 
+    
+        $students = array();
+        if($dc->activeRecord) {
+            if($dc->activeRecord->district != '' && $dc->activeRecord->district != '0') {
+                
+                $students = $students + array('0' => 'Select a Student');
+        		$result = $this->Database->prepare("SELECT * FROM tl_student WHERE district=".$dc->activeRecord->district . " ORDER BY name ASC")->execute();
+        		while($result->next())
+        		{
+                    $students = $students + array($result->id => $result->name);   
+        		}
+        
+        		return $students;
+            }
+        }
+        $students = $students + array('0' => 'First, Select a District');
+        $students[''] = '&nbsp;No Student Selected';
+        return $students;
+	}
+    
+
     // Get Services as select menu
     public function getServices(DataContainer $dc) { 
 
@@ -235,40 +259,8 @@ class AssignmentBackend extends Backend
 		return $services;
 	}
 
-    // Get Students as select menu
-    public function getStudents(DataContainer $dc) { 
     
-        $students = array();
-        if($dc->activeRecord) {
-            if($dc->activeRecord->district != '') {
-                
-                $students = $students + array('0' => 'Select a Student');
-                
-                // Use the DB to grab all of our enabled members, aka our psychologists
-        		$this->import('Database');
-        		$result = $this->Database->prepare("SELECT * FROM tl_student WHERE district=".$dc->activeRecord->district . " ORDER BY name ASC")->execute();
-        		while($result->next())
-        		{
-                    // Add ti array with ID as the value and firstname lastname as the label
-                    $students = $students + array($result->id => $result->name);   
-        		}
-        
-        		return $students;
-            }
-        }
-        $students = $students + array('0' => 'First, Select a District');
-        return $students;
-    
-	}
-
-
-
-
-
-
-
-
-     // Get Initial - Re-eval as select menu
+    // Get Initial - Re-eval as select menu
     public function getInitialReeval(DataContainer $dc) { 
     
         // Hold the psys
