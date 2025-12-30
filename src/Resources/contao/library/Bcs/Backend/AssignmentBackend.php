@@ -164,15 +164,10 @@ class AssignmentBackend extends Backend
     // Get Psychologists as select menu
     public function getPsychologistsShared(DataContainer $dc) { 
 
-        // Hold the psys
         $psychologists = array();
-
-        // Use the DB to grab all of our enabled members, aka our psychologists
-		$this->import('Database');
 		$result = $this->Database->prepare("SELECT * FROM tl_member WHERE disable=0 ORDER BY firstname ASC")->execute();
 		while($result->next())
 		{
-            // Add ti array with ID as the value and firstname lastname as the label
             $psychologists = $psychologists + array($result->id => ($result->firstname . " " . $result->lastname));   
 		}
 
@@ -182,19 +177,17 @@ class AssignmentBackend extends Backend
     // Get Districts as select menu
     public function getDistricts(DataContainer $dc) { 
 
-        // Hold the psys
         $districts = array();
-        
         $districts = $districts + array('0' => 'Select a District');
-        
-        // Use the DB to grab all of our enabled members, aka our psychologists
-		$this->import('Database');
-		$result = $this->Database->prepare("SELECT * FROM tl_district WHERE published=1 ORDER BY district_name ASC")->execute();
+
+		$result = $this->Database->prepare("SELECT * FROM tl_district ORDER BY district_name ASC")->execute();
 		while($result->next())
 		{
-            // Add ti array with ID as the value and firstname lastname as the label
             $districts = $districts + array($result->id => $result->district_name);   
 		}
+
+        // Add label for blank fields, prepend a space to bump this to the top on the frontend
+        $districts[''] = '&nbsp;No District Selected';
 
 		return $districts;
 	}
