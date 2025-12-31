@@ -2,6 +2,8 @@
 
 /* Customized DC_Table so we can customize the filterMenu function */
 
+namespace Bcs\Drivers;
+
 use Contao\DC_Table;
 use Contao\System;
 
