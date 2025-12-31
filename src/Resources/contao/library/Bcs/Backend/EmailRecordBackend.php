@@ -49,7 +49,7 @@ class EmailRecordBackend extends Backend
                 if($s->sasid != '')
                     $lasid_sasid = $s->sasid;
         }
-            $assignments = $assignments + array($result->id => (date("m/d/y", $result->date_created) . " - " . $d->district_name . " - " . $lasid_sasid));   
+            $assignments = $assignments + array($result->id => ($result->date_created . " - " . $d->district_name . " - " . $lasid_sasid));   
 		}
 
 		return $assignments;
