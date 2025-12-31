@@ -82,6 +82,7 @@
         }
         
         // Get the percentage of reviewed Misc. Transactions
+        // Preent Division by Zero errors by checking if it is zero before performing the math
         if ($misc_transactions_total > 0) {
             $misc_transactions_percentage_reviewed = ($misc_transactions_total_reviewed / $misc_transactions_total) * 100;
         } else {
