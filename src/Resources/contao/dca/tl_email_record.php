@@ -1,5 +1,7 @@
 <?php
 
+use Bcs\DC_Assignments;
+
 use Contao\Backend;
 use Contao\Database;
 use Contao\DataContainer;
@@ -13,7 +15,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
     // Config
     'config' => array
     (
-        'dataContainer'               => DC_Table::class,
+        'dataContainer'               => DC_Assignments::class,
         'switchToEdit'                => false,
         'closed'                      => true,
 		'notCopyable'                 => true,
@@ -133,7 +135,7 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
             'default'                 => '',
             'filter'                  => true,
             'search'                  => true,
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('datepicker'=>true, 'mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                     => "varchar(20) NOT NULL default ''",
             'default'                => date('m/d/y g:i a')
         ),
