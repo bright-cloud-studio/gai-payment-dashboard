@@ -85,7 +85,7 @@
                                 // Create Email Record of this email
                                 $record = new EmailRecord();
                                 $record->tstamp = time();
-                                $record->date_created = time();
+                                $record->date_created = date('m/d/y g:i a');
                                 $record->status = 'resolved';
                                 $record->email_type = 'alert_week_remaining';
                                 $record->email_recipient = $psychologist->id;
@@ -150,7 +150,7 @@
                                 $record = new EmailRecord();
                                 $record->tstamp = time();
                                 $record->status = 'resolved';
-                                $record->date_created = time();
+                                $record->date_created = date('m/d/y g:i a');
                                 $record->email_type = 'alert_final';
                                 $record->email_recipient = $psychologist->id;
                                 $record->email_subject = $sub;
