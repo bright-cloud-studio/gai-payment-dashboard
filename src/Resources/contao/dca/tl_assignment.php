@@ -21,7 +21,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     // Config
     'config' => array
     (
-        'dataContainer'               => DC_Table::class,
+        'dataContainer'               => 'Assignments',
         'ctable'                      => array('tl_transaction'),
         'switchToEdit'                => false,
         'enableVersioning'            => true,
