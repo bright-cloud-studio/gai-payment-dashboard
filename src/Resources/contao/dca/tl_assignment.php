@@ -5,6 +5,8 @@
 use Bcs\Model\District;
 use Bcs\Model\Student;
 
+use Bcs\Drivers\DC_Assignments;
+
 use Contao\Backend;
 use Contao\Database;
 use Contao\DataContainer;
@@ -21,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
     // Config
     'config' => array
     (
-        'dataContainer'               => 'Assignments',
+        'dataContainer'               => DC_Assignments::class,
         'ctable'                      => array('tl_transaction'),
         'switchToEdit'                => false,
         'enableVersioning'            => true,
