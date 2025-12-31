@@ -3,6 +3,7 @@
 /* Customized DC_Table so we can customize the filterMenu function */
 
 use Contao\DC_Table;
+use Contao\System;
 
 class DC_Assignments extends DC_Table
 {
