@@ -1,11 +1,17 @@
 <?php
 
-/* Customized DC_Table so we can customize the filterMenu function */
+/* Customized DC_Table so we can customize the 'filterMenu' function to add custom sorting rules for 'date_created' fields */
 
 namespace Bcs;
 
+use Contao\ArrayUtil;
+use Contao\Database;
 use Contao\DC_Table;
+use Contao\Input;
+use Contao\StringUtil;
 use Contao\System;
+
+use Symfony\Component\String\UnicodeString;
 
 class DC_Assignments extends DC_Table
 {
@@ -238,11 +244,13 @@ class DC_Assignments extends DC_Table
 			{
 				$options = $objFields->fetchEach($field);
                 
-                
+                // CUSTOMIZED - If the field is 'date_created' do our custom sorting rules, otherwise perform the usual sorting
                 if($field == 'date_created') {
+                    
                     usort($options, function($a, $b) {
                         return strtotime($b) - strtotime($a);
                     });
+                    
                 } else {
                 
     				// Sort by day
@@ -447,6 +455,7 @@ class DC_Assignments extends DC_Table
 					$options_sorter[$option_label . '_' . $field . '_' . $kk] = '  <option value="' . StringUtil::specialchars($value) . '"' . ((isset($session['filter'][$filter][$field]) && $value == $session['filter'][$filter][$field]) ? ' selected="selected"' : '') . '>' . StringUtil::specialchars($option_label) . '</option>';
 				}
 
+                // CUSTOMIZED - Do not perform if this is also 'date_created'
 				// Sort by option values
 				if (!$blnDate && $field != 'date_created')
 				{
