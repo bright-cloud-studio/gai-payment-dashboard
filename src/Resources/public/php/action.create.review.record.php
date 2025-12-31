@@ -82,7 +82,11 @@
         }
         
         // Get the percentage of reviewed Misc. Transactions
-        $misc_transactions_percentage_reviewed = ($misc_transactions_total_reviewed / $misc_transactions_total) * 100;
+        if ($misc_transactions_total > 0) {
+            $misc_transactions_percentage_reviewed = ($misc_transactions_total_reviewed / $misc_transactions_total) * 100;
+        } else {
+            $misc_transactions_percentage_reviewed = 0;
+        }
 
         $query = "INSERT INTO tl_review_record (tstamp, psychologist, total_assignments, transactions_total, transactions_total_reviewed, transactions_percentage_reviewed, misc_transactions_total, misc_transactions_total_reviewed, misc_transactions_percentage_reviewed, date_month, date_year, date_reviewed)
                     VALUES ($tstamp, $psy_id, $total_assignments, $transactions_total, $transactions_total_reviewed, $transactions_percentage_reviewed, $misc_transactions_total, $misc_transactions_total_reviewed, $misc_transactions_percentage_reviewed, '$date_month', $date_year, $date_reviewed)";
