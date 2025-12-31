@@ -5,7 +5,7 @@
 use Bcs\Model\District;
 use Bcs\Model\Student;
 
-use Bcs\Drivers\DC_Assignments;
+use Bcs\DC_Assignments;
 
 use Contao\Backend;
 use Contao\Database;
