@@ -108,7 +108,7 @@ if($assignments) {
                             // Create Email Record of this email
                             $record = new EmailRecord();
                             $record->tstamp = time();
-                            $record->date_created = time();
+                            $record->date_created = date('m/d/y g:i a');
                             $record->assignment = $assignment->id;
                             $record->email_type = 'pwf_no_meeting_date_entered';
                             $record->email_recipient = $psychologist->id;
@@ -201,7 +201,7 @@ if($assignments) {
                             // Create Email Record of this email
                             $record = new EmailRecord();
                             $record->tstamp = time();
-                            $record->date_created = time();
+                            $record->date_created = date('m/d/y g:i a');
                             $record->assignment = $assignment->id;
                             $record->email_type = 'pwf_no_report_submitted';
                             $record->email_recipient = $psychologist->id;
