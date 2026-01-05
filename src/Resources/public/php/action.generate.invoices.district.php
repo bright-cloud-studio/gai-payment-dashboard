@@ -437,7 +437,9 @@
                     $transactions[$i]['rate'] = number_format(floatval($services[$row['service']]['price_school_1']), 2, '.', ',');
                     $transactions[$i]['district'] = $row['district'];
                     $transactions[$i]['school'] = $schools[$row['school']];
-                    $transactions[$i]['student'] = $row['student_initials'];
+                    //$transactions[$i]['student'] = $row['student_initials'];
+                    $search = array(" ", ".");
+                    $transactions[$i]['student'] = str_replace($search, "", $row['student_initials']);
                     
                     if($row['lasid'] != '')
                         $transactions[$i]['number'] = $row['lasid'];
@@ -526,6 +528,8 @@
         foreach ($words as $word) {
             $initials .= strtoupper(substr($word, 0, 1));
         }
-    
-        return $initials;
+        
+        $search = array(" ", ".");
+        $cleaned_initials = str_replace($search, "", $initials);
+        return $cleaned_initials;
     }
