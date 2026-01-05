@@ -79,6 +79,7 @@ class ModAdminReview extends \Contao\Module
         
         // Get the current month and current year as two digit numbers
         $current_year = date('y');
+        $current_year = 25;
         
         $last_month = '';
         // If the month is June and we are at the 15th day or greater into the month, review this month as it's the end of the year
@@ -102,11 +103,15 @@ class ModAdminReview extends \Contao\Module
         $psychologists = MemberModel::findBy('disable', '0', $opt);
         foreach($psychologists as $psy) {
             
+            //echo "PSY: " . $psy->id . "<br>";
+            
+            
             // Get Transactions
             $transactions = Transaction::findBy(['psychologist = ?', 'published = ?'], [$psy->id, 1]);
             $transactions_total = 0.00;
         
             foreach($transactions as $transaction) {
+                //echo "Transactions: " . $transaction->id . "<br>";
                 
                 $transaction_month = date('m', $transaction->date_submitted);
                 $transaction_year = date('y', $transaction->date_submitted);
@@ -114,7 +119,7 @@ class ModAdminReview extends \Contao\Module
                 //echo "Last Month: " . $last_month . "<br>";
                 //echo "Current Year: " . $current_year . "<br>";
                 //echo "Trans Month: " . $transaction_month . "<br>";
-                //echo "Trans Year: " . $transaction_year . "<br>";
+                //echo "Trans Year: " . $transaction_year . "<br><br>";
                 
                 if($transaction_year == $current_year && $transaction_month == $last_month) {
                     
@@ -125,7 +130,8 @@ class ModAdminReview extends \Contao\Module
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
                         $current_month  = date('m');
                         $current_year = date('y');
-                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
+                        $current_year = 25;
+                        if($reviewed_year == 26) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
@@ -138,7 +144,8 @@ class ModAdminReview extends \Contao\Module
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
                         $current_month  = date('m');
                         $current_year = date('y');
-                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
+                        $current_year = 25;
+                        if($reviewed_year == 26) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
@@ -289,6 +296,8 @@ class ModAdminReview extends \Contao\Module
 
             foreach($transactions_misc as $transaction) {
                 
+                //echo "Misc Transaction: " . $transaction->id . "<br>";
+                
                 $transaction_month = date('m', $transaction->date_submitted);
                 $transaction_year = date('y', $transaction->date_submitted);
                 
@@ -306,7 +315,8 @@ class ModAdminReview extends \Contao\Module
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
                         $current_month  = date('m');
                         $current_year = date('y');
-                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
+                        $current_year = 25;
+                        if($reviewed_year == 26) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
@@ -319,7 +329,8 @@ class ModAdminReview extends \Contao\Module
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
                         $current_month  = date('m');
                         $current_year = date('y');
-                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
+                        $current_year = 25;
+                        if($reviewed_year == 26) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
