@@ -45,7 +45,7 @@ class ModAdminReview extends \Contao\Module
     /* Construct function */
     public function __construct($objModule, $strColumn='main')
 	{
-        parent::__construct($objModule, $strColumn);
+        //parent::__construct($objModule, $strColumn);
 	}
 
     /* Generate function */
@@ -77,22 +77,25 @@ class ModAdminReview extends \Contao\Module
         $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/bcspaymentdashboard/js/datatables.min.js';
         $GLOBALS['TL_CSS'][]        = 'bundles/bcspaymentdashboard/css/datatables.min.css';
         
-        // Get the current month and current year as two digit numbers
-        $current_year = date('y');
-        $current_year = 25;
+        // First, get the current month
+        $current_month  = date('m');
         
-        $last_month = '';
+        // Next, if the current month is 1, we need "current year" to actually be one year back
+        $reviewing_year;
+        if($current_month == 1)
+            $reviewing_year = date('y') - 1;
+        else
+            $reviewing_year = date('y');
+        
+        $reviewing_month = '';
         // If the month is June and we are at the 15th day or greater into the month, review this month as it's the end of the year
         // otherwise, review the last month
         if(date('n') == 6 && date('j') >= 15)
-            $last_month = date('m');
+            $reviewing_month = date('m');
         else
-            $last_month = date('m', strtotime('-1 month'));
+            $reviewing_month = date('m', strtotime('-1 month'));
 
-        
         $currently_reviewing = date('F, Y', strtotime('-1 month'));
-        //$last_month = date('m');
-        //$currently_reviewing = date('F, Y');
         
         // Get all active Psychologists
         $psy_name = '';
@@ -103,38 +106,35 @@ class ModAdminReview extends \Contao\Module
         $psychologists = MemberModel::findBy('disable', '0', $opt);
         foreach($psychologists as $psy) {
             
-            //echo "PSY: " . $psy->id . "<br>";
-            
+            $transactions_total = 0.00;
             
             // Get Transactions
             $transactions = Transaction::findBy(['psychologist = ?', 'published = ?'], [$psy->id, 1]);
-            $transactions_total = 0.00;
-        
             foreach($transactions as $transaction) {
-                //echo "Transactions: " . $transaction->id . "<br>";
                 
                 $transaction_month = date('m', $transaction->date_submitted);
                 $transaction_year = date('y', $transaction->date_submitted);
                 
-                //echo "Last Month: " . $last_month . "<br>";
-                //echo "Current Year: " . $current_year . "<br>";
-                //echo "Trans Month: " . $transaction_month . "<br>";
-                //echo "Trans Year: " . $transaction_year . "<br><br>";
-                
-                if($transaction_year == $current_year && $transaction_month == $last_month) {
+                if($transaction_year == $reviewing_year && $transaction_month == $reviewing_month) {
                     
                     if($psy->id != $psy_id) {
                         $template_psychologist_names[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
                         
                         $reviewed_month = date("m", (int)$psy->last_reviewed);
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
-                        $current_month  = date('m');
-                        $current_year = date('y');
-                        $current_year = 25;
-                        if($reviewed_year == 26) {
+                        
+                        
+                        
+                        // Perform our "Reviewed" check here
+                        if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
+                            
+                            
+                            
+                            
+                            
                         
                     } else {
                         $psy_name = $psy->firstname . " " . $psy->lastname;
@@ -142,15 +142,22 @@ class ModAdminReview extends \Contao\Module
                         
                         $reviewed_month = date("m", (int)$psy->last_reviewed);
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
-                        $current_month  = date('m');
-                        $current_year = date('y');
-                        $current_year = 25;
-                        if($reviewed_year == 26) {
+                        
+                        
+                        
+                        
+                        
+                        
+                        if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
+                            
+                            
+                            
+                            
+                            
                         
-        
                         $assignment = Assignment::findOneBy('id', $transaction->pid);
                         
                         $template_psychologists[$psy->id][$transaction->id]['psychologist_name'] = $psy->firstname . " " . $psy->lastname;
@@ -163,90 +170,22 @@ class ModAdminReview extends \Contao\Module
                             $template_psychologists[$psy->id][$transaction->id]['reviewed'] = 'Reviewed';
                         else
                             $template_psychologists[$psy->id][$transaction->id]['reviewed'] = 'Unreviewed';
-                        
-                        
-                        
+
                         // District
-                        /*
-                        $template_psychologists[$psy->id][$transaction->id]['district'] .= "<select name='district_$assignment->id' class='district' id='district_$assignment->id'>";
-                        $template_psychologists[$psy->id][$transaction->id]['district'] .= "<option value='' selected disabled>Select a District</option>";
-                        $districts = District::findAll();
-                        foreach($districts as $district) {
-                            if($assignment->district == $district->id)
-                                $template_psychologists[$psy->id][$transaction->id]['district'] .= "<option value='" . $district->id . "' selected>$district->district_name</option>";
-                            else
-                                $template_psychologists[$psy->id][$transaction->id]['district'] .= "<option value='" . $district->id . "'>$district->district_name</option>";
-                        }
-                        $template_psychologists[$psy->id][$transaction->id]['district'] .= "</select>";
-                        */
                         $district = District::findOneBy('id', $transaction->district);
                         $template_psychologists[$psy->id][$transaction->id]['district'] = $district->district_name;
     
-                        
                         // School
-                        /*
-                        $template_psychologists[$psy->id][$transaction->id]['school'] .= "<select name='school_$assignment->id' class='school' id='school_$assignment->id'>";
-                        $template_psychologists[$psy->id][$transaction->id]['school'] .= "<option value='' selected disabled>First, select a District</option>";
-                        $schools = School::findAll();
-                        foreach($schools as $school) {
-                            if($school->pid == $assignment->district) {
-                                if($assignment->school == $school->id)
-                                    $template_psychologists[$psy->id][$transaction->id]['school'] .= "<option value='" . $school->id . "' selected>$school->school_name</option>";
-                                else
-                                    $template_psychologists[$psy->id][$transaction->id]['school'] .= "<option value='" . $school->id . "'>$school->school_name</option>";
-                            }
-                        }
-                        $template_psychologists[$psy->id][$transaction->id]['school'] .= "</select>";
-                        */
                         $school = School::findOneBy('id', $assignment->school);
                         $template_psychologists[$psy->id][$transaction->id]['school'] = $school->school_name;
-    
-    
-                        
+
                         // Student
-                        /*
-                        $template_psychologists[$psy->id][$transaction->id]['student'] .= "<select name='student_$assignment->id' class='student' id='student_$assignment->id'>";
-                        $template_psychologists[$psy->id][$transaction->id]['student'] .= "<option value='' selected disabled>Select a Student</option>";
-                        $students = Student::findAll();
-                        foreach($students as $student) {
-                            if($student->district == $assignment->district) {
-                                if($assignment->student == $student->id) {
-                                    $template_psychologists[$psy->id][$transaction->id]['student'] .= "<option value='" . $student->id . "' selected>$student->name</option>";
-                                
-                                    $template_psychologists[$psy->id][$transaction->id]['lasid'] = "<input value='$student->lasid' name='lasid_$assignment->student'class='lasid' id='lasid_$assignment->student' autocomplete='off'>";
-                                    $template_psychologists[$psy->id][$transaction->id]['sasid'] = "<input value='$student->sasid' name='sasid_$assignment->student'class='sasid' id='sasid_$assignment->student' autocomplete='off'>";
-                                    
-                                }
-                                else
-                                    $template_psychologists[$psy->id][$transaction->id]['student'] .= "<option value='" . $student->id . "'>$student->name</option>";
-                            }
-                        }
-                        $template_psychologists[$psy->id][$transaction->id]['student'] .= "</select>";
-                        */
                         $student = Student::findOneBy('id', $assignment->student);
                         $template_psychologists[$psy->id][$transaction->id]['student'] = $student->name;
                         $template_psychologists[$psy->id][$transaction->id]['lasid'] = $student->lasid;
                         $template_psychologists[$psy->id][$transaction->id]['sasid'] = $student->sasid;
                         
-    
                         // Service
-                        /*
-                        $template_psychologists[$psy->id][$transaction->id]['service'] .= "<select name='service_$assignment->id' class='service' id='service_$assignment->id'>";
-                        $template_psychologists[$psy->id][$transaction->id]['service'] .= "<option value='' selected disabled>Select Service</option>";
-                        $aService = array(
-                			'column' 	=> array("published=?"),
-                			'value'		=> 1,
-                			'order' => 'name ASC'
-                		);
-                		$services = Service::findAll($aService);
-                        foreach($services as $service) {
-                            if($transaction->service == $service->service_code)
-                                $template_psychologists[$psy->id][$transaction->id]['service'] .= "<option value='" . $service->id . "' selected>$service->name</option>";
-                            else
-                                $template_psychologists[$psy->id][$transaction->id]['service'] .= "<option value='" . $service->id . "'>$service->name</option>";
-                        }
-                        $template_psychologists[$psy->id][$transaction->id]['service'] .= "</select>";
-                        */
                         $service = Service::findOneBy('service_code', $transaction->service);
                         
                         if($transaction->meeting_duration > 0) {
@@ -255,31 +194,21 @@ class ModAdminReview extends \Contao\Module
                             $template_psychologists[$psy->id][$transaction->id]['service'] = $service->name;
                         }
     
-    
-                        
                         // Price
                         if($transaction->price != '') {
                             
                             $template_psychologists[$psy->id][$transaction->id]['rate'] = number_format(floatval($transaction->price), 2, '.', ',');
                                 
                             if($transaction->service == 1) {
-                                
                                 $dur = ceil(intval($transaction->meeting_duration) / 60);
                                 $final_price = $dur * $transaction->price;
-                                
-                                //$template_psychologists[$psy->id][$transaction->id]['price'] = "<input value='".number_format(floatval($final_price), 2, '.', '')."' name='price_$transaction->id' class='price' id='price_$transaction->id' autocomplete='off'>";
                                 $template_psychologists[$psy->id][$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
-                                
                                 $transactions_total += number_format(floatval($final_price), 2, '.', '');
                             } else if($transaction->service == 19) {
                                 $final_price = $transaction->meeting_duration * 0.50;
-                                
-                                //$template_psychologists[$psy->id][$transaction->id]['price'] = "<input value='".number_format(floatval($final_price), 2, '.', '')."' name='price_$transaction->id' class='price' id='price_$transaction->id' autocomplete='off'>";
                                 $template_psychologists[$psy->id][$transaction->id]['price'] = number_format(floatval($final_price), 2, '.', ',');
-                                
                                 $transactions_total += number_format(floatval($final_price), 2, '.', '');
                             } else {
-                                //$template_psychologists[$psy->id][$transaction->id]['price'] = "<input value='".number_format(floatval($transaction->price), 2, '.', '')."' name='price_$transaction->id' class='price' id='price_$transaction->id' autocomplete='off'>";
                                 $template_psychologists[$psy->id][$transaction->id]['price'] = number_format(floatval($transaction->price), 2, '.', ',');
                                 $transactions_total += number_format(floatval($transaction->price), 2, '.', '');
                             }
@@ -288,38 +217,38 @@ class ModAdminReview extends \Contao\Module
                     }
                 }
                 
-                
             }
             
-            
             $transactions_misc = TransactionMisc::findBy(['psychologist = ?', 'published = ?'], [$psy->id, 1]);
-
             foreach($transactions_misc as $transaction) {
-                
-                //echo "Misc Transaction: " . $transaction->id . "<br>";
                 
                 $transaction_month = date('m', $transaction->date_submitted);
                 $transaction_year = date('y', $transaction->date_submitted);
                 
-                //echo "Last Month: " . $last_month . "<br>";
-                //echo "Current Year: " . $current_year . "<br>";
-                //echo "Trans Month: " . $transaction_month . "<br>";
-                //echo "Trans Year: " . $transaction_year . "<br>";
-                
-                if($transaction_year == $current_year && $transaction_month == $last_month) {
+                if($transaction_year == $reviewing_year && $transaction_month == $reviewing_month) {
                     
                     if($psy->id != $psy_id) {
                         $template_psychologist_names[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
                         
                         $reviewed_month = date("m", (int)$psy->last_reviewed);
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
-                        $current_month  = date('m');
-                        $current_year = date('y');
-                        $current_year = 25;
-                        if($reviewed_year == 26) {
+                        
+                        
+                        
+                        
+                        
+                        
+                        if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             
                     } else {
                         $psy_name = $psy->firstname . " " . $psy->lastname;
@@ -327,44 +256,42 @@ class ModAdminReview extends \Contao\Module
                         
                         $reviewed_month = date("m", (int)$psy->last_reviewed);
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
-                        $current_month  = date('m');
-                        $current_year = date('y');
-                        $current_year = 25;
-                        if($reviewed_year == 26) {
+                        
+                        
+                        
+                        
+                        
+                        
+                        if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
+                            
+                            
+                            
+                            
+                            
                         
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['psychologist_name'] = $psy->firstname . " " . $psy->lastname;
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['id'] = $transaction->id;
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['transaction_type'] = "transaction_misc";
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['date_submitted'] = date('m_d_y', $transaction->date_submitted);
     
-                        
-                        
                         // District
                         $district = District::findOneBy('id', $transaction->district);
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['district'] = $district->district_name;
-                        
+                    
                         // School
                         $school = School::findOneBy('id', $transaction->school);
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['school'] = $school->school_name;
-                        
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['student'] = $transaction->student_initials;
-                        
-                        
-                        
-                        
                         
                         // Lasid
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['lasid'] = $transaction->lasid;
+                        
                         // Sasid
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['sasid'] = $transaction->sasid;
-                        
-                        
-                        
-                        
-                        
+
                         // Service
                         $service = Service::findOneBy('service_code', $transaction->service);
                         if($transaction->meeting_duration > 0) {
@@ -411,11 +338,6 @@ class ModAdminReview extends \Contao\Module
         $this->Template->psychologists = $template_psychologists;
         $this->Template->psychologists_active = $template_active;
         $this->Template->last_reviewed = $template_last_reviewed;
-        
-        //echo "<pre>";
-        //print_r($template_psychologist_names);
-        //die();
-        
     }
   
 }
