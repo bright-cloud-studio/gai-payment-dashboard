@@ -124,8 +124,13 @@ class ModAdminReview extends \Contao\Module
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
                         
                         
-                        
                         // Perform our "Reviewed" check here
+                        
+                        //echo "Reviewed Year: " . $reviewed_year . "<br>";
+                        //echo "Reviewing Year: " . $reviewing_year . "<br>";
+                        //echo "Reviewed Month: " . $reviewed_month . "<br>";
+                        //echo "Current Month: " . $current_month . "<br><br>";
+                        
                         if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
@@ -145,7 +150,10 @@ class ModAdminReview extends \Contao\Module
                         
                         
                         
-                        
+                        //echo "Reviewed Year: " . $reviewed_year . "<br>";
+                        //echo "Reviewing Year: " . $reviewing_year . "<br>";
+                        //echo "Reviewed Month: " . $reviewed_month . "<br>";
+                        //echo "Current Month: " . $current_month . "<br><br>";
                         
                         
                         if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
@@ -236,7 +244,10 @@ class ModAdminReview extends \Contao\Module
                         
                         
                         
-                        
+                        //echo "Reviewed Year: " . $reviewed_year . "<br>";
+                        //echo "Reviewing Year: " . $reviewing_year . "<br>";
+                        //echo "Reviewed Month: " . $reviewed_month . "<br>";
+                        //echo "Current Month: " . $current_month . "<br><br>";
                         
                         if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
@@ -261,6 +272,10 @@ class ModAdminReview extends \Contao\Module
                         
                         
                         
+                        //echo "Reviewed Year: " . $reviewed_year . "<br>";
+                        //echo "Reviewing Year: " . $reviewing_year . "<br>";
+                        //echo "Reviewed Month: " . $reviewed_month . "<br>";
+                        //echo "Current Month: " . $current_month . "<br><br>";
                         
                         if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
