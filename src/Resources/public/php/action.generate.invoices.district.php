@@ -12,7 +12,6 @@
 	/* INITALIZE STUFFS */
 	/********************/
 	
-	
 	$price_total = 0;
 	
 	// Connect to the DB
@@ -246,9 +245,7 @@
             	}
             }
         }
-        
-        
-        
+
         // Now, do the Transactions
         $transaction_index = 0;
         
@@ -325,7 +322,6 @@
         // Reset global price total
         $price_total = 0;
     }
-    
     
     // Assemble our Trnasaction data into a PHP array
     function generateTransactionsDistrict($dbh, $districts, $schools, $students, $services, $transaction_ids) {
