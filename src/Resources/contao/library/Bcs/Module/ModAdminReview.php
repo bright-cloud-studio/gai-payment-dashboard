@@ -79,6 +79,7 @@ class ModAdminReview extends \Contao\Module
         
         // First, get the current month
         $current_month  = date('m');
+        $current_year  = date('y');
         
         // Next, if the current month is 1, we need "current year" to actually be one year back
         $reviewing_year;
@@ -123,24 +124,12 @@ class ModAdminReview extends \Contao\Module
                         $reviewed_month = date("m", (int)$psy->last_reviewed);
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
                         
-                        
-                        // Perform our "Reviewed" check here
-                        
-                        //echo "Reviewed Year: " . $reviewed_year . "<br>";
-                        //echo "Reviewing Year: " . $reviewing_year . "<br>";
-                        //echo "Reviewed Month: " . $reviewed_month . "<br>";
-                        //echo "Current Month: " . $current_month . "<br><br>";
-                        
-                        if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
+                        // Change the name to green with the "reviewed" class if the Last Reviewed mm/yy matches the current mm/yy
+                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
-                            
-                            
-                            
-                            
-                            
-                        
+
                     } else {
                         $psy_name = $psy->firstname . " " . $psy->lastname;
                         $template_psychologist_names[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
@@ -148,24 +137,12 @@ class ModAdminReview extends \Contao\Module
                         $reviewed_month = date("m", (int)$psy->last_reviewed);
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
                         
-                        
-                        
-                        //echo "Reviewed Year: " . $reviewed_year . "<br>";
-                        //echo "Reviewing Year: " . $reviewing_year . "<br>";
-                        //echo "Reviewed Month: " . $reviewed_month . "<br>";
-                        //echo "Current Month: " . $current_month . "<br><br>";
-                        
-                        
-                        if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
+                        // Change the name to green with the "reviewed" class if the Last Reviewed mm/yy matches the current mm/yy
+                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
-                            
-                            
-                            
-                            
-                            
-                        
+
                         $assignment = Assignment::findOneBy('id', $transaction->pid);
                         
                         $template_psychologists[$psy->id][$transaction->id]['psychologist_name'] = $psy->firstname . " " . $psy->lastname;
@@ -241,26 +218,12 @@ class ModAdminReview extends \Contao\Module
                         $reviewed_month = date("m", (int)$psy->last_reviewed);
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
                         
-                        
-                        
-                        
-                        //echo "Reviewed Year: " . $reviewed_year . "<br>";
-                        //echo "Reviewing Year: " . $reviewing_year . "<br>";
-                        //echo "Reviewed Month: " . $reviewed_month . "<br>";
-                        //echo "Current Month: " . $current_month . "<br><br>";
-                        
-                        if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
+                        // Change the name to green with the "reviewed" class if the Last Reviewed mm/yy matches the current mm/yy
+                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+
                     } else {
                         $psy_name = $psy->firstname . " " . $psy->lastname;
                         $template_psychologist_names[$psy->id]['name'] = $psy->firstname . " " . $psy->lastname;
@@ -268,25 +231,12 @@ class ModAdminReview extends \Contao\Module
                         $reviewed_month = date("m", (int)$psy->last_reviewed);
                         $reviewed_year = date("y", (int)$psy->last_reviewed);
                         
-                        
-                        
-                        
-                        
-                        //echo "Reviewed Year: " . $reviewed_year . "<br>";
-                        //echo "Reviewing Year: " . $reviewing_year . "<br>";
-                        //echo "Reviewed Month: " . $reviewed_month . "<br>";
-                        //echo "Current Month: " . $current_month . "<br><br>";
-                        
-                        if($reviewed_year == $reviewing_year && $reviewed_month == $current_month) {
+                        // Change the name to green with the "reviewed" class if the Last Reviewed mm/yy matches the current mm/yy
+                        if($reviewed_year == $current_year && $reviewed_month == $current_month) {
                             $template_psychologist_names[$psy->id]['class'] = "reviewed";
                         } else
                             $template_psychologist_names[$psy->id]['class'] = "";
-                            
-                            
-                            
-                            
-                            
-                        
+
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['psychologist_name'] = $psy->firstname . " " . $psy->lastname;
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['id'] = $transaction->id;
                         $template_psychologists[$psy->id]['m_'.$transaction->id]['transaction_type'] = "transaction_misc";
