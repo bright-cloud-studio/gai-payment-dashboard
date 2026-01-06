@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace Bcs\Backend;
 
 use Contao\Backend;
@@ -35,7 +33,6 @@ class AssignmentBackend extends Backend
             $assignment->lasid = $student->lasid;
             $assignment->sasid = $student->sasid;
             $assignment->save();
-
         }
 
     }
