@@ -32,36 +32,8 @@ class FormHooks
     public function onFormSubmit($submittedData, $formData, $files, $labels, $form)
     {
         
-        // BOOTSTRAP - For triggering one off scripts when the need arises
-        if($formData['formID'] == 'bootstrap') {
-            
-            // Get all Transactions
-             $transactions = Transaction::findAll();
-             
-             echo "Finding all Transactions <br>";
-             
-             foreach($transactions as $transaction) {
-                 
-                 echo "Transaction ID: ". $transaction->id ."<br>";
-                 
-                 $assignment = Assignment::findBy(['id = ?'], [$transaction->pid]);
-                 
-                 echo "Assignment ID: ". $assignment->id ."<br>";
-                 echo "District ID: ". $assignment->district ."<br>";
-                 echo "Transaction Saved <br><hr><br>";
-                 
-                 $transaction->district = $assignment->district;
-                 $transaction->save();
-                 
-             }
-
-        }
-        
-        
-        
-        
         // Assignment Selection Form
-        else if($formData['formID'] == 'assignment_selection') {
+        if($formData['formID'] == 'assignment_selection') {
             // Create transaction using submitted data
             $_SESSION['assignment_uuid'] = $submittedData['assignment_uuid'];
         }
@@ -134,6 +106,9 @@ class FormHooks
         // Assignment Add Meeting as a Covering Psychologist form
         else if($formData['formID'] == 'assignment_add_meeting') {
             
+            $characters_to_remove = array(" ", ".");
+            $cleaned_student_initials = str_replace($characters_to_remove, "", $submittedData['student_initials']);
+            
             // First, try to find Transaction with these values
             $duplicate_check = TransactionMisc::findOneBy(
             [
@@ -150,7 +125,7 @@ class FormHooks
                 FrontendUser::getInstance()->id, // psychologist
                 $submittedData['district'], // district
                 $submittedData['school'], // school
-                $submittedData['student_initials'], // student_initials
+                $cleaned_student_initials, // student_initials
                 $submittedData['service'], // service
                 $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'], // price
                 strtotime($submittedData['meeting_date']), // meeting_date
@@ -169,16 +144,12 @@ class FormHooks
                 $transaction->pid = 0;
                 $transaction->tstamp = time();
                 $transaction->psychologist = FrontendUser::getInstance()->id;
-                
                 $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-                
                 $transaction->district = $submittedData['district'];
                 $transaction->school = $submittedData['school'];
-                $transaction->student_initials = $submittedData['student_initials'];
+                $transaction->student_initials = $cleaned_student_initials;
                 $transaction->lasid = $submittedData['lasid'];
                 $transaction->sasid = $submittedData['sasid'];
-    
-                
                 $transaction->service = $submittedData['service'];
                 $service = Service::findBy('id', $transaction->service);
                 $transaction->service_label = "Covering - " . $service->name;
@@ -225,15 +196,10 @@ class FormHooks
                 // Apply values
                 $transaction->pid = 0;
                 $transaction->tstamp = time();
-                
                 $transaction->date_submitted = strtotime($submittedData['date_submitted']);
-    
                 $transaction->psychologist = $submittedData['psychologist'];
-    
                 $transaction->service = $service->service_code;
-    
                 $transaction->service_label = $submittedData['service_label'];
-                
                 $transaction->price = $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'];
                 $transaction->notes = $submittedData['notes'];
                 $transaction->status = 'created';
@@ -415,6 +381,9 @@ class FormHooks
             
             $service = Service::findBy('service_code', '32');
             
+            $characters_to_remove = array(" ", ".");
+            $cleaned_student_initials = str_replace($characters_to_remove, "", $submittedData['student_initials']);
+            
             // First, try to find Transaction with these values
             $duplicate_check = TransactionMisc::findOneBy(
             [
@@ -430,7 +399,7 @@ class FormHooks
                 $service->service_code, // service
                 $submittedData['district'], // district
                 $submittedData['school'], // school
-                $submittedData['student_initials'], // student initials
+                $cleaned_student_initials, // student initials
                 strtotime($submittedData['meeting_date']), // meeting date
                 $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
             ]);
@@ -451,7 +420,7 @@ class FormHooks
                 $transaction->service_label = $service->name;
                 $transaction->district = $submittedData['district'];
                 $transaction->school = $submittedData['school'];
-                $transaction->student_initials = $submittedData['student_initials'];
+                $transaction->student_initials = $cleaned_student_initials;
                 $transaction->lasid = $submittedData['lasid'];
                 $transaction->sasid = $submittedData['sasid'];
                 $transaction->meeting_date = strtotime($submittedData['meeting_date']);
@@ -468,6 +437,9 @@ class FormHooks
             
             $service = Service::findBy('service_code', '33');
             
+            $characters_to_remove = array(" ", ".");
+            $cleaned_student_initials = str_replace($characters_to_remove, "", $submittedData['student_initials']);
+            
             // First, try to find Transaction with these values
             $duplicate_check = TransactionMisc::findOneBy(
             [
@@ -483,7 +455,7 @@ class FormHooks
                 $service->service_code, // service
                 $submittedData['district'], // district
                 $submittedData['school'], // school
-                $submittedData['student_initials'], // student initials
+                $cleaned_student_initials, // student initials
                 strtotime($submittedData['meeting_date']), // meeting date
                 $submittedData['hourly_rate_dollars'] . '.' . $submittedData['hourly_rate_cents'] // price
             ]);
@@ -502,7 +474,7 @@ class FormHooks
                 $transaction->service_label = $service->name;
                 $transaction->district = $submittedData['district'];
                 $transaction->school = $submittedData['school'];
-                $transaction->student_initials = $submittedData['student_initials'];
+                $transaction->student_initials = $cleaned_student_initials;
                 $transaction->lasid = $submittedData['lasid'];
                 $transaction->sasid = $submittedData['sasid'];
                 $transaction->meeting_date = strtotime($submittedData['meeting_date']);
