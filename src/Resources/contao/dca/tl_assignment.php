@@ -377,7 +377,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'setBlankFilterLabel'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "varchar(255) NULL DEFAULT NULL"
         ),
         'sasid' => array
         (
@@ -388,7 +388,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
             'search'                  => true,
             'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50'),
             'options_callback'	      => array('Bcs\Backend\AssignmentBackend', 'setBlankFilterLabel'),
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "varchar(255) NULL DEFAULT NULL"
         ),
         
         'published' => array
