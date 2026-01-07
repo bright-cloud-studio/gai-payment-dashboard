@@ -53,6 +53,32 @@ class TemplateHooks
             ]
         ];
         
+        datasets: [
+            {
+                // DATASET 1: Revenue (Bars)
+                type: 'bar',
+                label: 'Revenue ($)',
+                data: [12000, 19000, 3000, 5000, 20000, 30000, 45000],
+                backgroundColor: barGradient,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                yAxisID: 'y', // Link to left axis
+            },
+            {
+                // DATASET 2: Active Users (Line)
+                type: 'line',
+                label: 'Active Users',
+                data: [150, 200, 250, 220, 300, 450, 500],
+                borderColor: '#ff6384',
+                backgroundColor: '#ff6384',
+                fill: false,
+                tension: 0.4, // Smoothing the line
+                yAxisID: 'y1', // Link to right axis
+                pointStyle: 'rectRot',
+                pointRadius: 6
+            }
+        ]
+        
     }
     */
 
