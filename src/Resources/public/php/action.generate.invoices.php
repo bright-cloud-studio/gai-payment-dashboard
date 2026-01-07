@@ -224,23 +224,20 @@
             				default:
             					break;
             			}
-            			
             		
             		break;
             		
             		//colors
             		case 'invoice':
-            			
             			switch($explodedTag[1]) { 
             				case 'price_total':
             				    if($x < ($total_pages-1))
             				        $template[$x] = str_replace($tag, 'VIEW FINAL SHEET', $template[$x]);
             				    else
             					    $template[$x] = str_replace($tag, '$' . number_format(floatval($price_total), 2, '.', ','), $template[$x]);
-            					break;
+        					break;
             			}
-            			
-            			break;
+        			break;
             	}
             }
         }
