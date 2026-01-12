@@ -26,63 +26,6 @@ class TemplateHooks
     
     public $transactions_today = array();
 
-    /*
-    public function generateGraphData() {
-        
-        // Example of "complex" data for Chartjs
-        
-        $data = [
-            "labels" => $months,
-            "datasets" => [
-                [
-                    "label" => "Revenue (USD)",
-                    "data" => [12000, 15000, 11000, 19000, 22000, 24000],
-                    "borderColor" => "rgba(54, 162, 235, 1)",
-                    "backgroundColor" => "rgba(54, 162, 235, 0.2)",
-                    "yAxisID" => "y-revenue", // Links to a specific axis
-                    "type" => "line",         // Mixed chart: this part is a line
-                    "fill" => true
-                ],
-                [
-                    "label" => "Units Sold",
-                    "data" => [450, 520, 380, 610, 700, 750],
-                    "backgroundColor" => "rgba(255, 99, 132, 0.5)",
-                    "yAxisID" => "y-units",   // Links to a second axis
-                    "type" => "bar"           // Mixed chart: this part is a bar
-                ]
-            ]
-        ];
-        
-        datasets: [
-            {
-                // DATASET 1: Revenue (Bars)
-                type: 'bar',
-                label: 'Revenue ($)',
-                data: [12000, 19000, 3000, 5000, 20000, 30000, 45000],
-                backgroundColor: barGradient,
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-                yAxisID: 'y', // Link to left axis
-            },
-            {
-                // DATASET 2: Active Users (Line)
-                type: 'line',
-                label: 'Active Users',
-                data: [150, 200, 250, 220, 300, 450, 500],
-                borderColor: '#ff6384',
-                backgroundColor: '#ff6384',
-                fill: false,
-                tension: 0.4, // Smoothing the line
-                yAxisID: 'y1', // Link to right axis
-                pointStyle: 'rectRot',
-                pointRadius: 6
-            }
-        ]
-        
-    }
-    */
-
-
     // When a form is submitted
     public function onParseTemplate($template)
     {
@@ -117,7 +60,6 @@ class TemplateHooks
             
         }
     }
-    
     
     // Calculates Transaction totals for "Today"
     public function calculateDay() {
@@ -496,11 +438,7 @@ class TemplateHooks
             'transactions_misc' => $total_transactions_misc
         );
     }
-    
-    
-    
-    
-    
+
     // Returns totals for Transactions and Misc. Transactions matching the current month
     public function calculateThisMonth() {
         
@@ -895,15 +833,7 @@ class TemplateHooks
             'transactions_misc' => $total_transactions_misc
         );
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     // Returns totals for Transactions and Misc. Transactions matching the current month
     public function calculateLastMonth() {
         
@@ -1374,7 +1304,6 @@ class TemplateHooks
         );
     }
     
-    
     // Returns totals for Transactions and Misc. Transactions matching the current year
     public function calculateYear() {
         
@@ -1758,9 +1687,7 @@ class TemplateHooks
             'transactions_misc' => $total_transactions_misc
         );
     }
-    
-    
-    
+
     public function getReviewStatuses($which_month) {
         
         // Loop through all Psychologists
@@ -1814,13 +1741,21 @@ class TemplateHooks
     }
     
 
+
+
+
+
     // Assignment Totals - Month
     public function calculateAssignmentsMonth($which_month) {
         if($which_month == 'this_month') {
-            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE FROM_UNIXTIME(date_created) >= DATE_FORMAT(NOW(), '%Y-%m-01') AND FROM_UNIXTIME(date_created) < DATE_FORMAT(NOW() + INTERVAL 1 MONTH, '%Y-%m-01')")->execute();
+            //$assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE FROM_UNIXTIME(date_created) >= DATE_FORMAT(NOW(), '%Y-%m-01') AND FROM_UNIXTIME(date_created) < DATE_FORMAT(NOW() + INTERVAL 1 MONTH, '%Y-%m-01')")->execute();
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE MONTH(STR_TO_DATE(date_created, '%m/%d/%y')) = MONTH(CURRENT_DATE()) AND YEAR(STR_TO_DATE(date_created, '%m/%d/%y')) = YEAR(CURRENT_DATE());")->execute();
+            
             return $assignments->count();
         } else if($which_month == 'last_month') {
-            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE FROM_UNIXTIME(date_created) >= DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') AND FROM_UNIXTIME(date_created) < DATE_FORMAT(NOW(), '%Y-%m-01');")->execute();
+            //$assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE FROM_UNIXTIME(date_created) >= DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') AND FROM_UNIXTIME(date_created) < DATE_FORMAT(NOW(), '%Y-%m-01');")->execute();
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE PERIOD_DIFF( EXTRACT(YEAR_MONTH FROM CURRENT_DATE()), EXTRACT(YEAR_MONTH FROM STR_TO_DATE(date_created, '%m/%d/%y'))) = 1;")->execute();
+            
             return $assignments->count();
         }
     }
@@ -1828,13 +1763,23 @@ class TemplateHooks
     // Assignment Totals - Year
     public function calculateAssignmentsYear($which_year) {
         if($which_year == 'this_year') {
-            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(FROM_UNIXTIME(date_created)) = YEAR(NOW())")->execute();
+            //$assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(FROM_UNIXTIME(date_created)) = YEAR(NOW())")->execute();
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(STR_TO_DATE(date_created, '%m/%d/%y')) = YEAR(CURRENT_DATE());")->execute();
+            
             return $assignments->count();
         } else if($which_year == 'last_year') {
-            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(FROM_UNIXTIME(date_created)) = YEAR(NOW()) - 1")->execute();
+            //$assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(FROM_UNIXTIME(date_created)) = YEAR(NOW()) - 1")->execute();
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(STR_TO_DATE(date_created, '%m/%d/%y')) = YEAR(CURRENT_DATE()) - 1;")->execute();
+            
             return $assignments->count();
         }
     }
+
+
+
+
+
+
 
 
     public function getLastReviewedAndSubmitted() {
