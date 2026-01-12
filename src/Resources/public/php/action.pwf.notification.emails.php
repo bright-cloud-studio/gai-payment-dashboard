@@ -183,7 +183,7 @@ if($assignments) {
                             $message = str_replace('$firstname', $psychologist->firstname, $message);
                             $message = str_replace('$lastname', $psychologist->lastname, $message);
                             // TEMPLATE TAGS - Assignment
-                            $message = str_replace('$date_created', date('m/d/y', $assignment->date_created), $message);
+                            $message = str_replace('$date_created', $assignment->date_created, $message);
                             $message = str_replace('$meeting_date', $assignment->meeting_date, $message);
                             // TEMPLATE TAGS - District
                             $message = str_replace('$district', $district->district_name, $message);
