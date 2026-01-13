@@ -1688,6 +1688,9 @@ class TemplateHooks
         );
     }
 
+
+
+
     public function getReviewStatuses($which_month) {
         
         // Loop through all Psychologists
@@ -1748,14 +1751,10 @@ class TemplateHooks
     // Assignment Totals - Month
     public function calculateAssignmentsMonth($which_month) {
         if($which_month == 'this_month') {
-            //$assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE FROM_UNIXTIME(date_created) >= DATE_FORMAT(NOW(), '%Y-%m-01') AND FROM_UNIXTIME(date_created) < DATE_FORMAT(NOW() + INTERVAL 1 MONTH, '%Y-%m-01')")->execute();
             $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE MONTH(STR_TO_DATE(date_created, '%m/%d/%y')) = MONTH(CURRENT_DATE()) AND YEAR(STR_TO_DATE(date_created, '%m/%d/%y')) = YEAR(CURRENT_DATE());")->execute();
-            
             return $assignments->count();
         } else if($which_month == 'last_month') {
-            //$assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE FROM_UNIXTIME(date_created) >= DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') AND FROM_UNIXTIME(date_created) < DATE_FORMAT(NOW(), '%Y-%m-01');")->execute();
             $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE PERIOD_DIFF( EXTRACT(YEAR_MONTH FROM CURRENT_DATE()), EXTRACT(YEAR_MONTH FROM STR_TO_DATE(date_created, '%m/%d/%y'))) = 1;")->execute();
-            
             return $assignments->count();
         }
     }
@@ -1763,14 +1762,10 @@ class TemplateHooks
     // Assignment Totals - Year
     public function calculateAssignmentsYear($which_year) {
         if($which_year == 'this_year') {
-            //$assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(FROM_UNIXTIME(date_created)) = YEAR(NOW())")->execute();
             $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(STR_TO_DATE(date_created, '%m/%d/%y')) = YEAR(CURRENT_DATE());")->execute();
-            
             return $assignments->count();
         } else if($which_year == 'last_year') {
-            //$assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(FROM_UNIXTIME(date_created)) = YEAR(NOW()) - 1")->execute();
             $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE YEAR(STR_TO_DATE(date_created, '%m/%d/%y')) = YEAR(CURRENT_DATE()) - 1;")->execute();
-            
             return $assignments->count();
         }
     }
