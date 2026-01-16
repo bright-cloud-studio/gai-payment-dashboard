@@ -17,26 +17,25 @@
     
     
     // Get passed in year if there is one, otherwise use the current year
-    $year = date('y');
+    $year = date('Y');
     if(isset($_GET['year']))
         $year = $_GET['year'];
     
-    
     // Get all Districts
     $assignments = array();
-    //$a_q =  "SELECT * FROM tl_assignment WHERE published='1'";
     $a_q = "SELECT * FROM tl_assignment WHERE RIGHT(date_created, 2) = '".$year."';";
     $a_r = $dbh->query($a_q);
     if($a_r) {
         while($a = $a_r->fetch_assoc()) {
             $assignments[$a['id']] = $a['date_created'];
-            //echo "Assignment ID: ". $a['id'] ."<br>";
-            //echo "Date Created: ". $a['date_created'] ."<br><br>";
         }
     }
     
+    
     $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+
+    // Return assembled data
     echo json_encode([
         'labels' => $months,
         'datasets' => [
@@ -78,4 +77,3 @@
         ]
     ]);
     
-    // Return data
