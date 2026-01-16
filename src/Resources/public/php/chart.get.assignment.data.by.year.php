@@ -34,46 +34,89 @@
     
     $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-
-    // Return assembled data
-    echo json_encode([
-        'labels' => $months,
-        'datasets' => [
-            [
-                'label' => 'Meetings',
-                'type' => 'bar',
-                'data' => [12, 15, 11, 17, 14, 13, 16, 18, 15, 20, 21, 23],
-                'backgroundColor' => 'rgba(52, 152, 219, 0.7)',
-                'yAxisID' => 'yCount'
-            ],
-            [
-                'label' => 'Psych Eval',
-                'type' => 'bar',
-                'data' => [10, 11, 9, 12, 13, 13, 14, 14, 13, 15, 16, 17],
-                'backgroundColor' => 'rgba(46, 204, 113, 0.7)',
-                'yAxisID' => 'yCount'
-            ],
-            [
-                'label' => 'Achvmnt',
-                'type' => 'bar',
-                'data' => [8, 9, 7, 11, 10, 9, 12, 11, 10, 13, 14, 15],
-                'backgroundColor' => 'rgba(155, 89, 182, 0.7)',
-                'yAxisID' => 'yCount'
-            ],
-            [
-                'label' => 'Parking',
-                'type' => 'bar',
-                'data' => [20, 22, 18, 25, 23, 21, 24, 26, 22, 28, 30, 31],
-                'backgroundColor' => 'rgba(241, 196, 15, 0.7)',
-                'yAxisID' => 'yCount'
-            ],
-            [
-                'label' => 'Editing',
-                'type' => 'bar',
-                'data' => [6, 7, 6, 8, 7, 8, 9, 9, 8, 10, 11, 12],
-                'backgroundColor' => 'rgba(231, 76, 60, 0.7)',
-                'yAxisID' => 'yCount'
+    if($year == 2026) {
+        // Return assembled data
+        echo json_encode([
+            'labels' => $months,
+            'datasets' => [
+                [
+                    'label' => 'Meetings',
+                    'type' => 'bar',
+                    'data' => [12, 15, 11, 17, 14, 13, 16, 18, 15, 20, 21, 23],
+                    'backgroundColor' => 'rgba(52, 152, 219, 0.7)',
+                    'yAxisID' => 'yCount'
+                ],
+                [
+                    'label' => 'Psych Eval',
+                    'type' => 'bar',
+                    'data' => [10, 11, 9, 12, 13, 13, 14, 14, 13, 15, 16, 17],
+                    'backgroundColor' => 'rgba(46, 204, 113, 0.7)',
+                    'yAxisID' => 'yCount'
+                ],
+                [
+                    'label' => 'Achvmnt',
+                    'type' => 'bar',
+                    'data' => [8, 9, 7, 11, 10, 9, 12, 11, 10, 13, 14, 15],
+                    'backgroundColor' => 'rgba(155, 89, 182, 0.7)',
+                    'yAxisID' => 'yCount'
+                ],
+                [
+                    'label' => 'Parking',
+                    'type' => 'bar',
+                    'data' => [20, 22, 18, 25, 23, 21, 24, 26, 22, 28, 30, 31],
+                    'backgroundColor' => 'rgba(241, 196, 15, 0.7)',
+                    'yAxisID' => 'yCount'
+                ],
+                [
+                    'label' => 'Editing',
+                    'type' => 'bar',
+                    'data' => [6, 7, 6, 8, 7, 8, 9, 9, 8, 10, 11, 12],
+                    'backgroundColor' => 'rgba(231, 76, 60, 0.7)',
+                    'yAxisID' => 'yCount'
+                ]
             ]
-        ]
-    ]);
+        ]);
+    } else {
+        // Return assembled data
+        echo json_encode([
+            'labels' => $months,
+            'datasets' => [
+                [
+                    'label' => 'Meetings',
+                    'type' => 'bar',
+                    'data' => [19, 4, 7, 14, 17, 5, 9, 18, 22, 13, 5, 16],
+                    'backgroundColor' => 'rgba(52, 152, 219, 0.7)',
+                    'yAxisID' => 'yCount'
+                ],
+                [
+                    'label' => 'Psych Eval',
+                    'type' => 'bar',
+                    'data' => [10, 11, 9, 12, 13, 13, 14, 14, 13, 15, 16, 17],
+                    'backgroundColor' => 'rgba(46, 204, 113, 0.7)',
+                    'yAxisID' => 'yCount'
+                ],
+                [
+                    'label' => 'Achvmnt',
+                    'type' => 'bar',
+                    'data' => [8, 9, 7, 11, 10, 9, 12, 11, 10, 13, 14, 15],
+                    'backgroundColor' => 'rgba(155, 89, 182, 0.7)',
+                    'yAxisID' => 'yCount'
+                ],
+                [
+                    'label' => 'Parking',
+                    'type' => 'bar',
+                    'data' => [20, 22, 18, 25, 23, 21, 24, 26, 22, 28, 30, 31],
+                    'backgroundColor' => 'rgba(241, 196, 15, 0.7)',
+                    'yAxisID' => 'yCount'
+                ],
+                [
+                    'label' => 'Editing',
+                    'type' => 'bar',
+                    'data' => [6, 7, 6, 8, 7, 8, 9, 9, 8, 10, 11, 12],
+                    'backgroundColor' => 'rgba(231, 76, 60, 0.7)',
+                    'yAxisID' => 'yCount'
+                ]
+            ]
+        ]);
+    }
     
