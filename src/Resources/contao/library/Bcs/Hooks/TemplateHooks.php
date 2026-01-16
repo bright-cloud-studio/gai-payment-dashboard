@@ -1688,9 +1688,6 @@ class TemplateHooks
         );
     }
 
-
-
-
     public function getReviewStatuses($which_month) {
         
         // Loop through all Psychologists
