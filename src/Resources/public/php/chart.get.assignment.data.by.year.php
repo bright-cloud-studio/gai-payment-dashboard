@@ -1,5 +1,7 @@
 <?php
     
+    header('Content-Type: application/json');
+    
     // Initialize Session, start Composer
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
@@ -15,6 +17,14 @@
         die("Connection failed: " . $dbh->connect_error);
     }
     
+    //$months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    $month_labels = [];
+    $month = date('n');
+    for ($i = 1; $i <= $month; $i++) {
+        $month_labels[] = date('M', mktime(0, 0, 0, $i, 1));
+    }
+
+    
     // Get passed in year if there is one, otherwise use the current year
     $year = date('y');
     if(isset($_GET['year']))
@@ -29,6 +39,11 @@
             $services[$s['service_code']] = $s['name'];
         }
     }
+    
+    
+
+
+    
 
     // Get all Assignments for the selected Year
     $assignments = array();
@@ -36,7 +51,6 @@
     $a_r = $dbh->query($a_q);
     if($a_r) {
         while($a = $a_r->fetch_assoc()) {
-
             // Get the month as a three letter string
             $month = date('M', strtotime($a['date_created']));
             
@@ -47,94 +61,49 @@
     }
 
 
-    foreach($assignments as $service_code => $assignment) {
-        echo "<hr>Service Code: " . $service_code . "<br>";
-        echo "<pre>";
-        print_r($assignment);
-        echo "</pre><br><hr><br>";
-    }
 
 
     $test['label'] = "Mreeting";
     $test['type'] = "bar";
-    $test['data'] = [12, 15, 11, 17, 14, 13, 16, 18, 15, 20, 21, 23];
+    $test['data'] = [12];
     $test['backgroundColor'] = "rgba(52, 152, 219, 0.7)";
     $test['yAxisID'] = "yCount";
 
 
-    $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    if($year == 26) {
-        // Return assembled data
-        echo json_encode([
-            'labels' => $months,
-            'datasets' => [
-                $test,
-                [
-                    'label' => 'Psych Eval',
-                    'type' => 'bar',
-                    'data' => [10, 11, 9, 12, 13, 13, 14, 14, 13, 15, 16, 17],
-                    'backgroundColor' => 'rgba(46, 204, 113, 0.7)',
-                    'yAxisID' => 'yCount'
-                ],
-                [
-                    'label' => 'Achvmnt',
-                    'type' => 'bar',
-                    'data' => [8, 9, 7, 11, 10, 9, 12, 11, 10, 13, 14, 15],
-                    'backgroundColor' => 'rgba(155, 89, 182, 0.7)',
-                    'yAxisID' => 'yCount'
-                ],
-                [
-                    'label' => 'Parking',
-                    'type' => 'bar',
-                    'data' => [20, 22, 18, 25, 23, 21, 24, 26, 22, 28, 30, 31],
-                    'backgroundColor' => 'rgba(241, 196, 15, 0.7)',
-                    'yAxisID' => 'yCount'
-                ],
-                [
-                    'label' => 'Editing',
-                    'type' => 'bar',
-                    'data' => [6, 7, 6, 8, 7, 8, 9, 9, 8, 10, 11, 12],
-                    'backgroundColor' => 'rgba(231, 76, 60, 0.7)',
-                    'yAxisID' => 'yCount'
-                ]
+    // Return assembled data
+    echo json_encode([
+        'labels' => $month_labels,
+        'datasets' => [
+            $test,
+            [
+                'label' => 'Psych Eval',
+                'type' => 'bar',
+                'data' => [10],
+                'backgroundColor' => 'rgba(46, 204, 113, 0.7)',
+                'yAxisID' => 'yCount'
+            ],
+            [
+                'label' => 'Achvmnt',
+                'type' => 'bar',
+                'data' => [8],
+                'backgroundColor' => 'rgba(155, 89, 182, 0.7)',
+                'yAxisID' => 'yCount'
+            ],
+            [
+                'label' => 'Parking',
+                'type' => 'bar',
+                'data' => [20],
+                'backgroundColor' => 'rgba(241, 196, 15, 0.7)',
+                'yAxisID' => 'yCount'
+            ],
+            [
+                'label' => 'Editing',
+                'type' => 'bar',
+                'data' => [6],
+                'backgroundColor' => 'rgba(231, 76, 60, 0.7)',
+                'yAxisID' => 'yCount'
             ]
-        ]);
-    } else {
-        // Return assembled data
-        echo json_encode([
-            'labels' => $months,
-            'datasets' => [
-                $test,
-                [
-                    'label' => 'Psych Eval',
-                    'type' => 'bar',
-                    'data' => [10, 11, 9, 12, 13, 13, 14, 14, 13, 15, 16, 17],
-                    'backgroundColor' => 'rgba(46, 204, 113, 0.7)',
-                    'yAxisID' => 'yCount'
-                ],
-                [
-                    'label' => 'Achvmnt',
-                    'type' => 'bar',
-                    'data' => [8, 9, 7, 11, 10, 9, 12, 11, 10, 13, 14, 15],
-                    'backgroundColor' => 'rgba(155, 89, 182, 0.7)',
-                    'yAxisID' => 'yCount'
-                ],
-                [
-                    'label' => 'Parking',
-                    'type' => 'bar',
-                    'data' => [20, 22, 18, 25, 23, 21, 24, 26, 22, 28, 30, 31],
-                    'backgroundColor' => 'rgba(241, 196, 15, 0.7)',
-                    'yAxisID' => 'yCount'
-                ],
-                [
-                    'label' => 'Editing',
-                    'type' => 'bar',
-                    'data' => [6, 7, 6, 8, 7, 8, 9, 9, 8, 10, 11, 12],
-                    'backgroundColor' => 'rgba(231, 76, 60, 0.7)',
-                    'yAxisID' => 'yCount'
-                ]
-            ]
-        ]);
-    }
+        ]
+    ]);
+    
     
