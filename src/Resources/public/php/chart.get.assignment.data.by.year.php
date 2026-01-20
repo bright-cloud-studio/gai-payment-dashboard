@@ -15,26 +15,42 @@
         die("Connection failed: " . $dbh->connect_error);
     }
     
-    
     // Get passed in year if there is one, otherwise use the current year
-    $year = date('Y');
+    $year = date('y');
     if(isset($_GET['year']))
         $year = $_GET['year'];
     
-    // Get all Districts
+    // Get all Services
+    $services = array();
+    $s_q = "SELECT * FROM tl_service";
+    $s_r = $dbh->query($s_q);
+    if($s_r) {
+        while($s = $s_r->fetch_assoc()) {
+            $services[$s['service_code']] = $s['name'];
+        }
+    }
+    
+    
+    
+    
+    // Get all Assignments for the selected Year
     $assignments = array();
     $a_q = "SELECT * FROM tl_assignment WHERE RIGHT(date_created, 2) = '".$year."';";
     $a_r = $dbh->query($a_q);
     if($a_r) {
         while($a = $a_r->fetch_assoc()) {
-            $assignments[$a['id']] = $a['date_created'];
+            echo "Date Created: " . $a['date_created'] . "<br>";
+            echo "Assignment ID: " . $a['id'] . "<br>";
+            echo "Service Code: " . $a['type_of_testing'] . "<br><br>";
         }
     }
     
     
+    
+    
     $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    if($year == 2026) {
+    if($year == 26) {
         // Return assembled data
         echo json_encode([
             'labels' => $months,
