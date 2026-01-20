@@ -29,25 +29,39 @@
             $services[$s['service_code']] = $s['name'];
         }
     }
-    
-    
-    
-    
+
     // Get all Assignments for the selected Year
     $assignments = array();
     $a_q = "SELECT * FROM tl_assignment WHERE RIGHT(date_created, 2) = '".$year."';";
     $a_r = $dbh->query($a_q);
     if($a_r) {
         while($a = $a_r->fetch_assoc()) {
-            echo "Date Created: " . $a['date_created'] . "<br>";
-            echo "Assignment ID: " . $a['id'] . "<br>";
-            echo "Service Code: " . $a['type_of_testing'] . "<br><br>";
+
+            // Get the month as a three letter string
+            $month = date('M', strtotime($a['date_created']));
+            
+            // Store by: Service Code > Month > Total
+            $assignments[$a['type_of_testing']][$month]['total_usage'] += 1;
+            $assignments[$a['type_of_testing']][$month]['service_name'] = $services[$a['type_of_testing']];
         }
     }
-    
-    
-    
-    
+
+
+    foreach($assignments as $service_code => $assignment) {
+        echo "<hr>Service Code: " . $service_code . "<br>";
+        echo "<pre>";
+        print_r($assignment);
+        echo "</pre><br><hr><br>";
+    }
+
+
+    $test['label'] = "Mreeting";
+    $test['type'] = "bar";
+    $test['data'] = [12, 15, 11, 17, 14, 13, 16, 18, 15, 20, 21, 23];
+    $test['backgroundColor'] = "rgba(52, 152, 219, 0.7)";
+    $test['yAxisID'] = "yCount";
+
+
     $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     if($year == 26) {
@@ -55,13 +69,7 @@
         echo json_encode([
             'labels' => $months,
             'datasets' => [
-                [
-                    'label' => 'Meetings',
-                    'type' => 'bar',
-                    'data' => [12, 15, 11, 17, 14, 13, 16, 18, 15, 20, 21, 23],
-                    'backgroundColor' => 'rgba(52, 152, 219, 0.7)',
-                    'yAxisID' => 'yCount'
-                ],
+                $test,
                 [
                     'label' => 'Psych Eval',
                     'type' => 'bar',
@@ -97,13 +105,7 @@
         echo json_encode([
             'labels' => $months,
             'datasets' => [
-                [
-                    'label' => 'Meetings',
-                    'type' => 'bar',
-                    'data' => [19, 4, 7, 14, 17, 5, 9, 18, 22, 13, 5, 16],
-                    'backgroundColor' => 'rgba(52, 152, 219, 0.7)',
-                    'yAxisID' => 'yCount'
-                ],
+                $test,
                 [
                     'label' => 'Psych Eval',
                     'type' => 'bar',
