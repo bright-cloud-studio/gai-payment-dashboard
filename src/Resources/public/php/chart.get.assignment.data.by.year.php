@@ -1,7 +1,5 @@
 <?php
     
-    header('Content-Type: application/json');
-    
     // Initialize Session, start Composer
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
@@ -24,10 +22,8 @@
         $month_labels[] = date('M', mktime(0, 0, 0, $i, 1));
     }
     
-    // Get passed in year if there is one, otherwise use the current year
+    // Get the Year range we are requesting data for
     $year = date('y');
-    if(isset($_GET['year']))
-        $year = $_GET['year'];
     
     // Get all Services
     $services = array();
@@ -39,7 +35,7 @@
         }
     }
     
-    // Get all Assignments for the selected Year
+    // Stage Assignment data. Store by: Service Code > Month > Total Usage
     $assignments = array();
     $a_q = "SELECT * FROM tl_assignment WHERE RIGHT(date_created, 2) = '".$year."';";
     $a_r = $dbh->query($a_q);
@@ -47,40 +43,34 @@
         while($a = $a_r->fetch_assoc()) {
             $month = date('M', strtotime($a['date_created']));
             $assignments[$a['type_of_testing']][$month] += 1;
-            //$assignments[$a['type_of_testing']][$month]['service_name'] = $services[$a['type_of_testing']];
+        }
+    }
+    
+    
+    $datasets = [];
+    // Loop through staged Assignment data and stage Chartjs data
+    foreach($assignments as $service_code => $months) {
+        
+        // Build array of totals by month
+        $totals_by_month = [];
+        foreach($months as $month => $total_usage) {
+            $totals_by_month[] = $total_usage;
         }
         
-    }
-
-
-
-    echo "<pre>";
-    print_r($assignments);
-    echo "</pre>";
-
-
-
-
-    $datasets = [];
-    for($a = 0; $a != 2; $a++) {
         $datasets[] = [
-            'label'           => "Test" . $a,
+            'label'           => $services[$service_code],
             'type'            => "bar",
-            'data'            => [12], // Note: You'll likely want to replace 12 with actual data
-            'backgroundColor' => "rgba(52, 152, 219, 0.7)",
+            'data'            => $totals_by_month,
+            'backgroundColor' => "rgba(".rand(1, 255).",".rand(1, 255).",".rand(1, 255).", 0.7)",
             'yAxisID'         => "yCount"
         ];
+        
     }
     
-
-    
-
-
-    // Return assembled data
+    // Spit out encoded json data
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode([
         'labels' => $month_labels,
         'datasets' =>
             $datasets
     ]);
-    
-    
