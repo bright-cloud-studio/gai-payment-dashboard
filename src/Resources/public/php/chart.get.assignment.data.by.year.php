@@ -17,13 +17,12 @@
         die("Connection failed: " . $dbh->connect_error);
     }
     
-    //$months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    // Generate Month labels
     $month_labels = [];
     $month = date('n');
     for ($i = 1; $i <= $month; $i++) {
         $month_labels[] = date('M', mktime(0, 0, 0, $i, 1));
     }
-
     
     // Get passed in year if there is one, otherwise use the current year
     $year = date('y');
@@ -40,29 +39,20 @@
         }
     }
     
-    
-
-
-    
-
     // Get all Assignments for the selected Year
     $assignments = array();
     $a_q = "SELECT * FROM tl_assignment WHERE RIGHT(date_created, 2) = '".$year."';";
     $a_r = $dbh->query($a_q);
     if($a_r) {
         while($a = $a_r->fetch_assoc()) {
-            // Get the month as a three letter string
             $month = date('M', strtotime($a['date_created']));
-            
-            // Store by: Service Code > Month > Total
             $assignments[$a['type_of_testing']][$month]['total_usage'] += 1;
             $assignments[$a['type_of_testing']][$month]['service_name'] = $services[$a['type_of_testing']];
         }
     }
 
 
-
-
+    // Stage data
     $test['label'] = "Mreeting";
     $test['type'] = "bar";
     $test['data'] = [12];
