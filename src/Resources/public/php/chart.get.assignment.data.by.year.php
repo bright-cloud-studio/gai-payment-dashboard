@@ -46,54 +46,41 @@
     if($a_r) {
         while($a = $a_r->fetch_assoc()) {
             $month = date('M', strtotime($a['date_created']));
-            $assignments[$a['type_of_testing']][$month]['total_usage'] += 1;
-            $assignments[$a['type_of_testing']][$month]['service_name'] = $services[$a['type_of_testing']];
+            $assignments[$a['type_of_testing']][$month] += 1;
+            //$assignments[$a['type_of_testing']][$month]['service_name'] = $services[$a['type_of_testing']];
         }
+        
     }
 
 
-    // Stage data
-    $test['label'] = "Mreeting";
-    $test['type'] = "bar";
-    $test['data'] = [12];
-    $test['backgroundColor'] = "rgba(52, 152, 219, 0.7)";
-    $test['yAxisID'] = "yCount";
+
+    echo "<pre>";
+    print_r($assignments);
+    echo "</pre>";
+
+
+
+
+    $datasets = [];
+    for($a = 0; $a != 2; $a++) {
+        $datasets[] = [
+            'label'           => "Test" . $a,
+            'type'            => "bar",
+            'data'            => [12], // Note: You'll likely want to replace 12 with actual data
+            'backgroundColor' => "rgba(52, 152, 219, 0.7)",
+            'yAxisID'         => "yCount"
+        ];
+    }
+    
+
+    
 
 
     // Return assembled data
     echo json_encode([
         'labels' => $month_labels,
-        'datasets' => [
-            $test,
-            [
-                'label' => 'Psych Eval',
-                'type' => 'bar',
-                'data' => [10],
-                'backgroundColor' => 'rgba(46, 204, 113, 0.7)',
-                'yAxisID' => 'yCount'
-            ],
-            [
-                'label' => 'Achvmnt',
-                'type' => 'bar',
-                'data' => [8],
-                'backgroundColor' => 'rgba(155, 89, 182, 0.7)',
-                'yAxisID' => 'yCount'
-            ],
-            [
-                'label' => 'Parking',
-                'type' => 'bar',
-                'data' => [20],
-                'backgroundColor' => 'rgba(241, 196, 15, 0.7)',
-                'yAxisID' => 'yCount'
-            ],
-            [
-                'label' => 'Editing',
-                'type' => 'bar',
-                'data' => [6],
-                'backgroundColor' => 'rgba(231, 76, 60, 0.7)',
-                'yAxisID' => 'yCount'
-            ]
-        ]
+        'datasets' =>
+            $datasets
     ]);
     
     
