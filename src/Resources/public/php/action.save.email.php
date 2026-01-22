@@ -15,11 +15,12 @@
     // Get data from ajax
     $assignment_id = $_POST['assignment_id'];
     $email = $_POST['email'];
+    $email_cleaned = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
     
     fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
-    fwrite($myfile, "SAVING: Email: " . $email . "\r\n");
+    fwrite($myfile, "SAVING: Email: " . $email_cleaned . "\r\n");
 
-    $update =  "update tl_assignment set email='".$email."' WHERE id='".$assignment_id."'";
+    $update =  "update tl_assignment set email='".$email_cleaned."' WHERE id='".$assignment_id."'";
     $result_update = $dbh->query($update);
 
     fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
