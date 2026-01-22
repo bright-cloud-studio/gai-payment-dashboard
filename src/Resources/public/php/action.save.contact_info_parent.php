@@ -15,11 +15,12 @@
     // Get data from ajax
     $assignment_id = $_POST['assignment_id'];
     $contact_info_parent = $_POST['contact_info_parent'];
+    $contact_info_parent_cleaned = htmlspecialchars($contact_info_parent, ENT_QUOTES, 'UTF-8');
     
     fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
-    fwrite($myfile, "SAVING: Contact Info Parent: " . $contact_info_parent . "\r\n");
+    fwrite($myfile, "SAVING: Contact Info Parent: " . $contact_info_parent_cleaned . "\r\n");
 
-    $update =  "update tl_assignment set contact_info_parent='".$contact_info_parent."' WHERE id='".$assignment_id."'";
+    $update =  "update tl_assignment set contact_info_parent='".$contact_info_parent_cleaned."' WHERE id='".$assignment_id."'";
     $result_update = $dbh->query($update);
 
     fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
