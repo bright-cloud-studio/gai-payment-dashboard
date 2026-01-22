@@ -153,6 +153,19 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     		'eval'                     => array('mandatory'=>true, 'tl_class'=>'w50', 'includeBlankOption'=>true, 'blankOptionLabel'=>'Select a Service Type'),
     		'sql'                      => "varchar(15) NOT NULL default ''"
         ),
+
+        'graph_color' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_assignment']['graph_color'],
+            'inputType'               => 'text',
+            'default'                 => '',
+    		'eval'                    => array('maxlength'=>6, 'multiple'=>false, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
+        ),
+
+
+
+        
         'description' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_service']['description'],
