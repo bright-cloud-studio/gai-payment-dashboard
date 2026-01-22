@@ -15,11 +15,12 @@
     // Get data from ajax
     $assignment_id = $_POST['assignment_id'];
     $team_chair = $_POST['team_chair'];
+    $team_chair_cleaned = htmlspecialchars($team_chair, ENT_QUOTES, 'UTF-8');
     
     fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
-    fwrite($myfile, "SAVING: Team Chair: " . $team_chair . "\r\n");
+    fwrite($myfile, "SAVING: Team Chair: " . $team_chair_cleaned . "\r\n");
 
-    $update =  "update tl_assignment set team_chair='".$team_chair."' WHERE id='".$assignment_id."'";
+    $update =  "update tl_assignment set team_chair='".$team_chair_cleaned."' WHERE id='".$assignment_id."'";
     $result_update = $dbh->query($update);
 
     fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
