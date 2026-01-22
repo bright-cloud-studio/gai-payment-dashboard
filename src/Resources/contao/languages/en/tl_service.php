@@ -28,6 +28,8 @@ $GLOBALS['TL_LANG']['tl_service']['services_legend']         = 'Service Informat
 $GLOBALS['TL_LANG']['tl_service']['service_code']            = array('Service Code', 'Enter the unique Service Code for this Service');
 $GLOBALS['TL_LANG']['tl_service']['name']                    = array('Service Name', 'Enter the name of this Service');
 $GLOBALS['TL_LANG']['tl_service']['service_type']            = array('Service Type', 'Select which type of Service this is.');
+$GLOBALS['TL_LANG']['tl_service']['graph_color']            = array('Graph Color', 'Select the color this Service will use in graphs');
+
 $GLOBALS['TL_LANG']['tl_service']['description']             = array('Description', 'Enter a private description of what this Service is. This Description is for internal use only.');
 
 $GLOBALS['TL_LANG']['tl_service']['psy_tiers_legend']         = 'Psychologist Price Tier Information';
