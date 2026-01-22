@@ -18,12 +18,14 @@
     // Generate Month labels
     $month_labels = [];
     $month = date('n');
+    $month = 12;
     for ($i = 1; $i <= $month; $i++) {
         $month_labels[] = date('M', mktime(0, 0, 0, $i, 1));
     }
     
     // Get the Year range we are requesting data for
     $year = date('y');
+    $year = 25;
     
     // Get all Services
     $services = array();
