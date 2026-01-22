@@ -86,7 +86,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{services_legend}, service_code, name, service_type, description;{psy_tiers_legend}, tier_1_price, tier_2_price, tier_3_price, tier_4_price, tier_5_price, tier_6_price, tier_7_price, tier_8_price, tier_9_price, tier_10_price;{school_tiers_legend}, school_tier_1_price, school_tier_2_price, school_tier_3_price;{publish_legend}, published;'
+        'default'                     => '{services_legend}, service_code, name, service_type, graph_color, description;{psy_tiers_legend}, tier_1_price, tier_2_price, tier_3_price, tier_4_price, tier_5_price, tier_6_price, tier_7_price, tier_8_price, tier_9_price, tier_10_price;{school_tiers_legend}, school_tier_1_price, school_tier_2_price, school_tier_3_price;{publish_legend}, published;'
     ),
  
     // Fields
