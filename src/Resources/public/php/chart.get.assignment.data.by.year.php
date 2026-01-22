@@ -36,7 +36,6 @@
         }
     }
     
-    
     // Stage Assignment data. Store by: Service Code > Month > Total Usage
     $assignments = array();
     $a_q = "SELECT * FROM tl_assignment WHERE date_created LIKE '%/".$year."' AND published='1'";
@@ -49,7 +48,6 @@
         }
     }
 
-    
     $datasets = [];
     // Loop through staged Assignment data and stage Chartjs data
     foreach($assignments as $service_code => $months) {
