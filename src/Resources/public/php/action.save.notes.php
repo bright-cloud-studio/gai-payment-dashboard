@@ -15,11 +15,12 @@
     // Get data from ajax
     $assignment_id = $_POST['assignment_id'];
     $notes = $_POST['notes'];
+    $notes_cleaned = htmlspecialchars($notes, ENT_QUOTES, 'UTF-8');
     
     fwrite($myfile, "SAVING: Assignment ID: " . $assignment_id . "\r\n");
-    fwrite($myfile, "SAVING: Notes: " . addslashes($notes) . "\r\n");
+    fwrite($myfile, "SAVING: Notes: " . $notes_cleaned . "\r\n");
 
-    $update =  "update tl_assignment set notes='".addslashes($notes)."' WHERE id='".$assignment_id."'";
+    $update =  "update tl_assignment set notes='".$notes_cleaned."' WHERE id='".$assignment_id."'";
     $result_update = $dbh->query($update);
 
     fwrite($myfile, "SAVING: Query Results: " . $result_update . "\r\n");
