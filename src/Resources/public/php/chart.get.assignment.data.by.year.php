@@ -16,14 +16,22 @@
     }
     
     // Generate Month labels
-    $month_labels = [];
+    
     $month = date('n');
+    if(isset($_GET['month']))
+        $month = $_GET['month'];
+    
+    // Generate month labels up to the selected Month
+    $month_labels = [];
     for ($i = 1; $i <= $month; $i++) {
         $month_labels[] = date('M', mktime(0, 0, 0, $i, 1));
     }
     
     // Get the Year range we are requesting data for
     $year = date('y');
+    if(isset($_GET['year']))
+        $year = $_GET['year'];
+    
     
     // Get all Services
     $services = array();
