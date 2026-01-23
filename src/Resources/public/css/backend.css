@@ -1,3 +1,8 @@
+.dashboard_mode_selector {
+    width: 100%;
+    text-align: right;
+}
+
 #main .content {
     border: 0;
 }
