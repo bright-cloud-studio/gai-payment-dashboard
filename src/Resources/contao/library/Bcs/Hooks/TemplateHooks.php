@@ -1748,10 +1748,14 @@ class TemplateHooks
     // Assignment Totals - Month
     public function calculateAssignmentsMonth($which_month) {
         if($which_month == 'this_month') {
-            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE MONTH(STR_TO_DATE(date_created, '%m/%d/%y')) = MONTH(CURRENT_DATE()) AND YEAR(STR_TO_DATE(date_created, '%m/%d/%y')) = YEAR(CURRENT_DATE());")->execute();
+            $this_month = date('m');
+            $this_year = date('y');
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE date_created LIKE '$this_month/%/$this_year' AND published='1'")->execute();
             return $assignments->count();
         } else if($which_month == 'last_month') {
-            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE PERIOD_DIFF( EXTRACT(YEAR_MONTH FROM CURRENT_DATE()), EXTRACT(YEAR_MONTH FROM STR_TO_DATE(date_created, '%m/%d/%y'))) = 1;")->execute();
+            $last_month = date('m', strtotime('-1 month'));
+            $last_year = date('y', strtotime('-1 year'));
+            $assignments = Database::getInstance()->prepare("SELECT * FROM tl_assignment WHERE date_created LIKE '$last_month/%/$last_year' AND published='1'")->execute();
             return $assignments->count();
         }
     }
