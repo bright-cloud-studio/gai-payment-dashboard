@@ -16,13 +16,12 @@
     }
     
     // Generate Month labels
-    
+    $month_labels = [];
     $month = date('n');
+    
     if(isset($_GET['month']))
         $month = $_GET['month'];
     
-    // Generate month labels up to the selected Month
-    $month_labels = [];
     for ($i = 1; $i <= $month; $i++) {
         $month_labels[] = date('M', mktime(0, 0, 0, $i, 1));
     }
@@ -68,16 +67,20 @@
             $totals_by_month[] = $total_usage;
         }
         
+        /*
         $label = "N/A";
         if($service_code != 0)
             $label = $services[$service_code]['service_name'];
+        */
+        
+        $label = "Assignments";
         
         $datasets[] = [
             'label'           => $label,
             'type'            => "bar",
             'data'            => $totals_by_month,
             //'backgroundColor' => hex2rgba($services[$service_code]['graph_color'], 0.7),
-            'backgroundColor' => 'rgba(215, 29, 6, 1)',
+            'backgroundColor' => "rgba(215, 29, 6, 1)",
             'yAxisID'         => "yCount"
         ];
         
