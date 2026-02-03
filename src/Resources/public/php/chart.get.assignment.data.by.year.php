@@ -52,7 +52,9 @@
         while($a = $a_r->fetch_assoc()) {
 
             $month = date('M', strtotime($a['date_created']));
-            $assignments[$a['type_of_testing']][$month] = ($assignments[$a['type_of_testing']][$month] ?? 0) + 1;
+            // Stores our data, by Service, by Month
+            //$assignments[$a['type_of_testing']][$month] = ($assignments[$a['type_of_testing']][$month] ?? 0) + 1;
+            $assignments[0][$month] = ($assignments[0][$month] ?? 0) + 1;
         }
     }
 
@@ -74,7 +76,8 @@
             'label'           => $label,
             'type'            => "bar",
             'data'            => $totals_by_month,
-            'backgroundColor' => hex2rgba($services[$service_code]['graph_color'], 0.7),
+            //'backgroundColor' => hex2rgba($services[$service_code]['graph_color'], 0.7),
+            'backgroundColor' => 'rgba(215, 29, 6, 1)',
             'yAxisID'         => "yCount"
         ];
         
