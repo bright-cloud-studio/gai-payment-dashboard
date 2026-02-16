@@ -1722,10 +1722,16 @@ class TemplateHooks
                 $percent_misc_transactions = $review_record->misc_transactions_percentage_reviewed;
                 
                 $review_status[$psy->id]['name'] .= $psy->firstname . " " . $psy->lastname;
+                $review_status[$psy->id]['date'] = date('m/d/y', $review_record->date_reviewed);
                 $review_status[$psy->id]['percent_transactions'] = $percent_transactions;
                 $review_status[$psy->id]['percent_misc_transactions'] = $percent_misc_transactions;
-                
+
+                // BOTH 100 = FUll REVIEW
                 if($percent_transactions == 100 && $percent_misc_transactions == 100) {
+                    $review_status[$psy->id]['class'] = "reviewed_full";
+                } else if($percent_transactions == 0 && $percent_misc_transactions == 100) {
+                    $review_status[$psy->id]['class'] = "reviewed_full";
+                } else if($percent_transactions == 100 && $percent_misc_transactions == 0) {
                     $review_status[$psy->id]['class'] = "reviewed_full";
                 } else {
                     if($percent_transactions == 0 && $percent_misc_transactions == 0) {
@@ -1734,6 +1740,7 @@ class TemplateHooks
                         $review_status[$psy->id]['class'] = "reviewed_partial";
                     }
                 }
+ 
             }
             
         }
