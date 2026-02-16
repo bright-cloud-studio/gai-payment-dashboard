@@ -33,7 +33,6 @@
     
     
     // Get all Services
-    /*
     $services = array();
     $s_q = "SELECT * FROM tl_service";
     $s_r = $dbh->query($s_q);
@@ -43,11 +42,10 @@
             $services[$s['service_code']]['graph_color'] = $s['graph_color'];
         }
     }
-    */
     
     // Stage Assignment data. Store by: Service Code > Month > Total Usage
-    /*
     $assignments = array();
+    $meetings = array();
     $a_q = "SELECT * FROM tl_assignment WHERE date_created LIKE '%/".$year."' AND published='1'";
     $a_r = $dbh->query($a_q);
     if($a_r) {
@@ -59,22 +57,9 @@
             $assignments[0][$month] = ($assignments[0][$month] ?? 0) + 1;
         }
     }
-    */
-
-    $transactions = array();
-    $t_q = "SELECT * FROM tl_transaction WHERE date_created LIKE '%/".$year."' AND published='1'";
-    $t_r = $dhb->query($t_q);
-    if($t_r) {
-        while($t = $t_r->fetch_assoc()) {
-            $month = date('M', strtotime($a['date_created']));
-            $transactions[$month] = $transaction[$month] + 1;
-        }
-    }
 
     $datasets = [];
     // Loop through staged Assignment data and stage Chartjs data
-
-    /*
     foreach($assignments as $service_code => $months) {
         
         // Build array of totals by month
@@ -83,6 +68,12 @@
             $totals_by_month[] = $total_usage;
         }
         
+        /*
+        $label = "N/A";
+        if($service_code != 0)
+            $label = $services[$service_code]['service_name'];
+        */
+        
         $label = "Assignments";
         
         $datasets[] = [
@@ -90,17 +81,19 @@
             'type'            => "bar",
             'data'            => $totals_by_month,
             //'backgroundColor' => hex2rgba($services[$service_code]['graph_color'], 0.7),
-            'backgroundColor' => 'rgba(54, 81, 186, 1)',
+            'backgroundColor' => 'rgba(215, 29, 6, 1)',
             'yAxisID'         => "yCount"
         ];
-    }
-    */
-
-    foreach($transactions as $month => $data) {
-        echo "Month: " . $month . "<br>";
-        echo "<pre>";
-        print_r($data);
-        echo "</pre><br><hr><br>";
+        
+        $datasets[] = [
+            'label'           => "Meetings",
+            'type'            => "bar",
+            'data'            => $totals_by_month,
+            'backgroundColor' => 'rgba(215, 29, 6, 1)',
+            'yAxisID'         => "yCount"
+        ];
+        
+        
     }
     
     // Spit out encoded json data
@@ -110,3 +103,18 @@
         'datasets' =>
             $datasets
     ]);
+
+    /* Convert our hexidecimal color to RGBA */
+    function hex2rgba($hex, $alpha = 1.0) {
+        $hex = str_replace("#", "", $hex);
+        if (strlen($hex) == 3) {
+            $r = hexdec(str_repeat(substr($hex, 0, 1), 2));
+            $g = hexdec(str_repeat(substr($hex, 1, 1), 2));
+            $b = hexdec(str_repeat(substr($hex, 2, 1), 2));
+        } else {
+            $r = hexdec(substr($hex, 0, 2));
+            $g = hexdec(substr($hex, 2, 2));
+            $b = hexdec(substr($hex, 4, 2));
+        }
+        return "rgba($r, $g, $b, $alpha)";
+    }
