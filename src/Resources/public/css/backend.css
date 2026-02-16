@@ -3,6 +3,11 @@
     text-align: right;
 }
 
+.submitted_date {
+    font-size: 0.7em;
+    font-weight: 800;
+}
+
 #main .content {
     border: 0;
 }
