@@ -130,15 +130,15 @@ class TransactionBackend extends Backend
 	{
         if (strlen(Input::get('tid')))
 		{
-		    
-		    // Create a Review Record
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
+			
+			// Create a Review Record
 		    $transaction = Transaction::findOneBy('id', Input::get('tid'));
 		    if($transaction) {
 		        if($transaction->psychologist >= 1)
 		            $this->createReviewRecord($transaction->psychologist);
 		    }
-		    
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
+			
 			$this->redirect($this->getReferer());
 		}
 
