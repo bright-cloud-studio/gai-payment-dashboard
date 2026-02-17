@@ -13,8 +13,10 @@ use Contao\System;
 use Contao\MemberModel;
 
 use Bcs\Model\Transaction;
+use Bcs\Model\TransactionMisc;
 use Bcs\Model\Assignment;
 use Bcs\Model\District;
+use Bcs\Model\ReviewRecord;
 use Bcs\Model\School;
 use Bcs\Model\Service;
 use Bcs\Model\Student;
@@ -43,14 +45,10 @@ class TransactionBackend extends Backend
             $transaction->sasid = $student->sasid;
             $transaction->save();
             
-            // Create a Review Record
-            
-            // Get the percentage of unreviewed Transactions
-            
-            // Get the percentage of the unreviewed Misc. Transactions
-            
-            // Save Review Record
-            
+            if($dc->activeRecord->published == 1) {
+                // Create Review Record
+                $this->createReviewRecord($dc->activeRecord->psychologist);
+            }
 
         }
 
@@ -132,6 +130,14 @@ class TransactionBackend extends Backend
 	{
         if (strlen(Input::get('tid')))
 		{
+		    
+		    // Create a Review Record
+		    $transaction = Transaction::findOneBy('id', Input::get('tid'));
+		    if($transaction) {
+		        if($transaction->psychologist >= 1)
+		            $this->createReviewRecord($transaction->psychologist);
+		    }
+		    
 			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
@@ -231,6 +237,65 @@ class TransactionBackend extends Backend
 
 		return $varValue;
 	}
+	
+	
+	
+	
+	public function createReviewRecord($psychologist) {
+	    
+        // Create a Review Record
+        $review_record = new ReviewRecord();
+        $review_record->tstamp = time();
+        $review_record->psychologist = $psychologist;
+        
+        // Get the total number of Assignments for this Psychologist
+        $total_assignments = Assignment::countBy(['psychologist=?'], [$psychologist]);
+        $review_record->total_assignments = $total_assignments;
+        
+        // Total of Transactions
+        $total_transactions = Transaction::countBy(['psychologist=?'], [$psychologist]);
+        $review_record->transactions_total = $total_transactions;
+        
+        // Total of Transactions Reviewed
+        $total_transactions_reviewed = Transaction::countBy(['psychologist=?', 'published=?'], [$psychologist, 1]);
+        $review_record->transactions_total_reviewed = $total_transactions_reviewed;
+        
+        // Percentage of Reviewed Transactions
+        $total_transactions_percentage;
+        if ($total_transactions > 0) {
+            $total_transactions_percentage = ($total_transactions_reviewed / $total_transactions) * 100;
+        } else {
+            $total_transactions_percentage = 0;
+        }
+        $review_record->transactions_percentage_reviewed = $total_transactions_percentage;
+        
+        // Total of Misc. Transactions
+        $total_misc_transactions = TransactionMisc::countBy(['psychologist=?'], [$psychologist]);
+        $review_record->misc_transactions_total = $total_misc_transactions;
+        
+        // Total of Misc. Transactions Reviewed
+        $total_misc_transactions_reviewed = TransactionMisc::countBy(['psychologist=?', 'published=?'], [$psychologist, 1]);
+        $review_record->misc_transactions_total_reviewed = $total_misc_transactions_reviewed;
+        
+        // Percentage of Reviewed Transactions
+        $total_misc_transactions_percentage;
+        if ($total_misc_transactions > 0) {
+            $total_misc_transactions_percentage = ($total_misc_transactions_reviewed / $total_misc_transactions) * 100;
+        } else {
+            $total_misc_transactions_percentage = 0;
+        }
+        $review_record->misc_transactions_percentage_reviewed = $total_misc_transactions_percentage;
+
+        $review_record->date_month = strtolower(date('F'));
+        $review_record->date_year = date('Y');
+        $review_record->date_reviewed = time();
+        
+        $review_record->save();
+	}
+	
+	
+	
+	
 
 
     // Get Psychologists as select menu
