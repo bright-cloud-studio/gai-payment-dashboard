@@ -42,6 +42,15 @@ class TransactionBackend extends Backend
             $transaction->lasid = $student->lasid;
             $transaction->sasid = $student->sasid;
             $transaction->save();
+            
+            // Create a Review Record
+            
+            // Get the percentage of unreviewed Transactions
+            
+            // Get the percentage of the unreviewed Misc. Transactions
+            
+            // Save Review Record
+            
 
         }
 
