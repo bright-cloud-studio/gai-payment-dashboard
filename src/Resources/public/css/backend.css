@@ -5,7 +5,12 @@
 
 .submitted_date {
     font-size: 0.7em;
-    font-weight: 800;
+    font-weight: 600;
+}
+
+.review_record_totals {
+    font-weight: 600;
+    font-size: 0.7em;
 }
 
 #main .content {
@@ -68,7 +73,9 @@ html[data-color-scheme=light] #tl_gai div.size50 .inside {
 }
 .review_statuses thead tr { border-bottom: 1px solid black; }
 .review_statuses table .center {
+    
     text-align: center;
+    text-align: initial;
 }
 
 #tl_gai h1 {
