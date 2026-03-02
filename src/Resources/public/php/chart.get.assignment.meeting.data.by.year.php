@@ -42,52 +42,86 @@
             $assignment_month_number = date('m', strtotime($a['date_created']));
             
             if($assignment_month_number <= $month)
-                $assignments[0][$assignment_month] = ($assignments[0][$assignment_month] ?? 0) + 1;
+                $assignments[$assignment_month] = ($assignments[$assignment_month] ?? 0) + 1;
         }
     }
     
-    // Stage Transaction data. Store by: Service Code > Month > Total Usage
-    $transactions = array();
+    // Stage Transaction data
+    $t_meeting = array();
+    $t_mtg_late_cancel = array();
     
-    $t_q = "SELECT * FROM tl_transaction 
-        WHERE YEAR(FROM_UNIXTIME(date_submitted)) = '20" . $year . "' 
-        AND service='1' 
-        AND published='1'";
+    $t_q = "SELECT * FROM tl_transaction WHERE YEAR(FROM_UNIXTIME(date_submitted)) = '20" . $year . "'";
     $t_r = $dbh->query($t_q);
     if($t_r) {
         while($t = $t_r->fetch_assoc()) {
             $transaction_month = date('F', $t['date_submitted']);
             $transaction_month_number = date('m', $t['date_submitted']);
             
-            if($transaction_month_number <= $month)
-                $transactions[0][$transaction_month] = ($transactions[0][$transaction_month] ?? 0) + 1;
+            if($transaction_month_number <= $month) {
+                
+                if($t['service'] == 1) {
+                    $t_meeting[$transaction_month] = ($t_meeting[$transaction_month] ?? 0) + 1;
+                } else if($t['service'] == 12) {
+                    $t_mtg_late_cancel[$transaction_month] = ($t_mtg_late_cancel[$transaction_month] ?? 0) + 1;
+                }
+            }
         }
     }
     
+    // Stage Misc. Transaction data
+    $mt_meeting = array();
+    $mt_mtg_late_cancel = array();
+    
+    $mt_q = "SELECT * FROM tl_transaction_misc WHERE YEAR(FROM_UNIXTIME(date_submitted)) = '20" . $year . "'";
+    $mt_r = $dbh->query($mt_q);
+    if($t_r) {
+        while($mt = $mt_r->fetch_assoc()) {
+            $misc_transaction_month = date('F', $mt['date_submitted']);
+            $misc_transaction_month_number = date('m', $mt['date_submitted']);
+            
+            if($misc_transaction_month_number <= $month) {
+                
+                if($mt['service'] == 1) {
+                    $mt_meeting[$misc_transaction_month] = ($mt_meeting[$misc_transaction_month] ?? 0) + 1;
+                } else if($mt['service'] == 12) {
+                    $mt_mtg_late_cancel[$misc_transaction_month] = ($mt_mtg_late_cancel[$misc_transaction_month] ?? 0) + 1;
+                }
+            }
+        }
+    }
+    
+    uksort($assignments, function($a, $b) {
+        $monthA = strtotime($a);
+        $monthB = strtotime($b);
+        return $monthA - $monthB;
+    });
+    uksort($t_meeting, function($a, $b) {
+        $monthA = strtotime($a);
+        $monthB = strtotime($b);
+        return $monthA - $monthB;
+    });
+    uksort($t_mtg_late_cancel, function($a, $b) {
+        $monthA = strtotime($a);
+        $monthB = strtotime($b);
+        return $monthA - $monthB;
+    });
+    uksort($mt_meeting, function($a, $b) {
+        $monthA = strtotime($a);
+        $monthB = strtotime($b);
+        return $monthA - $monthB;
+    });
+    uksort($mt_mtg_late_cancel, function($a, $b) {
+        $monthA = strtotime($a);
+        $monthB = strtotime($b);
+        return $monthA - $monthB;
+    });
     
     // Sample logic to simulate database results
-    
-    $data[$year]['assignments'] = $assignments[0];
-    $data[$year]['meetings'] = $transactions[0];
-    
-    /*
-    $data = [
-        '26' => [
-            'assignments' => [102, 19, 3, 5, 2, 3, 10, 15, 8, 12, 14, 9],
-            'meetings' => [8, 12, 5, 8, 4, 6, 12, 10, 7, 9, 11, 7]
-        ],
-        '25' => [
-            'assignments' => [15, 22, 10, 12, 8, 14, 18, 20, 15, 18, 22, 19],
-            'meetings' => [10, 15, 8, 10, 6, 10, 14, 15, 12, 13, 16, 14]
-        ],
-        '24' => [
-            'assignments' => [99, 22, 10, 12, 8, 14, 18, 20, 15, 18, 22, 19],
-            'meetings' => [44, 15, 8, 10, 6, 10, 14, 15, 12, 13, 16, 14]
-        ]
-    ];
-    */
-
-    
+    $data[$year]['assignments'] = $assignments;
+    $data[$year]['transactions_meetings'] = $t_meeting;
+    $data[$year]['transactions_mtg_late_cancels'] = $t_mtg_late_cancel;
+    $data[$year]['misc_transactions_meetings'] = $mt_meeting;
+    $data[$year]['misc_transactions_mtg_late_cancels'] = $mt_mtg_late_cancel;
     
     // Return the data for the requested year, or a default if not found
     echo json_encode($data[$year]);
