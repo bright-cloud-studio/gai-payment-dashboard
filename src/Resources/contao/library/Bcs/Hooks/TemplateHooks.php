@@ -1723,6 +1723,13 @@ class TemplateHooks
                 
                 $review_status[$psy->id]['name'] .= $psy->firstname . " " . $psy->lastname;
                 $review_status[$psy->id]['date'] = date('m/d/y', $review_record->date_reviewed);
+                
+                $review_status[$psy->id]['transactions'] = $review_record->transactions_total;
+                $review_status[$psy->id]['transactions_reviewed'] = $review_record->transactions_total_reviewed;
+                
+                $review_status[$psy->id]['misc_transactions'] = $review_record->misc_transactions_total;
+                $review_status[$psy->id]['misc_transactions_reviewed'] = $review_record->misc_transactions_total_reviewed;
+                
                 $review_status[$psy->id]['percent_transactions'] = $percent_transactions;
                 $review_status[$psy->id]['percent_misc_transactions'] = $percent_misc_transactions;
 
