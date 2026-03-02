@@ -62,6 +62,8 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
+
+            /*
             'toggle' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_alert_email']['toggle'],
@@ -69,6 +71,8 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
                 'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
                 'button_callback'     => array('Bcs\Backend\AlertEmailBackend', 'toggleIcon')
             ),
+            */
+            
             'copy' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_alert_email']['copy'],
@@ -94,7 +98,8 @@ $GLOBALS['TL_DCA']['tl_alert_email'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{alert_email_legend}, month; {warning_legend}, warning_date, warning_subject, warning_body, warning_last_sent;{final_legend}, final_date, final_subject, final_body, final_last_sent;{publish_legend},published;'
+        'default'                     => '{alert_email_legend}, month; {warning_legend}, warning_date, warning_subject, warning_body, warning_last_sent;{final_legend}, final_date, final_subject, final_body, final_last_sent;'
+        //'default'                     => '{alert_email_legend}, month; {warning_legend}, warning_date, warning_subject, warning_body, warning_last_sent;{final_legend}, final_date, final_subject, final_body, final_last_sent;{publish_legend},published;'
     ),
  
     // Fields
