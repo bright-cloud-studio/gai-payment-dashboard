@@ -71,8 +71,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_issue']['toggle'],
                 'icon'                => 'visible.gif',
-                //'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['confirmToggle'] ?? 'Do you really want to toggle this item?') . '\')) return false; Backend.getScrollOffset()"',
+                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['confirmToggle'] ?? 'Please confirm you would like to toggle this Issue on/off') . '\')) return false; Backend.getScrollOffset()"',
                 'button_callback'     => array('Bcs\Backend\IssueBackend', 'toggleIcon')
             ),
             'delete' => array
