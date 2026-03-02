@@ -71,7 +71,7 @@ $GLOBALS['TL_DCA']['tl_service'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_district']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+				'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['confirmToggle'] ?? 'Please confirm you would like to toggle this Service on/off') . '\')) return false; Backend.getScrollOffset()"',
 				'button_callback'     => array('Bcs\Backend\DistrictBackend', 'toggleIcon')
 			),
             'show' => array
