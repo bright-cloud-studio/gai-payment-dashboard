@@ -82,7 +82,7 @@ $GLOBALS['TL_DCA']['tl_transaction_misc'] = array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_transaction_misc']['toggle'],
                 'icon'                => 'visible.gif',
-                'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['confirmToggle'] ?? 'Please confirm you would like to toggle this Misc. Transaction on/off') . '\')) return false; Backend.getScrollOffset()"',
                 'button_callback'     => array('Bcs\Backend\TransactionMiscBackend', 'toggleIcon')
             ),
             'delete' => array
