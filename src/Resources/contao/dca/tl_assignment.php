@@ -92,7 +92,7 @@ $GLOBALS['TL_DCA']['tl_assignment'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_assignment']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+				'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['confirmToggle'] ?? 'Please confirm you would like to toggle this Assignment on/off') . '\')) return false; Backend.getScrollOffset()"',
 				'button_callback'     => array('Bcs\Backend\AssignmentBackend', 'toggleIcon')
 			),
             'show' => array
