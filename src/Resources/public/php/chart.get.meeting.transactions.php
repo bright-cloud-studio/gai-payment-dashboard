@@ -81,7 +81,7 @@
             'type'            => "bar",
             'data'            => $totals_by_month,
             //'backgroundColor' => hex2rgba($services[$service_code]['graph_color'], 0.7),
-            'backgroundColor' => 'rgba(215, 29, 6, 1)',
+            'backgroundColor' => 'rgba(54, 81, 186, 1)',
             'yAxisID'         => "yCount"
         ];
         
@@ -89,7 +89,7 @@
             'label'           => "Meetings",
             'type'            => "bar",
             'data'            => $totals_by_month,
-            'backgroundColor' => 'rgba(215, 29, 6, 1)',
+            'backgroundColor' => 'rgba(54, 81, 186, 1)',
             'yAxisID'         => "yCount"
         ];
         
