@@ -76,7 +76,7 @@ $GLOBALS['TL_DCA']['tl_school'] = array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_school']['toggle'],
                 'icon'                => 'visible.gif',
-                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['confirmToggle'] ?? 'Please confirm you would like to toggle this Issue on/off') . '\')) return false; Backend.getScrollOffset()"',
+                'attributes'          => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['confirmToggle'] ?? 'Please confirm you would like to toggle this School on/off') . '\')) return false; Backend.getScrollOffset()"',
                 'button_callback'     => array('Bcs\Backend\SchoolBackend', 'toggleIcon')
             ),
             'show' => array
