@@ -1,9 +1,5 @@
 <?php
 
-    // DELETE THIS - EVENTUALLY
-    // This ajax script file has been replaced by: chart.get.assignment.meeting.data.by.year.php
-    // This keeps the naming similar for both charts.
-
     /*
     // Initialize Session, start Composer
     session_start();
