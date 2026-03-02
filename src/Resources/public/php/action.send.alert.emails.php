@@ -1,5 +1,9 @@
 <?php
 
+    //$debug_mode = true;
+    define('DEBUG_MODE', true);
+    define('DEBUG_FILE', fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/alert_emails_'.date('m_d_y').'.txt', "a+"));
+
     use Bcs\Model\AlertEmail;
     use Bcs\Model\EmailRecord;
     use Contao\MemberModel;
@@ -13,9 +17,6 @@
     if ($dbh->connect_error) {
         die("Connection failed: " . $dbh->connect_error);
     }
-
-    // Create a log file so we can track this is working accurately
-    $log = fopen($_SERVER['DOCUMENT_ROOT'] . '/../logs/alert_emails_'.date('m_d_y').'.txt', "a+") or die("Unable to open file!");
 
     // Loop through all Alert emails
     $alert_emails = AlertEmail::findAll();
@@ -44,20 +45,26 @@
             // Get the current hour, as we only want to send out at noon
             $hour = date("H");
 
+
+
+
+
+
             // WARNING EMAIL
             if($warning_date == $today) {
-                fwrite($log, "WARNING: Send Day \r\n");
+                debug("WARNING: Send Day");
 
                 if($warning_last_sent != $today) {
-                    fwrite($log, "WARNING: Unset yet today \r\n");
+                    debug("WARNING: Unset yet today");
+                    
                     if($hour == 12) {
-                        fwrite($log, "WARNING: Correct Hour \r\n");
+                        debug("WARNING: Correct Hour");
 
                         $psychologists = MemberModel::findBy('disable', '0');
                         if($psychologists) {
                             foreach ($psychologists as $psychologist) {
+                                debug("WARNING: Emailing ". $psychologist->firstname . " " . $psychologist->lastname);
 
-                                fwrite($log, "WARNING: Emailing ". $psychologist->firstname . " " . $psychologist->lastname . "\r\n");
                                 $addr = $psychologist->email;
                     			$headers = "MIME-Version: 1.0" . "\r\n";
                     			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -80,7 +87,7 @@
                                 $message = str_replace('$firstname', $psychologist->firstname, $message);
                                 $message = str_replace('$lastname', $psychologist->lastname, $message);
                                 
-                    			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
+                    			//mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
 
                                 // Create Email Record of this email
                                 $record = new EmailRecord();
@@ -91,79 +98,94 @@
                                 $record->email_recipient = $psychologist->id;
                                 $record->email_subject = $sub;
                                 $record->email_body = $message;
-                                $record->save();
+                                //$record->save();
 
                             }
                         }
                         $alert_email->warning_last_sent = time();
-                        $alert_email->save();
+                        //$alert_email->save();
                     } else {
-                        fwrite($log, "WARNING: NOT Correct Hour \r\n");
+                        debug("WARNING: NOT Correct Hour");
                     }
                 }
             } else {
-                fwrite($log, "WARNING: NOT Send Day \r\n");
-                fwrite($log, "SEND DATE: " . $warning_date. "\r\n");
-                fwrite($log, "TODAY DATE: " . $today. "\r\n");
+                debug("WARNING: NOT Send Day");
+                debug("SEND DATE: " . $warning_date);
+                debug("TODAY DATE: " . $today);
             }
-            
 
+
+
+            
+            //$hour = 12;
             // FINAL DAY EMAIL
             if($final_date == $today) {
-                fwrite($log, "FINAL: Send Day \r\n");
+                debug("FINAL: Send Day");
 
                 if($final_last_sent != $today) {
-                    fwrite($log, "FINAL: Unset yet today \r\n");
+                    debug("FINAL: Unset yet today");
+                    
                     if($hour == 12) {
-                        fwrite($log, "FINAL: Correct Hour \r\n");
+                        debug("FINAL: Correct Hour");
 
                         $psychologists = MemberModel::findBy('disable', '0');
                         if($psychologists) {
                             foreach ($psychologists as $psychologist) {
-
-                                fwrite($log, "FINAL: Emailing ". $psychologist->firstname . " " . $psychologist->lastname . "\r\n");
-                                $addr = $psychologist->email;
-                    			$headers = "MIME-Version: 1.0" . "\r\n";
-                    			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
-                                $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
-                    			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
-                    			$sub = $alert_email->warning_subject;
-                    			$message = "
-                    				<html>
-                    				<head>
-                    				<title>Global Assessments, Inc. - FINAL DAY Reminder</title>
-                    				</head>
-                    				<body>".
-                                        $alert_email->warning_body
-                                    ."</body>
-                    				</html>
-                    				";
-
-                                // TEMPLATE TAGS
-                                $message = str_replace('$firstname', $psychologist->firstname, $message);
-                                $message = str_replace('$lastname', $psychologist->lastname, $message);
                                 
-                    			mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
-
-                                // Create Email Record of this email
-                                $record = new EmailRecord();
-                                $record->tstamp = time();
-                                $record->status = 'resolved';
-                                $record->date_created = date('m/d/y g:i a');
-                                $record->email_type = 'alert_final';
-                                $record->email_recipient = $psychologist->id;
-                                $record->email_subject = $sub;
-                                $record->email_body = $message;
-                                $record->save();
+                                //if($psychologist->email == 'mark@brightcloudstudio.com') {
+                                    //fwrite($log, "FINAL: Emailing ". $psychologist->firstname . " " . $psychologist->lastname . "\r\n");
+                                    $addr = $psychologist->email;
+                        			$headers = "MIME-Version: 1.0" . "\r\n";
+                        			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                        			$headers .= 'From: billing@globalassessmentsinc.com' . "\r\n";
+                                    $headers .= 'Return-Path: billing@globalassessmentsinc.com' . "\r\n";
+                        			$headers .= 'Cc: ed@globalassessmentsinc.com' . "\r\n";
+                        			$sub = $alert_email->final_subject;
+                        			$message = "
+                        				<html>
+                        				<head>
+                        				<title>Global Assessments, Inc. - FINAL DAY Reminder</title>
+                        				</head>
+                        				<body>".
+                                            $alert_email->final_body
+                                        ."</body>
+                        				</html>
+                        				";
+    
+                                    // TEMPLATE TAGS
+                                    $message = str_replace('$firstname', $psychologist->firstname, $message);
+                                    $message = str_replace('$lastname', $psychologist->lastname, $message);
+                                    
+                        			//mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
+    
+                                    // Create Email Record of this email
+                                    $record = new EmailRecord();
+                                    $record->tstamp = time();
+                                    $record->status = 'resolved';
+                                    $record->date_created = date('m/d/y g:i a');
+                                    $record->email_type = 'alert_final';
+                                    $record->email_recipient = $psychologist->id;
+                                    $record->email_subject = $sub;
+                                    $record->email_body = $message;
+                                    //$record->save();
+                                //}
                                 
                             }
                         }
                         $alert_email->final_last_sent = time();
-                        $alert_email->save();
+                        //$alert_email->save();
+                    } else {
+                        debug("FINAL: Not current hour. Current hour: $hour. Desired hour: 12");
                     }
                 }
             }
+            
+            
+            
+            
+            
+            
+            
 
 
 
@@ -171,4 +193,16 @@
     }
 
     // Close our log file
-    fclose($log);
+    if(DEBUG_MODE)
+        fclose(DEBUG_FILE);
+    
+    
+    /** Helper Functions **/
+    function debug($message) {
+        if(DEBUG_MODE) {
+            fwrite(DEBUG_FILE, $message . "\n");
+            echo $message . "<br>";
+        } else {
+            fwrite(DEBUG_FILE, "DEBUG MODE not active" . "\n");
+        }
+    }
