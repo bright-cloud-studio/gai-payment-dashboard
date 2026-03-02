@@ -18,15 +18,24 @@
         die("Connection failed: " . $dbh->connect_error);
     }
 
+
+
+
+
     // Loop through all Alert emails
     $alert_emails = AlertEmail::findAll();
     if($alert_emails) {
         foreach ($alert_emails as $alert_email) {
-
+            
             // Get the Warning email date and Today's date
             $warning_date = date('m_d_y', $alert_email->warning_date);
             $final_date = date('m_d_y', $alert_email->final_date);
             $today = date('m_d_y', time());
+            
+            debug("\n[Alert Email: " . $alert_email->id . "] [Month: " . $alert_email->month . "]");
+            debug("[Week Remaining: " . $warning_date ."]");
+            debug("[Final Day: " . $final_date ."]");
+            debug("[Today: " . $today ."]");
 
             // Warning Last Sent will either be empty or have a value
             $warning_last_sent;
@@ -44,27 +53,23 @@
 
             // Get the current hour, as we only want to send out at noon
             $hour = date("H");
-
-
-
-
-
-
-            // WARNING EMAIL
+            
+            $hour = 12;
+            // EMAIL - Week Remaining
             if($warning_date == $today) {
-                debug("WARNING: Send Day");
+                debug("[Week Remaining] Today is Send Day", 1);
 
-                if($warning_last_sent != $today) {
-                    debug("WARNING: Unset yet today");
+                if($hour == 12) {
+                    debug("[Week Remaining] This (".$hour.") is the Send Hour", 2);
                     
-                    if($hour == 12) {
-                        debug("WARNING: Correct Hour");
+                    if($warning_last_sent != $today) {
+                        debug("[Week Remaining] This has NOT been sent yet today", 3);
 
                         $psychologists = MemberModel::findBy('disable', '0');
                         if($psychologists) {
                             foreach ($psychologists as $psychologist) {
-                                debug("WARNING: Emailing ". $psychologist->firstname . " " . $psychologist->lastname);
-
+                                debug("[Week Remaining] Emailing " . $psychologist->firstname . " " . $psychologist->lastname, 4);
+    
                                 $addr = $psychologist->email;
                     			$headers = "MIME-Version: 1.0" . "\r\n";
                     			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -82,13 +87,14 @@
                                     ."</body>
                     				</html>
                     				";
-
+    
                                 // TEMPLATE TAGS
                                 $message = str_replace('$firstname', $psychologist->firstname, $message);
                                 $message = str_replace('$lastname', $psychologist->lastname, $message);
                                 
                     			//mail($addr, $sub, $message, $headers, "-fbilling@globalassessmentsinc.com");
-
+                    			debug("[Week Remaining] Email sent", 4);
+    
                                 // Create Email Record of this email
                                 $record = new EmailRecord();
                                 $record->tstamp = time();
@@ -99,19 +105,23 @@
                                 $record->email_subject = $sub;
                                 $record->email_body = $message;
                                 //$record->save();
-
+                                debug("[Week Remaining] Email Record Created - ID: " . $record->id, 4);
+    
                             }
                         }
                         $alert_email->warning_last_sent = time();
                         //$alert_email->save();
                     } else {
-                        debug("WARNING: NOT Correct Hour");
+                        debug("[Week Remaining] This has ALREADY been sent today", 3);
                     }
+                    
+                } else {
+                    debug("[Week Remaining] This is NOT the Send Hour", 2);
+                    debug("[Current Hour: $hour] [Desired Hour: 12]", 2);
                 }
+
             } else {
-                debug("WARNING: NOT Send Day");
-                debug("SEND DATE: " . $warning_date);
-                debug("TODAY DATE: " . $today);
+                debug("[Week Remaining] Today is NOT Send Day", 1);
             }
 
 
@@ -179,16 +189,12 @@
                     }
                 }
             }
-            
-            
-            
-            
-            
+
             
             
 
 
-
+        debug("\n--------------------------------------------");
         }
     }
 
@@ -198,10 +204,13 @@
     
     
     /** Helper Functions **/
-    function debug($message) {
+    function debug($message, $indent_level = 0) {
         if(DEBUG_MODE) {
+            $indent = str_repeat("\t", $indent_level);
+            $message = $indent . $message;
             fwrite(DEBUG_FILE, $message . "\n");
             echo $message . "<br>";
+            
         } else {
             fwrite(DEBUG_FILE, "DEBUG MODE not active" . "\n");
         }
