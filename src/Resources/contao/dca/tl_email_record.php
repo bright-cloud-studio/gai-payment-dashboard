@@ -35,10 +35,10 @@ $GLOBALS['TL_DCA']['tl_email_record'] = array
     (
         'sorting' => array
         (
-            'mode'                    => DataContainer::MODE_SORTABLE,
+            'mode'                    => DataContainer::MODE_UNSORTED,
             'rootPaste'               => false,
             'flag'                    => DataContainer::SORT_DESC,
-            'fields'                  => array('date_created DESC'),
+            'fields'                  => array('tstamp DESC'),
             'icon'                    => 'pagemounts.svg',
             'defaultSearchField'      => 'date_created',
             'panelLayout'             => 'filter;sort,search,limit'
