@@ -72,6 +72,7 @@ $GLOBALS['TL_DCA']['tl_issue'] = array
                 'label'               => &$GLOBALS['TL_LANG']['tl_issue']['toggle'],
                 'icon'                => 'visible.gif',
                 'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                'confirm'             => 'Are you sure you want to change the published state of this element?',
                 'button_callback'     => array('Bcs\Backend\IssueBackend', 'toggleIcon')
             ),
             'delete' => array
