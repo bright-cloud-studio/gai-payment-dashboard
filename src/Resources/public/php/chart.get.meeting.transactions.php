@@ -1,5 +1,10 @@
 <?php
-    
+
+    // DELETE THIS - EVENTUALLY
+    // This ajax script file has been replaced by: chart.get.assignment.meeting.data.by.year.php
+    // This keeps the naming similar for both charts.
+
+    /*
     // Initialize Session, start Composer
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
@@ -68,11 +73,11 @@
             $totals_by_month[] = $total_usage;
         }
         
-        /*
-        $label = "N/A";
-        if($service_code != 0)
-            $label = $services[$service_code]['service_name'];
-        */
+        
+        //$label = "N/A";
+        //if($service_code != 0)
+        //    $label = $services[$service_code]['service_name'];
+        
         
         $label = "Assignments";
         
@@ -103,8 +108,12 @@
         'datasets' =>
             $datasets
     ]);
+    
+    */
+    
 
     /* Convert our hexidecimal color to RGBA */
+    /*
     function hex2rgba($hex, $alpha = 1.0) {
         $hex = str_replace("#", "", $hex);
         if (strlen($hex) == 3) {
@@ -118,3 +127,4 @@
         }
         return "rgba($r, $g, $b, $alpha)";
     }
+    */
