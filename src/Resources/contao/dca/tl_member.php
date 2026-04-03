@@ -11,40 +11,6 @@ use Contao\StringUtil;
 $GLOBALS['TL_DCA']['tl_member']['list']['operations']['su']['button_callback'] = array('Bcs\Backend\MemberBackend', 'switchUserCustomized');
 
 /* Add a confirmation prompt for toggling */
-$GLOBALS['TL_DCA']['tl_member']['list']['operations']['toggle']['button_callback'] = static function (
-    array   $row,
-    ?string $href,
-    string  $label,
-    string  $title,
-    ?string $icon,
-    string  $attributes,
-    string  $table
-): string {
-    // tl_member toggle is on the 'disable' field with reverse=true
-    // so active = disable is falsy
-    $isActive    = empty($row['disable']);
-    $activeIcon  = 'visible.svg';
-    $inactiveIcon = 'invisible.svg';
-    $currentIcon = $isActive ? $activeIcon : $inactiveIcon;
-
-    $confirmMsg = addslashes(
-        $GLOBALS['TL_LANG']['MSC']['confirmToggle'] ?? 'Please confirm you would like to toggle this Member on/off'
-    );
-
-    return sprintf(
-        '<a href="%s" title="%s" onclick="if(!confirm(\'%s\')) return false; Backend.getScrollOffset(); return AjaxRequest.toggleField(this, true)" data-icon="%s" data-icon-disabled="%s" data-states="1,0"%s>%s</a> ',
-        Backend::addToUrl($href . '&amp;id=' . $row['id']),
-        StringUtil::specialchars($title),
-        $confirmMsg,
-        $activeIcon,
-        $inactiveIcon,
-        $attributes,  // preserves any other attributes Contao passes in
-        Image::getHtml($currentIcon, $label, 'data-state="' . ($isActive ? 1 : 0) . '"')
-    );
-};
-
-/* Remove the 'show' action so users can see the full details */
-//$GLOBALS['TL_DCA']['tl_member']['list']['operations']['show'] = false;
 
  /* Extend the tl_user palettes */
 foreach ($GLOBALS['TL_DCA']['tl_member']['palettes'] as $k => $v) {
