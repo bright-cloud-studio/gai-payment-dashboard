@@ -11,6 +11,7 @@ use Contao\StringUtil;
 $GLOBALS['TL_DCA']['tl_member']['list']['operations']['su']['button_callback'] = array('Bcs\Backend\MemberBackend', 'switchUserCustomized');
 
 /* Add a confirmation prompt for toggling */
+$GLOBALS['TL_DCA']['tl_member']['list']['operations']['toggle']['attributes'] = 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['confirmToggle'] ?? 'Please confirm you would like to toggle this Member on/off') . '\')) return false; Backend.getScrollOffset()"';
 
  /* Extend the tl_user palettes */
 foreach ($GLOBALS['TL_DCA']['tl_member']['palettes'] as $k => $v) {
