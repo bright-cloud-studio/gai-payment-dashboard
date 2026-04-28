@@ -22,7 +22,7 @@
                 
                  $options[] = array (
                     'value' => $row['id'],
-                    'label' => $row['school_name']
+                    'label' => htmlspecialchars($row['school_name'], ENT_QUOTES, 'UTF-8')
                 );
             }
         }
