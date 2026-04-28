@@ -828,7 +828,8 @@ class FormHooks
         
                         $options[] = array (
                             'value' => $district->id,
-                            'label' => $district->district_name,
+                            //'label' => $district->district_name,
+                            'label' => htmlspecialchars($district->district_name, ENT_QUOTES, 'UTF-8'),
                             'mandatory' => false
                         );
                         
