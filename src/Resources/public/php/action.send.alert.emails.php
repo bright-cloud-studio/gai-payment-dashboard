@@ -21,6 +21,10 @@
     // Get Today's date and current hour
     $today = date('m_d_y', time());
     $hour = date("H");
+    
+    debug("[Current Day: " . $today ."]");
+    debug("[Current Hour: " . $hour ."]");
+    debug("\n--------------------------------------------");
 
     // Loop through all Alert emails
     $alert_emails = AlertEmail::findAll();
@@ -28,7 +32,6 @@
         foreach ($alert_emails as $alert_email) {
             
             debug("\n[Alert Email: " . $alert_email->id . "] [Month: " . $alert_email->month . "]");
-            debug("[Today: " . $today ."]");
             
             $week_remaining_date = date('m_d_y', $alert_email->warning_date);
             $week_remaining_last_sent = 0;
@@ -37,14 +40,6 @@
             
             debug("[Week Remaining: " . $week_remaining_date ."]");
             debug("[Week Remaining Last Sent: " . $week_remaining_last_sent ."]");
-            
-            $final_date = date('m_d_y', $alert_email->final_date);
-            $final_last_sent = 0;
-            if($alert_email->final_last_sent)
-                $final_last_sent = date('m_d_y', $alert_email->final_last_sent);
-            
-            debug("[Final Day: " . $final_date ."]");
-            debug("[Final Day Last Sent: " . $final_last_sent ."]");
 
             // EMAIL - Week Remaining
             if($week_remaining_date == $today) {
@@ -114,6 +109,14 @@
                 debug("[Week Remaining] Today is NOT Send Day", 1);
             }
 
+            $final_date = date('m_d_y', $alert_email->final_date);
+            $final_last_sent = 0;
+            if($alert_email->final_last_sent)
+                $final_last_sent = date('m_d_y', $alert_email->final_last_sent);
+            
+            debug("[Final Day: " . $final_date ."]");
+            debug("[Final Day Last Sent: " . $final_last_sent ."]");
+
             // EMAIL - Final Day
             if($final_date == $today) {
                 debug("[Final Day] Today is Send Day", 1);
@@ -175,6 +178,8 @@
                     debug("[Final Day] This (".$hour.") is NOT the Send Hour", 2);
                     debug("[Current Hour: $hour] [Desired Hour: 12]", 2);
                 }
+            } else {
+                debug("[Final Day] Today is NOT Send Day", 1);
             }
 
         debug("\n--------------------------------------------");
