@@ -711,7 +711,7 @@ class FormHooks
 
         //////////////////////////////////////////
         // ASSIGNMENT GENERATE TRANSACTION FORM //
-        //////////////////////////////////////////
+        //////////////////////////////////////////s
         else if($form->formID == 'assignment_generate_transaction') {
             
             // Get the Assignment
@@ -951,7 +951,9 @@ class FormHooks
                     ];
                     
                     // Hold the psys
-                    $invoice_requests = InvoiceRequest::findAll();
+                    //$invoice_requests = InvoiceRequest::findAll();
+                    $invoice_requests = InvoiceRequest::findAll(['order' => 'tstamp DESC']);
+                    
                     Invoice::findBy(['psychologist = ?'], [$member->id]);
                     
                     $options[] = array (
