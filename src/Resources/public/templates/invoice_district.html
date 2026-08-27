@@ -52,7 +52,7 @@
             }
             
             table#invoice_wrapper {
-                border-top: 5px solid red;
+                border-top: 3px solid red;
                 border-collapse: initial;
             }
             
@@ -79,7 +79,7 @@
             span.invoice_number { font-weight: 600; }
             
             span.bill_to { font-weight: 600; }
-            .bill_to_wrapper { font-size: 9px; }
+            .bill_to_wrapper { font-size: 8px; }
             
             thead {
                 background-color: #bdbdbe;
@@ -97,16 +97,22 @@
             }
             #transactions_wrapper { min-height: 910px; }
             
-            #total_value { font-size: 26px; font-weight: 600; }
+            #total_value { font-size: 22px; font-weight: 600; }
             
             
             #header_details { font-size: 10px; }
             .h_addr_1,
             .bill_to { font-weight: 600; }
             
-            .h_addr_4 { margin-bottom: 15px; }
+            .h_addr_4 { margin-bottom: 5px; }
             .memo { width: 100%; text-align: center; }
             
+            .h_addr_1,
+            .h_addr_2,
+            .h_addr_3,
+            .h_addr_4 {
+                font-size: 9px;
+            }
 
 		</style>
 	</head>
@@ -126,7 +132,8 @@
                         			    <p class="h_addr_1">Global Assessments, Inc.</p>
                         			    <p class="h_addr_2">88 Old Westfield Road</p>
                         			    <p class="h_addr_3">Granville, MA 01034</p>
-                        			    <p class="h_addr_4">(617) 686-2587</p>
+                        			    <p class="h_addr_3">(617) 686-2587</p>
+                        			    <p class="h_addr_4">billing@globalassessmentsinc.com</p>
                         			</td>
                         		</tr>
                         		<tr>
