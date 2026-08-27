@@ -23,3 +23,6 @@ $GLOBALS['TL_LANG']['tl_member']['last_review_and_submit']           = array('La
 
 $GLOBALS['TL_LANG']['tl_member']['pwf_hidden_assignments_legend']    = 'Psych Work Form - Hidden Assignment Details';
 $GLOBALS['TL_LANG']['tl_member']['pwf_hidden_assignments']           = array('Hidden Assignments for Psych Work Form', 'Tracks the IDs of the Assignments this Psychologist have hidden from their Psych Work Form');
+
+/* Operations */
+$GLOBALS['TL_LANG']['tl_member']['confirmToggle']                    = 'Please confirm you would like to toggle this Member on/off';
