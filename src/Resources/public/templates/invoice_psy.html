@@ -73,13 +73,13 @@
 
             
             h1, h2, h3, h4, p { margin: 0; padding: 0; }
-            h2 { margin-bottom: 10px; }
+            h2 { font-size: 14px; margin-bottom: 5px; }
             
             span.date_issued,
             span.invoice_number { font-weight: 600; }
             
             span.bill_to { font-weight: 600; }
-            .bill_to_wrapper { font-size: 9px; }
+            .bill_to_wrapper { font-size: 8px; }
             
             thead {
                 background-color: #bdbdbe;
@@ -97,8 +97,12 @@
             }
             #transactions_wrapper { min-height: 950px; }
             
-            #total_value { font-size: 26px; font-weight: 600; }
-
+            #total_value { font-size: 22px; font-weight: 600; }
+            
+            .gai_info {
+                font-size: 9px;
+                margin-bottom: 5px;
+            }
             
 
 		</style>
@@ -108,7 +112,16 @@
         <table id="invoice_wrapper">
             <tbody>
                 <tr>
-                    <td colspan="2"><h2>{{psychologist::name}}</h2></td>
+                    <td colspan="2">
+                        <p class="gai_info">
+                            <strong>Global Assessments, Inc.</strong><br>
+                            88 Old Westfield Road<br>
+                            Granville, MA 01034<br>
+                            (617) 686-2587<br>
+                            billing@globalassessmentsinc.com
+                        </p>
+                        <h2>{{psychologist::name}}</h2>
+                    </td>
                     <td>
                         
                         <table id="invoice_details">
