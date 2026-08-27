@@ -10,6 +10,15 @@ use Contao\StringUtil;
 /* Override the switch user function with our custom one that routes the user to the Dashboard instead of the homepage */
 $GLOBALS['TL_DCA']['tl_member']['list']['operations']['su']['button_callback'] = array('Bcs\Backend\MemberBackend', 'switchUserCustomized');
 
+/* Require confirmation before toggling a member on/off (keeps the core Ajax behaviour) */
+$confirmMemberToggle = $GLOBALS['TL_LANG']['tl_member']['confirmToggle']
+    ?? $GLOBALS['TL_LANG']['MSC']['confirmToggle']
+    ?? 'Please confirm you would like to toggle this Member on/off';
+
+$GLOBALS['TL_DCA']['tl_member']['list']['operations']['toggle']['attributes'] =
+    'onclick="if(!confirm(\'' . str_replace("'", "\\'", $confirmMemberToggle) . '\')) return false; '
+    . 'Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)"';
+
  /* Extend the tl_user palettes */
 foreach ($GLOBALS['TL_DCA']['tl_member']['palettes'] as $k => $v) {
     $GLOBALS['TL_DCA']['tl_member']['palettes'][$k] = str_replace('groups;', 'groups;{price_tier_legend}, price_tier, price_tier_display;{admin_review_legend}, last_reviewed; {last_review_and_submit_legend}, last_review_and_submit; {pwf_hidden_assignments_legend}, pwf_hidden_assignments;', $v);
