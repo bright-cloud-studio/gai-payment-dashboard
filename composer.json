@@ -5,6 +5,7 @@
     "type": "contao-bundle",
     "homepage": "http://brightcloudstudio.com/",
     "license": "LGPL-3.0+",
+    "version": "0.0.1",
     "authors":[
         {
             "name": "Bright Cloud Studio",
@@ -19,7 +20,7 @@
     },
     "require":{
         "php": "^7.3 || ^8.0",
-        "contao/core-bundle": "^4.9 || ^5.3",
+        "contao/core-bundle": "^4.9 || ^5.7",
         "dompdf/dompdf": "v3.0.0"
     },
     "extra":{
